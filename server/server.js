@@ -1,16 +1,27 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./resources/routes');
-const app = express();
+const webpack = require('webpack');
+const config = require('../webpack.config');
 
+const app = express();
+const compiler = webpack(config);
 // configure our server with all the middleware and routing
+
+// middleware to enable hot reloading
+app.use(require('webpack-dev-middleware')(compiler, {
+  publicPath: config.output.publicPath
+}));
+app.use(require('webpack-hot-middleware')(compiler));
 
 // start listening to requests on port 8000
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname));
-app.use(express.static(__dirname + '/../build'))
 
+app.get('*', function(req, res) {
+  res.sendFile('index.html', {root: './'});
+});
 // app.get('/', function(req, res) {
 //     res.sendFile('index.html');
 // })
