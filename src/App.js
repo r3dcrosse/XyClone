@@ -29,7 +29,7 @@ class App extends Component {
           </span>
         </div>
         <p className="App-intro">
-          TRY ME: make a change somewhere and save. Webpack should hot reload your page
+          TRY ME! : make a change somewhere and save your text editor. Webpack should hot reload your page
         </p>
         <ul role='nav'>
           <li> <Link to='/login'> login </Link> </li>
