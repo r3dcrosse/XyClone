@@ -22,6 +22,13 @@
 
 > Some usage instructions
 
+To run it for production (using express server on port 8000)
+  npm start
+(npm start will call (npm run build & nodemon on server))
+To run it for dev purposes (using react-scripts on port 3000)
+  npm run start:react
+
+
 ## Requirements
 
 - Node 0.10.x
