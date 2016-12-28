@@ -17,8 +17,6 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>XyCLONE</h2>
-          <button>SIGN IN <Link to={`/setup`}></Link>
-          </button>
         </div>
         <p className="App-intro">
           TRY ME! : make a change somewhere and save your text editor. Webpack should hot reload your page

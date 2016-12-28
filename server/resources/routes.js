@@ -1,16 +1,17 @@
 const path = require('path');
 const Router = require('express').Router();
 const Controller = require('./controller')
-
+const User = require('../models/user')
 
 Router.route('/*')
   .get(function(req, res) {
     res.sendFile('index.html',  {root: './'})
   });
 
-Router.route('/setup')
+Router.route('/login')
   .get(function(req, res) {
-
+    console.log('get received');
+    
     // sample user
     var forrest = new User({
       name: 'Forrest Murray',
