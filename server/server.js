@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const router = require('./resources/routes');
 const webpack = require('webpack');
 const config = require('../webpack.config');
-
+const controller = require('./resources/controller')
 const app = express();
 const compiler = webpack(config);
 // configure our server with all the middleware and routing
