@@ -1,6 +1,10 @@
-const db = require('./resources/configDB');
+const db = require('./configDB');
 
+var newUsername = new db.Username({
+  username: "evan",
+  password: "password"
+})
 
-
-var newUsername = new db.Username
-db.
+newUsername.save().then(function(saved) {
+  console.log(saved);
+})

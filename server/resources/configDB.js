@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var dbURI = 'mongodb://localhost/db'
+var dbURI = 'mongodb://localhost/XyClone'
 mongoose.connect(dbURI);
 var db = mongoose.connection;
 
