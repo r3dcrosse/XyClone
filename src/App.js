@@ -1,32 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+
 import { connect } from 'react-redux';
-import { addTodo } from './actions/incrementAction';
+import  addTodo from './actions/incrementAction';
+import { Router, Route, Link } from 'react-router';
+import EditorContainer from './containers/EditorContainer'
 
 require("./basic.less");
 
-class App extends Component {
+// const Router = require('react-router').Router
+// const Route = require('react-router').Route
+// const Link = require('react-router').Link
+//  const Root = ({ store }) => (
+//    <Provider store={store}>
+//    </Provider>
+//  );
+
+export default class App extends Component {
   constructor() {
     super();
   }
 
-  addTodo () {
-    console.log(this.props.dispatch);
-    var todo = 'yolo swag this up';
-    this.props.dispatch(addTodo(todo));
-    console.log(this.props.todos);
-  }
+  // addTodo () {
+  //   console.log(this.props.dispatch);
+  //   var todo = 'forrest says hi';
+  //   this.props.dispatch(addTodo(todo));
+  //   console.log(this.props.todos);
+  // }
 
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <h2>XyCLONE</h2>
-          <span onClick={this.addTodo.bind(this)}> click me to change state
-            {this.props.todos.map(todo =>
-              <span> {todo.text} </span>
-            )}
-          </span>
         </div>
         <p className="App-intro">
           TRY ME! : make a change somewhere and save your text editor. Webpack should hot reload your page
@@ -36,18 +41,59 @@ class App extends Component {
           <li> <Link to='/editor'> editor </Link> </li>
           <li> <Link to='/dashboard'> dashboard </Link> </li>
         </ul>
-        {this.props.children}
+        <EditorContainer />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state.todos
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     todos: state.todos
+//   }
+// }
+// const mapStateToProps = (state) => {
+//     return {
+//         components: state.components
+//     }
+// }
 
-App = connect(mapStateToProps, null)(App);
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onComponentClick: (id) => {
+//             dispatch(editingActions.removeComponent(id))
+//         }
+//     }
+// }
 
-export default App;
+// const App = connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(App)
+
+//export default EditorContainer
+//App = connect(mapStateToProps, null)(App);
+
+// export default App;
+
+////////////////////////////////////////////////////
+// const mapStateToProps = (state) => {
+//     return {
+//         components: state.components
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onComponentClick: (id) => {
+//             dispatch(editingActions.removeComponent(id))
+//         }
+//     }
+// }
+
+// const EditorContainer = connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Editor)
+
+// export default EditorContainer
