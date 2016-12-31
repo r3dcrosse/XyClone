@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Sidebar from './sidebar'
+import EditorView from './editorView'
 require("../basic.less");
 
 class Editor extends Component {
@@ -6,6 +8,10 @@ class Editor extends Component {
     return (
       <div className="App">
         <div> yep im editor </div>
+        <div>
+          <Sidebar />
+          <EditorView />
+        </div>
       </div>
     );
   }

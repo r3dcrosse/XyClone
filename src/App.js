@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { addTodo } from './actions/incrementAction';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 require("./basic.less");
 
@@ -50,4 +52,4 @@ const mapStateToProps = (state) => {
 
 App = connect(mapStateToProps, null)(App);
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);
