@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import  addTodo from './actions/incrementAction';
 import { Router, Route, Link } from 'react-router';
 import EditorContainer from './containers/EditorContainer'
 
 import { addTodo } from './actions/incrementAction';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
 
 require("./basic.less");
 
@@ -51,55 +48,3 @@ export default class App extends Component {
     );
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     todos: state.todos
-//   }
-// }
-// const mapStateToProps = (state) => {
-//     return {
-//         components: state.components
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onComponentClick: (id) => {
-//             dispatch(editingActions.removeComponent(id))
-//         }
-//     }
-// }
-
-// const App = connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(App)
-
-//export default EditorContainer
-//App = connect(mapStateToProps, null)(App);
-
-// export default App;
-
-////////////////////////////////////////////////////
-// const mapStateToProps = (state) => {
-//     return {
-//         components: state.components
-//     }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onComponentClick: (id) => {
-//             dispatch(editingActions.removeComponent(id))
-//         }
-//     }
-// }
-
-// const EditorContainer = connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Editor)
-
-// export default EditorContainer
-export default DragDropContext(HTML5Backend)(App);
