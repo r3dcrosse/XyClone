@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { removeComponent } from '../actions/editingActions'
+import { removeComponent, addComponent } from '../actions/editingActions'
 import Editor from '../components/Editor'
 
 const mapStateToProps = (state) => {
@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onComponentClick: (id) => {
             console.log(id);
-            dispatch(removeComponent(id))
+            dispatch(addComponent(id))
         }
     }
 }

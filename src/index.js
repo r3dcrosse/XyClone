@@ -7,7 +7,7 @@ import Editor from './components/Editor';
 import Login from './components/login';
 
 import { Provider } from 'react-redux'
-import './actions/incrementAction';
+// import './actions/incrementAction';
 import { component } from './reducers/editingReducer';
 import { createStore } from 'redux';
 
