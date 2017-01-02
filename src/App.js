@@ -15,11 +15,6 @@ require("./basic.less");
 //    </Provider>
 //  );
 
-export default class App extends Component {
-  constructor() {
-    super();
-  }
-
   // addTodo () {
   //   console.log(this.props.dispatch);
   //   var todo = 'forrest says hi';
@@ -27,6 +22,7 @@ export default class App extends Component {
   //   console.log(this.props.todos);
   // }
 
+class App extends Component {
   render() {
     return (
       <div className="App">
