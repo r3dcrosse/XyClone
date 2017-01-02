@@ -2,24 +2,20 @@
 
 // THIS IS ALL FOR TESTING PURPOSES
 
-import '../actions/incrementAction'
+import '../actions/editingActions'
 
 const initialState = {
-  todos: []
+  components: [{componentId: 'nav'}, {componentId: 'textbox'}]
 }
 
-export function todoApp(state = initialState, action) {
+export function component(state = initialState, action) {
   switch(action.type) {
-    case "ADD_TODO":
-      return Object.assign({}, state, {
-        todos: [
-          ...state.todos,
-          {
-            text: action.text,
-            completed: false
-          }
-        ]
-      })
+    case 'REMOVE_COMPONENT':
+            return Object.assign({}, state, {
+                components: [ ...state.components.slice(0, action.componentId),
+                              ...state.components.slice(action.componentId + 1)
+                            ]
+            })
     default:
       return state
   }
