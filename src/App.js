@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+
 import  addTodo from './actions/incrementAction';
 import { Router, Route, Link } from 'react-router';
 import EditorContainer from './containers/EditorContainer'
+
+import { addTodo } from './actions/incrementAction';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 require("./basic.less");
 
@@ -97,3 +102,4 @@ export default class App extends Component {
 // )(Editor)
 
 // export default EditorContainer
+export default DragDropContext(HTML5Backend)(App);
