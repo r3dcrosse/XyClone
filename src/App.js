@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import  addTodo from './actions/incrementAction';
+// import  addTodo from './actions/incrementAction';
 import { Router, Route, Link } from 'react-router';
 import EditorContainer from './containers/EditorContainer'
 

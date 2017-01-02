@@ -1,6 +1,8 @@
 
+import { _components, storage } from '../cache/componentCache'
+
 const initialState = {
-  components: [{componentId: '0'}, {componentId: '1'}]
+  components: [{componentId: '0'}, {componentId: 'navbar'}]
 }
 
 export function component (state = initialState, action) {
@@ -12,6 +14,16 @@ export function component (state = initialState, action) {
                 components: [ ...state.components.slice(0, action.componentId),
                               ...state.components.slice(action.componentId + 1)
                             ]
+            })
+        case 'ADD_COMPONENT': 
+            console.log('action', action);
+            let elem = action.componentId;
+            _components[elem]('our nav', null, {})
+            return Object.assign({}, state, {
+                // store the component skeletons on the window for now, 
+                // potentially they can be migrated to redis or even 
+                // stored directly on the state tree
+                components: [...state.components, storage.id]
             })
         default:
             return state
