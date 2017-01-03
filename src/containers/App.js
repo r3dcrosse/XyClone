@@ -8,7 +8,7 @@ import * as Actions from '../actions/editingActions';
 
 require('../basic.less');
 
-class App extends Component {
+export class App extends Component {
   render() {
     const { components, actions } = this.props;
 
