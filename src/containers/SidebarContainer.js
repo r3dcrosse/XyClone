@@ -11,9 +11,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onComponentClick: (id) => {
+        onSidebarClick: (type) => {
             console.log('DISPATCHING ON COMPONENT CLICK')
-            dispatch(addComponent(id))
+            dispatch(addComponent(type))
         }
     }
 }

@@ -5,27 +5,43 @@
 }
 
 .flex-container {
-    display: flex;
-    width: 700px;
-    height: 700px;
-    margin: auto;
-    background-color: blue;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: inline-flex;
+  margin-left: 180px;
+  padding: 0px;
+  width: 70%;
+  height: 100%;
+  background-color: blue;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.flex-item-navbar {
-  /*background-color: yellow;*/
-/*  width: 700px;
-  height: 100px;
-  margin: 10px;*/
-  /*resize: vertical;*/
+.editor-inPage {
+  height: 100%;
+  width: 100%;
 }
 
 .side-bar {
+  position: fixed;
   float: left;
-  height: 700px;
-  width: 100px;
+  height: 40%;
+  width: 10%;
   border: 1px solid black;
+}
+
+.editor-component {
+  position: fixed;
+  margin-right: 40px;
+  margin-top: 70px;
+  height: 700px;
+  width: 12%;
+  border: 1px solid black;
+  background-color:green;
+  top: 0;
+  right: 0;
+}
+
+.editor-container {
+  height: 900px;
+  width: 1000px;
 }

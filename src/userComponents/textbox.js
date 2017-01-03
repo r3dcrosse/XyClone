@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-const Textbox = ({name, style}) => (
-  <div className='flex-item-textbox' style={style}>
+const Textbox = ({name, style, id, onEditorClick}) => (
+  <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
     <div>
-      TEXTBOX LOADED
+      TEXTBOX LOADED with id {id}
     </div>
   </div>
 )
