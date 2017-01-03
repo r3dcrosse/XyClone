@@ -5,7 +5,7 @@ import Sidebar from '../components/sidebar'
 const mapStateToProps = (state) => {
     console.log('mapping state', state);
     return {
-        components: state.components
+        components: state.xyclone.components
     }
 }
 

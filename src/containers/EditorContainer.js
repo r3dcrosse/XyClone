@@ -3,8 +3,9 @@ import { removeComponent, addComponent, editComponent } from '../actions/editing
 import Editor from '../components/Editor'
 
 const mapStateToProps = (state) => {
+	console.log('MAPPING COMPONENTS TO EDITORCONTAINER');
 	return {
-		components: state.components
+		components: state.xyclone.components
 	}
 }
 
@@ -17,10 +18,13 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
+
+
 const EditorContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Editor)
+
 // const EditorContainer = connect(
 //     mapStateToProps,
 //     mapDispatchToProps

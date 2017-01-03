@@ -18,7 +18,8 @@ export default function xyclone (state = initialState, action) {
 							]
 			});
 		case 'ADD_COMPONENT':
-			console.log('ADDING COMPONENT');
+
+			console.log('ADDING COMPONENT', elem);
 			let elem = action.componentType;
 			let idInStorage = _components[elem]();
 			return Object.assign({}, state, {
