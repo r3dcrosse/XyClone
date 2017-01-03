@@ -1,8 +1,8 @@
-import component from './editingReducer'
+// import component from './editingReducer'
 
-const todoApp = combineReducers({
-  todos,
-  visibilityFilter
-})
+// const todoApp = combineReducers({
+//   todos,
+//   visibilityFilter
+// })
 
-export default todoApp
+// export default todoApp;

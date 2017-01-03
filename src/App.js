@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
-import EditorContainer from './containers/EditorContainer'
 
-import { addTodo } from './actions/incrementAction';
 
 require("./basic.less");
 
@@ -38,8 +36,10 @@ class App extends Component {
           <li> <Link to='/editor'> editor </Link> </li>
           <li> <Link to='/dashboard'> dashboard </Link> </li>
         </ul>
-        <EditorContainer />
+        {this.props.children}
       </div>
     );
   }
 }
+
+export default App;

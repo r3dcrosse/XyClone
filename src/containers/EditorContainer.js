@@ -8,18 +8,19 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onComponentClick: (id) => {
-            console.log(id);
-            dispatch(addComponent(id))
-        }
-    }
-}
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         onComponentClick: (id) => {
+//             console.log(id);
+//             dispatch(addComponent(id))
+//         }
+//     }
+// }
 
 const EditorContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
+    // ,
+    // mapDispatchToProps
 )(Editor)
 
 export default EditorContainer

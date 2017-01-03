@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import Textbox from './Textbox';
-import Navbar from './Navbar';
+import Navbar from '../userComponents/navbar'
 
-class Sidebar extends Component {
-  render() {
-    return (
-      <div className='Sidebar'>
-        <div id='sidebarContainer'>
-          <Textbox />
-          <Navbar />
-        </div>
-      </div>
-    )
-  }
-}
+const Sidebar = ({ onComponentClick }) => (
+  <div className='Sidebar' style={{"float":"left"}}>
+    <div id='sidebarContainer'>
+      <div onClick={() => onComponentClick('Navbar')}> CLICK ME FOR NAVBAR </div>
+      <div onClick={() => onComponentClick('Textbox')}> CLICK ME FOR TEXTBOX </div>
+    </div>
+  </div>
+)
 
 export default Sidebar;
