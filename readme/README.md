@@ -22,11 +22,12 @@
 
 > Some usage instructions
 
-To run it for production (using express server on port 8000)
-  npm start
-(npm start will call (npm run build & nodemon on server))
-To run it for dev purposes (using react-scripts on port 3000)
-  npm run start:react
+### Development: 
+1) Set NODE_ENV to 'dev'
+2) npm install 
+3) npm test to ensure changes are safe
+4) npm start to bundle
+5) go to http://localhost:8000
 
 
 ## Requirements
