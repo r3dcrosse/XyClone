@@ -18,6 +18,9 @@ app.use(require('webpack-hot-middleware')(compiler));
 // start listening to requests on port 8000
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(router);
+
+
 
 app.get('*', function(req, res) {
   res.sendFile('index.html', {root: './'});
@@ -25,7 +28,6 @@ app.get('*', function(req, res) {
 // app.get('/', function(req, res) {
 //     res.sendFile('index.html');
 // })
-app.use(router);
 
 // export our app for testing and flexibility, required by index.js
 const port = process.env.PORT || 8000;
