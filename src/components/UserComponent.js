@@ -8,15 +8,8 @@ const UserComponent = ({ componentId, type }) => {
   // Object of all available compoennts
   // grab the type from the componentid
   // reference component type to grab skeleton
-  //if type is img
-  // <imgcomponent> </imgcomponent>
-    //render <img> </img>
-  console.log(componentId, 'INSIDE USERCOMPONENT');
-  console.log(type, 'TYPE');
   let style = storage[componentId].css;
   let name = storage[componentId].name;
-  console.log(storage, 'THIS IS STORAGE');
-  console.log(style, 'THIS IS STYLE');
   switch (type) {
     case 'Navbar':
       let links = storage[componentId].links;

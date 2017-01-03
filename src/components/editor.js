@@ -3,7 +3,7 @@ import { PropTypes } from 'react';
 import UserComponent from './UserComponent'
 require("../basic.less");
 
-const Editor = ({ components }) => (
+const Editor = ({ components, onComponentClick }) => (
   <div>
     <div className='flex-container'>
       {components.map(component =>
