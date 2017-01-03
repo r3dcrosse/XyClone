@@ -6,7 +6,7 @@ const app = express();
 //////////////////////////////
 const port = process.env.PORT || 1337;
 
-// set the view engine to jsx
+// set the view engine to jsx for server side rendering
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jsx');
 app.engine('jsx', require('express-react-views').createEngine());
