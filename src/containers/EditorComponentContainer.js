@@ -3,10 +3,10 @@ import { removeComponent, addComponent } from '../actions/editingActions'
 import EditorComponent from '../components/editorComponent'
 
 const mapStateToProps = (state) => {
-    console.log('MAPPING STATE for currentComponentId', state);
-    return {
-        currComponentId: state.xyclone.currComponentId
-    }
+  console.log('MAPPING STATE for currentComponentId', state);
+  return {
+    currComponentId: state.xyclone.currComponentId
+  }
 }
 
 // const mapDispatchToProps = (dispatch) => {
@@ -19,9 +19,9 @@ const mapStateToProps = (state) => {
 // }
 
 const EditorComponentContainer = connect(
-    mapStateToProps
-    // ,
-    // mapDispatchToProps
+  mapStateToProps
+  // ,
+  // mapDispatchToProps
 )(EditorComponent)
 
 export default EditorComponentContainer;
