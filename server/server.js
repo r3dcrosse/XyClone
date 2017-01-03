@@ -20,8 +20,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(router);
 
-
-
 app.get('*', function(req, res) {
   res.sendFile('index.html', {root: './'});
 });

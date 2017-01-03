@@ -17,11 +17,17 @@ class Dashboard extends Component {
   onBuildSite() {
     var context = this;
 
-    axios.get('buildSite')
+    axios.post('buildSite')
     .then(function(response) {
+      console.log(response)
       context.setState({
         link: response.data
       })
+      return response
+    })
+    .then(function(res) {
+      console.log(res.data, 'DATA')
+      axios.delete(res.data)
     })
   }
 
