@@ -1,6 +1,6 @@
 # Project Name
 
-> XyCline
+> XyClone
 
 ## Team
 
