@@ -17,7 +17,7 @@ export function component (state = initialState, action) {
             });
         case 'ADD_COMPONENT':
             let elem = action.componentId;
-            let idInStorage = _components[elem]('our nav', null, {color: 'blue'});
+            let idInStorage = _components[elem]();
             return Object.assign({}, state, {
                 // store the component skeletons on the window for now,
                 // potentially they can be migrated to redis or even

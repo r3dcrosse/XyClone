@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
 const Textbox = ({name, style}) => (
-  <nav style={style}>
-    <ul>
-      <li> TEXTBOX LOADED</li>
-    </ul>
-  </nav>
+  <div className='flex-item-textbox' style={style}>
+    <div>
+      TEXTBOX LOADED
+    </div>
+  </div>
 )
 
 export default Textbox;

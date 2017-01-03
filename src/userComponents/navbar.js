@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
 const Navbar = ({name, links, style}) => (
-  <nav style={style}>
-    <ul>
-      <li> NAV BAR LOADED</li>
-    </ul>
+  <nav className='flex-item-navbar' style={style}>
+    <div>
+      NAVBAR LOADED
+    </div>
   </nav>
 )
 

@@ -1,23 +1,33 @@
 window.incrementId = 0;
 
 export const _components = {
-  Navbar: ( name, links, css ) => {
+  Navbar: ( ) => {
+    let defaultCss = {
+      "background-color": "yellow",
+      "width": "700px",
+      "height": "100px",
+      "margin": "10px"
+    }
     let component = {
-        name: name,
-        css: css,
-        links: links
+        name: 'Default Navbar Name',
+        css: defaultCss,
+        links: null
     }
     storage[incrementId] = component;
-
     return window.incrementId++;
   },
-  Textbox: ( name, css ) => {
+  Textbox: ( ) => {
+    let defaultCss = {
+      "background-color": "cornflowerblue",
+      "width": "100px",
+      "height": "100px",
+      "margin": "10px"
+    };
     let component = {
-      name: name,
-      css: css
+      name: 'Default Textbox Name',
+      css: defaultCss
     }
     storage[incrementId] = component;
-
     return window.incrementId++;
   }
 }

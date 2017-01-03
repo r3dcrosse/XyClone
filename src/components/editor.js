@@ -4,8 +4,8 @@ import UserComponent from './UserComponent'
 require("../basic.less");
 
 const Editor = ({ components }) => (
-  <div style={{"float":"right"}}>
-    <ul>
+  <div>
+    <div className='flex-container'>
       {components.map(component =>
         <UserComponent
           key={component.componentId}
@@ -13,7 +13,7 @@ const Editor = ({ components }) => (
           type={component.type}
         />
       )}
-    </ul>
+    </div>
   </div>
 )
 

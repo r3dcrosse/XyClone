@@ -15,6 +15,8 @@ const UserComponent = ({ componentId, type }) => {
   console.log(type, 'TYPE');
   let style = storage[componentId].css;
   let name = storage[componentId].name;
+  console.log(storage, 'THIS IS STORAGE');
+  console.log(style, 'THIS IS STYLE');
   switch (type) {
     case 'Navbar':
       let links = storage[componentId].links;
@@ -24,7 +26,7 @@ const UserComponent = ({ componentId, type }) => {
     default:
       return <li>
               ID: {storage.componentId}
-            </li>
+             </li>
   }
 }
 

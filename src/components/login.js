@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
+
 require("../basic.less");
 
 class Login extends Component {
   render() {
     return (
       <div className="App">
-        yep im supposed to be login page
+        <input placeholder='Username' />
+        <input placeholder='Password' />
+        <button>
+          <Link to='/dashboard'> Login </Link>
+        </button>
       </div>
     );
   }
