@@ -3,7 +3,7 @@ window.incrementId = 0;
 export const _components = {
   Navbar: ( ) => {
     let defaultCss = {
-      "background-color": "yellow",
+      "backgroundColor": "yellow",
       "width": "700px",
       "height": "100px",
       "margin": "10px"
@@ -18,7 +18,7 @@ export const _components = {
   },
   Textbox: ( ) => {
     let defaultCss = {
-      "background-color": "cornflowerblue",
+      "backgroundColor": "cornflowerblue",
       "width": "100px",
       "height": "100px",
       "margin": "10px"

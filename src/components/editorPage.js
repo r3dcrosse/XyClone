@@ -4,15 +4,21 @@ import { Link } from 'react-router';
 
 import EditorContainer from '../containers/EditorContainer';
 import SidebarContainer from '../containers/SidebarContainer';
+import EditorComponentContainer from '../containers/editorComponentContainer';
 require("../basic.less");
 
 const EditorPage = () => (
-  <div>
+  <div className='editor-container'>
     <div className='side-bar'>
       <button><Link to='/dashboard'> Back to Dashboard </Link></button>
       <SidebarContainer />
     </div>
+    <div className='editor-inPage'>
       <EditorContainer />
+    </div>
+    <div className='editor-component'>
+      <EditorComponentContainer />
+    </div>
   </div>
 
 )

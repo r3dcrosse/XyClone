@@ -2,29 +2,34 @@
 import { _components, storage } from '../cache/componentCache';
 
 const initialState = {
-  components: []
+  components: [],
+  currComponentId: null
 }
 
 export default function xyclone (state = initialState, action) {
-    switch (action.type) {
-        case 'REMOVE_COMPONENT':
-            console.log('Im being notified of an action', state.components);
-            console.log('action', action);
-            return Object.assign({}, state, {
-                components: [ ...state.components.slice(0, action.componentId),
-                              ...state.components.slice(action.componentId + 1)
-                            ]
-            });
-        case 'ADD_COMPONENT':
-            let elem = action.componentId;
-            let idInStorage = _components[elem]();
-            return Object.assign({}, state, {
-                // store the component skeletons on the window for now,
-                // potentially they can be migrated to redis or even
-                // stored directly on the state tree
-                components: [...state.components, {componentId: idInStorage, type: action.componentId}]
-            });
-        default:
-            return state
-    }
+	console.log(action.type, 'RUNNING THROUGH STATE WITH TIHS ACTION');
+	switch (action.type) {
+		case 'REMOVE_COMPONENT':
+			console.log('Im being notified of an action', state.components);
+			console.log('action', action);
+			return Object.assign({}, state, {
+				components: [ ...state.components.slice(0, action.componentId),
+							  ...state.components.slice(action.componentId + 1)
+							]
+			});
+		case 'ADD_COMPONENT':
+			console.log('ADDING COMPONENT');
+			let elem = action.componentType;
+			let idInStorage = _components[elem]();
+			return Object.assign({}, state, {
+				components: [...state.components, {componentId: idInStorage, type: action.componentType}]
+			});
+		case 'EDIT_COMPONENT':
+			console.log('IN EDIT COMPONENT SWITCH', action.componentId)
+			return Object.assign({}, state, {
+				currComponentId: action.componentId
+			})
+		default:
+			return state
+	}
 }

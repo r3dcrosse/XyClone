@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-const Navbar = ({name, links, style}) => (
-  <nav className='flex-item-navbar' style={style}>
+const Navbar = ({name, links, style, id, onEditorClick}) => (
+  <nav className='flex-item-navbar' style={style} onClick={onEditorClick}>
     <div>
-      NAVBAR LOADED
+      NAVBAR LOADED with id {id}
     </div>
   </nav>
 )
