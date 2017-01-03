@@ -5,7 +5,7 @@ import EditorComponent from '../components/editorComponent'
 const mapStateToProps = (state) => {
     console.log('MAPPING STATE for currentComponentId', state);
     return {
-        currComponentId: state.currComponentId
+        currComponentId: state.xyclone.currComponentId
     }
 }
 

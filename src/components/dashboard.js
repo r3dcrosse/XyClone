@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 require("../basic.less");
 import axios from 'axios';
@@ -39,7 +38,6 @@ class Dashboard extends Component {
         <div> yeah im dashboard </div>
         <button onClick={this.onBuildSite}> SAVE SITE </button>
         <button><a href={this.state.link}> DOWNLOAD SITE </a></button>
-
         <button> <Link to='/login'> Logout </Link> </button>
         <button> <Link to='/Editor'> Editor </Link> </button>
 

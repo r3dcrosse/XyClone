@@ -42,11 +42,10 @@ app.use(morgan('dev'));
 //////////////////////////////
 // routes ===================
 //////////////////////////////
-app.use(router);
 
-// app.get('*', function(req, res) {
-//   res.sendFile('index.html', {root: './'});
-// });
+app.get('*', function(req, res) {
+  res.sendFile('index.html', {root: './'});
+});
 // app.get('/', function(req, res) {
 //     res.sendFile('index.html');
 // })
