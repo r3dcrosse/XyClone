@@ -1,12 +1,12 @@
 # Project Name
 
-> Pithy project description
+> XyCline
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Forrest Murray
+  - __Scrum Master__: David Wayman
+  - __Development Team Members__: Evan Chang, Fiona Chiang
 
 ## Table of Contents
 
