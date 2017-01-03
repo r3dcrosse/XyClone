@@ -22,5 +22,9 @@ const EditorContainer = connect(
     // ,
     // mapDispatchToProps
 )(Editor)
+// const EditorContainer = connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Editor)
 
 export default EditorContainer

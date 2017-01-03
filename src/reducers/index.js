@@ -1,8 +1,9 @@
-// import component from './editingReducer'
 
-// const todoApp = combineReducers({
-//   todos,
-//   visibilityFilter
-// })
+import { combineReducers } from 'redux';
+import xyclone from './editingReducer'
 
-// export default todoApp;
+const rootReducer = combineReducers({
+  xyclone
+})
+
+export default rootReducer;

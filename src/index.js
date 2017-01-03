@@ -1,35 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import Dashboard from './components/dashboard';
-import EditorPage from './components/editorPage';
-import Login from './components/login';
+import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import configureStore from './store/configureStore';
+import Root from './containers/Root';
 
-import { Provider } from 'react-redux'
-import { component } from './reducers/editingReducer';
-import { createStore } from 'redux';
+const store = configureStore();
 
-let store = createStore(component);
-window.store = store;
-
-ReactDOM.render(
-  <Provider store={store} >
-    <Router history={browserHistory} >
-        <Route path='/' component={App} >
-          <IndexRoute component={Login} />
-          <Route path='/login' component={Login} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/editor' component={EditorPage} />
-        </Route>
-    </Router>
-  </Provider>,
+// need to move routes into Root
+render(
+  <AppContainer>
+    <Root
+      store={ store }
+    />
+  </AppContainer>,
   document.getElementById('root')
 );
 
-// ReactDOM.render(
-//   <Provider store={store} >
-//     <App />
-//   </Provider>,
-//   document.getElementById('root')
-// );
+if (module.hot) {
+  module.hot.accept('./containers/Root', () => {
+    const RootContainer = require('./containers/Root').default;
+    render(
+      <AppContainer>
+        <RootContainer
+          store={ store }
+        />
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
+}

@@ -5,7 +5,7 @@ const initialState = {
   components: []
 }
 
-export function component (state = initialState, action) {
+export default function xyclone (state = initialState, action) {
     switch (action.type) {
         case 'REMOVE_COMPONENT':
             console.log('Im being notified of an action', state.components);

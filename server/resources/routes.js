@@ -4,7 +4,7 @@ const Controller = require('./controller')
 const User = require('../models/user')
 
 Router.route('/setup')
-  .get(function(req, res) {});
+ .get(function(req, res) {});
 
 Router.route('/*')
   .get(function(req, res) {
