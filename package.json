@@ -28,6 +28,7 @@
     "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.2.1",
@@ -40,10 +41,12 @@
     "react-hot-loader": "^3.0.0-beta.1",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "zip-dir": "^1.0.2",
+    "zip-folder": "^1.0.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "nodemon server/server.js",
     "lint": "eslint src"
   }
 }
