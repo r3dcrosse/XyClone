@@ -4,6 +4,7 @@ const Router = require('express').Router();
 const Controller = require('./controller');
 const zipdir = require('zip-dir');
 const fs = require('fs');
+const Project = require('../models/projectSchema');
 
 // Router.route('/')
 //   .get(function(req, res) {
@@ -15,7 +16,19 @@ Router.route('/buildSite')
     // write files to a directory based on req state tree
 
     zipdir('./server/templates', {saveTo: './server/fakeData/myZip.zip'}, function(err, buffer) {
-      // needs to also send the buffer to the db
+      console.log('hi')
+      //hard coding in the single project ID, will need to refactor later
+      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', data: buffer}, {upsert: true})
+      .then(function(data) {
+        if (data === null) {
+          console.log('Project Created');
+        } else {
+          console.log('Updated Project');
+        }
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
     })
     res.send('/fakeData/myZip.zip');
   });
