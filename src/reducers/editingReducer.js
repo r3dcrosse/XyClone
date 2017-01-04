@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export default function xyclone (state = initialState, action) {
-	// console.log(action.type, 'RUNNING THROUGH STATE WITH TIHS ACTION');
 	switch (action.type) {
 		case 'REMOVE_COMPONENT':
 			// return Object.assign({}, state, {
@@ -17,8 +16,6 @@ export default function xyclone (state = initialState, action) {
 			// 				]
 			// });
 		case 'ADD_COMPONENT':
-
-			// console.log('ADDING COMPONENT', elem);
 			let elem = action.componentType;
 			let idInStorage = _components[elem]();
 			return Object.assign({}, state, {
