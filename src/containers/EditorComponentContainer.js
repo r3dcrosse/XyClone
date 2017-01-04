@@ -1,27 +1,26 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent } from '../actions/editingActions'
+import { changeStyle } from '../actions/editingActions'
 import EditorComponent from '../components/editorComponent'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING STATE for currentComponentId', state);
+  console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
+    currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         onComponentClick: (id) => {
-//             console.log(id);
-//             dispatch(addComponent(id))
-//         }
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeStyleClick: (newProps, id) => {
+      dispatch(changeStyle(newProps, id))
+    }
+  }
+}
 
 const EditorComponentContainer = connect(
-  mapStateToProps
-  // ,
-  // mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(EditorComponent)
 
 export default EditorComponentContainer;
