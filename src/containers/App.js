@@ -20,7 +20,6 @@ export class App extends Component {
         <ul role='nav'>
         </ul>
         {this.props.children}
-
       </div>
     );
   }

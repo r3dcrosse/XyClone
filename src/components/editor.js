@@ -14,7 +14,6 @@ const Editor = ({ components, onEditorClick }) => (
           onEditorClick={() => onEditorClick(component.componentId)}
         />
       )}
-      {console.log(onEditorClick)}
     </div>
   </div>
 )
