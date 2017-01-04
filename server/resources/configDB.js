@@ -11,7 +11,6 @@ db.once('on', function() {
   console.log('MONGODB OPEN')
 })
 
-
 var Schema = mongoose.Schema;
 var UsernameSchema = new Schema({
   username: String,
