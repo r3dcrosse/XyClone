@@ -17,6 +17,7 @@
     "eslint-plugin-react": "^3.6.2",
     "express": "^4.13.4",
     "ignore-styles": "^5.0.1",
+    "immutable": "^3.8.1",
     "jsdom": "^9.9.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
