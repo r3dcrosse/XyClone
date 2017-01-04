@@ -3,8 +3,9 @@ import Navbar from '../userComponents/navbar'
 
 const Sidebar = ({ onSidebarClick }) => (
   <div>
-    <button onClick={() => onSidebarClick('Navbar')}> CLICK ME FOR NAVBAR </button>
-    <button onClick={() => onSidebarClick('Textbox')}> CLICK ME FOR TEXTBOX </button>
+    <button onClick={() => onSidebarClick('Navbar')}> Add Navbar</button>
+    <button onClick={() => onSidebarClick('Textbox')}> Add Textbox </button>
+    <button onClick={() => onSidebarClick('Image')}> Add Image </button>
   </div>
 )
 
