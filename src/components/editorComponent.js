@@ -23,7 +23,7 @@ class EditorComponent extends Component {
     // }
   }
   componentWillReceiveProps(newProps) {
-    console.log('COMPONENT RECIEVED PROPS', this.props.currComponent)
+    console.log('COMPONENT RECIEVED PROPS', newProps.currComponent)
     if (newProps.currComponent !== null) {
       let component = newProps.currComponent;
       let { css, type, name } = component;
@@ -44,28 +44,6 @@ class EditorComponent extends Component {
     e.preventDefault();
     let newCss = this.state;
     this.props.onChangeStyleClick(newCss, this.props.currComponentId);
-    // // console.log('THIS IS NEW PROPS YO /////////////////////', newProps);
-    // let component = this.props.currComponent
-    // let { css, type, name } = component;
-    // var newCss = {
-    //   name: this.nameInput,
-    //   css: {
-    //     backgroundColor: this.colorInput,
-    //     height: this.heightInput + 'px',
-    //     width: this.widthInput + 'px',
-    //     margin: this.marginInput + 'px'
-    //   },
-    //   type: type
-    // }
-    // //   name: name,
-    // //   css: {
-    // //     backgroundColor: css.backgroundColor,
-    // //     width: css.width,
-    // //     height: css.height,
-    // //     margin: css.margin
-    // //   },
-    // //   type: type
-    // // })
   }
 
   changeNameInput (e) {
@@ -73,24 +51,24 @@ class EditorComponent extends Component {
   }
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
-    css.backgroundColor = e.target.value
+    cssObject.backgroundColor = e.target.value
     this.setState({css: cssObject});
   }
   changeHeight (e) {
     let cssObject = this.state.css;
-    css.height = e.target.value + 'px';
+    cssObject.height = e.target.value + 'px';
     this.setState({css: cssObject});
   }
 
   changeWidth (e) {
     let cssObject = this.state.css;
-    css.width = e.target.value + 'px';
+    cssObject.width = e.target.value + 'px';
     this.setState({css: cssObject});
   }
 
   changeMargin (e) {
     let cssObject = this.state.css;
-    css.margin = e.target.value + 'px';
+    cssObject.margin = e.target.value + 'px';
     this.setState({css: cssObject});
   }
 
@@ -103,7 +81,6 @@ class EditorComponent extends Component {
       )
     } else {
       console.log('THIS IS THE RENDERED COMPONENT THAT I AM CLICKLING', this.props.currComponent);
-      console.log('THIS IS THE STATE THAT IS FROM THE RENDERED COMPONENT', this.state)
       let component = this.state;
       let { css, type, name } = component;
       return (

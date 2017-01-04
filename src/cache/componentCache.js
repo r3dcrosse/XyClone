@@ -1,6 +1,4 @@
-window.incrementId = 0;
-
-const incrementId = 0;
+let incrementId = 0;
 
 export const _components = {
   Navbar: ( ) => {
@@ -17,7 +15,7 @@ export const _components = {
         type: 'Navbar'
     }
     storage[incrementId] = component;
-    return window.incrementId++;
+    return incrementId++;
   },
   Textbox: ( ) => {
     let defaultCss = {
@@ -32,7 +30,7 @@ export const _components = {
       type: 'Textbox'
     }
     storage[incrementId] = component;
-    return window.incrementId++;
+    return incrementId++;
   }
 }
 
