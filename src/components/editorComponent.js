@@ -138,37 +138,3 @@ class EditorComponent extends Component {
 // You have to connect() to any reducers that you wish to connect to yourself
 
 export default EditorComponent;
-
-// export default compose(
-//   connect(
-//     state => ({
-//       initialValues: state.user,
-//     })
-//   )
-//   reduxForm({form: "form", fields: ["foo", "bar", "baz"]})
-// )(MyForm)
-
-
-        // <div>
-        //   <form onSubmit={this.changeStylePrep.bind(this)}>
-        //     <div>
-        //       <div> {type} </div>
-        //     </div>
-        //     <div>
-        //       <span> Name: </span> <input type='text' value={name} ref={(input) => this.nameInput = input} onInput={this.changeNameInput.bind(this)}/>
-        //     </div>
-        //     <div>
-        //       <span> Background Color: </span> <input type='text' value={css.backgroundColor} ref={(input) => this.colorInput = input}/>
-        //     </div>
-        //     <div>
-        //       <span> Width: </span> <input type='text' value={css.width} ref={(input) => this.widthInput = input}/>
-        //     </div>
-        //     <div>
-        //       <span> Height: </span> <input type='text' value={css.height} ref={(input) => this.heightInput = input}/>
-        //     </div>
-        //     <div>
-        //       <span> Margin: </span> <input type='text' value={css.margin} ref={(input) => this.marginInput = input}/>
-        //     </div>
-        //     <input type="submit" value="Submit" />
-        //   </form>
-        // </div>

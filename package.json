@@ -17,6 +17,7 @@
     "eslint-plugin-react": "^3.6.2",
     "express": "^4.13.4",
     "ignore-styles": "^5.0.1",
+    "immutable": "^3.8.1",
     "jsdom": "^9.9.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
@@ -45,11 +46,13 @@
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.4.1",
-    "react-hot-loader": "^3.0.0-beta.1",
+    "react-hot-loader": "^3.0.0-beta.6",
     "react-redux": "^5.0.1",
     "react-router": "^3.0.0",
     "redux": "^3.6.0",
-    "redux-form": "^6.4.3",
+
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
     "zip-dir": "^1.0.2",
     "zip-folder": "^1.0.0"
   },
@@ -57,5 +60,9 @@
     "start": "nodemon server/server.js",
     "lint": "eslint src",
     "test": "mocha --require ignore-styles test/.setup.js test/**/*.test.js"
+  },
+  "engines": {
+    "node": ">= 0.4"
   }
+
 }

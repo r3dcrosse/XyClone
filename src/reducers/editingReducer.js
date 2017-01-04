@@ -10,11 +10,11 @@ const initialState = {
 export default function xyclone (state = initialState, action) {
 	switch (action.type) {
 		case 'REMOVE_COMPONENT':
-			return Object.assign({}, state, {
-				components: [ ...state.components.slice(0, action.componentId),
-							  ...state.components.slice(action.componentId + 1)
-							]
-			});
+			// return Object.assign({}, state, {
+			// 	components: [ ...state.components.slice(0, action.componentId),
+			// 				  ...state.components.slice(action.componentId + 1)
+			// 				]
+			// });
 		case 'ADD_COMPONENT':
 			let elem = action.componentType;
 			let idInStorage = _components[elem]();

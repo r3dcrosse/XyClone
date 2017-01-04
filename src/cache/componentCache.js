@@ -1,5 +1,7 @@
 window.incrementId = 0;
 
+const incrementId = 0;
+
 export const _components = {
   Navbar: ( ) => {
     let defaultCss = {
