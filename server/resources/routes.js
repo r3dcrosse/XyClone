@@ -15,6 +15,7 @@ Router.route('/buildSite')
     // write files to a directory based on req state tree
 
     zipdir('./server/templates', {saveTo: './server/fakeData/myZip.zip'}, function(err, buffer) {
+      // needs to also send the buffer to the db
     })
     res.send('/fakeData/myZip.zip');
   });
@@ -25,7 +26,7 @@ Router.route('/fakeData/myZip.zip')
     res.sendFile('fakeData/myZip.zip', {root: '../XyClone/server/'});
   })
   .delete(function(res) {
-    console.log(res)
+    console.log(res.url)
     fs.unlink('./server/fakeData/myZip.zip', function(err) {
       if (err) {
         console.log(err)
