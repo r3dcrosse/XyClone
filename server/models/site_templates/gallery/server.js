@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
 //////////////////////////////
@@ -6,15 +7,15 @@ const app = express();
 //////////////////////////////
 const port = process.env.PORT || 1337;
 
-// set the view engine to jsx for server side rendering
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
-
 //////////////////////////////
 // routes ===================
 //////////////////////////////
-app.get('/', require('./routes').index);
+app.get('/', function(req, res) {
+  res.sendFile('index.html', { root: './' });
+});
+
+app.use('/', express.static(path.join(__dirname, '/.')));
+app.use('/public', express.static(path.join(__dirname, '/public')));
 
 
 app.listen(port);
