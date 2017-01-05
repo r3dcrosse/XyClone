@@ -1,0 +1,3 @@
+letThatPost=function(){
+returnReact.createElement('Post',{},'Helloworld')
+}

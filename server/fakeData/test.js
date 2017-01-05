@@ -1,5 +1,5 @@
-const ThatPost = function () {
-        return React.createElement('Post', {}, 'Hello world')
-      }
-
-module.exports = ThatPost
+ThatPost = function () {
+          return React.createElement('Post', {}, 'Hello world')
+        },AnotherPost = function () {
+          return React.createElement('Post', {}, 'Hello again world')
+        }
