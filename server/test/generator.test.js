@@ -5,6 +5,8 @@ const expect = chai.expect
 const reactGenerator = require('../generator/generator.js')
 const fileWriter = require('../generator/writeToFile.js')
 
+const Promise = require('bluebird')
+
 const dataPath = path.resolve(__dirname, '../fakeData/test.js')
 
 const writeToFile = fileWriter.writeToFile
