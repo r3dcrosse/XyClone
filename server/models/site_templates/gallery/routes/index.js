@@ -12,18 +12,18 @@ var parseComponents = function(propTree) {
       type: 'image',
       src: 'http://placecorgi.com/260/180',
       alt: 'DOGE1',
-      key: 'H3dz4d'
+      id: 'H3dz4d'
     },
     {
       type: 'text',
       text: 'DOGGGGGEEEEEEE',
-      key: 'zs3d9d'
+      id: 'zs3d9d'
     },
     {
       type: 'image',
       src: 'http://placecorgi.com/260/180',
       alt: 'DOGE 2',
-      key: 'Hd82x9'
+      id: 'Hd82x9'
     }];
 
   return components;

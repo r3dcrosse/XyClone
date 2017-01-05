@@ -2,112 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../cache/componentCache'
-import { Field, reduxForm } from 'redux-form';
 
+import TextboxContextContainer from '../containers/TextboxContextContainer'
+import NavbarContextContainer from '../containers/NavbarContextContainer';
+import ImageContextContainer from '../containers/ImgContextContainer';
 require("../basic.less");
 
 
-class EditorComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: null,
-      css: {
-        backgroundColor: null,
-        width: null,
-        height: null,
-        margin: null
-      },
-      type: null
-    }
-    // }
-  }
-  componentWillReceiveProps(newProps) {
-    console.log('COMPONENT RECIEVED PROPS', newProps.currComponent)
-    if (newProps.currComponent !== null) {
-      let component = newProps.currComponent;
-      let { css, type, name } = component;
-      this.setState({
-        name: name,
-        css: {
-          backgroundColor: css.backgroundColor,
-          width: css.width,
-          height: css.height,
-          margin: css.margin
-        },
-        type: type
-      })
-    }
-  }
-
-  changeStylePrep (e) {
-    e.preventDefault();
-    let newCss = this.state;
-    this.props.onChangeStyleClick(newCss, this.props.currComponentId);
-  }
-
-  changeNameInput (e) {
-    this.setState({name: e.target.value})
-  }
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
-  }
-  changeHeight (e) {
-    let cssObject = this.state.css;
-    cssObject.height = e.target.value + 'px';
-    this.setState({css: cssObject});
-  }
-
-  changeWidth (e) {
-    let cssObject = this.state.css;
-    cssObject.width = e.target.value + 'px';
-    this.setState({css: cssObject});
-  }
-
-  changeMargin (e) {
-    let cssObject = this.state.css;
-    cssObject.margin = e.target.value + 'px';
-    this.setState({css: cssObject});
-  }
-
-  render() {
-    if (this.props.currComponent === null) {
-      console.log('WHY IS THERENOTHING YET? IM CLICKING', this.state);
-      console.log('THIS IS CURRCOMPONENT', this.props.currComponent);
-      return (
-        <div> NOTHING YET </div>
-      )
-    } else {
-      console.log('THIS IS THE RENDERED COMPONENT THAT I AM CLICKLING', this.props.currComponent);
-      let component = this.state;
-      let { css, type, name } = component;
-      return (
-        <div>
-          <form onSubmit={this.changeStylePrep.bind(this)}>
-            <div>
-              <div> {type} </div>
-            </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-            </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-        </div>
-      )
+const EditorComponent = (props) => {
+  if (props.currComponent === null) {
+    // console.log('WHY IS THERENOTHING YET? IM CLICKING', this.state);
+    // console.log('THIS IS CURRCOMPONENT', this.props.currComponent);
+    return (
+      <div> NOTHING YET </div>
+    )
+  } else {
+    // console.log('THIS IS THE RENDERED COMPONENT THAT I AM CLICKLING', this.props.currComponent);
+    let component = props.currComponent
+    let { type } = component;
+    switch (type) {
+      case "Textbox":
+        return (
+          <TextboxContextContainer/>
+        )
+      case "Navbar":
+        return (
+          <NavbarContextContainer/>
+        )
+      case "Image":
+        return (
+          <ImageContextContainer/>
+        )
+      default:
+        return (
+          <div> CASE DEFAULTED </div>
+        )
     }
   }
 }

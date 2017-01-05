@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'react'
-import { storage } from '../cache/componentCache'
+import { PropTypes } from 'react';
+import { storage } from '../cache/componentCache';
 
-import Navbar from '../userComponents/navbar'
-import Textbox from '../userComponents/textbox'
+import ImageComponent from '../userComponents/img';
+import Navbar from '../userComponents/navbar';
+import Textbox from '../userComponents/textbox';
 const UserComponent = ({ componentId, type, onEditorClick }) => {
   // Object of all available compoennts
   // grab the type from the componentid
@@ -15,7 +16,11 @@ const UserComponent = ({ componentId, type, onEditorClick }) => {
       let links = storage[componentId].links;
       return <Navbar name={name} links={links} style={style} id={componentId} onEditorClick={() => onEditorClick(componentId)}/>;
     case 'Textbox':
-      return <Textbox name={name} style={style} id={componentId} onEditorClick={() => onEditorClick(componentId)}/>
+      let text = storage[componentId].text;
+      return <Textbox name={name} style={style} text={text} id={componentId} onEditorClick={() => onEditorClick(componentId)}/>
+    case 'Image':
+      let src = storage[componentId].src;
+      return <ImageComponent name={name} style={style} src={src} id={componentId} onEditorClick={() => onEditorClick(componentId)}/>
     default:
       return <li>
               ID: {storage.componentId}

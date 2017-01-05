@@ -11,12 +11,12 @@ var getComponentBasedOnType = (comp) => {
         <ImageComponent
           src={comp.src}
           alt={comp.alt}
-          key={comp.key}
+          id={comp.id}
         />
       );
     case 'text':
       return (
-        <h1 key={comp.key}>{comp.text}</h1>
+        <h1 id={comp.id}>{comp.text}</h1>
       );
   };
 }
