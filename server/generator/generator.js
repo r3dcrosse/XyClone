@@ -12,7 +12,6 @@ const mapStateTreeToReact = (stateTree) => {
       let actual = storage[components[i].id];
       reactStr += getComponentString(actual);
     }
-    console.log('react str', reactStr);
     return reactStr;
   }
 
@@ -31,47 +30,59 @@ const getComponentString = (component) => {
   let template = templates[componentType];
   let componentMaker;
 
-  let name = component.name;
-  let props = component.props;
-
   if (template) {
     componentMaker = template;
   } else {
     throw 'Reference Error: This component doesn\'t have a valid template';
   }
 
-  return componentMaker(name, props);
+  return componentMaker(component);
 };
 
 const templates = {
-  Post: (name, props) => {
+  Post: (props) => {
+    let name = props.name
+    let text = props.text
+
     let componentText = `
       let ${name} = function() {
-        return React.createElement('Post', {}, '${props.text}');
+        return React.createElement('Post', {}, '${text}');
       };
     `;
-    return trimWhitespace(componentText);
+    return keywordParser(componentText);
   },
 
-  Image: (name, props) => {
+  Image: (props) => {
+    let name = props.name
+    let src = props.src
+
     let componentText = `
       let ${name} = function() {
-        return React.createElement('img', {src: '${props.src}'});
+        return React.createElement('img', {src: '${src}'});
       };
     `;
     return trimWhitespace(componentText);
   }
  // Textbox etc.
-};
+}
 
 const escapeSpecialChars = function(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s][\n\r]/g, "\\$&");
 };
 
+const keywordParser = function(text) {
+  // break 'return' out of the middle
+  let retSplit = text.split('return')
+  return 'let ' + trimWhitespace(retSplit[0]) + ' return ' + (trimWhitespace(retSplit[1]))
+}
+
+// need to make this more sophisticated to ignore inner strings
 const trimWhitespace = function(text) {
   return text.replace(/ /g,'');
 };
 
-module.exports.mapStateTreeToReact = mapStateTreeToReact;
-module.exports.escapeSpecialChars = escapeSpecialChars;
-module.exports.trimWhitespace = trimWhitespace;
+
+module.exports.mapStateTreeToReact = mapStateTreeToReact
+module.exports.escapeSpecialChars = escapeSpecialChars
+module.exports.trimWhitespace = trimWhitespace
+module.exports.keywordParser = keywordParser
