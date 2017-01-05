@@ -1,19 +1,22 @@
 import { connect } from 'react-redux'
 import { removeComponent, addComponent, editComponent } from '../actions/editingActions'
-import Editor from '../components/Editor'
+import { storage } from '../cache/componentCache'
+import Editor from '../components/editor'
 
 const mapStateToProps = (state) => {
-	console.log('MAPPING COMPONENTS TO EDITORCONTAINER');
 	return {
-		components: state.xyclone.components
-	}
+		components: state.xyclone.components,
+    currComponent: state.xyclone.currComponent,
+    currComponentId: state.xyclone.currComponentId
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onEditorClick: (id) => {
 			console.log('DISPATCHING ON EDITOR CLICK with ID OF ', id);
-			dispatch(editComponent(id))
+			let component = storage[id];
+			dispatch(editComponent(component, id))
 		}
 	}
 }

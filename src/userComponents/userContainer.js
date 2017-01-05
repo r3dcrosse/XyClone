@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 
-const Textbox = ({name, style, text, id, onEditorClick}) => (
-  <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
-    <div>
-      {text}
-    </div>
+const userContainer = ({name, style, id, onEditorClick}) => (
+  <div className='userContainer-flexbox' style={style} onClick={onEditorClick}>
+    {name}
   </div>
 )
 
-export default Textbox;
+export default userContainer;
 
 // Textbox.propTypes = {
 //   name: PropTypes.string.isRequired,

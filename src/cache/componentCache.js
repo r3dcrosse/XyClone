@@ -1,6 +1,4 @@
-window.incrementId = 0;
-
-const incrementId = 0;
+let incrementId = 0;
 
 export const _components = {
   Navbar: ( ) => {
@@ -14,10 +12,12 @@ export const _components = {
         name: 'Default Navbar Name',
         css: defaultCss,
         links: null, 
-        children: []
+        children: [],
+        links: ['/reddit'],
+        type: 'Navbar'
     }
     storage[incrementId] = component;
-    return window.incrementId++;
+    return incrementId++;
   },
   Textbox: ( ) => {
     let defaultCss = {
@@ -29,10 +29,42 @@ export const _components = {
     let component = {
       name: 'Default Textbox Name',
       css: defaultCss,
-      children: []
+      children: [],
+      text: 'I AM A TEXTBOX I GOT LOADED HAHA',
+      css: defaultCss,
+      type: 'Textbox'
     }
     storage[incrementId] = component;
-    return window.incrementId++;
+    return incrementId++;
+  },
+  Image: ( ) => {
+    let defaultCss = {
+      width: '100px',
+      height: '100px',
+      margin: '10px'
+    }
+    let component = {
+      name: 'Default Image Name',
+      src: 'https://smalldogbreeds.net/img/dog.jpg',
+      alt: '',
+      css: defaultCss,
+      type: 'Image'
+    }
+    storage[incrementId] = component;
+    return incrementId++;
+  },
+  userContainer: () => {
+    let defaultCss = {
+      backgroundColor: 'red',
+      width: '400px',
+      height: '400px',
+      margin: '10px'
+    }
+    let component = {
+      name: 'Default User Container',
+      css: defaultCss,
+      children: []
+    }
   }
 }
 

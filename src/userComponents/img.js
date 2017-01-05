@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
-const Textbox = ({name, style, text, id, onEditorClick}) => (
+const ImageComponent = ({name, style, src, id, onEditorClick}) => (
   <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
     <div>
-      {text}
+      Image loaded with {id}, {name}
     </div>
+    <img src={src} alt=""/>
   </div>
 )
 
-export default Textbox;
+export default ImageComponent;
 
 // Textbox.propTypes = {
 //   name: PropTypes.string.isRequired,

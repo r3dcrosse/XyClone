@@ -32,8 +32,8 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 // start listening to requests on port 8000
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(router);
 
 // use morgan to log requests to the console

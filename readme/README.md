@@ -22,9 +22,9 @@
 
 > Some usage instructions
 
-### Development: 
+### Development:
 1) Set NODE_ENV to 'dev'
-2) npm install 
+2) npm install
 3) npm test to ensure changes are safe
 4) npm start to bundle
 5) go to http://localhost:8000
@@ -38,7 +38,14 @@
 - etc
 - etc
 
-## Development
+### HOW THE ACTIONS WORK
+
+- Add Component
+  Only triggered by the sidebar. Once sidebar is clicked, an add component action is triggered. The reducer then maps a new component to the storage and displays it on the editor.js file (editing flexbox)
+- Edit Component
+  Only triggered by the editor.js file (flexbox). Once an element is clicked, it dispatches an action to get the current ID of the component clicked. The editorComponent.js (editing toolbar) recieves the object clicked, and is then able to change the properties
+- changeStyle
+  Only triggered by clicking submit on the editor.js file (toolbar). Once clicked, it submits the current properties listed on the inputs and saves it onto the state. The editor.js file (flexbox) will see the changes and change the component accordingly.
 
 ### Installing Dependencies
 
