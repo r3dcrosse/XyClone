@@ -37,10 +37,10 @@ const EditorComponent = (props) => {
         return (
           <div> CASE DEFAULTED </div>
         )
+
     }
   }
 }
-
 // You have to connect() to any reducers that you wish to connect to yourself
 
 export default EditorComponent;
