@@ -68,7 +68,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	// const ImageComponent = require('./ImageComponent.jsx');
-	var IndexComponent = __webpack_require__(/*! ./components/test.js */ 235);
+	var IndexComponent = __webpack_require__(/*! ./components/test.js */ 233);
 	
 	////////////////////////////////////////////////////////////////////////////////
 	// DUMMY DATA (prop tree)
@@ -27139,9 +27139,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ },
-/* 233 */,
-/* 234 */,
-/* 235 */
+/* 233 */
 /*!********************************!*\
   !*** ./app/components/test.js ***!
   \********************************/
@@ -27156,7 +27154,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var ThatPost = function ThatPost() {
-	        return _react2.default.createElement('Post', {}, 'Hello world');
+	  return _react2.default.createElement('Post', {}, [_react2.default.createElement('div', {}, [_react2.default.createElement('p', {}, 'doge')]), _react2.default.createElement('img', { src: 'http://placecorgi.com/260/180' })]);
 	};
 	
 	module.exports = ThatPost;
