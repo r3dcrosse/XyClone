@@ -2,7 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
 
-const ImageComponent = require('./ImageComponent.jsx');
+// const ImageComponent = require('./ImageComponent.jsx');
+const IndexComponent = require('./components/test.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 // DUMMY DATA (prop tree)
@@ -28,13 +29,12 @@ var dummyData = [
 
 class IndexPage extends React.Component {
   render() {
+    console.log('&&&&&&', IndexComponent);
     return (
       <div>
         <p>{dummyData[1].text}</p>
-        <ImageComponent
-          src={dummyData[0].src}
-          alt={dummyData[0].alt}
-        />
+        <IndexComponent />
+        {/* <ImageComponent src={dummyData[0].src} alt={dummyData[0].alt} /> */}
       </div>
     );
   }
