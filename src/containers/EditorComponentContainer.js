@@ -9,12 +9,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-}
+// const mapDispatchToProps = (dispatch) => {
+// }
 
 const EditorComponentContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
+  // ,
+  // mapDispatchToProps
 )(EditorComponent)
 
 export default EditorComponentContainer;

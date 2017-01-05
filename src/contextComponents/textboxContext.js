@@ -20,12 +20,21 @@ class TextboxContext extends Component {
   }
 
   componentDidMount (){
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
       text: this.props.currComponent.text
+    })
+  }
+  componentWillReceiveProps (newProps) {
+    console.log('COMPONENTSWILLRECIEVEPROPS');
+    this.setState({
+      name: newProps.currComponent.name,
+      css: newProps.currComponent.css,
+      type: newProps.currComponent.type,
+      text: newProps.currComponent.text
     })
   }
 
@@ -66,7 +75,7 @@ class TextboxContext extends Component {
   }
 
   render() {
-    console.log('TEXTBOXCONTEXT IS BEING RENDERED');
+    // console.log('TEXTBOXCONTEXT IS BEING RENDERED');
     let { type, name, css, text } = this.state;
     if (type !== 'Textbox') {
       return (

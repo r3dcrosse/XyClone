@@ -53,7 +53,7 @@ export const _components = {
     storage[incrementId] = component;
     return incrementId++;
   },
-  userContainer: () => {
+  UserContainer: () => {
     let defaultCss = {
       backgroundColor: 'red',
       width: '400px',
@@ -63,8 +63,11 @@ export const _components = {
     let component = {
       name: 'Default User Container',
       css: defaultCss,
-      children: []
+      children: [],
+      type: 'UserContainer'
     }
+    storage[incrementId] = component;
+    return incrementId++;
   }
 }
 

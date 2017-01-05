@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
+import UserComponent from '../components/UserComponent';
+import { storage } from '../cache/componentCache'
 
-const userContainer = ({name, style, id, onEditorClick}) => (
-  <div className='userContainer-flexbox' style={style} onClick={onEditorClick}>
-    {name}
-  </div>
-)
+const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildClick}) => {
+  return (
+    <div className=''>
+      <div className='userContainer-flexcontainer' style={style} onClick={onEditorClick} >
+        {
+          children.map((idReference) => {
+            console.log('CHILDREN MAPPING. WHAT IS IDREFERENCE?', idReference);
+            return (
+              <UserComponent key={idReference} type={storage[idReference].type} componentId={idReference} child={true} onEditorChildClick={()=> onEditorChildClick(idReference)}/>
+            )
+          }
+        )}
+      </div>
+    </div>
+  )
+}
 
-export default userContainer;
+export default UserContainer;
 
-// Textbox.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   links: PropTypes.arrayOf(PropTypes.shape({componentId: PropTypes.string.isRequired}).isRequired),
-//   css: PropTypes.shape
-// }
+// onEditorClick={() => onEditorClick(idReference)}
+
+      // <div className='userContainer-flexcontainer' style={style} onClick={onEditorClick}>
+

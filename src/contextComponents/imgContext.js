@@ -20,7 +20,7 @@ class ImageContext extends Component {
   }
 
   componentDidMount (){
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
@@ -29,7 +29,16 @@ class ImageContext extends Component {
       alt: this.props.currComponent.alt
     })
   }
-
+  componentWillReceiveProps (newProps) {
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
+    this.setState({
+      name: newProps.currComponent.name,
+      css: newProps.currComponent.css,
+      type: newProps.currComponent.type,
+      src: newProps.currComponent.src,
+      alt: newProps.currComponent.alt
+    })
+  }
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
@@ -67,7 +76,7 @@ class ImageContext extends Component {
   }
 
   render() {
-    console.log('ImageContext IS BEING RENDERED');
+    // console.log('ImageContext IS BEING RENDERED');
     let { type, name, css, src, alt } = this.state;
     if (type !== 'Image') {
       return (

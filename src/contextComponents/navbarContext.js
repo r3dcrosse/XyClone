@@ -20,12 +20,22 @@ class NavbarContext extends Component {
   }
 
   componentDidMount (){
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
       links: this.props.currComponent.links
+    })
+  }
+
+  componentWillReceiveProps (newProps){
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
+    this.setState({
+      name: newProps.currComponent.name,
+      css: newProps.currComponent.css,
+      type: newProps.currComponent.type,
+      links: newProps.currComponent.links
     })
   }
 
@@ -66,7 +76,7 @@ class NavbarContext extends Component {
   }
 
   render() {
-    console.log('NavbarContext IS BEING RENDERED');
+    // console.log('NavbarContext IS BEING RENDERED');
     let { type, name, css, links } = this.state;
     if (type !== 'Navbar') {
       return (
