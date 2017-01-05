@@ -6,6 +6,7 @@ const zipdir = require('zip-dir');
 const fs = require('fs');
 const Project = require('../models/projectSchema');
 var ncp = require('ncp').ncp;
+const bodyParser = require('body-parser');
 
 // Router.route('/')
 //   .get(function(req, res) {
@@ -15,6 +16,7 @@ var ncp = require('ncp').ncp;
 Router.route('/buildSite')
   .post(function(req, res) {
     // write files to a directory based on req state tree
+    console.log('REQUEST', req.body, 'REQUEST');
 
     zipdir('./server/models/site_templates/gallery', {saveTo: './server/tempData/myZip.zip'}, function(err, buffer) {
       console.log('hi');
@@ -28,7 +30,7 @@ Router.route('/buildSite')
        console.log('done!');
       });
       //hard coding in the single project ID, will need to refactor later
-      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', data: buffer}, {upsert: true})
+      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', stateTree: req.body.dummyData.stateTree, components: req.body.dummyData.components}, {upsert: true})
       .then(function(data) {
         if (data === null) {
           console.log('Project Created');

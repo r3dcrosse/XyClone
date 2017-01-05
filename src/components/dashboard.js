@@ -9,7 +9,7 @@ class Dashboard extends Component {
     super(props)
 
     this.state = {
-      link: ''
+      link: '',
     }
 
     this.onBuildSite = this.onBuildSite.bind(this)
@@ -17,8 +17,36 @@ class Dashboard extends Component {
 
   onBuildSite() {
     var context = this;
+    var dummyData = {
+      stateTree: { //dummy data since state tree hasn't been created yet
+      componentReference: [{componentId: 0, type: "Navbar"}, {componentId: 1, type: "Textbox"}],
+      },
+      components: {
+        0: {
+          name: 'asdfas',
+          css: {
+            backgroundColor: 'Blue',
+            width: '500px',
+            height: '100px',
+            margin: '10px'
+          },
+          links: [],
+          type: 'Navbar'
+        },
+        1: {
+          name: 'textboxasdfasef',
+          css: {
+            backgroundColor: 'yellow',
+            width: '100px',
+            height: '100px',
+            margin: '10px'
+          },
+          text: 'text inside textbox'
+        }
+      }
+    }
 
-    axios.post('buildSite')
+    axios.post('buildSite', dummyData)
     .then(function(response) {
       console.log(response)
       context.setState({

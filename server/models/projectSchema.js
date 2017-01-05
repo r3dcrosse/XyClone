@@ -8,5 +8,6 @@ module.exports = mongoose.model('Project', new Schema({
   id: {type: Number, index: true},
   title: String,
   data: Buffer,
-
+  stateTree: Object,
+  components: Object,
 }));
