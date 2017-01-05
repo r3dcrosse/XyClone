@@ -11,6 +11,8 @@ export const _components = {
     let component = {
         name: 'Default Navbar Name',
         css: defaultCss,
+        links: null, 
+        children: [],
         links: ['/reddit'],
         type: 'Navbar'
     }
@@ -26,6 +28,8 @@ export const _components = {
     };
     let component = {
       name: 'Default Textbox Name',
+      css: defaultCss,
+      children: [],
       text: 'I AM A TEXTBOX I GOT LOADED HAHA',
       css: defaultCss,
       type: 'Textbox'

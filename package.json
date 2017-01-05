@@ -61,7 +61,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "lint": "eslint src",
-    "test": "mocha --require ignore-styles test/.setup.js test/**/*.test.js"
+    "test": "mocha --require ignore-styles test/.setup.js test/**/*.test.js server/test/*.test.js"
   },
   "engines": {
     "node": ">= 0.4"
