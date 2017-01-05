@@ -21,7 +21,13 @@ export function changeStyle (newProps, componentId) {
   };
 }
 
-
+export function addInChildren (componentType, componentId) {
+  return {
+    type: 'ADD_CHILDREN',
+    componentType: componentType,
+    componentId: componentId
+  }
+}
 
 // export const removeComponent = (componentId) =>
 //     ({type: 'REMOVE_COMPONENT', componentId: componentId})

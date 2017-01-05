@@ -6,6 +6,7 @@ const Sidebar = ({ onSidebarClick }) => (
     <button onClick={() => onSidebarClick('Navbar')}> Add Navbar</button>
     <button onClick={() => onSidebarClick('Textbox')}> Add Textbox </button>
     <button onClick={() => onSidebarClick('Image')}> Add Image </button>
+    <button onClick={() => onSidebarClick('UserContainer')}> Add Container </button>
   </div>
 )
 

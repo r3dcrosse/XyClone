@@ -6,6 +6,7 @@ import { storage } from '../cache/componentCache'
 import TextboxContextContainer from '../containers/TextboxContextContainer'
 import NavbarContextContainer from '../containers/NavbarContextContainer';
 import ImageContextContainer from '../containers/ImgContextContainer';
+import UserContainerContextContainer from '../containers/UserContainerContextContainer'
 require("../basic.less");
 
 
@@ -32,6 +33,10 @@ const EditorComponent = (props) => {
       case "Image":
         return (
           <ImageContextContainer/>
+        )
+      case "UserContainer":
+        return (
+          <UserContainerContextContainer/>
         )
       default:
         return (
