@@ -56,7 +56,7 @@ const templates = {
   Image: (name, props) => {
     let componentText = `
       let ${name} = function() {
-        return React.createElement('Image', {src: '${props.src}'});
+        return React.createElement('img', {src: '${props.src}'});
       };
     `;
     return trimWhitespace(componentText);
