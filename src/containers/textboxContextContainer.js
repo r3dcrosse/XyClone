@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
-import EditorComponent from '../components/editorComponent'
+import { changeStyle } from '../actions/editingActions'
+import TextboxContext from '../contextComponents/textboxContext'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
@@ -10,11 +11,16 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeStyleClick: (newProps, id) => {
+      dispatch(changeStyle(newProps, id))
+    }
+  }
 }
 
-const EditorComponentContainer = connect(
+const TextboxContextContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditorComponent)
+)(TextboxContext)
 
-export default EditorComponentContainer;
+export default TextboxContextContainer;

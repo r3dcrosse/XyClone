@@ -11,7 +11,7 @@ export const _components = {
     let component = {
         name: 'Default Navbar Name',
         css: defaultCss,
-        links: null,
+        links: ['/reddit'],
         type: 'Navbar'
     }
     storage[incrementId] = component;
@@ -35,6 +35,9 @@ export const _components = {
   },
   Image: ( ) => {
     let defaultCss = {
+      width: '100px',
+      height: '100px',
+      margin: '10px'
     }
     let component = {
       name: 'Default Image Name',
@@ -56,12 +59,11 @@ export const _components = {
     let component = {
       name: 'Default User Container',
       css: defaultCss,
-      children: null
+      children: []
     }
   }
 }
 
 export const storage = {
   // API => id : component
-
 }
