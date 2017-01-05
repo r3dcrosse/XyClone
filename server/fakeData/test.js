@@ -1,5 +1,7 @@
-ThatPost = function () {
-          return React.createElement('Post', {}, 'Hello world')
-        },AnotherPost = function () {
-          return React.createElement('Post', {}, 'Hello again world')
-        }
+
+let ThatPost=function(){
+ return React.createElement('Post',{},'Helloworld')
+}
+let AnotherPost=function(){
+ return React.createElement('Post',{},'Helloagainworld')
+}
