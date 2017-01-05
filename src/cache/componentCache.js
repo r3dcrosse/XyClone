@@ -13,7 +13,8 @@ export const _components = {
     let component = {
         name: 'Default Navbar Name',
         css: defaultCss,
-        links: null
+        links: null, 
+        children: []
     }
     storage[incrementId] = component;
     return window.incrementId++;
@@ -27,7 +28,8 @@ export const _components = {
     };
     let component = {
       name: 'Default Textbox Name',
-      css: defaultCss
+      css: defaultCss,
+      children: []
     }
     storage[incrementId] = component;
     return window.incrementId++;
