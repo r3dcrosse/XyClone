@@ -15,7 +15,8 @@ class UserContainerContext extends Component {
         margin: ''
       },
       children: [],
-      type: ''
+      type: '',
+      addChild: 'Textbox'
     }
   }
 // let defaultCss = {
@@ -58,10 +59,21 @@ class UserContainerContext extends Component {
     this.setState({name: e.target.value})
   }
 
+  changeChildType (e) {
+    let options = e.target.options;
+    let addChildType = '';
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        addChildType = options[i].value
+      }
+    }
+    this.setState({addChild: addChildType});
+  }
+
   changeChildrenInput (e) {
     // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
     e.preventDefault();
-    this.props.onEditorComponentSidebarClick('Textbox', this.props.currComponentId);
+    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId);
   }
 
   changeBackgroundColor (e) {
@@ -120,7 +132,12 @@ class UserContainerContext extends Component {
             <input type="submit" value="Submit" />
           </form>
           <div>
+            <span> Add a child! </span>
             <form onSubmit={this.changeChildrenInput.bind(this)}>
+              <select onChange={this.changeChildType.bind(this)}>
+                <option value="Textbox"> Textbox </option>
+                <option value="Image"> Image </option>
+              </select>
               <input type="submit" value="Add Children"/>
             </form>
           </div>

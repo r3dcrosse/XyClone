@@ -21,16 +21,9 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-
-
 const EditorContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Editor)
-
-// const EditorContainer = connect(
-//     mapStateToProps,
-//     mapDispatchToProps
-// )(Editor)
 
 export default EditorContainer;

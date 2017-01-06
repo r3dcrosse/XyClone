@@ -11,7 +11,7 @@ export const _components = {
     let component = {
         name: 'Default Navbar Name',
         css: defaultCss,
-        links: null, 
+        links: null,
         children: [],
         links: ['/reddit'],
         type: 'Navbar'
