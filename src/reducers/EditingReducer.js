@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/reducers/EditingReducer.js
-
 import { _components, storage } from '../cache/ComponentCache';
-=======
-import { _components, storage } from '../cache/componentCache';
->>>>>>> Delete Feature WIP:src/reducers/editingReducer.js
 
 const initialState = {
   components: [],
