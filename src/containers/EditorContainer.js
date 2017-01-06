@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent, editComponent } from '../actions/editingActions'
-import { storage } from '../cache/componentCache'
-import Editor from '../components/editor'
+import { removeComponent, addComponent, editComponent } from '../actions/EditingActions'
+import { storage } from '../cache/ComponentCache'
+import Editor from '../components/Editor'
 
 const mapStateToProps = (state) => {
 	return {

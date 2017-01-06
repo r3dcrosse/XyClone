@@ -1,4 +1,4 @@
-import rootReducer from '../src/reducers/editingReducer';
+import rootReducer from '../src/reducers/EditingReducer';
 import { expect } from 'chai';
 import { fromJS } from 'immutable';
 

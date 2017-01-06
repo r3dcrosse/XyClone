@@ -1,6 +1,6 @@
 
 import { combineReducers } from 'redux';
-import xyclone from './editingReducer';
+import xyclone from './EditingReducer';
 import { reducer as formReducer } from 'redux-form';
 
 

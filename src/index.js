@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import configureStore from './store/configureStore';
+import configureStore from './store/ConfigureStore';
 import Root from './containers/Root';
 
 const store = configureStore();

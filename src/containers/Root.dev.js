@@ -4,9 +4,9 @@ import App from './App';
 import DevTools from './DevTools';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import Dashboard from '../components/dashboard';
-import Login from '../components/login';
-import EditorPage from '../components/editorPage'
+import Dashboard from '../components/Dashboard';
+import Login from '../components/Login';
+import EditorPage from '../components/EditorPage'
 
 
 export default class Root extends Component {

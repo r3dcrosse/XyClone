@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 // import EditorContainer from './EditorContainer'
-import * as Actions from '../actions/editingActions';
+import * as Actions from '../actions/EditingActions';
 
-require('../basic.less');
+require('../Basic.less');
 
 export class App extends Component {
   render() {

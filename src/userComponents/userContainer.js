@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserComponent from '../components/UserComponent';
-import { storage } from '../cache/componentCache'
+import { storage } from '../cache/ComponentCache'
 
 const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildClick}) => {
   return (

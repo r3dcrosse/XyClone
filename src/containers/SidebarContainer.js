@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent } from '../actions/editingActions'
-import Sidebar from '../components/sidebar'
+import { removeComponent, addComponent } from '../actions/EditingActions'
+import Sidebar from '../components/Sidebar'
 
 const mapStateToProps = (state) => {
     console.log('mapping state', state);

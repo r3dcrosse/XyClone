@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle } from '../actions/editingActions'
-import TextboxContext from '../contextComponents/textboxContext'
+import { changeStyle } from '../actions/EditingActions'
+import TextboxContext from '../contextComponents/TextboxContext'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)

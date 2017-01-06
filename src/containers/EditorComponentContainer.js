@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import EditorComponent from '../components/editorComponent'
+import EditorComponent from '../components/EditorComponent'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle, addInChildren } from '../actions/editingActions'
-import UserContainerContext from '../contextComponents/userContainerContext'
+import { changeStyle, addInChildren } from '../actions/EditingActions'
+import UserContainerContext from '../contextComponents/UserContainerContext'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
