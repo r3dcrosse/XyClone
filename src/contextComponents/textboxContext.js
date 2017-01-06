@@ -28,6 +28,7 @@ class TextboxContext extends Component {
       text: this.props.currComponent.text
     })
   }
+
   componentWillReceiveProps (newProps) {
     console.log('COMPONENTSWILLRECIEVEPROPS');
     this.setState({
@@ -91,7 +92,7 @@ class TextboxContext extends Component {
             <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
           </div>
           <div>
-            <span> Name: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
+            <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
           </div>
           <div>
             <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
