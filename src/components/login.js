@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-require("../basic.less");
+require("../Basic.less");
 
 class Login extends Component {
   render() {

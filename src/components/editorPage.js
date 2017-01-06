@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 
 import EditorContainer from '../containers/EditorContainer';
 import SidebarContainer from '../containers/SidebarContainer';
-import BuildSiteContainer from '../containers/buildSiteContainer'
-import EditorComponentContainer from '../containers/editorComponentContainer';
-require("../basic.less");
+import BuildSiteContainer from '../containers/BuildSiteContainer'
+import EditorComponentContainer from '../containers/EditorComponentContainer';
+require("../Basic.less");
 
 const EditorPage = () => (
   <div className='editor-container'>

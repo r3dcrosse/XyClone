@@ -2,9 +2,9 @@ import React from 'react';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { shallow, mount, render } from 'enzyme';
-import * as Actions from '../src/actions/editingActions'
+import * as Actions from '../src/actions/EditingActions'
 
-import Sidebar from '../src/components/sidebar'
+import Sidebar from '../src/components/Sidebar'
 
 describe('Actions', function() {
     describe('Add action: ', function() {

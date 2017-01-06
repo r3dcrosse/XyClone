@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react';
-import { storage } from '../cache/componentCache';
+import { storage } from '../cache/ComponentCache';
 
-import ImageComponent from '../userComponents/img';
-import Navbar from '../userComponents/navbar';
-import Textbox from '../userComponents/textbox';
-import UserContainerForIds from '../containers/userContainerForIds'
+import ImageComponent from '../userComponents/Img';
+import Navbar from '../userComponents/Navbar';
+import Textbox from '../userComponents/Textbox';
+import UserContainerForIds from '../containers/UserContainerForIds'
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
   console.log(componentId);
   let style = storage[componentId].css;

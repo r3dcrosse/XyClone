@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle } from '../actions/editingActions'
-import NavbarContext from '../contextComponents/navbarContext'
+import { changeStyle } from '../actions/EditingActions'
+import NavbarContext from '../contextComponents/NavbarContext'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)

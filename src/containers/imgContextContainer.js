@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeStyle } from '../actions/editingActions'
+import { changeStyle } from '../actions/EditingActions'
 import ImageContext from '../contextComponents/ImgContext'
 
 const mapStateToProps = (state) => {

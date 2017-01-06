@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../cache/componentCache'
+import { storage } from '../cache/ComponentCache'
 
 import TextboxContextContainer from '../containers/TextboxContextContainer'
 import NavbarContextContainer from '../containers/NavbarContextContainer';
 import ImageContextContainer from '../containers/ImgContextContainer';
 import UserContainerContextContainer from '../containers/UserContainerContextContainer'
-require("../basic.less");
+require("../Basic.less");
 
 
 const EditorComponent = (props) => {

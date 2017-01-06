@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../cache/componentCache';
+import { storage } from '../cache/ComponentCache';
 
 class TextboxContext extends Component {
   constructor(props) {

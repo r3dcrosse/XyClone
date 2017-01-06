@@ -1,5 +1,5 @@
 
-import { _components, storage } from '../cache/componentCache';
+import { _components, storage } from '../cache/ComponentCache';
 
 const initialState = {
   components: [],
