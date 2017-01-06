@@ -1,6 +1,6 @@
 import { createStore, compose } from 'redux';
 import { persistState } from 'redux-devtools';
-import rootReducer from '../reducers';
+import rootReducer from '../reducers/Index';
 import DevTools from '../containers/rootContainers/DevTools';
 
 const enhancer = compose(
@@ -23,8 +23,8 @@ export default function configureStore(initialState) {
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')/*.default if you use Babel 6+ */)
+    module.hot.accept('../reducers/Index', () =>
+      store.replaceReducer(require('../reducers/Index')/*.default if you use Babel 6+ */)
     );
   }
 
