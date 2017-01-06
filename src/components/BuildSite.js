@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD:src/components/BuildSite.js
-import {Link} from 'react-router';
-import { storage } from '../cache/ComponentCache'
-=======
 import { Link } from 'react-router';
-import { storage } from '../cache/componentCache'
->>>>>>> Delete Feature WIP:src/components/buildSite.js
+import { storage } from '../cache/ComponentCache'
 
 class BuildSite extends Component {
 constructor(props) {
