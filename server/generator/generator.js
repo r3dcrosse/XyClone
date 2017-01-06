@@ -3,15 +3,27 @@ const path = require('path')
 
 const mapStateTreeToReact = (stateTree) => {
 
-  let components = stateTree.components;
-  let storage = stateTree.storage;
+  let components = stateTree.componentReferences;
+  let storage = stateTree.components;
 
   function formReactStringFromArray(components) {
-    let reactStr = '';
+    let reactStr = `
+    import React from 'react';
+
+    const IndexComponent = function () {
+      return (
+    `;
     for (var i = 0; i < components.length; i++) {
-      let actual = storage[components[i].id];
+      let actual = storage[components[i].componentId];
       reactStr += getComponentString(actual);
     }
+    reactStr += `
+      )
+    };
+
+    module.exports = IndexComponent;
+    `;
+
     return reactStr;
   }
 
@@ -45,11 +57,9 @@ const templates = {
     let text = props.text
 
     let componentText = `
-      let ${name} = function() {
-        return React.createElement('Post', {}, '${text}');
-      };
+      React.createElement('Post', {}, '${text}');
     `;
-    return keywordParser(componentText);
+    return componentText;
   },
 
   Image: (props) => {
@@ -57,11 +67,9 @@ const templates = {
     let src = props.src
 
     let componentText = `
-      let ${name} = function() {
-        return React.createElement('img', {src: '${src}'});
-      };
+      React.createElement('img', {src: '${src}'})
     `;
-    return trimWhitespace(componentText);
+    return componentText;
   }
  // Textbox etc.
 }

@@ -2,12 +2,13 @@ const fs = require('fs')
 const path = require('path')
 const Promise = require('bluebird')
 
-const dataPath = path.resolve(__dirname, '../fakeData/test.js')
+// const dataPath = path.resolve(__dirname, '../fakeData/test.js')
 
 const writeFile = Promise.promisify(fs.writeFile)
 
-const writeToFile = (component, cb) => {
-  writeFile(dataPath, component, (err) => {
+const writeToFile = (pathToSaveFile, component, cb) => {
+  console.log('&&&&&&&&&&', cb);
+  writeFile(pathToSaveFile, component, (err) => {
   }).then(() => {
     console.log('It\'s saved!');
     cb()
