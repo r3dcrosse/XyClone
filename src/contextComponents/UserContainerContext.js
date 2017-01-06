@@ -100,6 +100,11 @@ class UserContainerContext extends Component {
     this.setState({css: cssObject});
   }
 
+  deleteCurrComponent(e) {
+    e.preventDefault();
+    this.props.deleteFocusedComponent(this.props.currComponentId);
+  }
+
   render() {
     console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
     let { type, name, css, children } = this.state;
@@ -141,6 +146,9 @@ class UserContainerContext extends Component {
               <input type="submit" value="Add Children"/>
             </form>
           </div>
+          <form onSubmit={this.deleteCurrComponent.bind(this)}>
+            <input type="submit" value="Delete Component" />
+          </form>
         </div>
       )
     }

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { changeStyle, addInChildren } from '../actions/EditingActions'
+import { changeStyle, addInChildren, deleteComponent } from '../actions/EditingActions'
 import UserContainerContext from '../contextComponents/UserContainerContext'
+
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
@@ -15,9 +16,12 @@ const mapDispatchToProps = (dispatch) => {
     onChangeStyleClick: (newProps, id) => {
       dispatch(changeStyle(newProps, id))
     },
-     onEditorComponentSidebarClick: (type, componentId) => {
+    onEditorComponentSidebarClick: (type, componentId) => {
       console.log('DISPATCHING ON COMPONENT CLICK')
       dispatch(addInChildren(type, componentId))
+    },
+    deleteFocusedComponent: (id) => {
+      dispatch(deleteComponent(id));
     }
   }
 }

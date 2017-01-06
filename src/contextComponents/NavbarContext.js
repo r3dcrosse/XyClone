@@ -75,6 +75,11 @@ class NavbarContext extends Component {
     this.setState({css: cssObject});
   }
 
+  deleteCurrComponent(e) {
+    e.preventDefault();
+    this.props.deleteFocusedComponent(this.props.currComponentId);
+  }
+
   render() {
     // console.log('NavbarContext IS BEING RENDERED');
     let { type, name, css, links } = this.state;
@@ -84,30 +89,35 @@ class NavbarContext extends Component {
       )
     } else {
       return (
-        <form onSubmit={this.prepForDispatch.bind(this)}>
-          <div>
-            <div> {type} </div>
-          </div>
-          <div>
-            <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-          </div>
-          <div>
-            <span> Links: </span> <input type='text' value={links} onChange={this.changeLinksInput.bind(this)}/>
-          </div>
-          <div>
-            <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-          </div>
-          <div>
-            <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-          </div>
-          <div>
-            <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-          </div>
-          <div>
-            <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-          </div>
-          <input type="submit" value="Submit" />
-        </form>
+        <div>
+          <form onSubmit={this.prepForDispatch.bind(this)}>
+            <div>
+              <div> {type} </div>
+            </div>
+            <div>
+              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
+            </div>
+            <div>
+              <span> Links: </span> <input type='text' value={links} onChange={this.changeLinksInput.bind(this)}/>
+            </div>
+            <div>
+              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+            </div>
+            <div>
+              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
+            </div>
+            <div>
+              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
+            </div>
+            <div>
+              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
+            </div>
+            <input type="submit" value="Submit" />
+          </form>
+          <form onSubmit={this.deleteCurrComponent.bind(this)}>
+            <input type="submit" value="Delete Component" />
+          </form>
+        </div>
       )
     }
   }

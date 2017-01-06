@@ -23,6 +23,7 @@ Router.route('/buildSite')
 
     // Save the website prop tree to database
     Project.findOneAndUpdate({id: 1}, {title: 'MVProject', componentReferences: req.body.componentReferences, components: req.body.components}, {upsert: true})
+
       .then(function(data) {
         if (data === null) {
           console.log('Project Created');

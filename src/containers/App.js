@@ -11,7 +11,6 @@ require('../Basic.less');
 export class App extends Component {
   render() {
     const { components, actions } = this.props;
-
     return (
       <div className="App">
         <div className="App-header">

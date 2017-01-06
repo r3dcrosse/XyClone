@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { changeStyle } from '../actions/EditingActions'
+import { changeStyle, deleteComponent } from '../actions/EditingActions'
 import NavbarContext from '../contextComponents/NavbarContext'
+
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
@@ -14,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChangeStyleClick: (newProps, id) => {
       dispatch(changeStyle(newProps, id))
+    },
+    deleteFocusedComponent: (id) => {
+      dispatch(deleteComponent(id));
     }
   }
 }

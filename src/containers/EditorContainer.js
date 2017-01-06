@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent, editComponent } from '../actions/EditingActions'
+import { addComponent, editComponent, deleteComponent } from '../actions/EditingActions'
 import { storage } from '../cache/ComponentCache'
 import Editor from '../components/Editor'
 
@@ -17,7 +17,10 @@ const mapDispatchToProps = (dispatch) => {
 			console.log('DISPATCHING ON EDITOR CLICK with ID OF ', id);
 			let component = storage[id];
 			dispatch(editComponent(component, id))
-		}
+		},
+    deleteFocusedComponent: (id) => {
+      dispatch(deleteComponent(id));
+    }
 	}
 }
 
