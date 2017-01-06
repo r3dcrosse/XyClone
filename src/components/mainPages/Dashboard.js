@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-require("../Basic.less");
+require("../../Basic.less");
 
 
 class Dashboard extends Component {

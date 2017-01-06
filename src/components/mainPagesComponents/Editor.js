@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import UserComponent from './UserComponent'
-require("../Basic.less");
+require("../../Basic.less");
 
 const Editor = ({ components, onEditorClick }) => (
   <div className='editor-inPage'>

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle, deleteComponent } from '../actions/EditingActions'
-import TextboxContext from '../contextComponents/TextboxContext'
+import { changeStyle, deleteComponent } from '../../actions/EditingActions'
+import TextboxContext from '../../components/contextComponents/TextboxContext'
 
 
 const mapStateToProps = (state) => {

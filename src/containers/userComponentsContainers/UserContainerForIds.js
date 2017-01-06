@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { editComponent } from '../actions/EditingActions'
-import { storage } from '../cache/ComponentCache'
-import UserContainer from '../userComponents/UserContainer'
+import { editComponent } from '../../actions/EditingActions'
+import { storage } from '../../cache/ComponentCache'
+import UserContainer from '../../components/userComponents/UserContainer'
 
 
 const mapStateToProps = (state) => {

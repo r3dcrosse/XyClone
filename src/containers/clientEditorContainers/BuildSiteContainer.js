@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import BuildSite from '../components/BuildSite'
+import BuildSite from '../../components/mainPagesComponents/BuildSite'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO BuildSiteCONTAINERASDFASDFASDF', state)

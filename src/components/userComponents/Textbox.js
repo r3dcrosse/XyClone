@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { storage } from '../cache/ComponentCache'
 
 const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClick}) => {
   if (!child) {

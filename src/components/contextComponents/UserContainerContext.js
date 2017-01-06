@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../cache/ComponentCache';
+import { storage } from '../../cache/ComponentCache';
 
-class TextboxContext extends Component {
+class UserContainerContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,28 +14,38 @@ class TextboxContext extends Component {
         height: '',
         margin: ''
       },
-      text: '',
-      type: ''
+      children: [],
+      type: '',
+      addChild: 'Textbox'
     }
   }
-
+// let defaultCss = {
+//       backgroundColor: 'red',
+//       width: '400px',
+//       height: '400px',
+//       margin: '10px'
+//     }
+//     let component = {
+//       name: 'Default User Container',
+//       css: defaultCss,
+//       children: []
+//     }
   componentDidMount (){
-    // console.log('COMPONENT RECEIVED PROPS.', this.props);
+    console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      text: this.props.currComponent.text
+      children: this.props.currComponent.children
     })
   }
-
-  componentWillReceiveProps (newProps) {
-    console.log('COMPONENTSWILLRECIEVEPROPS');
+  componentWillReceiveProps (newProps){
+    console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      text: newProps.currComponent.text
+      children: newProps.currComponent.children
     })
   }
 
@@ -49,14 +59,29 @@ class TextboxContext extends Component {
     this.setState({name: e.target.value})
   }
 
-  changeTextInput (e) {
-    this.setState({text: e.target.value});
+  changeChildType (e) {
+    let options = e.target.options;
+    let addChildType = '';
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        addChildType = options[i].value
+      }
+    }
+    this.setState({addChild: addChildType});
   }
+
+  changeChildrenInput (e) {
+    // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
+    e.preventDefault();
+    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId);
+  }
+
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
     cssObject.backgroundColor = e.target.value
     this.setState({css: cssObject});
   }
+
   changeHeight (e) {
     let cssObject = this.state.css;
     cssObject.height = e.target.value;
@@ -81,11 +106,11 @@ class TextboxContext extends Component {
   }
 
   render() {
-    // console.log('TEXTBOXCONTEXT IS BEING RENDERED');
-    let { type, name, css, text } = this.state;
-    if (type !== 'Textbox') {
+    console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
+    let { type, name, css, children } = this.state;
+    if (type !== 'UserContainer') {
       return (
-        <div> SHIT IM NOT A TEXTBOX IM JUST NULL </div>
+        <div> SHIT IM NOT A USERCONTAINER IM JUST NULL </div>
       )
     } else {
       return (
@@ -96,9 +121,6 @@ class TextboxContext extends Component {
             </div>
             <div>
               <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
             </div>
             <div>
               <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
@@ -114,6 +136,16 @@ class TextboxContext extends Component {
             </div>
             <input type="submit" value="Submit" />
           </form>
+          <div>
+            <span> Add a child! </span>
+            <form onSubmit={this.changeChildrenInput.bind(this)}>
+              <select onChange={this.changeChildType.bind(this)}>
+                <option value="Textbox"> Textbox </option>
+                <option value="Image"> Image </option>
+              </select>
+              <input type="submit" value="Add Children"/>
+            </form>
+          </div>
           <form onSubmit={this.deleteCurrComponent.bind(this)}>
             <input type="submit" value="Delete Component" />
           </form>
@@ -123,4 +155,4 @@ class TextboxContext extends Component {
   }
 }
 
-export default TextboxContext;
+export default UserContainerContext;

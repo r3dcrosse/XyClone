@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle, deleteComponent } from '../actions/EditingActions'
-import ImageContext from '../contextComponents/ImgContext'
+import { changeStyle, deleteComponent } from '../../actions/EditingActions'
+import ImageContext from '../../components/contextComponents/ImgContext'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)

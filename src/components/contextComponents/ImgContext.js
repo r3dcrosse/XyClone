@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../cache/ComponentCache';
+import { storage } from '../../cache/ComponentCache';
 
 class ImageContext extends Component {
   constructor(props) {
