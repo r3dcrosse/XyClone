@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changeStyle } from '../actions/EditingActions'
+import { changeStyle, deleteComponent } from '../actions/EditingActions'
 import ImageContext from '../contextComponents/ImgContext'
 
 const mapStateToProps = (state) => {
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChangeStyleClick: (newProps, id) => {
       dispatch(changeStyle(newProps, id))
+    },
+    deleteFocusedComponent: (id) => {
+      dispatch(deleteComponent(id));
     }
   }
 }

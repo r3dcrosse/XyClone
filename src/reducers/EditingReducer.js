@@ -1,5 +1,9 @@
+<<<<<<< HEAD:src/reducers/EditingReducer.js
 
 import { _components, storage } from '../cache/ComponentCache';
+=======
+import { _components, storage } from '../cache/componentCache';
+>>>>>>> Delete Feature WIP:src/reducers/editingReducer.js
 
 const initialState = {
   components: [],
@@ -11,13 +15,18 @@ const initialState = {
 export default function xyclone (state = initialState, action) {
 	let elem;
 	let idInStorage;
+	let componentFromStorage;
+	let recurseDelete = (element) => {
+		console.log('THIS IS ELEMENT INSIDE RECURSE DELETE', element);
+		if (element.children.length > 0) {
+			for (let i = 0; i < element.children.length; i++) {
+				recurseDelete(element.children[i]);
+				delete storage[element.children[i]];
+			}
+			element.children.splice(0, element.length);
+		}
+	}
 	switch (action.type) {
-		case 'REMOVE_COMPONENT':
-			// return Object.assign({}, state, {
-			// 	components: [ ...state.components.slice(0, action.componentId),
-			// 				  ...state.components.slice(action.componentId + 1)
-			// 				]
-			// });
 		case 'ADD_COMPONENT':
 			elem = action.componentType;
 			idInStorage = _components[elem]();
@@ -42,17 +51,23 @@ export default function xyclone (state = initialState, action) {
 			let newObjectId = _components[elem]();
 			storage[newObjectId].child = true;
 			storage[action.componentId].children.push(newObjectId);
-			// let currComponentState = state.currComponent
-			// let currComponentChildrenState = state.currComponent.children;
-			// console.log(storage[action.componentId], 'THIS IS WHAT IM TRYIGN TO COPY/CHANGE INTO NEW');
-			// storage[action.componentId].children = storage[action.componentId].children.concat([newObjectId]);
-			// console.log(storage[action.componentId], 'SHOUDL HAVE CHANGES');
 			return Object.assign({}, state, {
-				// components: [...state.components, {componentId: newObjectId, type: action.componentType}],
 				currComponent: {
 					...state.currComponent,
 					children: [...state.currComponent.children, newObjectId]
 				}
+			})
+		case 'DELETE_COMPONENT':
+			console.log('DELETING COMPONENT with action', action.componentId);
+			componentFromStorage = storage[action.componentId];
+			if (componentFromStorage.type === 'UserContainer') {
+				recurseDelete(componentFromStorage);
+			}
+			delete storage[action.componentId];
+			return Object.assign({}, state, {
+				components: state.components.filter((ref) => ref.componentId !== action.componentId),
+				currComponent: null,
+				currComponentId: null
 			})
 		default:
 			return state

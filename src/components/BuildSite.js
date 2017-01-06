@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD:src/components/BuildSite.js
 import {Link} from 'react-router';
 import { storage } from '../cache/ComponentCache'
+=======
+import { Link } from 'react-router';
+import { storage } from '../cache/componentCache'
+>>>>>>> Delete Feature WIP:src/components/buildSite.js
 
 class BuildSite extends Component {
 constructor(props) {
     super(props)
     this.state = {
-      componentReferences: [],
-      components: {},
+      components: [],
+      storage: {},
       link: ''
     }
     this.onBuildSite = this.onBuildSite.bind(this)
   }
   componentDidMount() {
     this.setState({
-      componentReferences: this.props.components,
-      components: storage
+      components: this.props.components,
+      storage: storage
     })
   }
   componentWillReceiveProps(newProps) {
     console.log('BUILDSITE RECEIVED NEW PROPS', newProps);
     this.setState({
-      componentReferences: newProps.components,
-      components: storage
+      components: newProps.components,
+      storage: storage
     })
   }
 
   onBuildSite() {
     var context = this;
     var siteData = {
-      componentReferences: this.state.componentReferences,
-      components: this.state.components
+      components: this.state.components,
+      storage: this.state.storage
     };
     console.log(siteData);
     console.log('BUILDING SITE WITH INSIDE STATE DATA');

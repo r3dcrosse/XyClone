@@ -21,8 +21,24 @@ Router.route('/buildSite')
     // write files to a directory based on req state tree
     console.log('REQUEST', req.body, 'REQUEST');
 
+<<<<<<< HEAD
     // Save the website prop tree to database
     Project.findOneAndUpdate({id: 1}, {title: 'MVProject', componentReferences: req.body.componentReferences, components: req.body.components}, {upsert: true})
+=======
+    zipdir('./server/models/site_templates/gallery', {saveTo: './server/tempData/myZip.zip'}, function(err, buffer) {
+      console.log('hi');
+
+      // ncp.limit = 16;
+
+      // ncp('./server/models/site_templates/gallery', './server/tempData/myZip.zip', function (err) {
+      //   if (err) {
+      //    return console.error(err);
+      //   }
+      //   console.log('done!');
+
+      // });
+      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', components: req.body.components, storage: req.body.storage}, {upsert: true})
+>>>>>>> Delete Feature WIP
       .then(function(data) {
         if (data === null) {
           console.log('Project Created');

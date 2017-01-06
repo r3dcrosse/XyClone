@@ -13,6 +13,13 @@ export function editComponent (component, componentId) {
   };
 }
 
+export function deleteComponent (componentId) {
+  return {
+    type: 'DELETE_COMPONENT',
+    componentId: componentId
+  }
+}
+
 export function changeStyle (newProps, componentId) {
   return {
     type: 'CHANGE_STYLE',
@@ -28,6 +35,7 @@ export function addInChildren (componentType, componentId) {
     componentId: componentId
   }
 }
+
 
 // export const removeComponent = (componentId) =>
 //     ({type: 'REMOVE_COMPONENT', componentId: componentId})
