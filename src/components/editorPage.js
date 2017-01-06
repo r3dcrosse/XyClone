@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import EditorContainer from __dirname + '/../containers/EditorContainer';
+import EditorContainer from '../containers/EditorContainer';
 import SidebarContainer from '../containers/SidebarContainer';
 import BuildSiteContainer from '../containers/buildSiteContainer'
 import EditorComponentContainer from '../containers/editorComponentContainer';
