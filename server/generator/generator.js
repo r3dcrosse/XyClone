@@ -3,8 +3,8 @@ const path = require('path')
 
 const mapStateTreeToReact = (stateTree) => {
 
-  let components = stateTree.componentReferences;
-  let storage = stateTree.components;
+  let components = stateTree.components;
+  let storage = stateTree.storage;
 
   function formReactStringFromArray(components) {
     let reactStr = `
@@ -12,12 +12,15 @@ const mapStateTreeToReact = (stateTree) => {
 
     const IndexComponent = function () {
       return (
+        React.createElement('section', {}, [
     `;
     for (var i = 0; i < components.length; i++) {
       let actual = storage[components[i].componentId];
       reactStr += getComponentString(actual);
+      i <= components.length - 1 ? reactStr += `,` : null;
     }
     reactStr += `
+        ])
       )
     };
 
@@ -66,7 +69,7 @@ const templates = {
     let name = props.name;
     let src = props.src;
     let css = JSON.stringify(props.css);
-    
+
     let componentText = `
       React.createElement('img', {src: '${src}', style: ${css}})
     `;
