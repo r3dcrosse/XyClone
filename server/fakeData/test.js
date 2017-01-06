@@ -1,7 +1,1 @@
-
-let ThatPost=function(){
- return React.createElement('Post',{},'Helloworld')
-}
-let AnotherPost=function(){
- return React.createElement('Post',{},'Helloagainworld')
-}
+/Users/redcrosse/Desktop/XyClone/server/resources/tempData/fileToBeZipped/app/components/IndexComponent.js
