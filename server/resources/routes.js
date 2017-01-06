@@ -20,29 +20,29 @@ Router.route('/buildSite')
 
     zipdir('./server/models/site_templates/gallery', {saveTo: './server/tempData/myZip.zip'}, function(err, buffer) {
       console.log('hi');
- 
-      ncp.limit = 16;
-       
-      ncp('./server/models/site_templates/gallery', './server/tempData/myZip.zip', function (err) {
-       if (err) {
-         return console.error(err);
-       }
-       console.log('done!');
-      });
-      //hard coding in the single project ID, will need to refactor later
-      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', stateTree: req.body.dummyData.stateTree, components: req.body.dummyData.components}, {upsert: true})
+
+      // ncp.limit = 16;
+
+      // ncp('./server/models/site_templates/gallery', './server/tempData/myZip.zip', function (err) {
+      //   if (err) {
+      //    return console.error(err);
+      //   }
+      //   console.log('done!');
+
+      // });
+      Project.findOneAndUpdate({id: 1}, {title: 'MVProject', componentReferences: req.body.componentReferences, components: req.body.components}, {upsert: true})
       .then(function(data) {
         if (data === null) {
           console.log('Project Created');
         } else {
           console.log('Updated Project');
         }
+        res.send('/tempData/myZip.zip');
       })
       .catch(function(error) {
         console.log(error)
       });
     })
-    res.send('/tempData/myZip.zip');
   });
 
 Router.route('/tempData/myZip.zip')
