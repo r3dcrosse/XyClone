@@ -12,7 +12,6 @@ const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClic
     )
   } else {
     let stopBubble = (e) => {
-      console.log('STOP BUBBLE WAS CALLED DOE');
       onEditorChildClick();
       e.stopPropagation();
     }

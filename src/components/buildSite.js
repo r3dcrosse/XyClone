@@ -20,8 +20,9 @@ constructor(props) {
     })
   }
   componentWillReceiveProps(newProps) {
+    console.log('BUILDSITE RECEIVED NEW PROPS', newProps);
     this.setState({
-      componentReferences: this.props.components,
+      componentReferences: newProps.components,
       components: storage
     })
   }
