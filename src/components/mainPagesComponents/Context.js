@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../cache/ComponentCache'
+import { storage } from '../../cache/ComponentCache'
 
-import TextboxContextContainer from '../containers/TextboxContextContainer'
-import NavbarContextContainer from '../containers/NavbarContextContainer';
-import ImageContextContainer from '../containers/ImgContextContainer';
-import UserContainerContextContainer from '../containers/UserContainerContextContainer'
-require("../Basic.less");
+import TextboxContextContainer from '../../containers/contextContainers/TextboxContextContainer'
+import NavbarContextContainer from '../../containers/contextContainers/NavbarContextContainer';
+import ImageContextContainer from '../../containers/contextContainers/ImgContextContainer';
+import UserContainerContextContainer from '../../containers/contextContainers/UserContainerContextContainer'
+require("../../Basic.less");
 
 
-const EditorComponent = (props) => {
+const Context = (props) => {
   if (props.currComponent === null) {
     // console.log('WHY IS THERENOTHING YET? IM CLICKING', this.state);
     // console.log('THIS IS CURRCOMPONENT', this.props.currComponent);
@@ -48,4 +48,4 @@ const EditorComponent = (props) => {
 }
 // You have to connect() to any reducers that you wish to connect to yourself
 
-export default EditorComponent;
+export default Context;

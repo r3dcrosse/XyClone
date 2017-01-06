@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from '../userComponents/Navbar'
 
 const Sidebar = ({ onSidebarClick }) => (
   <div>

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import App from './App';
+import App from '../App';
 import DevTools from './DevTools';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import Dashboard from '../components/Dashboard';
-import Login from '../components/Login';
-import EditorPage from '../components/EditorPage'
+import Dashboard from '../../components/mainPages/Dashboard';
+import Login from '../../components/mainPages/Login';
+import EditorPage from '../../components/mainPages/EditorPage'
 
 
 export default class Root extends Component {

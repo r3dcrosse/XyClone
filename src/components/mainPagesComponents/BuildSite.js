@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
-import { storage } from '../cache/ComponentCache'
+import { storage } from '../../cache/ComponentCache'
 
 class BuildSite extends Component {
 constructor(props) {

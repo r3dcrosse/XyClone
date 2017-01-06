@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import EditorContainer from '../containers/EditorContainer';
-import SidebarContainer from '../containers/SidebarContainer';
-import BuildSiteContainer from '../containers/BuildSiteContainer'
-import EditorComponentContainer from '../containers/EditorComponentContainer';
-require("../Basic.less");
+import EditorContainer from '../../containers/clientEditorContainers/EditorContainer';
+import SidebarContainer from '../../containers/clientEditorContainers/SidebarContainer';
+import BuildSiteContainer from '../../containers/clientEditorContainers/BuildSiteContainer'
+import ContextContainer from '../../containers/clientEditorContainers/ContextContainer';
+require("../../Basic.less");
 
 const EditorPage = () => (
   <div className='editor-container'>
@@ -19,7 +19,7 @@ const EditorPage = () => (
       <EditorContainer />
     </div>
     <div className='editor-component'>
-      <EditorComponentContainer />
+      <ContextContainer />
     </div>
   </div>
 

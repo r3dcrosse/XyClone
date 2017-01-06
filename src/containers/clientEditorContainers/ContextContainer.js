@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
-import EditorComponent from '../components/EditorComponent'
+import Context from '../../components/mainPagesComponents/Context'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
+  console.log('MAPPING TO ContextCONTAINERASDFASDFASDF', state)
   return {
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId
@@ -12,10 +12,10 @@ const mapStateToProps = (state) => {
 // const mapDispatchToProps = (dispatch) => {
 // }x`
 
-const EditorComponentContainer = connect(
+const ContextContainer = connect(
   mapStateToProps
   // ,
   // mapDispatchToProps
-)(EditorComponent)
+)(Context)
 
-export default EditorComponentContainer;
+export default ContextContainer;

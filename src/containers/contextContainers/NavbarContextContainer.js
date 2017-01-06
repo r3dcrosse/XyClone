@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle, deleteComponent } from '../actions/EditingActions'
-import NavbarContext from '../contextComponents/NavbarContext'
+import { changeStyle, deleteComponent } from '../../actions/EditingActions'
+import NavbarContext from '../../components/contextComponents/NavbarContext'
 
 
 const mapStateToProps = (state) => {
