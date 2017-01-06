@@ -57,18 +57,20 @@ const templates = {
     let text = props.text
 
     let componentText = `
-      React.createElement('Post', {}, '${text}');
+      React.createElement('Post', {}, '${text}')
     `;
     return componentText;
   },
 
   Image: (props) => {
-    let name = props.name
-    let src = props.src
-
+    let name = props.name;
+    let src = props.src;
+    let css = JSON.stringify(props.css);
+    
     let componentText = `
-      React.createElement('img', {src: '${src}'})
+      React.createElement('img', {src: '${src}', style: ${css}})
     `;
+
     return componentText;
   }
  // Textbox etc.

@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
 
 // const ImageComponent = require('./ImageComponent.jsx');
-const IndexComponent = require('./components/test.js');
+const IndexComponent = require('./components/IndexComponent.js');
 
 ////////////////////////////////////////////////////////////////////////////////
 // DUMMY DATA (prop tree)
