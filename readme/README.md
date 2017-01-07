@@ -53,36 +53,31 @@
 
 DO THESE STEPS IN ORDER:
 
-  SIDEBAR STEPS/COMPONENT CREATION:
   - Inside src/cache/ComponentCache.js file
-    - Create the default values for your component
+    - Create the default values for your component inside the object _components
     - Increment the incrementId (That is the componentId which is passed around)
-  - Inside src/mainPagesComponents/Sidebar.js file
+  - Inside src/components/Editor/EditorComponents/Sidebar.js file
     - Create a button for your component
     - Add the "onSidebarClick" onClick property, passing in your created component type.
-  - Inside src/components/userComponents dir
-    - Create the component (React Component!) in a new file
-    - Make sure you pass in the properties of the components you will need! (Along with EditorClick)
-    - If component is nested
-      - DOCUMENTATION WIP
-  - Inside src/components/mainPagesComponents/userComponent.js
-    - Import the component created
-    - Add a switch option for your component type
-    - Initialize any extra properties that you might need from storage[componentId] <-- This will grab your created component once its created.
+  - Inside src/components/Editor/UserComponents/ directory
+    CREATING THE COMPONENT FILE
+      - Create the component (React Component!) in a new file
+      - Make sure you pass in the properties of the components you will need! (Along with EditorClick)
+      - If component is nested
+        - Add the onEditorChildClick property
+        - Create a container for your nested component inside same folder
+    CREATING THE CONTEXT FILE
+      - Create the context menu for your component (Copy a previous context template)
+      - Give it initial state values in constructor.
+      - Make sure componentDidMount / componentWillReceiveProps assigns this.props/newProps accordingly to the attributes wanted
+    CREATING THE CONTEXT CONTAINER FILE
+      - Create the context menu container for your component (Copy a previous template)
+        - if component is nested, use UserContainerContextContainer as a template
+      - import the Context file made from the previous step (from CONTEXT FILE CREATION)
+  - Inside src/components/Editor/Context.js file
+    - Import the container created from the CONTEXT CONTAINER FILE step
+    - Add a switch case for the context component created
 
-  CONTEXTMENU/FOCUS FOR PROPERTIES
-  - Inside src/components/contextComponents dir
-    - Create a new file for a context menu for your component (Copy a previous context template)
-    - Give it initial state values in constructor. This is so it won't bug out when loaded in beginning
-    - componentDidMount can grab the properties of the currently focused element. Use this.props.currElement.'property' to grab your element property
-    - componentWillReceiveProps will grab the updated props once you click submit.
-    - Add your wanted props to be modified as inputs.
-  - Inside src/containers/contextContainers dir
-    - Create a new file for the context component container (Copy a previous template)
-      - Don't copy UserContainerContextMenu. That has a children property (Unless your component is nested)
-    - Import the new context component. Change the names to fit for a container
-  - Inside src/components/mainPagesComponents/context.js file
-    -
 
 ### Installing Dependencies
 
