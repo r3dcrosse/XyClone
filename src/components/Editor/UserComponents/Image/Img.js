@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEditorChildClick}) => {
+const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEditorChildClick = undefined}) => {
   if (!child) {
     return (
       <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
@@ -9,7 +9,9 @@ const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEdit
     )
   } else {
     let stopBubble = (e) => {
-      onEditorChildClick();
+      if (onEditorChildClick) {
+        onEditorChildClick();
+      }
       e.stopPropagation();
     }
     return (

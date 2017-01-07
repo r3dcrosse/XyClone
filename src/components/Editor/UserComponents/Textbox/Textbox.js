@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClick}) => {
+const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClick = undefined}) => {
   if (!child) {
     return (
       <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
@@ -11,7 +11,9 @@ const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClic
     )
   } else {
     let stopBubble = (e) => {
-      onEditorChildClick();
+      if (onEditorChildClick) {
+        onEditorChildClick();
+      }
       e.stopPropagation();
     }
     return (

@@ -3,39 +3,40 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
 
-class UserContainerContext extends Component {
+class CarouselContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      css: {
-        backgroundColor: '',
-        width: '',
-        height: '',
-        margin: ''
-      },
-      children: [],
-      type: '',
-      addChild: 'Textbox'
+      // name: '',
+      // css: {
+      //   backgroundColor: '',
+      //   width: '',
+      //   height: '',
+      //   margin: ''
+      // },
+      // children: [],
+      // type: '',
+      // addChild: 'Textbox'
     }
   }
 
   componentDidMount (){
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
-      name: this.props.currComponent.name,
-      css: this.props.currComponent.css,
-      type: this.props.currComponent.type,
-      children: this.props.currComponent.children
+      // name: this.props.currComponent.name,
+      // css: this.props.currComponent.css,
+      // type: this.props.currComponent.type,
+      // children: this.props.currComponent.children
     })
   }
+
   componentWillReceiveProps (newProps){
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
-      name: newProps.currComponent.name,
-      css: newProps.currComponent.css,
-      type: newProps.currComponent.type,
-      children: newProps.currComponent.children
+      // name: newProps.currComponent.name,
+      // css: newProps.currComponent.css,
+      // type: newProps.currComponent.type,
+      // children: newProps.currComponent.children
     })
   }
 

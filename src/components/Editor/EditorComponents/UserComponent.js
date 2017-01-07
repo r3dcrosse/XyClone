@@ -6,29 +6,34 @@ import ImageComponent from '../UserComponents/Image/Img';
 import Navbar from '../UserComponents/Navbar/Navbar';
 import Textbox from '../UserComponents/Textbox/Textbox';
 import UserContainerContainer from '../UserComponents/UserContainer/UserContainerContainer'
+import GalleryPost from '../UserComponents/GalleryPost/GalleryPost'
 
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
-  console.log(componentId);
-  console.log('THIS IS STORAGE CURRENTLY', storage);
-  console.log('THIS IS THE ACTUAL STORAGE COMPONENT', storage[componentId])
+  console.log('COMPONENTID', componentId);
+  console.log('TYPE OF COMPONENT', type);
   let style = storage[componentId].css;
   let name = storage[componentId].name;
   let children = storage[componentId].children;
   switch (type) {
+
     case 'Navbar':
       return <Navbar name={name} children={children} style={style} id={componentId} onEditorClick={onEditorClick}/>;
+
     case 'Textbox':
-      console.log('ADDING A TEXTBOX', componentId)
       let { text } = storage[componentId];
       return <Textbox name={name} style={style} text={text} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
+
     case 'Image':
       let { src, alt } = storage[componentId];
       return <ImageComponent name={name} style={style} src={src} alt={alt} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
+
     case 'UserContainer':
-      console.log('WHAT KIND OF USERCONTAINER AM I?')
       return <UserContainerContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
+
+    case 'GalleryPost':
+      return <GalleryPost name={name} style={style} children={children} onEditorClick={onEditorClick}/>
+
     default:
-      console.log(type);
       return <li>
               ID: {storage[componentId].name}
              </li>

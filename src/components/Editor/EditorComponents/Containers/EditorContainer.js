@@ -4,6 +4,7 @@ import { storage } from '../../../../cache/ComponentCache'
 import Editor from '../Editor'
 
 const mapStateToProps = (state) => {
+  console.log('MAPPING STATE TO PROPS FOR EDITOR', state)
 	return {
 		components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
