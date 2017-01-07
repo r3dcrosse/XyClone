@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
-import { editComponent } from '../../actions/EditingActions'
-import { storage } from '../../cache/ComponentCache'
-import UserContainer from '../../components/userComponents/UserContainer'
+import { editComponent } from '../../../../actions/EditingActions'
+import { storage } from '../../../../cache/ComponentCache'
+import UserContainer from './UserContainer'
 
 
 const mapStateToProps = (state) => {
@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-const UserContainerForIds = connect(
+const UserContainerContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserContainer)
@@ -34,4 +34,4 @@ const UserContainerForIds = connect(
 //     mapDispatchToProps
 // )(Editor)
 
-export default UserContainerForIds;
+export default UserContainerContainer;

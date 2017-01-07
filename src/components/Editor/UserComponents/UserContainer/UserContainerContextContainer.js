@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { changeStyle, addInChildren, deleteComponent } from '../../actions/EditingActions'
-import UserContainerContext from '../../components/contextComponents/UserContainerContext'
+import { changeStyle, addInChildren, deleteComponent } from '../../../../actions/EditingActions'
+import UserContainerContext from './UserContainerContext'
 
 
 const mapStateToProps = (state) => {

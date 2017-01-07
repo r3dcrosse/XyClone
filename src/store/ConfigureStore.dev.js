@@ -1,7 +1,8 @@
 import { createStore, compose } from 'redux';
 import { persistState } from 'redux-devtools';
+
 import rootReducer from '../reducers/Index';
-import DevTools from '../containers/rootContainers/DevTools';
+import DevTools from '../components/AppRoot/DevTools';
 
 const enhancer = compose(
   // Middleware you want to use in development:

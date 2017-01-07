@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import UserComponent from '../mainPagesComponents/UserComponent';
-import { storage } from '../../cache/ComponentCache'
+import UserComponent from '../../EditorComponents/UserComponent';
+import { storage } from '../../../../cache/ComponentCache'
 
 const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildClick}) => {
   return (
     <div className=''>
       <div className='userContainer-flexcontainer' style={style} onClick={onEditorClick} >
         {
-          children.map((idReference) => {
-            console.log('CHILDREN MAPPING. WHAT IS IDREFERENCE?', idReference);
+          children.map((referenceObject) => {
+            console.log(referenceObject);
             return (
-              <UserComponent key={idReference} type={storage[idReference].type} componentId={idReference} child={true} onEditorChildClick={()=> onEditorChildClick(idReference)}/>
+              <UserComponent key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true} onEditorChildClick={()=> onEditorChildClick(referenceObject.componentId)}/>
             )
           }
         )}

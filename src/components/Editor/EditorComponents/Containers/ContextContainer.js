@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Context from '../../components/mainPagesComponents/Context'
+import Context from '../Context'
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO ContextCONTAINERASDFASDFASDF', state)

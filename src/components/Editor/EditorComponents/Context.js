@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../../cache/ComponentCache'
+import { storage } from '../../../cache/ComponentCache'
 
-import TextboxContextContainer from '../../containers/contextContainers/TextboxContextContainer'
-import NavbarContextContainer from '../../containers/contextContainers/NavbarContextContainer';
-import ImageContextContainer from '../../containers/contextContainers/ImgContextContainer';
-import UserContainerContextContainer from '../../containers/contextContainers/UserContainerContextContainer'
-require("../../Basic.less");
+import TextboxContextContainer from '../UserComponents/Textbox/TextboxContextContainer'
+import NavbarContextContainer from '../UserComponents/Navbar/NavbarContextContainer';
+import ImageContextContainer from '../UserComponents/Image/ImgContextContainer';
+import UserContainerContextContainer from '../UserComponents/UserContainer/UserContainerContextContainer'
+require("../../../Basic.less");
 
 
 const Context = (props) => {

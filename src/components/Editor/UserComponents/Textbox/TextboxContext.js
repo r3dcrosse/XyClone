@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../../cache/ComponentCache';
+import { storage } from '../../../../cache/ComponentCache';
 
-class ImageContext extends Component {
+class TextboxContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       css: {
+        backgroundColor: '',
         width: '',
         height: '',
         margin: ''
       },
-      src: '',
-      alt: '',
+      text: '',
       type: ''
     }
   }
@@ -25,20 +25,20 @@ class ImageContext extends Component {
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      src: this.props.currComponent.src,
-      alt: this.props.currComponent.alt
+      text: this.props.currComponent.text
     })
   }
+
   componentWillReceiveProps (newProps) {
-    // console.log('COMPONENT RECEIVED PROPS.', this.props);
+    console.log('COMPONENTSWILLRECIEVEPROPS');
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      src: newProps.currComponent.src,
-      alt: newProps.currComponent.alt
+      text: newProps.currComponent.text
     })
   }
+
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
@@ -49,14 +49,14 @@ class ImageContext extends Component {
     this.setState({name: e.target.value})
   }
 
-  changeSrcInput (e) {
-    this.setState({src: e.target.value});
+  changeTextInput (e) {
+    this.setState({text: e.target.value});
   }
-
-  changeAlternativeInput(e) {
-    this.setState({alt: e.target.value});
+  changeBackgroundColor (e) {
+    let cssObject = this.state.css;
+    cssObject.backgroundColor = e.target.value
+    this.setState({css: cssObject});
   }
-
   changeHeight (e) {
     let cssObject = this.state.css;
     cssObject.height = e.target.value;
@@ -80,13 +80,12 @@ class ImageContext extends Component {
     this.props.deleteFocusedComponent(this.props.currComponentId);
   }
 
-
   render() {
-    // console.log('ImageContext IS BEING RENDERED');
-    let { type, name, css, src, alt } = this.state;
-    if (type !== 'Image') {
+    // console.log('TEXTBOXCONTEXT IS BEING RENDERED');
+    let { type, name, css, text } = this.state;
+    if (type !== 'Textbox') {
       return (
-        <div> SHIT IM NOT A IMAGE IM JUST NULL </div>
+        <div> SHIT IM NOT A TEXTBOX IM JUST NULL </div>
       )
     } else {
       return (
@@ -99,10 +98,10 @@ class ImageContext extends Component {
               <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
             </div>
             <div>
-              <span> Source: </span> <input type='text' value={src} onChange={this.changeSrcInput.bind(this)}/>
+              <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
             </div>
             <div>
-              <span> Alternative: </span> <input type='text' value={alt} onChange={this.changeAlternativeInput.bind(this)}/>
+              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
             </div>
             <div>
               <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
@@ -124,4 +123,4 @@ class ImageContext extends Component {
   }
 }
 
-export default ImageContext;
+export default TextboxContext;

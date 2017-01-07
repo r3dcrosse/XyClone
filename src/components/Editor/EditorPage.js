@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-import EditorContainer from '../../containers/clientEditorContainers/EditorContainer';
-import SidebarContainer from '../../containers/clientEditorContainers/SidebarContainer';
-import BuildSiteContainer from '../../containers/clientEditorContainers/BuildSiteContainer'
-import ContextContainer from '../../containers/clientEditorContainers/ContextContainer';
+import EditorContainer from './EditorComponents/Containers/EditorContainer';
+import SidebarContainer from './EditorComponents/Containers/SidebarContainer';
+import BuildSiteContainer from './EditorComponents/Containers/BuildSiteContainer'
+import ContextContainer from './EditorComponents/Containers/ContextContainer';
 require("../../Basic.less");
 
 const EditorPage = () => (

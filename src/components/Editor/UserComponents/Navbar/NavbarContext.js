@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
-import { storage } from '../../cache/ComponentCache';
+import { storage } from '../../../../cache/ComponentCache';
 
-class TextboxContext extends Component {
+class NavbarContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ class TextboxContext extends Component {
         height: '',
         margin: ''
       },
-      text: '',
+      links: [],
       type: ''
     }
   }
@@ -25,17 +25,17 @@ class TextboxContext extends Component {
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      text: this.props.currComponent.text
+      links: this.props.currComponent.links
     })
   }
 
-  componentWillReceiveProps (newProps) {
-    console.log('COMPONENTSWILLRECIEVEPROPS');
+  componentWillReceiveProps (newProps){
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      text: newProps.currComponent.text
+      links: newProps.currComponent.links
     })
   }
 
@@ -49,8 +49,8 @@ class TextboxContext extends Component {
     this.setState({name: e.target.value})
   }
 
-  changeTextInput (e) {
-    this.setState({text: e.target.value});
+  changeLinksInput (e) {
+    this.setState({links: e.target.value});
   }
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
@@ -81,11 +81,11 @@ class TextboxContext extends Component {
   }
 
   render() {
-    // console.log('TEXTBOXCONTEXT IS BEING RENDERED');
-    let { type, name, css, text } = this.state;
-    if (type !== 'Textbox') {
+    // console.log('NavbarContext IS BEING RENDERED');
+    let { type, name, css, links } = this.state;
+    if (type !== 'Navbar') {
       return (
-        <div> SHIT IM NOT A TEXTBOX IM JUST NULL </div>
+        <div> SHIT IM NOT A NAVBAR IM JUST NULL </div>
       )
     } else {
       return (
@@ -98,7 +98,7 @@ class TextboxContext extends Component {
               <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
             </div>
             <div>
-              <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
+              <span> Links: </span> <input type='text' value={links} onChange={this.changeLinksInput.bind(this)}/>
             </div>
             <div>
               <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
@@ -123,4 +123,4 @@ class TextboxContext extends Component {
   }
 }
 
-export default TextboxContext;
+export default NavbarContext;
