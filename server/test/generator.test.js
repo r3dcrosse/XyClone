@@ -1,3 +1,4 @@
+"use strict";
 const fs = require('fs')
 const path = require('path')
 const chai = require('chai')
@@ -54,6 +55,36 @@ describe('Server: ', function() {
     //     expect(mapStateTreeToReact(singleState))
     //   })
     // })
+
+    describe('Text component: ', function() {
+      it('should return a text component with props', function() {
+      var testState =
+        {
+          components: [
+            {
+              id: 1,
+              type: 'Textbox'
+            }
+          ],
+          storage: {
+            1: {
+              name: 'ThatTextBox',
+              css: {
+                color: 'red',
+                height: '200px'
+              },
+              type: 'Textbox',
+              text: 'Hello World!!!!!!'
+            }
+          }
+        }
+        let testText = getComponentString(testState.storage[1], testState.storage);
+        // console.log('%%%%% TEST TEXTBOX ^^^^^^^^');
+        // console.log(testText);
+        let rawText = `React.createElement('div', {style: {"color":"red","height":"200px"}}, 'Hello World!!!!!!')`;
+        expect(testText).to.equal(rawText);
+      })
+    });
 
     describe('Image component: ', function() {
       it('should return an image component with props', function() {

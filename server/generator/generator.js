@@ -1,3 +1,4 @@
+"use strict";
 const fs = require('fs')
 const path = require('path')
 
@@ -93,8 +94,17 @@ const templates = {
     let componentText = `React.createElement('div', {style: ${css}}, [${builtChildren}])`;
 
     return componentText;
-  }
- // Textbox etc.
+  },
+
+ // Textbox
+ Textbox: (props) => {
+   let text = props.text;
+   let css = JSON.stringify(props.css);
+
+   let componentText = `React.createElement('div', {style: ${css}}, '${text}')`;
+
+   return componentText;
+ }
 }
 
 const escapeSpecialChars = function(text) {
