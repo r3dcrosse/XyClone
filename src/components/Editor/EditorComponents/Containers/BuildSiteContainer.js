@@ -2,7 +2,6 @@ import { connect } from 'react-redux'
 import BuildSite from '../BuildSite'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING TO BuildSiteCONTAINERASDFASDFASDF', state)
   return {
     components: state.xyclone.components,
     currComponent: state.xyclone.currComponent

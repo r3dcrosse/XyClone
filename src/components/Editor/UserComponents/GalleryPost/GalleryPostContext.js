@@ -3,73 +3,80 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
 
-class UserContainerContext extends Component {
+class GalleryPostContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       css: {
-        backgroundColor: '',
         width: '',
         height: '',
         margin: ''
       },
-      children: [],
       type: '',
-      addChild: 'Textbox'
+      children: [],
+      src: '',
+      text: ''
     }
   }
 
   componentDidMount (){
     console.log('COMPONENT RECEIVED PROPS.', this.props);
+    let src = storage[storage[this.props.currComponentId].children[0].componentId].src;
+    let text = storage[storage[this.props.currComponentId].children[1].componentId].text;
+    // let text = storage[this.props.currComponentId].children[1].text;
+    console.log('GETTING SORUCE AND TEXT %%%%%%%%%%%%%%%%%%%%%%', src, text);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      children: this.props.currComponent.children
+      children: this.props.currComponent.children,
+      src: src,
+      text: text
     })
   }
-  componentWillReceiveProps (newProps){
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+
+  componentWillReceiveProps (newProps) {
+    console.log('COMPONENTS WILLRECEIVEPROPS WORKED', newProps);
+    let src = storage[storage[this.props.currComponentId].children[0].componentId].src;
+    let text = storage[storage[this.props.currComponentId].children[1].componentId].text;
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      children: newProps.currComponent.children
+      children: newProps.currComponent.children,
+      src: src,
+      text: text
     })
   }
 
   prepForDispatch(e) {
+    // THIS IS WHERE WE REASSEMBLE THE NEW PROPS
     e.preventDefault();
-    let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId);
+    let newPropsValues = this.state;
+
+    storage[storage[this.props.currComponentId].children[0].componentId].src = newPropsValues.src;
+    storage[storage[this.props.currComponentId].children[1].componentId].text = newPropsValues.text;
+
+    let galleryProps = {
+      name: newPropsValues.name,
+      css: newPropsValues.css,
+      type: newPropsValues.type,
+      children: newPropsValues.children
+    }
+    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId);
   }
 
   changeNameInput (e) {
     this.setState({name: e.target.value})
   }
 
-  changeChildType (e) {
-    let options = e.target.options;
-    let addChildType = '';
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        addChildType = options[i].value
-      }
-    }
-    this.setState({addChild: addChildType});
+  changeSrcInput (e) {
+    this.setState({src: e.target.value});
   }
 
-  changeChildrenInput (e) {
-    // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
-    e.preventDefault();
-    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId);
-  }
-
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
+  changeTextInput (e) {
+    this.setState({text: e.target.value});
   }
 
   changeHeight (e) {
@@ -95,12 +102,13 @@ class UserContainerContext extends Component {
     this.props.deleteFocusedComponent(this.props.currComponentId);
   }
 
+
   render() {
-    console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
-    let { type, name, css, children } = this.state;
-    if (type !== 'UserContainer') {
+    // console.log('GalleryPostContext IS BEING RENDERED');
+    let { type, name, css, src, text } = this.state;
+    if (type !== 'GalleryPost') {
       return (
-        <div> SHIT IM NOT A USERCONTAINER IM JUST NULL </div>
+        <div> SHIT IM NOT A GalleryPost IM JUST NULL </div>
       )
     } else {
       return (
@@ -113,7 +121,10 @@ class UserContainerContext extends Component {
               <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
             </div>
             <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+              <span> Source: </span> <input type='text' value={src} onChange={this.changeSrcInput.bind(this)}/>
+            </div>
+            <div>
+              <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
             </div>
             <div>
               <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
@@ -126,16 +137,6 @@ class UserContainerContext extends Component {
             </div>
             <input type="submit" value="Submit" />
           </form>
-          <div>
-            <span> Add a child! </span>
-            <form onSubmit={this.changeChildrenInput.bind(this)}>
-              <select onChange={this.changeChildType.bind(this)}>
-                <option value="Textbox"> Textbox </option>
-                <option value="Image"> Image </option>
-              </select>
-              <input type="submit" value="Add Children"/>
-            </form>
-          </div>
           <form onSubmit={this.deleteCurrComponent.bind(this)}>
             <input type="submit" value="Delete Component" />
           </form>
@@ -145,4 +146,4 @@ class UserContainerContext extends Component {
   }
 }
 
-export default UserContainerContext;
+export default GalleryPostContext;

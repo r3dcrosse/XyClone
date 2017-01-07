@@ -74,6 +74,8 @@ DO THESE STEPS IN ORDER:
       - Create the context menu container for your component (Copy a previous template)
         - if component is nested, use UserContainerContextContainer as a template
       - import the Context file made from the previous step (from CONTEXT FILE CREATION)
+  - Inside UserCompoennt.js
+    ADD YOUR CASE FOR YOUR COMPONENT
   - Inside src/components/Editor/Context.js file
     - Import the container created from the CONTEXT CONTAINER FILE step
     - Add a switch case for the context component created

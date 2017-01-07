@@ -6,13 +6,17 @@ require("../../../Basic.less");
 const Editor = ({ components, onEditorClick }) => (
   <div className='editor-inPage'>
     <div className='flex-container'>
-      {components.map(component =>
-        <UserComponent
-          key={component.componentId}
-          componentId={component.componentId}
-          type={component.type}
-          onEditorClick={() => onEditorClick(component.componentId)}
-        />
+      {components.map(component => {
+          console.log('RENDERING A COMPONENT', component);
+          return (
+            <UserComponent
+              key={component.componentId}
+              componentId={component.componentId}
+              type={component.type}
+              onEditorClick={() => onEditorClick(component.componentId)}
+            />
+          )
+        }
       )}
     </div>
   </div>

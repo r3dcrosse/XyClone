@@ -7,6 +7,7 @@ import TextboxContextContainer from '../UserComponents/Textbox/TextboxContextCon
 import NavbarContextContainer from '../UserComponents/Navbar/NavbarContextContainer';
 import ImageContextContainer from '../UserComponents/Image/ImgContextContainer';
 import UserContainerContextContainer from '../UserComponents/UserContainer/UserContainerContextContainer'
+import GalleryPostContextContainer from '../UserComponents/GalleryPost/GalleryPostContextContainer'
 require("../../../Basic.less");
 
 
@@ -37,6 +38,10 @@ const Context = (props) => {
       case "UserContainer":
         return (
           <UserContainerContextContainer/>
+        )
+      case "GalleryPost":
+        return (
+          <GalleryPostContextContainer/>
         )
       default:
         return (

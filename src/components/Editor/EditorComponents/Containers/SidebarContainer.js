@@ -3,7 +3,6 @@ import { removeComponent, addComponent } from '../../../../actions/EditingAction
 import Sidebar from '../Sidebar'
 
 const mapStateToProps = (state) => {
-    console.log('mapping state', state);
     return {
         components: state.xyclone.components
     }
