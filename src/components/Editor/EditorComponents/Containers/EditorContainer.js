@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addComponent, editComponent, deleteComponent } from '../../../../actions/EditingActions'
+import { addComponent, editComponent, deleteComponent, editBodyClick } from '../../../../actions/EditingActions'
 import { storage } from '../../../../cache/ComponentCache'
 import Editor from '../Editor'
 
@@ -8,7 +8,8 @@ const mapStateToProps = (state) => {
 	return {
 		components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
-    currComponentId: state.xyclone.currComponentId
+    currComponentId: state.xyclone.currComponentId,
+    style: storage['body'].css
   }
 }
 
@@ -21,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
 		},
     deleteFocusedComponent: (id) => {
       dispatch(deleteComponent(id));
+    },
+    onEditorBodyClick: (props) => {
+      dispatch(editBodyClick());
     }
 	}
 }

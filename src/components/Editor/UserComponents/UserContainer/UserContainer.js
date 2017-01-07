@@ -3,9 +3,13 @@ import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
 
 const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildClick}) => {
+  let stopSideProp = (e) => {
+      e.stopPropagation();
+      onEditorClick();
+    }
   return (
     <div className=''>
-      <div className='userContainer-flexcontainer' style={style} onClick={onEditorClick} >
+      <div className='userContainer-flexcontainer' style={style} onClick={stopSideProp} >
         {
           children.map((referenceObject) => {
             console.log("THIS IS THE REFERENCE OBJECT ==========================", referenceObject);

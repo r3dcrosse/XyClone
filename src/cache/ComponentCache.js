@@ -136,5 +136,19 @@ export const _components = {
 
 export const storage = {
   // API => id : component
-
+  body: {
+    css: {
+      display: 'inline-flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      position: 'relative',
+      alignItems: 'center',
+      backgroundColor: 'blue',
+      marginLeft: '180px',
+      padding: '0px',
+      width: '70%',
+      height: '100%',
+    }
+  }
 }

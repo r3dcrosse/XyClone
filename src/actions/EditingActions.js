@@ -4,7 +4,6 @@ export function addComponent (componentType) {
     componentType: componentType
   };
 }
-
 export function editComponent (component, componentId) {
   return {
     type: 'EDIT_COMPONENT',
@@ -36,12 +35,15 @@ export function addInChildren (componentType, componentId) {
   }
 }
 
+export function editBodyClick () {
+  return {
+    type: 'EDIT_BODY_CLICK'
+  }
+}
 
-// export const removeComponent = (componentId) =>
-//     ({type: 'REMOVE_COMPONENT', componentId: componentId})
-
-// export const addComponent = (componentType) =>
-//     ({type: 'ADD_COMPONENT', componentType: componentType})
-
-// export const editComponent = (componentId) =>
-//     ({type: 'EDIT_COMPONENT', componentId: componentId})
+export function changeBodyProps (newProps) {
+  return {
+    type: 'CHANGE_BODY_PROPS',
+    newProps: newProps
+  }
+}
