@@ -1,6 +1,7 @@
 import { connect } from 'react-redux'
-import { changeStyle, deleteComponent } from '../../actions/EditingActions'
-import ImageContext from '../../components/contextComponents/ImgContext'
+import { changeStyle, deleteComponent } from '../../../../actions/EditingActions'
+import NavbarContext from './NavbarContext'
+
 
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
@@ -21,9 +22,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const ImageContextContainer = connect(
+const NavbarContextContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ImageContext)
+)(NavbarContext)
 
-export default ImageContextContainer;
+export default NavbarContextContainer;

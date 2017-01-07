@@ -43,13 +43,15 @@ export default function xyclone (state = initialState, action) {
 		case 'ADD_CHILDREN':
 			console.log('ADDING A CHILD INTO', action.componentId);
 			elem = action.componentType;
+			console.log('THIS IS STORAGE BEFORE', storage);
 			let newObjectId = _components[elem]();
 			storage[newObjectId].child = true;
-			storage[action.componentId].children.push(newObjectId);
+			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType });
+			console.log('STORAGE HAS BEEN UPDATED WITH A NEW CHILD', storage);
 			return Object.assign({}, state, {
 				currComponent: {
 					...state.currComponent,
-					children: [...state.currComponent.children, newObjectId]
+					children: [...state.currComponent.children]
 				}
 			})
 		case 'DELETE_COMPONENT':

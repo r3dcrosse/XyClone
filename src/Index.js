@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/ConfigureStore';
-import Root from './containers/rootContainers/Root';
+import Root from './components/AppRoot/Root';
 
 const store = configureStore();
 
@@ -17,8 +17,8 @@ render(
 );
 
 if (module.hot) {
-  module.hot.accept('./containers/rootContainers/Root', () => {
-    const RootContainer = require('./containers/rootContainers/Root').default;
+  module.hot.accept('./components/AppRoot/Root', () => {
+    const RootContainer = require('./components/AppRoot/Root').default;
     render(
       <AppContainer>
         <RootContainer

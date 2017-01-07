@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react';
-import { storage } from '../../cache/ComponentCache';
+import { storage } from '../../../cache/ComponentCache';
 
-import ImageComponent from '../userComponents/Img';
-import Navbar from '../userComponents/Navbar';
-import Textbox from '../userComponents/Textbox';
-import UserContainerForIds from '../../containers/userComponentsContainers/UserContainerForIds'
+import ImageComponent from '../UserComponents/Image/Img';
+import Navbar from '../UserComponents/Navbar/Navbar';
+import Textbox from '../UserComponents/Textbox/Textbox';
+import UserContainerContainer from '../UserComponents/UserContainer/UserContainerContainer'
 
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
   console.log(componentId);
+  console.log('THIS IS STORAGE CURRENTLY', storage);
+  console.log('THIS IS THE ACTUAL STORAGE COMPONENT', storage[componentId])
   let style = storage[componentId].css;
   let name = storage[componentId].name;
   switch (type) {
@@ -25,7 +27,7 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
     case 'UserContainer':
       let { children } = storage[componentId];
       console.log('WHAT KIND OF USERCONTAINER AM I?')
-      return <UserContainerForIds name={name} style={style} children={children} onEditorClick={onEditorClick}/>
+      return <UserContainerContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
     default:
       console.log(type);
       return <li>
