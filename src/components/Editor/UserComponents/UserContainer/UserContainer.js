@@ -8,7 +8,7 @@ const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildC
       <div className='userContainer-flexcontainer' style={style} onClick={onEditorClick} >
         {
           children.map((referenceObject) => {
-            console.log(referenceObject);
+            console.log("THIS IS THE REFERENCE OBJECT ==========================", referenceObject);
             return (
               <UserComponent key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true} onEditorChildClick={()=> onEditorChildClick(referenceObject.componentId)}/>
             )

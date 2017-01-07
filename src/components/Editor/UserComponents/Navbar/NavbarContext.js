@@ -14,7 +14,7 @@ class NavbarContext extends Component {
         height: '',
         margin: ''
       },
-      links: [],
+      children: [],
       type: ''
     }
   }
@@ -25,7 +25,7 @@ class NavbarContext extends Component {
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      links: this.props.currComponent.links
+      children: this.props.currComponent.children
     })
   }
 
@@ -35,7 +35,7 @@ class NavbarContext extends Component {
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      links: newProps.currComponent.links
+      children: newProps.currComponent.children
     })
   }
 
@@ -50,7 +50,7 @@ class NavbarContext extends Component {
   }
 
   changeLinksInput (e) {
-    this.setState({links: e.target.value});
+    this.setState({children: e.target.value});
   }
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
@@ -82,7 +82,7 @@ class NavbarContext extends Component {
 
   render() {
     // console.log('NavbarContext IS BEING RENDERED');
-    let { type, name, css, links } = this.state;
+    let { type, name, css, children } = this.state;
     if (type !== 'Navbar') {
       return (
         <div> SHIT IM NOT A NAVBAR IM JUST NULL </div>
@@ -98,7 +98,7 @@ class NavbarContext extends Component {
               <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
             </div>
             <div>
-              <span> Links: </span> <input type='text' value={links} onChange={this.changeLinksInput.bind(this)}/>
+              <span> Links: </span> <input type='text' value={children} onChange={this.changeLinksInput.bind(this)}/>
             </div>
             <div>
               <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
