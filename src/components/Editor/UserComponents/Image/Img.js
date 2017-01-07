@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
 const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEditorChildClick = undefined}) => {
+  let stopSideProp = (e) => {
+    e.stopPropagation();
+    onEditorClick();
+  }
   if (!child) {
     return (
-      <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
+      <div className='flex-item-textbox' style={style} onClick={stopSideProp}>
         <img src={src} alt={alt} style={{"width": "100%", "height": "100%"}}/>
       </div>
     )

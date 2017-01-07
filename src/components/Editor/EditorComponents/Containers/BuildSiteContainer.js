@@ -3,8 +3,7 @@ import BuildSite from '../BuildSite'
 
 const mapStateToProps = (state) => {
   return {
-    components: state.xyclone.components,
-    currComponent: state.xyclone.currComponent
+    components: state.xyclone.components
   }
 }
 

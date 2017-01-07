@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 
-const Navbar = ({name, children, style, id, onEditorClick}) => (
-  <nav className='flex-item-navbar' style={style} onClick={onEditorClick}>
-    <div>
-      NAVBAR LOADED with id {id}, {name}
-    </div>
-  </nav>
-)
+const Navbar = ({name, children, style, id, onEditorClick}) => {
+  let stopSideProp = (e) => {
+    e.stopPropagation();
+    onEditorClick();
+  }
+  return (
+    <nav className='flex-item-navbar' style={style} onClick={stopSideProp}>
+      <div>
+        NAVBAR LOADED with id {id}, {name}
+      </div>
+    </nav>
+  )
+}
 
 export default Navbar;
 // Editor.propTypes = {
