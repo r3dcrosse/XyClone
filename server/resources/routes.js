@@ -53,21 +53,30 @@ Router.route('/tempData/myZip.zip')
           }
           console.log('TEMPLATE SUCCESSFULLY COPIED');
 
-          // Write IndexComponent to template
+          // Write css file to template
           fs.writeFile(
-            path.resolve(__dirname, '../tempData/fileToBeZipped/app/components/IndexComponent.js'),
-            generator.mapStateTreeToReact(data),
+            path.resolve(__dirname, '../tempData/fileToBeZipped/styles.css'),
+            generator.mapBodyCSS(data),
             function() {
-              zipdir(
-                './server/tempData/fileToBeZipped',
-                {saveTo: './server/tempData/MyCoolSite.zip'},
-                function(err, buffer) {
-                  console.log('File was zipped and can now be downloaded');
-                  res.sendFile('tempData/MyCoolSite.zip', {root: '../XyClone/server/'});
+              // Write IndexComponent to template
+              fs.writeFile(
+                path.resolve(__dirname, '../tempData/fileToBeZipped/app/components/IndexComponent.js'),
+                generator.mapStateTreeToReact(data),
+                function() {
+                  // Zip templated directory and send back to user
+                  zipdir(
+                    './server/tempData/fileToBeZipped',
+                    { saveTo: './server/tempData/MyCoolSite.zip' },
+                    function(err, buffer) {
+                      console.log('File was zipped and can now be downloaded');
+                      res.sendFile('tempData/MyCoolSite.zip', {root: '../XyClone/server/'});
+                    }
+                  )
                 }
-              )
+              );
             }
           );
+
 
           // Inject new code into copied directory
           // injectFile.writeToFile(
