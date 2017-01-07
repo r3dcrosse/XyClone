@@ -47,7 +47,7 @@ Router.route('/tempData/myZip.zip')
         data === null ? console.log('Could not find website in database') : console.log('found website', data);
         // Copy template to a new folder that can be modified
         ncp.limit = 16;
-        ncp('./server/models/site_templates/gallery', './server/tempData/fileToBeZipped', function(err) {
+        ncp('./server/site_templates/gallery', './server/tempData/fileToBeZipped', function(err) {
           if (err) {
             return console.error('ERROR COPYING TEMPLATE', err);
           }
