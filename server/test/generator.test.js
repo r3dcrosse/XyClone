@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; // This is necessary to pass TravisCI tests
 const fs = require('fs')
 const path = require('path')
 const chai = require('chai')
@@ -42,19 +42,6 @@ describe('Server: ', function() {
         }
       }
     }
-
-    // describe('Post component: ', function() {
-    //
-    //   it('should return a post with props regardless of whitespace', function() {
-    //     let rawText = `
-    //       let ThatPost = function () {
-    //         return React.createElement('Post', {}, 'Hello world');
-    //       };
-    //     `;
-    //     let scriptText = trimWhitespace(rawText)
-    //     expect(mapStateTreeToReact(singleState))
-    //   })
-    // })
 
     describe('Text component: ', function() {
       it('should return a text component with props', function() {
@@ -221,6 +208,7 @@ describe('Server: ', function() {
           expect(testText).to.equal(rawText)
       });
 
+
     //   it('should write to a file', function() {
     //     let testText = mapStateTreeToReact(singleState)
     //
@@ -238,6 +226,64 @@ describe('Server: ', function() {
     //     expect(file).to.equal(scriptText)
     //
     //   })
+  });
+
+  describe('Gallery component: ', function() {
+
+    it('should return a gallery component that includes an image and text component', function() {
+      var testState =
+        {
+          components: [
+            {
+              componentId: 0,
+              type: 'GalleryPost'
+            }
+          ],
+          storage: {
+            0: {
+              name: 'AGalleryPost',
+              css: {
+                height: '400px',
+                width: '400px'
+              },
+              type: 'GalleryPost',
+              children: [
+                {
+                  componentId: 1,
+                  type: 'Image'
+                },
+                {
+                  componentId: 2,
+                  type: 'Textbox'
+                }
+              ]
+            },
+            1: {
+              name: 'AnImageComponent',
+              css: {
+                width: '260px',
+                height: '180px',
+                padding: '10px'
+              },
+              type: 'Image',
+              src: 'http://placecorgi.com/260/180'
+            },
+            2: {
+              name: 'ATextboxComponent',
+              css: {
+                color: 'red',
+                backgroundColor: 'blue'
+              },
+              type: 'Textbox',
+              text: 'DOooogGGGEEEeee'
+            }
+          }
+        };
+
+      let testText = getComponentString(testState.storage[0], testState.storage);
+      let rawText = `React.createElement('GalleryPost', {}, [React.createElement('div', {style: {"height":"400px","width":"400px"}}, [React.createElement('img', {src: 'http://placecorgi.com/260/180', style: {"width":"260px","height":"180px","padding":"10px"}}),React.createElement('div', {style: {"color":"red","backgroundColor":"blue"}}, 'DOooogGGGEEEeee')])])`;
+      expect(testText).to.equal(rawText);
+    })
   });
 
     // describe('Generator depth: ', function() {

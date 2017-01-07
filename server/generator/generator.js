@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; // This is necessary to pass TravisCI tests
 const fs = require('fs')
 const path = require('path')
 
@@ -56,13 +56,25 @@ const getComponentString = (component, storage) => {
 };
 
 const templates = {
-  Post: (props) => {
-    let name = props.name
-    let text = props.text
+  GalleryPost: (props, storage) => {
+    let name = props.name;
+    let css = JSON.stringify(props.css);
+    let children = props.children;
+    var builtChildren = ``;
 
-    let componentText = `
-      React.createElement('Post', {}, '${text}')
-    `;
+    // Build out children as a string of react components
+    if (children !== []) {
+      // Wrap the children in a div
+      builtChildren += `React.createElement('div', {style: ${css}}, [`;
+      for (var i = 0; i < children.length; i++) {
+        builtChildren += getComponentString(storage[children[i].componentId], storage);
+        // Append a comma to to seperate the children, except the last child
+        i <= children.length - 2 ? builtChildren += ',' : null;
+      }
+      builtChildren += `])`;
+    }
+
+    let componentText = `React.createElement('GalleryPost', {}, [${builtChildren}])`;
     return componentText;
   },
 
@@ -80,7 +92,7 @@ const templates = {
     let name = props.name;
     let css = JSON.stringify(props.css);
     let children = props.children;
-    let builtChildren = ``;
+    var builtChildren = ``;
 
     // Build out the children as a string of react components, if it has children
     if (children !== []) {

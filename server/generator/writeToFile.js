@@ -1,4 +1,4 @@
-"use strict";
+"use strict"; // This is necessary to pass TravisCI tests
 const fs = require('fs')
 const path = require('path')
 const Promise = require('bluebird')
