@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-const Navbar = ({name, links, style, id, onEditorClick}) => (
+const Navbar = ({name, children, style, id, onEditorClick}) => (
   <nav className='flex-item-navbar' style={style} onClick={onEditorClick}>
     <div>
       NAVBAR LOADED with id {id}, {name}

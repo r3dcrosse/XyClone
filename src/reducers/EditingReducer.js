@@ -12,14 +12,13 @@ export default function xyclone (state = initialState, action) {
 	let idInStorage;
 	let componentFromStorage;
 	let recurseDelete = (element) => {
-		console.log('THIS IS ELEMENT INSIDE RECURSE DELETE', element);
+		console.log(element, 'RECURSEDELETE WITH ELEMENT');
 		if (element.children.length > 0) {
 			for (let i = 0; i < element.children.length; i++) {
-				recurseDelete(element.children[i]);
-				delete storage[element.children[i]];
+				recurseDelete(storage[element.children[i].componentId]);
 			}
-			element.children.splice(0, element.length);
 		}
+		element.children.length = 0;
 	}
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -42,10 +41,11 @@ export default function xyclone (state = initialState, action) {
 			})
 		case 'ADD_CHILDREN':
 			console.log('ADDING A CHILD INTO', action.componentId);
+			var parentEle = storage[action.componentId];
 			elem = action.componentType;
 			console.log('THIS IS STORAGE BEFORE', storage);
 			let newObjectId = _components[elem]();
-			storage[newObjectId].child = true;
+			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type};
 			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType });
 			console.log('STORAGE HAS BEEN UPDATED WITH A NEW CHILD', storage);
 			return Object.assign({}, state, {
@@ -59,6 +59,9 @@ export default function xyclone (state = initialState, action) {
 			componentFromStorage = storage[action.componentId];
 			if (componentFromStorage.type === 'UserContainer') {
 				recurseDelete(componentFromStorage);
+			}
+			if (Object.keys(componentFromStorage.parent).length !== 0) {
+				storage[componentFromStorage.parent.componentId].children = storage[componentFromStorage.parent.componentId].children.filter((ref) => ref.componentId !== action.componentId);
 			}
 			delete storage[action.componentId];
 			return Object.assign({}, state, {

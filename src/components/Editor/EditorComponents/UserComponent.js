@@ -13,10 +13,10 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
   console.log('THIS IS THE ACTUAL STORAGE COMPONENT', storage[componentId])
   let style = storage[componentId].css;
   let name = storage[componentId].name;
+  let children = storage[componentId].children;
   switch (type) {
     case 'Navbar':
-      let { links } = storage[componentId];
-      return <Navbar name={name} links={links} style={style} id={componentId} onEditorClick={onEditorClick}/>;
+      return <Navbar name={name} children={children} style={style} id={componentId} onEditorClick={onEditorClick}/>;
     case 'Textbox':
       console.log('ADDING A TEXTBOX', componentId)
       let { text } = storage[componentId];
@@ -25,7 +25,6 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
       let { src, alt } = storage[componentId];
       return <ImageComponent name={name} style={style} src={src} alt={alt} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
     case 'UserContainer':
-      let { children } = storage[componentId];
       console.log('WHAT KIND OF USERCONTAINER AM I?')
       return <UserContainerContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
     default:
