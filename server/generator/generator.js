@@ -3,8 +3,8 @@ const path = require('path')
 
 const mapStateTreeToReact = (stateTree) => {
 
-  let components = stateTree.componentReferences;
-  let storage = stateTree.components;
+  let components = stateTree.components;
+  let storage = stateTree.storage;
 
   function formReactStringFromArray(components) {
     let reactStr = `
@@ -12,12 +12,16 @@ const mapStateTreeToReact = (stateTree) => {
 
     const IndexComponent = function () {
       return (
+        React.createElement('section', {}, [
     `;
     for (var i = 0; i < components.length; i++) {
       let actual = storage[components[i].componentId];
-      reactStr += getComponentString(actual);
+      reactStr += getComponentString(actual, storage);
+      i <= components.length - 2 ?
+        reactStr += `,` : null; // Makes it so there is no coma for last component
     }
     reactStr += `
+        ])
       )
     };
 
@@ -36,8 +40,7 @@ const mapStateTreeToReact = (stateTree) => {
   return reactStr;
 };
 
-const getComponentString = (component) => {
-
+const getComponentString = (component, storage) => {
   let componentType = component.type;
   let template = templates[componentType];
   let componentMaker;
@@ -48,7 +51,7 @@ const getComponentString = (component) => {
     throw 'Reference Error: This component doesn\'t have a valid template';
   }
 
-  return componentMaker(component);
+  return componentMaker(component, storage);
 };
 
 const templates = {
@@ -66,10 +69,28 @@ const templates = {
     let name = props.name;
     let src = props.src;
     let css = JSON.stringify(props.css);
-    
-    let componentText = `
-      React.createElement('img', {src: '${src}', style: ${css}})
-    `;
+
+    let componentText = `React.createElement('img', {src: '${src}', style: ${css}})`;
+
+    return componentText;
+  },
+
+  UserContainer: (props, storage) => {
+    let name = props.name;
+    let css = JSON.stringify(props.css);
+    let children = props.children;
+    let builtChildren = ``;
+
+    // Build out the children as a string of react components, if it has children
+    if (children !== []) {
+      for (var i = 0; i < children.length; i++) {
+        builtChildren += getComponentString(storage[children[i].componentId], storage);
+        // Append a comma to to seperate the children, except the last child
+        i <= children.length - 2 ? builtChildren += ',' : null;
+      }
+    }
+
+    let componentText = `React.createElement('div', {style: ${css}}, [${builtChildren}])`;
 
     return componentText;
   }
@@ -92,7 +113,8 @@ const trimWhitespace = function(text) {
 };
 
 
-module.exports.mapStateTreeToReact = mapStateTreeToReact
-module.exports.escapeSpecialChars = escapeSpecialChars
-module.exports.trimWhitespace = trimWhitespace
-module.exports.keywordParser = keywordParser
+module.exports.mapStateTreeToReact = mapStateTreeToReact;
+module.exports.getComponentString = getComponentString;
+module.exports.escapeSpecialChars = escapeSpecialChars;
+module.exports.trimWhitespace = trimWhitespace;
+module.exports.keywordParser = keywordParser;
