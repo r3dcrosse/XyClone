@@ -104,23 +104,28 @@ export const _components = {
       parent: {}
     };
     storage[incrementId] = component;
+    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
+    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
     return incrementId++;
   },
 
   Carousel: () => {
     let defaultCss = {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      position: 'relative',
+      alignItems: 'center',
       backgroundColor: 'grey',
       width: '400px',
       height: '400px',
       margin: '10px'
     };
-    let idOfGalleryPost = _components["GalleryPost"]();
     let component = {
       name: 'Default Carousel',
       css: defaultCss,
-      children: [
-        {componentId: idOfGalleryPost, type: 'GalleryPost'}
-      ],
+      children: [],
       type: 'Carousel',
       parent: {}
     }
@@ -131,5 +136,19 @@ export const _components = {
 
 export const storage = {
   // API => id : component
-
+  body: {
+    css: {
+      display: 'inline-flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      position: 'relative',
+      alignItems: 'center',
+      backgroundColor: 'blue',
+      marginLeft: '180px',
+      padding: '0px',
+      width: '70%',
+      height: '100%',
+    }
+  }
 }

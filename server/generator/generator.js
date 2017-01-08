@@ -2,6 +2,34 @@
 const fs = require('fs')
 const path = require('path')
 
+const mapBodyCSS = (stateTree) => {
+  const cssProperites = stateTree.storage.body.css;
+  var bodyCSSasString = `body {`;
+
+  // Helper hash to return templated css string
+  const buildCSSstring = {
+    backgroundColor: (val) => {
+      return `background-color:${val};`;
+    }
+  };
+
+  // Build a string of all the css properties to be included in body element
+  for (var cssProp in cssProperites) {
+    // check if cssProp is in the helper hash, if not, do nothing
+    buildCSSstring[cssProp] !== undefined ?
+      bodyCSSasString += buildCSSstring[cssProp](cssProperites[cssProp]) : null;
+  }
+
+  bodyCSSasString += `}`; // Build up the end of body css syntax
+
+  //////////////////////////////////////////////////////////////////////////////
+  // FLEXBOX CONTAINER CSS template to be written to .css file
+  bodyCSSasString += `.flex-container {display: inline-flex;margin: 0px;padding: 0px;width: 100%;height: 100%;flex-direction: row;flex-wrap: wrap;justify-content: center;position: relative;align-items: center;}`;
+  //////////////////////////////////////////////////////////////////////////////
+
+  return bodyCSSasString;
+};
+
 const mapStateTreeToReact = (stateTree) => {
 
   let components = stateTree.components;
@@ -134,7 +162,7 @@ const trimWhitespace = function(text) {
   return text.replace(/ /g,'');
 };
 
-
+module.exports.mapBodyCSS = mapBodyCSS;
 module.exports.mapStateTreeToReact = mapStateTreeToReact;
 module.exports.getComponentString = getComponentString;
 module.exports.escapeSpecialChars = escapeSpecialChars;

@@ -15,12 +15,32 @@ const writeToFileSync = fileWriter.writeToFileSync
 
 const escapeSpecialChars = reactGenerator.escapeSpecialChars
 const mapStateTreeToReact = reactGenerator.mapStateTreeToReact
+const mapBodyCSS = reactGenerator.mapBodyCSS
 const getComponentString = reactGenerator.getComponentString
 const trimWhitespace = reactGenerator.trimWhitespace
 const keywordParser = reactGenerator.keywordParser
 
 describe('Server: ', function() {
   describe('Generator', function() {
+    describe('Body CSS: ', function() {
+      it('should return body css as a string', function() {
+      var testState =
+        {
+          components: [],
+          storage: {
+            'body': {
+              css: {
+                backgroundColor: 'blue'
+              }
+            }
+          }
+        }
+        let testText = mapBodyCSS(testState);
+        let rawText = `body {background-color:blue;}.flex-container {display: inline-flex;margin: 0px;padding: 0px;width: 100%;height: 100%;flex-direction: row;flex-wrap: wrap;justify-content: center;position: relative;align-items: center;}`;
+        expect(testText).to.equal(rawText);
+      })
+    });
+
     const singleState =
     {
       components: [

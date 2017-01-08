@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../cache/ComponentCache'
 
+import BodyContextContainer from './BodyContext/BodyContextContainer'
+
 import TextboxContextContainer from '../UserComponents/Textbox/TextboxContextContainer'
 import NavbarContextContainer from '../UserComponents/Navbar/NavbarContextContainer';
 import ImageContextContainer from '../UserComponents/Image/ImgContextContainer';
 import UserContainerContextContainer from '../UserComponents/UserContainer/UserContainerContextContainer'
 import GalleryPostContextContainer from '../UserComponents/GalleryPost/GalleryPostContextContainer'
+import CarouselContextContainer from '../UserComponents/Carousel/CarouselContextContainer'
 require("../../../Basic.less");
 
 
@@ -17,6 +20,11 @@ const Context = (props) => {
     // console.log('THIS IS CURRCOMPONENT', this.props.currComponent);
     return (
       <div> NOTHING YET </div>
+    )
+  } else if (props.currComponentId === 'body') {
+    console.log('MOUNTING BODYCONTEXTCONTAINER');
+    return (
+      <BodyContextContainer/>
     )
   } else {
     // console.log('THIS IS THE RENDERED COMPONENT THAT I AM CLICKLING', this.props.currComponent);
@@ -43,6 +51,10 @@ const Context = (props) => {
         return (
           <GalleryPostContextContainer/>
         )
+      case "Carousel":
+        return (
+          <CarouselContextContainer/>
+        )  
       default:
         return (
           <div> CASE DEFAULTED </div>

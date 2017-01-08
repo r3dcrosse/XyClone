@@ -7,7 +7,7 @@ import Navbar from '../UserComponents/Navbar/Navbar';
 import Textbox from '../UserComponents/Textbox/Textbox';
 import UserContainerContainer from '../UserComponents/UserContainer/UserContainerContainer'
 import GalleryPost from '../UserComponents/GalleryPost/GalleryPost'
-import Carousel from '../UserComponents/Carousel/Carousel'
+import CarouselContainer from '../UserComponents/Carousel/CarouselContainer'
 
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
   console.log('COMPONENTID', componentId);
@@ -32,10 +32,10 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
       return <UserContainerContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
 
     case 'GalleryPost':
-      return <GalleryPost name={name} style={style} child={child} children={children} onEditorClick={onEditorClick}/>
+      return <GalleryPost name={name} style={style} child={child} children={children} onEditorClick={onEditorClick} onEditorChildClick={onEditorChildClick}/>
 
     case 'Carousel':
-      return <Carousel name={name} style={style} children={children} onEditorClick={onEditorClick} onEditorChildClick={onEditorChildClick}/>
+      return <CarouselContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
 
     default:
       return <li>

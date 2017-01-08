@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 
 const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClick = undefined}) => {
   if (!child) {
+    let stopSideProp = (e) => {
+      e.stopPropagation();
+      onEditorClick();
+    }
     return (
-      <div className='flex-item-textbox' style={style} onClick={onEditorClick}>
+      <div className='flex-item-textbox' style={style} onClick={stopSideProp}>
         <div>
           {text}
         </div>
