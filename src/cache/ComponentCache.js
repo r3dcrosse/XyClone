@@ -77,14 +77,6 @@ export const _components = {
     storage[incrementId] = component;
     return incrementId++;
   },
-//   .GalleryPost-flexcontainer {
-//   display: flex;
-//   flex-direction: column;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   position: relative;
-//   align-items: center;
-// }
 
   GalleryPost: () => {
     let defaultCss = {
@@ -112,11 +104,19 @@ export const _components = {
       parent: {}
     };
     storage[incrementId] = component;
+    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
+    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
     return incrementId++;
   },
 
   Carousel: () => {
     let defaultCss = {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      position: 'relative',
+      alignItems: 'center',
       backgroundColor: 'grey',
       width: '400px',
       height: '400px',

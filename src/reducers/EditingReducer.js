@@ -60,7 +60,7 @@ export default function xyclone (state = initialState, action) {
 		case 'DELETE_COMPONENT':
 			componentFromStorage = storage[action.componentId];
 			// REFACTOR THIS PART TO BE MORE EFFICENT (OBJECT????)
-			if (componentFromStorage.type === 'UserContainer' || componentFromStorage.type === 'GalleryPost') {
+			if (componentFromStorage.type === 'UserContainer' || componentFromStorage.type === 'GalleryPost' || componentFromStorage.type === 'Carousel') {
 				recurseDelete(componentFromStorage);
 			}
 			if (Object.keys(componentFromStorage.parent).length !== 0) {

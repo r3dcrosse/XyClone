@@ -10,6 +10,7 @@ import NavbarContextContainer from '../UserComponents/Navbar/NavbarContextContai
 import ImageContextContainer from '../UserComponents/Image/ImgContextContainer';
 import UserContainerContextContainer from '../UserComponents/UserContainer/UserContainerContextContainer'
 import GalleryPostContextContainer from '../UserComponents/GalleryPost/GalleryPostContextContainer'
+import CarouselContextContainer from '../UserComponents/Carousel/CarouselContextContainer'
 require("../../../Basic.less");
 
 
@@ -50,6 +51,10 @@ const Context = (props) => {
         return (
           <GalleryPostContextContainer/>
         )
+      case "Carousel":
+        return (
+          <CarouselContextContainer/>
+        )  
       default:
         return (
           <div> CASE DEFAULTED </div>

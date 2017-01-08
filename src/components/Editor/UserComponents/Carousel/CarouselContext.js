@@ -7,36 +7,36 @@ class CarouselContext extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // name: '',
-      // css: {
-      //   backgroundColor: '',
-      //   width: '',
-      //   height: '',
-      //   margin: ''
-      // },
-      // children: [],
-      // type: '',
-      // addChild: 'Textbox'
+      name: '',
+      css: {
+        backgroundColor: '',
+        width: '',
+        height: '',
+        margin: ''
+      },
+      children: [],
+      type: '',
+      addChild: 'GalleryPost'
     }
   }
 
   componentDidMount (){
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
-      // name: this.props.currComponent.name,
-      // css: this.props.currComponent.css,
-      // type: this.props.currComponent.type,
-      // children: this.props.currComponent.children
+      name: this.props.currComponent.name,
+      css: this.props.currComponent.css,
+      type: this.props.currComponent.type,
+      children: this.props.currComponent.children
     })
   }
 
   componentWillReceiveProps (newProps){
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
-      // name: newProps.currComponent.name,
-      // css: newProps.currComponent.css,
-      // type: newProps.currComponent.type,
-      // children: newProps.currComponent.children
+      name: newProps.currComponent.name,
+      css: newProps.currComponent.css,
+      type: newProps.currComponent.type,
+      children: newProps.currComponent.children
     })
   }
 
@@ -99,7 +99,7 @@ class CarouselContext extends Component {
   render() {
     console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
     let { type, name, css, children } = this.state;
-    if (type !== 'UserContainer') {
+    if (type !== 'Carousel') {
       return (
         <div> SHIT IM NOT A USERCONTAINER IM JUST NULL </div>
       )
@@ -131,8 +131,7 @@ class CarouselContext extends Component {
             <span> Add a child! </span>
             <form onSubmit={this.changeChildrenInput.bind(this)}>
               <select onChange={this.changeChildType.bind(this)}>
-                <option value="Textbox"> Textbox </option>
-                <option value="Image"> Image </option>
+                <option value="GalleryPost"> Gallery Post </option>
               </select>
               <input type="submit" value="Add Children"/>
             </form>
@@ -146,4 +145,4 @@ class CarouselContext extends Component {
   }
 }
 
-export default UserContainerContext;
+export default CarouselContext;
