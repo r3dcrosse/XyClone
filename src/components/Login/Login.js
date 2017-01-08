@@ -10,27 +10,26 @@ class Login extends Component {
     return (
       <div className="App">
         <div className="loginpage-field-container">
-          <div className="loginpage-username-field">
-            <TextField
-              hintText="What is your username?"
-              floatingLabelText="Username"
+          <TextField
+            hintText="What is your username?"
+            floatingLabelText="Username"
+          />
+          <TextField
+            hintText="Please enter your password"
+            floatingLabelText="Password"
+            type="password"
+          />
+          <span>
+            <RaisedButton
+              label="Sign Up"
+              secondary="true"
             />
-          </div>
-          <div className="loginpage-password-field">
-            <TextField
-              hintText="Please enter your password"
-              floatingLabelText="Password"
-              type="password"
-            />
-          </div>
-          <div className="loginpage-login-button">
             <RaisedButton
               label="Login"
               primary="true"
-              href="/dashboard">
-              {/* <Link to='/dashboard' /> */} {/* Maybe still need??? */}
-            </RaisedButton>
-          </div>
+              href="/dashboard"
+            />
+          </span>
         </div>
       </div>
     );
