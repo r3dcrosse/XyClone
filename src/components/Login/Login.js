@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
 require("../../Basic.less");
 
@@ -9,9 +10,9 @@ class Login extends Component {
       <div className="App">
         <input placeholder='Username' />
         <input placeholder='Password' />
-        <button>
-          <Link to='/dashboard'> Login </Link>
-        </button>
+        <RaisedButton label="Login" primary="true" href="/dashboard">
+          {/* <Link to='/dashboard' /> */} {/* Maybe still need??? */}
+        </RaisedButton>
       </div>
     );
   }
