@@ -15,7 +15,9 @@ const mapBodyCSS = (stateTree) => {
 
   // Build a string of all the css properties to be included in body element
   for (var cssProp in cssProperites) {
-    bodyCSSasString += buildCSSstring[cssProp](cssProperites[cssProp]);
+    // check if cssProp is in the helper hash, if not, do nothing
+    buildCSSstring[cssProp] !== undefined ?
+      bodyCSSasString += buildCSSstring[cssProp](cssProperites[cssProp]) : null;
   }
 
   bodyCSSasString += `}`; // Build up the end of body css syntax
