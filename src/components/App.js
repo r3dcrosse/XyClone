@@ -5,6 +5,7 @@ import { Router, Route, Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 // import EditorContainer from './EditorContainer'
 import * as Actions from '../actions/EditingActions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 require('../Basic.less');
 
@@ -12,14 +13,16 @@ export class App extends Component {
   render() {
     const { components, actions } = this.props;
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>XyCLONE</h2>
+      <MuiThemeProvider>
+        <div className="App">
+          <div className="App-header">
+            <h2>XyCLONE</h2>
+          </div>
+          <ul role='nav'>
+          </ul>
+          {this.props.children}
         </div>
-        <ul role='nav'>
-        </ul>
-        {this.props.children}
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
