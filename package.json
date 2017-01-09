@@ -62,7 +62,7 @@
     "zip-folder": "^1.0.0"
   },
   "scripts": {
-    "start": "nodemon server/server.js",
+    "start": "node server/server.js",
     "lint": "eslint src",
     "test": "mocha --require ignore-styles server/test/*.test.js",
     "test_old": "mocha --require ignore-styles test/.setup.js test/**/*.test.js server/test/*.test.js"

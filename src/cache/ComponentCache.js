@@ -110,6 +110,14 @@ export const _components = {
   },
 
   Carousel: () => {
+    let goLeft = function() {
+      
+    };
+
+    let goRight = function() {
+      
+    };
+
     let defaultCss = {
       display: 'flex',
       flexDirection: 'row',
@@ -127,7 +135,8 @@ export const _components = {
       css: defaultCss,
       children: [],
       type: 'Carousel',
-      parent: {}
+      parent: {},
+      functions: {goLeft: goLeft, goRight: goRight}
     }
     storage[incrementId] = component;
     return incrementId++;
