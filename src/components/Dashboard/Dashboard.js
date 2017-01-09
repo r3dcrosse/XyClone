@@ -10,22 +10,16 @@ class Dashboard extends Component {
       <div className="App">
         <RaisedButton
           label="Log Out"
+          secondary="true"
           href="/login"
         />
         <div className="dashboard-container">
-          <table className="websites-table">
-            <tr>
-              <td><h1>My First Cool Website</h1></td>
-            </tr>
-            <tr>
-              <td>
-              <RaisedButton
-              label="Open Editor"
-              href="/Editor"
-              />
-              </td>
-            </tr>
-          </table>
+          <h1>My Cool Website</h1>
+          <RaisedButton
+            label="Open Editor"
+            primary="true"
+            href="/Editor"
+          />
         </div>
 
       </div>
