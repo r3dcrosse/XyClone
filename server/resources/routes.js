@@ -30,7 +30,7 @@ Router.route('/buildSite')
         } else {
           console.log('Updated Project');
         }
-        res.send('/tempData/myZip.zip');
+        res.send('/tempData/MyZip.zip');
       })
       .catch(function(error) {
         console.log(error)
