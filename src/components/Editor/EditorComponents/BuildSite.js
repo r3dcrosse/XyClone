@@ -43,10 +43,10 @@ constructor(props) {
       })
       return response
     })
-    .then(function(res) {
-      console.log(res.data, 'DATA')
-      axios.delete(res.data)
-    })
+    // .then(function(res) {
+    //   console.log(res.data, 'DATA')
+    //   axios.delete(res.data)
+    // })
   }
 
   render () {
