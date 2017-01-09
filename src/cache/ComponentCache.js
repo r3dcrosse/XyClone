@@ -87,8 +87,8 @@ export const _components = {
       position: 'relative',
       alignItems: 'center',
       backgroundColor: 'white',
-      width: '400px',
-      height: '400px',
+      width: '300px',
+      height: '300px',
       margin: '10px'
     };
     let idOfImage = _components["Image"]();
@@ -110,13 +110,6 @@ export const _components = {
   },
 
   Carousel: () => {
-    let goLeft = function() {
-      
-    };
-
-    let goRight = function() {
-      
-    };
 
     let defaultCss = {
       display: 'flex',
@@ -135,8 +128,7 @@ export const _components = {
       css: defaultCss,
       children: [],
       type: 'Carousel',
-      parent: {},
-      functions: {goLeft: goLeft, goRight: goRight}
+      parent: {}
     }
     storage[incrementId] = component;
     return incrementId++;

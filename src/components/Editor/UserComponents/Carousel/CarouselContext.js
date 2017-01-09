@@ -91,17 +91,19 @@ class CarouselContext extends Component {
     this.setState({css: cssObject});
   }
 
+
+
   deleteCurrComponent(e) {
     e.preventDefault();
     this.props.deleteFocusedComponent(this.props.currComponentId);
   }
 
   render() {
-    console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
+    console.log('CAROUSELContainerContext IS BEING RENDERED WITH', this.state);
     let { type, name, css, children } = this.state;
     if (type !== 'Carousel') {
       return (
-        <div> SHIT IM NOT A USERCONTAINER IM JUST NULL </div>
+        <div> SHIT IM NOT A CAROUSEL IM JUST NULL </div>
       )
     } else {
       return (
