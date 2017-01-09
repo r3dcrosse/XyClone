@@ -97,15 +97,15 @@ Router.route('/tempData/myZip.zip')
         console.log(error);
       })
   })
-  // .delete(function(res) {
-  //   console.log(res.url)
-  //   fs.unlink('./server/tempData/myZip.zip', function(err) {
-  //     if (err) {
-  //       console.log(err)
-  //       console.log('not successfully deleted');
-  //     }
-  //   });
-  // });
+  .delete(function(res) {
+    console.log(res.url)
+    fs.unlink('./server/tempData/myZip.zip', function(err) {
+      if (err) {
+        console.log(err)
+        console.log('not successfully deleted');
+      }
+    });
+  });
 
 
 module.exports = Router

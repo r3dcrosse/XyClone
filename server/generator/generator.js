@@ -41,7 +41,7 @@ const mapStateTreeToReact = (stateTree) => {
 
     const IndexComponent = function () {
       return (
-        React.createElement('section', {}, [
+        React.createElement('section', {className: 'flex-container'}, [
     `;
     for (var i = 0; i < components.length; i++) {
       let actual = storage[components[i].componentId];
