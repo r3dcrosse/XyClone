@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
+import { SketchPicker } from 'react-color';
 
 class BodyContext extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class BodyContext extends Component {
     this.state = {
       css: {
         backgroundColor: ''
-      }
+      },
+      showColorPicker: false
     }
   }
 
@@ -41,9 +43,20 @@ class BodyContext extends Component {
 
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
+    cssObject.backgroundColor = e.target.value;
     console.log(cssObject);
     this.setState({css: cssObject});
+  }
+
+  handleBackgroundColor (color) {
+    let cssObject = this.state.css;
+    cssObject.backgroundColor = color.hex;
+    console.log(cssObject);
+    this.setState({css: cssObject});
+  }
+
+  showTheColorPicker () {
+    this.setState({showColorPicker: !this.state.showColorPicker});
   }
 
   render() {
@@ -58,7 +71,22 @@ class BodyContext extends Component {
         <div>
           <form onSubmit={this.prepForDispatch.bind(this)}>
             <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+              <span> Background Color: </span>
+              <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+              <div style={{
+                height: '20px',
+                width: '80px',
+                cursor: 'pointer',
+                backgroundColor: css.backgroundColor}}
+                onClick={this.showTheColorPicker.bind(this)}
+              />
+              {
+                this.state.showColorPicker &&
+                <SketchPicker
+                  color={css.backgroundColor}
+                  onChangeComplete={this.handleBackgroundColor.bind(this)}
+                />
+              }
             </div>
             <input type="submit" value="Submit" />
           </form>
