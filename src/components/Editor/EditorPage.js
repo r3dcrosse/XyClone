@@ -39,7 +39,7 @@ class EditorPage extends Component {
         <div className='editor-inPage'>
           <EditorContainer />
         </div>
-        <div className='editor-component'>
+        <div>
           <ContextContainer />
         </div>
       </div>
