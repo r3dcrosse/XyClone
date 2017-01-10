@@ -32,8 +32,6 @@ class Carousel extends Component {
   }
 
   clickNext (e) {
-    console.log('NEXT ========!!!!!!!!!!!!!!!')
-
     this.setState({
       show: (this.state.show + 1) % this.props.children.length
     })
