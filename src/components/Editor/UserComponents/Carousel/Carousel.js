@@ -8,15 +8,17 @@ class Carousel extends Component {
     // console.log(props, 'THIS IS PROPS');
 
     this.state = {
-      currGallery: ''
+      show: null
     }
   }
 
   componentWillReceiveProps (newProps){
     console.log(newProps, 'NEWPROPS GOT RECEIVED !!!!!!!!!!!!!!!')
-    this.setState({
-      currGallery: newProps.children[0]
-    })
+    if (newProps.children.length !== 0 && this.state.show === null) {
+      this.setState({
+        show: 0,
+      })
+    }
   }
 
   stopSideProp (e) {
@@ -30,33 +32,54 @@ class Carousel extends Component {
   }
 
   clickNext (e) {
-    this.stopSideProp(e)
+    console.log('NEXT ========!!!!!!!!!!!!!!!')
+
+    this.setState({
+      show: (this.state.show + 1) % this.props.children.length
+    })
+    
   }
 
   clickBack (e) {
-    this.stopSideProp(e)
+    this.setState({
+      show: ((this.state.show - 1) + this.props.children.length) % this.props.children.length
+    })
   }
 
   render() {
-    return (
+    if (this.state.show === null) {
+      return (
       <div className=''>
-      <button onClick={this.clickNext}>NEXT</button>
         <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
-          {
-            this.props.children.map((referenceObject, i) => {
-              return (
-                <UserComponent i={i} key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true} onEditorChildClick={() => this.props.onEditorChildClick(referenceObject.componentId)}/>
-              )
-            }
-          )}
         </div>
-        <button onClick={this.clickBack}>BACK</button>
       </div>
     )
+    } else {
+      return (
+        <div className=''>
+        <button onClick={this.clickNext.bind(this)}>NEXT</button>
+          <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
+            {
+              <UserComponent show={this.state.show} key={this.props.children[this.state.show].componentId} type={this.props.children[this.state.show].type} componentId={this.props.children[this.state.show].componentId} child={true} onEditorChildClick={() => this.props.onEditorChildClick(this.props.children[this.state.show].componentId)}/>
+            }
+          </div>
+          <button onClick={this.clickBack.bind(this)}>BACK</button>
+        </div>
+      )
+    }
   }
+
 }
 
 export default Carousel;
+
+          // {
+          //   this.props.children.map((referenceObject, i) => {
+          //     return (
+          //       <UserComponent i={i} key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true} onEditorChildClick={() => this.props.onEditorChildClick(referenceObject.componentId)}/>
+          //     )
+          //   }
+          // )}
 
 
 

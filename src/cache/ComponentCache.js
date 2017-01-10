@@ -127,6 +127,7 @@ export const _components = {
       name: 'Default Carousel',
       css: defaultCss,
       children: [],
+      show: null,
       type: 'Carousel',
       parent: {}
     }
