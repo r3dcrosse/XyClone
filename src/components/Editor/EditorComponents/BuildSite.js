@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
-import { storage } from '../../../cache/ComponentCache'
-
+import { storage } from '../../../cache/ComponentCache';
+import MenuItem from 'material-ui/MenuItem';
+import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
 class BuildSite extends Component {
 constructor(props) {
     super(props)
@@ -52,8 +53,13 @@ constructor(props) {
   render () {
     return (
       <div>
-        <button onClick={this.onBuildSite}> SAVE SITE </button>
-        <button><a href={this.state.link}> DOWNLOAD SITE </a></button>
+        <MenuItem rightIcon={<ArrowDropRight />} menuItems=
+                {[
+                  <MenuItem onTouchTap={this.onBuildSite}> Save Site </MenuItem>,
+                  <MenuItem href={this.state.link}> Download Site </MenuItem>
+                ]}>
+           Manage Sites
+        </MenuItem>
       </div>
     )
   }

@@ -1,12 +1,6 @@
-/*@color-base: #2d5f8b
-
-.App-header {
-  background-color: @color-base;
-}*/
-
-.App-header {
-  background-color: #2d5f8b;
-  color: white;
+body, html {
+  margin: 0px;
+  padding: 0px;
 }
 
 .loginpage-field-container,
@@ -16,7 +10,6 @@
   justify-content: center;
   flex-direction: column;
 }
-
 .flex-container {
   display: inline-flex;
   margin-left: 180px;
@@ -29,6 +22,14 @@
   justify-content: center;
   position: relative;
   align-items: center;
+}
+
+.AppBar-EditorPage {
+  z-index: 9999 !important;
+  position: fixed !important;
+  height: 10%;
+  top: 0 !important;
+  background-color: #9E9E9E !important;
 }
 
 /*.userContainer-flexcontainer {
@@ -60,26 +61,17 @@
 .editor-inPage {
   height: 100%;
   width: 100%;
-}
-
-.side-bar {
-  position: fixed;
-  float: left;
-  height: 40%;
-  width: 10%;
-  border: 1px solid black;
+  margin-top: 15%;
+  margin-left: 5%;
 }
 
 .editor-component {
-  position: fixed;
-  margin-right: 20%;
-  margin-top: 70px;
-  height: 700px;
-  width: 12%;
-  border: 1px solid black;
-  background-color:green;
-  top: 0;
-  right: 0;
+  display: fixed !important;
+  height: 500px;
+  width: 200px;
+  border: 1px solid blue;
+  border-radius: 20px;
+  background-color: #42f4e2;
 }
 
 .editor-container {

@@ -9,7 +9,6 @@ const Editor = ({ style, components, onEditorClick, onEditorBodyClick }) => {
     e.stopPropagation();
     onEditorClick(this.componentId);
   };
-  console.log('THIS IS THE EDITOR STYLE', style);
   return (
     <div className='editor-inPage'>
       <div style={style} onClick={onEditorBodyClick}>

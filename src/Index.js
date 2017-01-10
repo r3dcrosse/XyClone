@@ -3,9 +3,10 @@ import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/ConfigureStore';
 import Root from './components/AppRoot/Root';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const store = configureStore();
-
 // need to move routes into Root
 render(
   <AppContainer>
