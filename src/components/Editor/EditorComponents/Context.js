@@ -54,7 +54,7 @@ const Context = (props) => {
       case "Carousel":
         return (
           <CarouselContextContainer/>
-        )  
+        )
       default:
         return (
           <div> CASE DEFAULTED </div>
@@ -63,6 +63,5 @@ const Context = (props) => {
     }
   }
 }
-// You have to connect() to any reducers that you wish to connect to yourself
 
 export default Context;
