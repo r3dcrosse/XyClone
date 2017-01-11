@@ -13,8 +13,9 @@ db.once('on', function() {
 
 var Schema = mongoose.Schema;
 var UsernameSchema = new Schema({
-  username: String,
-  password: String
+  name: String,
+  id: String,
+  token: String
 });
 
 module.exports = {

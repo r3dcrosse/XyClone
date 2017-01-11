@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import FacebookLoginContainer from './LoginFacebookContainer.js'
 require("../../Basic.less");
 
+
 class Login extends Component {
+
   render() {
     return (
       <div className="App">
+        <FacebookLoginContainer />
         <div className="loginpage-field-container">
           <TextField
             hintText="What is your username?"
@@ -22,11 +25,11 @@ class Login extends Component {
           <span>
             <RaisedButton
               label="Sign Up"
-              secondary="true"
+              secondary={true}
             />
             <RaisedButton
               label="Login"
-              primary="true"
+              primary={true}
               href="/dashboard"
             />
           </span>

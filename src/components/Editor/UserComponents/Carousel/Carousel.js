@@ -34,14 +34,14 @@ class Carousel extends Component {
   clickNext (e) {
     this.setState({
       show: (this.state.show + 1) % this.props.children.length
-    })
-    
+    });
+
   }
 
   clickBack (e) {
     this.setState({
       show: ((this.state.show - 1) + this.props.children.length) % this.props.children.length
-    })
+    });
   }
 
   render() {

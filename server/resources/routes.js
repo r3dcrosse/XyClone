@@ -10,11 +10,26 @@ const bodyParser = require('body-parser');
 
 const generator = require('../generator/generator');
 const injectFile = require('../generator/writeToFile');
+const passport = require('./facebookPassport.js')
 
 // Router.route('/')
 //   .get(function(req, res) {
 //     res.sendFile('index.html')
 //   });
+
+Router.route('/facebook/auth', passport.authenticate('facebook'));
+
+// used to serialize the user for the session
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+// used to deserialize the user
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+      done(err, user);
+  });
+});
 
 Router.route('/buildSite')
   .post(function(req, res) {

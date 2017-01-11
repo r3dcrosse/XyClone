@@ -1,11 +1,11 @@
 
 import { combineReducers } from 'redux';
 import xyclone from './EditingReducer';
-import { reducer as formReducer } from 'redux-form';
-
+import xycloneLogin from './LoginReducer';
 
 const reducers = {
-  xyclone: xyclone
+  xyclone: xyclone,
+  xycloneLogin: xycloneLogin
 };
 
 // const rootReducer = combineReducers({
