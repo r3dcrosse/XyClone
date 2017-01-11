@@ -35,13 +35,13 @@ export default class Root extends Component {
   requireAuth() {
     console.log('REQUIREING AUTH');
     if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length === 0) {
-      console.log('never here');
       browserHistory.push('/login');
     }
   }
+
   checkLogin() {
-    console.log('CHECKING LOGIN');
     if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length !== 0) {
+      console.log('CHECKING LOGIN COMPLETE YOU ARE LOGGED IN');
       browserHistory.push('/dashboard');
     }
   }
