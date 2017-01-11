@@ -23,9 +23,11 @@ class EditorPage extends Component {
       open: !this.state.open
     })
   }
+
   backToDashboard () {
     browserHistory.push('/dashboard')
   }
+
   render () {
     return (
     <div>

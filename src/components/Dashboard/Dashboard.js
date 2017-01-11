@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import WebsitesBox from './DashboardComponents/WebsitesBox.js';
+import { Link } from 'react-router';
+import LogoutButtonContainer from './DashboardComponents/LogoutButtonContainer'
 require("../../Basic.less");
 
 
 class Dashboard extends Component {
-
-  logout() {
-    browserHistory.push('/login');
-  }
 
   render() {
     return (
@@ -19,9 +16,9 @@ class Dashboard extends Component {
         <AppBar
           title="XyClone | Dashboard"
           className='AppBar-EditorPage'
-          iconElementRight={ <FlatButton label='Log Out' /> }
-          onRightIconButtonTouchTap={ this.logout.bind(this) }
+          iconElementRight={ <LogoutButtonContainer /> }
         />
+
         <div className="websitesBox-container">
           <WebsitesBox />
           <span>

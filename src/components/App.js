@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 import { connect } from 'react-redux';
 import { Router, Route, Link } from 'react-router';
@@ -10,9 +11,34 @@ import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 require('../Basic.less');
 
+
+// CHECK IF USER IS AUTHENTICATED. IF IS, THEN RENDER THIS.PROPS.CIHLDREN. ELSE...
 export class App extends Component {
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     loginStatus: this.props.loginStatus
+  //   }
+  // }
+
+  // componentDidMount () {
+  //   if (Object.keys(this.state.loginStatus).length === 0) {
+  //     // browserHistory.push('/login');
+  //   }
+  // }
+
+  // componentWillReceiveProps (newProps) {
+  //   console.log(newProps)
+  //   this.setState({
+  //     loginStatus: newProps.loginStatus
+  //   });
+
+  //   if (Object.keys(newProps.loginStatus).length === 0) {
+  //     // browserHistory.push('/login');
+  //   }
+  // }
+
   render() {
-    const { components, actions } = this.props;
     return (
       <MuiThemeProvider>
         <div className="App" >
@@ -25,10 +51,10 @@ export class App extends Component {
   }
 }
 
-function mapState(state) {
+function mapStateToProps (state) {
   return {
-    components: state.components
-  };
+    loginStatus: state.xycloneLogin.loginStatus
+  }
 }
 
 function mapDispatch(dispatch) {
@@ -37,4 +63,4 @@ function mapDispatch(dispatch) {
   };
 }
 
-export default connect(mapState, mapDispatch)(App);
+export default connect(mapStateToProps, mapDispatch)(App);
