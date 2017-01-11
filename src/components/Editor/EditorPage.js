@@ -29,12 +29,16 @@ class EditorPage extends Component {
   render () {
     return (
     <div>
-      <AppBar title="Editor" className='AppBar-EditorPage' onLeftIconButtonTouchTap={this.changeOpenState.bind(this)} iconElementRight={ <FlatButton label='Dashboard'/>}
-      onRightIconButtonTouchTap={this.backToDashboard.bind(this)}
+      <AppBar
+        title="Editor"
+        className='AppBar-EditorPage'
+        onLeftIconButtonTouchTap={ this.changeOpenState.bind(this) }
+        iconElementRight={ <FlatButton label='Dashboard' /> }
+        onRightIconButtonTouchTap={ this.backToDashboard.bind(this) }
       />
       <div className='editor-container'>
         <div>
-          <SidebarContainer openState={this.state.open}/>
+          <SidebarContainer openState={ this.state.open }/>
         </div>
         <div className='editor-inPage'>
           <EditorContainer />
@@ -51,5 +55,3 @@ class EditorPage extends Component {
 
 
 export default EditorPage;
-
-
