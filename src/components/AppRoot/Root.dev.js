@@ -34,11 +34,18 @@ export default class Root extends Component {
   // }
   requireAuth() {
     console.log('REQUIREING AUTH');
-    console.log(this.props.store.getState().xycloneLogin, 'store');
-    if (Object.keys(this.props.store.getState().xycloneLogin).length === 0) {
-      browserHistory.push('/Editor');
+    if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length === 0) {
+      console.log('never here');
+      browserHistory.push('/login');
     }
   }
+  checkLogin() {
+    console.log('CHECKING LOGIN');
+    if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length !== 0) {
+      browserHistory.push('/dashboard');
+    }
+  }
+
 
   render() {
     const { store } = this.props;
@@ -46,9 +53,9 @@ export default class Root extends Component {
       <Provider store={store}>
         <div>
           <Router history={browserHistory} >
-            <Route path='/' component={App} >
+            <Route path='/' component={App}>
               <IndexRoute component={Login} />
-              <Route path='/login' component={Login} />
+              <Route path='/login' component={Login} onEnter={this.checkLogin.bind(this)}/>
               <Route path='/dashboard' component={Dashboard} onEnter={this.requireAuth.bind(this)} />
               <Route path='/editor' component={EditorPage} onEnter={this.requireAuth.bind(this)}/>
             </Route>

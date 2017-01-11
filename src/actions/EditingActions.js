@@ -47,10 +47,3 @@ export function changeBodyProps (newProps) {
     newProps: newProps
   }
 }
-
-export function loginUser (userId) {
-  return {
-    type: 'LOGIN_USER',
-    userId: userId
-  }
-}

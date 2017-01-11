@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions/LoginActions';
 import FacebookLogin from './LoginFacebook';
 
-// const mapStateToProps = (state) => {
-//   return {
-
-//   }
-// }
+const mapStateToProps = (state) => {
+  console.log(state.xycloneLogin, 'XYCLONELOGIN YOLO');
+  return {
+    loginStatus: state.xycloneLogin.loginStatus
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -19,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 
 
 const FacebookLoginContainer = connect(
-  // mapStateToProps,
+  mapStateToProps,
   mapDispatchToProps
 )(FacebookLogin)
 

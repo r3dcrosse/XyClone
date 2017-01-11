@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class FacebookLogin extends Component {
+  componentWillMount() {
+    console.log('running', this.props.loginStatus);
+    if (Object.keys(this.props.loginStatus).length !== 0) {
+      browserHistory.push('/dashboard');
+    }
+  }
   componentDidMount() {
     window.fbAsyncInit = function() {
       FB.init({
@@ -22,9 +30,6 @@ class FacebookLogin extends Component {
       //    your app or not.
       //
       // These three cases are handled in the callback function.
-      FB.getLoginStatus(function(response) {
-        this.statusChangeCallback(response);
-      }.bind(this));
     }.bind(this);
 
     // Load the SDK asynchronously
@@ -39,12 +44,13 @@ class FacebookLogin extends Component {
 
   // Here we run a very simple test of the Graph API after login is
   // successful.  See statusChangeCallback() for when this call is made.
-  changeLoginState () {
+  changeLoginState (response) {
     console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      console.log(this.props);
-      this.props.dispatchLoginUser(response);
+    FB.api('/me', function(meInfo) {
+      console.log('Successful login for: ' + meInfo.name);
+      let assembledMe = Object.assign({}, meInfo, response);
+      this.props.dispatchLoginUser(assembledMe);
+      browserHistory.push('/dashboard');
     }.bind(this));
   }
 
@@ -58,7 +64,7 @@ class FacebookLogin extends Component {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
-      this.changeLoginState();
+      this.changeLoginState(response);
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       console.log('YOU ARE NOT AUTHORIZED YET')
@@ -84,7 +90,7 @@ class FacebookLogin extends Component {
 
   render () {
     return (
-      <button onClick={this.handleClick.bind(this)}> Facebook Login </button>
+      <RaisedButton primary={true} label='Facebook Login' onClick={this.handleClick.bind(this)}/>
     )
   }
 }

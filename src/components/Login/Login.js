@@ -11,9 +11,17 @@ class Login extends Component {
   render() {
     return (
       <div className="App">
-        <FacebookLoginContainer />
         <div className="loginpage-field-container">
-          <TextField
+          <FacebookLoginContainer />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Login;
+
+ /* <TextField
             hintText="What is your username?"
             floatingLabelText="Username"
           />
@@ -32,11 +40,4 @@ class Login extends Component {
               primary={true}
               href="/dashboard"
             />
-          </span>
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Login;
+          </span>*/
