@@ -16,10 +16,9 @@ class Dashboard extends Component {
         <AppBar
           title="XyClone | Dashboard"
           className='AppBar-EditorPage'
-          iconElementRight={ <FlatButton label='Log Out' /> }
-          onRightIconButtonTouchTap={ this.logout.bind(this) }
+          iconElementRight={ <LogoutButtonContainer /> }
         />
-        <LogoutButtonContainer />
+
         <div className="websitesBox-container">
           <WebsitesBox />
           <span>

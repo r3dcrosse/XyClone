@@ -13,15 +13,7 @@ class Login extends Component {
       <div className="App">
         <div className="loginpage-field-container">
           <FacebookLoginContainer />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default Login;
-
- /* <TextField
+          <TextField
             hintText="What is your username?"
             floatingLabelText="Username"
           />
@@ -40,4 +32,13 @@ export default Login;
               primary={true}
               href="/dashboard"
             />
-          </span>*/
+          </span>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Login;
+
+
