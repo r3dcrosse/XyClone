@@ -67,12 +67,21 @@ describe('Server: ', function() {
       it('should return a text component with props', function() {
       var testState =
         {
-          components: [
+          pages: [
             {
-              id: 1,
-              type: 'Textbox'
+              pageID: 0,
+              pageName: 'index'
+            },
+            {
+              pageID: 1,
+              pageName: 'dogepage'
             }
-          ],
+          ]
+          components: [
+          {
+            id: 1,
+            type: 'Textbox'
+          }],
           storage: {
             1: {
               name: 'ThatTextBox',
@@ -81,7 +90,11 @@ describe('Server: ', function() {
                 height: '200px'
               },
               type: 'Textbox',
-              text: 'Hello World!!!!!!'
+              text: 'Hello World!!!!!!',
+              page: {
+                pageID: 0,
+                pageName: 'dogepage'
+              }
             }
           }
         }

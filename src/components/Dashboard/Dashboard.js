@@ -10,6 +10,15 @@ require("../../Basic.less");
 
 class Dashboard extends Component {
 
+
+  logout() {
+    browserHistory.push('/login');
+  }
+
+  addNewProject() {
+    console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,7 +31,10 @@ class Dashboard extends Component {
         <div className="websitesBox-container">
           <WebsitesBox />
           <span>
-            <RaisedButton label="+" />
+            <RaisedButton
+              label="+"
+              onClick={ this.addNewProject.bind(this) }
+            />
           </span>
         </div>
       </div>
