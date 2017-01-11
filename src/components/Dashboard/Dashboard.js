@@ -17,13 +17,16 @@ class Dashboard extends Component {
     return (
       <div className="App">
         <AppBar
-          title="Dashboard"
+          title="XyClone | Dashboard"
           className='AppBar-EditorPage'
           iconElementRight={ <FlatButton label='Log Out' /> }
           onRightIconButtonTouchTap={ this.logout.bind(this) }
         />
         <div className="websitesBox-container">
           <WebsitesBox />
+          <span>
+            <RaisedButton label="+" />
+          </span>
         </div>
       </div>
     );

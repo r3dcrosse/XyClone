@@ -30,7 +30,7 @@ class EditorPage extends Component {
     return (
     <div>
       <AppBar
-        title="Editor"
+        title="XyClone | Editor"
         className='AppBar-EditorPage'
         onLeftIconButtonTouchTap={ this.changeOpenState.bind(this) }
         iconElementRight={ <FlatButton label='Dashboard' /> }
