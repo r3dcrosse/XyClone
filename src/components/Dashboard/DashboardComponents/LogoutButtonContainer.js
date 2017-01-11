@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../../actions/LoginActions';
+import { loginUser, logoutUser } from '../../../actions/LoginActions';
 import LogoutButton from './LogoutButton';
 
 
