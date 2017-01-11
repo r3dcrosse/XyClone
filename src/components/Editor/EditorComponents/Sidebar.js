@@ -5,7 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
 const Sidebar = ({ onSidebarClick, openState }) => (
-    <Drawer open={openState} containerStyle={{'marginTop': '2%', 'width': '15%'}}>
+    <Drawer open={!openState} containerStyle={{'marginTop': '2%', 'width': '15%'}}>
       <MenuItem onTouchTap={() => onSidebarClick('Navbar')}> Add Navbar</MenuItem>
       <MenuItem onTouchTap={() => onSidebarClick('Textbox')}> Add Textbox </MenuItem>
       <MenuItem onTouchTap={() => onSidebarClick('Image')}> Add Image </MenuItem>
