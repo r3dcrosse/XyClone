@@ -1,7 +1,7 @@
 let incrementId = 0;
 
 export const _components = {
-  Navbar: (project = {}, page = null) => {
+  Navbar: (project = {}, page = null, userId = null) => {
     let defaultCss = {
       "backgroundColor": "yellow",
       "width": "700px",
@@ -15,12 +15,13 @@ export const _components = {
         type: 'Navbar',
         parent: {},
         project: project,
-        page: page
+        page: page,
+        userId: userId
     }
     storage[incrementId] = component;
     return incrementId++;
   },
-  Textbox: (project = {}, page = null) => {
+  Textbox: (project = {}, page = null, userId = null) => {
     let defaultCss = {
       "backgroundColor": "cornflowerblue",
       "width": "100px",
@@ -35,12 +36,13 @@ export const _components = {
       type: 'Textbox',
       parent: {},
       project: project,
-      page: page
+      page: page,
+      userId: userId
     }
     storage[incrementId] = component;
     return incrementId++;
   },
-  Image: (project = {}, page = null) => {
+  Image: (project = {}, page = null, userId = null) => {
     let defaultCss = {
       width: '100px',
       height: '100px',
@@ -54,13 +56,14 @@ export const _components = {
       type: 'Image',
       project: project,
       page: page,
+      userId: userId,
       parent: {},
       children: []
     }
     storage[incrementId] = component;
     return incrementId++;
   },
-  UserContainer: (project = {}, page = null) => {
+  UserContainer: (project = {}, page = null, userId = null) => {
     let defaultCss = {
       display: 'flex',
       flexDirection: 'row',
@@ -80,13 +83,14 @@ export const _components = {
       type: 'UserContainer',
       project: project,
       page: page,
+      userId: userId,
       parent: {}
     }
     storage[incrementId] = component;
     return incrementId++;
   },
 
-  GalleryPost: (project = {}, page = null) => {
+  GalleryPost: (project = {}, page = null, userId = null) => {
     let defaultCss = {
       display: 'flex',
       flexDirection: 'column',
@@ -111,7 +115,8 @@ export const _components = {
       type: 'GalleryPost',
       parent: {},
       project: project,
-      page: page
+      page: page,
+      userId: userId
     };
     storage[incrementId] = component;
     storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
@@ -119,7 +124,7 @@ export const _components = {
     return incrementId++;
   },
 
-  Carousel: (project = {}, page = null) => {
+  Carousel: (project = {}, page = null, userId = null) => {
 
     let defaultCss = {
       display: 'flex',
@@ -141,7 +146,8 @@ export const _components = {
       type: 'Carousel',
       parent: {},
       project: project,
-      page: page
+      page: page,
+      userId: userId
     }
     storage[incrementId] = component;
     return incrementId++;

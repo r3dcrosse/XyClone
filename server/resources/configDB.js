@@ -11,16 +11,8 @@ db.once('on', function() {
   console.log('MONGODB OPEN')
 })
 
-var Schema = mongoose.Schema;
-var UsernameSchema = new Schema({
-  name: String,
-  id: String,
-  token: String
-});
-
 module.exports = {
-  db: db,
-  Username: mongoose.model('Username', UsernameSchema)
+  db: db
 }
 
 

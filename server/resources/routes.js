@@ -31,6 +31,19 @@ const injectFile = require('../generator/writeToFile');
 //   });
 // });
 
+// SAVE USER ROUTE
+Router.route('/saveUser')
+  .post(Controller.saveUserId)
+
+// GRAB USER COMPONENTS ROUTE
+// WHEN WE USE SESSIONS, WE CAN CHANGE THIS TO GET AND USE SESSION.USER
+// Router.route('/populateComponents')
+//   .post(Controller.grabUserComponents);
+// // ADD NEW PROJECT ROUTE
+// Router.route('/addNewProject')
+//   .get(Controller.addNewProject);
+
+
 Router.route('/buildSite')
   .post(function(req, res) {
     // write files to a directory based on req state tree

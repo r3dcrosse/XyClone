@@ -1,8 +1,9 @@
-export function addComponent (componentType, project) {
+export function addComponent (componentType, project, userId) {
   return {
     type: 'ADD_COMPONENT',
     componentType: componentType,
-    project: project
+    project: project,
+    userId: userId
   };
 }
 export function editComponent (component, componentId) {
