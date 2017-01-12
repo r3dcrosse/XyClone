@@ -38,6 +38,7 @@ const mapStateTreeToReact = (stateTree) => {
   function formReactStringFromArray(components) {
     let reactStr = `
     import React from 'react';
+    import Carousel from './Carousel.jsx';
 
     const IndexComponent = function () {
       return (
@@ -47,7 +48,7 @@ const mapStateTreeToReact = (stateTree) => {
       let actual = storage[components[i].componentId];
       reactStr += getComponentString(actual, storage);
       i <= components.length - 2 ?
-        reactStr += `,` : null; // Makes it so there is no coma for last component
+        reactStr += `,` : null; // Makes it so there is no comma for last component
     }
     reactStr += `
         ])
@@ -144,7 +145,25 @@ const templates = {
    let componentText = `React.createElement('div', {style: ${css}}, '${text}')`;
 
    return componentText;
+ },
+
+ Carousel: (props, storage) => {
+  let childrenArr = [];
+
+  let children = props.children;
+  let css = JSON.stringify(props.css);
+
+  for (var i = 0; i < children.length; i++) {
+    let galleryPost = storage[children[i].componentId];
+    childrenArr.push([galleryPost.css, storage[galleryPost.children[0].componentId], storage[galleryPost.children[1].componentId]])
+  }
+
+  let stringChildren = JSON.stringify(childrenArr);
+
+  let componentText = `<Carousel style={${css}} arrayChildren={${stringChildren}} />`;
+  return componentText;
  }
+
 }
 
 const escapeSpecialChars = function(text) {

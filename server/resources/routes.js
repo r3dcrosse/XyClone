@@ -34,7 +34,7 @@ const injectFile = require('../generator/writeToFile');
 Router.route('/buildSite')
   .post(function(req, res) {
     // write files to a directory based on req state tree
-    console.log('REQUEST', req.body, 'REQUEST');
+    console.log('STORAGE', req.body, 'STORAGE: REQ.BODY');
 
     // Save the website prop tree to database
     Project.findOneAndUpdate({id: 1}, {title: 'MVProject', storage: req.body.storage, components: req.body.components}, {upsert: true})
