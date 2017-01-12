@@ -4,7 +4,7 @@ import App from '../App';
 import DevTools from './DevTools';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
-import Dashboard from '../Dashboard/Dashboard';
+import DashboardContainer from '../Dashboard/DashboardContainer';
 import Login from '../Login/Login';
 import EditorPage from '../Editor/EditorPage'
 
@@ -56,7 +56,7 @@ export default class Root extends Component {
             <Route path='/' component={App}>
               <IndexRoute component={Login} />
               <Route path='/login' component={Login} onEnter={this.checkLogin.bind(this)}/>
-              <Route path='/dashboard' component={Dashboard} onEnter={this.requireAuth.bind(this)} />
+              <Route path='/dashboard' component={DashboardContainer} onEnter={this.requireAuth.bind(this)} />
               <Route path='/editor' component={EditorPage} onEnter={this.requireAuth.bind(this)}/>
             </Route>
           </Router>

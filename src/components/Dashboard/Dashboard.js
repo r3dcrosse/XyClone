@@ -2,13 +2,37 @@ import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
-import WebsitesBox from './DashboardComponents/WebsitesBox.js';
+import WebsitesBoxContainer from './DashboardComponents/WebsitesBoxContainer';
 import { Link } from 'react-router';
 import LogoutButtonContainer from './DashboardComponents/LogoutButtonContainer'
 require("../../Basic.less");
 
 
 class Dashboard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      projects: []
+    }
+  }
+
+  componentDidMount() {
+    this.setState({ projects: this.props.projects });
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({ projects: newProps.projects });
+  }
+
+  logout() {
+    browserHistory.push('/login');
+  }
+
+  addNewProject() {
+    console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
+    this.props.addNewProject('lolcat', '2 doge for u', 1337);
+  }
 
   render() {
     return (
@@ -20,9 +44,16 @@ class Dashboard extends Component {
         />
 
         <div className="websitesBox-container">
-          <WebsitesBox />
+          {
+            this.state.projects.map((project, key) => {
+              return ( <WebsitesBoxContainer key={key} project={project} /> )
+            })
+          }
           <span>
-            <RaisedButton label="+" />
+            <RaisedButton
+              label="+"
+              onClick={ this.addNewProject.bind(this) }
+            />
           </span>
         </div>
       </div>
