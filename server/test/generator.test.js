@@ -319,6 +319,79 @@ describe('Server: ', function() {
     })
   });
 
+  describe('Carousel component: ', function() {
+
+    it('should return a carousel component that includes a gallery post component', function() {
+      var testState =
+        {
+          components: [
+            {
+              componentId: 0,
+              type: 'Carousel'
+            }
+          ],
+          storage: {
+            0: {
+              name: 'Default Carousel',
+              css: {
+                height: '400px',
+                width: '400px'
+              },
+              type: 'Carousel',
+              children: [
+                {
+                  componentId: 1,
+                  type: 'GalleryPost'
+                }
+              ]
+            },
+            1: {
+              name: 'AGalleryPost',
+              css: {
+                height: '400px',
+                width: '400px'
+              },
+              type: 'GalleryPost',
+              children: [
+                {
+                  componentId: 2,
+                  type: 'Image'
+                },
+                {
+                  componentId: 3,
+                  type: 'Textbox'
+                }
+              ]
+            },
+            2: {
+              name: 'AnImageComponent',
+              css: {
+                width: '260px',
+                height: '180px',
+                padding: '10px'
+              },
+              type: 'Image',
+              src: 'http://placecorgi.com/260/180'
+            },
+            3: {
+              name: 'ATextboxComponent',
+              css: {
+                color: 'red',
+                backgroundColor: 'blue'
+              },
+              type: 'Textbox',
+              text: 'DOooogGGGEEEeee'
+            }
+          }
+        };
+
+      console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+      let testText = getComponentString(testState.storage[0], testState.storage);
+      // let rawText = `React.createElement('Carousel', {}, [React.createElement('div', {style: {"height":"400px","width":"400px"}}, [React.createElement('img', {src: 'http://placecorgi.com/260/180', style: {"width":"260px","height":"180px","padding":"10px"}}),React.createElement('div', {style: {"color":"red","backgroundColor":"blue"}}, 'DOooogGGGEEEeee')])])`;
+      // expect(testText).to.equal(rawText);
+    })
+  });
+
     // describe('Generator depth: ', function() {
     //   it('should handle multiple flat components', function() {
     //     const flatState =
