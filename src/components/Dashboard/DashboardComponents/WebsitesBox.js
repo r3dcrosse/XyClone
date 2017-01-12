@@ -8,6 +8,7 @@ const WebsitesBox = ({ project, changeCurrProject }) => {
   let enterEditor = () => {
     // send dispatch action to redux to change the current project
     changeCurrProject(project.projectId);
+    // GRAB ALL THE COMPONENTS THAT CORRESPOND TO THE PROJECT.projectId THROUGH A DISPATCH
     browserHistory.push('/editor')
   }
   return (

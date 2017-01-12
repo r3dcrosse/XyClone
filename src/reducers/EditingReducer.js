@@ -27,7 +27,7 @@ export default function xyclone (state = initialState, action) {
 	switch (action.type) {
 		case 'ADD_COMPONENT':
 			elem = action.componentType;
-			idInStorage = _components[elem]();
+			idInStorage = _components[elem](action.project);
 			return Object.assign({}, state, {
 				components: [...state.components, {componentId: idInStorage, type: action.componentType}]
 			});
