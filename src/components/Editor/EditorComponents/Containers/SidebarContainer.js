@@ -5,15 +5,16 @@ import Sidebar from '../Sidebar'
 const mapStateToProps = (state) => {
     return {
         components: state.xyclone.components,
-        currProject: state.xycloneProjects.currProject
+        currProject: state.xycloneProjects.currProject,
+        loginStatus: state.xycloneLogin.loginStatus
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSidebarClick: (type, project) => {
+        onSidebarClick: (type, project, userId) => {
             console.log('DISPATCHING ON COMPONENT CLICK')
-            dispatch(addComponent(type, project))
+            dispatch(addComponent(type, project, userId))
         }
     }
 }

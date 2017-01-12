@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -31,7 +32,11 @@ class Dashboard extends Component {
 
   addNewProject() {
     console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
-    this.props.addNewProject('lolcat', '2 doge for u', 1337);
+    axios.get('/addNewProject')
+      .then((response) => {
+        console.log(response.data, 'THIS IS THE RESPONSE AFTER ADDING A NEW PROJECT');
+        this.props.addNewProject('Default Project ' + response.data.newSequenceNumber, '2 doge for u', 1337);
+      });
   }
 
   render() {

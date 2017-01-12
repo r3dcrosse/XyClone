@@ -31,26 +31,19 @@ const injectFile = require('../generator/writeToFile');
 //   });
 // });
 
-Router.route('/buildSite')
-  .post(function(req, res) {
-    // write files to a directory based on req state tree
-    console.log('STORAGE', req.body, 'STORAGE: REQ.BODY');
+// SAVE USER ROUTE
+Router.route('/saveUser')
+  .post(Controller.saveUserIdAndReturnStorage);
 
-    // Save the website prop tree to database
-    Project.findOneAndUpdate({id: 1}, {title: 'MVProject', storage: req.body.storage, components: req.body.components}, {upsert: true})
+// GRAB USER COMPONENTS ROUTE
+// WHEN WE USE SESSIONS, WE CAN CHANGE THIS TO GET AND USE SESSION.USER
+// // ADD NEW PROJECT ROUTE
+Router.route('/addNewProject')
+  .get(Controller.addNewProject);
 
-      .then(function(data) {
-        if (data === null) {
-          console.log('Project Created');
-        } else {
-          console.log('Updated Project');
-        }
-        res.send('/tempData/myZip.zip');
-      })
-      .catch(function(error) {
-        console.log(error)
-      });
-  });
+Router.route('/saveSite')
+  .post(Controller.saveUserSite);
+
 
 Router.route('/tempData/myZip.zip')
   .get(function(req, res) {

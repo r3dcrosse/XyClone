@@ -1,8 +1,9 @@
-export function addComponent (componentType, project) {
+export function addComponent (componentType, project, userId) {
   return {
     type: 'ADD_COMPONENT',
     componentType: componentType,
-    project: project
+    project: project,
+    userId: userId
   };
 }
 export function editComponent (component, componentId) {
@@ -46,5 +47,13 @@ export function changeBodyProps (newProps) {
   return {
     type: 'CHANGE_BODY_PROPS',
     newProps: newProps
+  }
+}
+
+export function updateStorageAndStateComponents (storage, components) {
+  return {
+    type: 'UPDATE_COMPONENTS_STORAGE',
+    storage: storage,
+    components: components
   }
 }

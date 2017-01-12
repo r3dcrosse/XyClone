@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
 
 class FacebookLogin extends Component {
-  componentWillMount() {
-    console.log('running', this.props.loginStatus);
-    if (Object.keys(this.props.loginStatus).length !== 0) {
-      browserHistory.push('/dashboard');
-    }
-  }
   componentDidMount() {
+    // if (Object.keys(this.props.loginStatus).length !== 0) {
+    //   browserHistory.push('/dashboard');
+    // }
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '233882087066195',
@@ -35,11 +33,33 @@ class FacebookLogin extends Component {
   changeLoginState (response) {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(meInfo) {
+
       console.log('Successful login for: ' + meInfo.name);
       let assembledMe = Object.assign({}, meInfo, response);
       this.props.dispatchLoginUser(assembledMe);
-      browserHistory.push('/dashboard');
+      // REQUEST ENDPOINT FOR SAVING USERS
+      // 'http://localhost:8000/saveUser'
+      // ALSO SET SESSION FROM HERE IN FUTURE
     }.bind(this));
+    this.requestForStorage(response);
+  }
+
+  requestForStorage (response) {
+    console.log('RUNNING REQUEST FOR STORAGE');
+     axios.post('/saveUser', {userId: response.authResponse.userID})
+    .then((userData) => {
+        console.log(JSON.stringify(userData));
+        //MOUNT ALL THE COMPONENTS/PROJECTS BELONGING TO THIS USER
+          // result.project = projects. map through projects.
+
+        // weed out ALL component references
+        // weed out ALL storage elements
+        // weed out projects.
+        // call this.props.updateStorageComponents(storage, components)
+        // call this.props.(make youro wn dispatch) for new projects)
+
+        browserHistory.push('/Editor');
+    });
   }
 
   // This is called with the results from from FB.getLoginStatus().

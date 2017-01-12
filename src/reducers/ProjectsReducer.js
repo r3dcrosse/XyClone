@@ -1,16 +1,16 @@
 
 const initialState = {
   projects: [
-    {
-      name: 'Doge Project Ever',
-      description: 'Best Doge Ever...',
-      projectId: 0
-    },
-    {
-      name: 'Doge Project Ever 2',
-      description: ' 2 Best Doge Ever...',
-      projectId: 1
-    }
+    // {
+    //   name: 'Doge Project Ever',
+    //   description: 'Best Doge Ever...',
+    //   projectId: 0
+    // },
+    // {
+    //   name: 'Doge Project Ever 2',
+    //   description: ' 2 Best Doge Ever...',
+    //   projectId: 1
+    // }
   ],
   currProject: {},
   currProjectId: null

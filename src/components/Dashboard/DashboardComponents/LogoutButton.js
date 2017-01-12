@@ -23,7 +23,6 @@ class LogoutButton extends Component {
   }
 
   handleLogout() {
-    console.log('LOGOUT TIME', console.log(FB));
     FB.logout(function(response) {
       console.log('response of logout', response);
       this.props.dispatchLogoutUser();

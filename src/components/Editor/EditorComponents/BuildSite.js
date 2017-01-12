@@ -15,6 +15,7 @@ constructor(props) {
     this.onBuildSite = this.onBuildSite.bind(this)
   }
   componentDidMount() {
+    console.log(this.props, 'THIS.PROPS FOR BUILDISTE.JS');
     this.setState({
       components: this.props.components,
       storage: storage
@@ -32,11 +33,14 @@ constructor(props) {
     var context = this;
     var siteData = {
       components: this.state.components,
-      storage: this.state.storage
+      storage: this.state.storage,
+      userId: this.props.currUserId,
+      projectId: this.props.currProjectId,
+      title: 'yoloswag for now'
     };
     console.log(siteData);
     console.log('BUILDING SITE WITH INSIDE STATE DATA');
-    axios.post('buildSite', siteData)
+    axios.post('saveSite', siteData)
     .then(function(response) {
       console.log(response)
       context.setState({

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { updateStorageAndStateComponents } from '../../actions/EditingActions'
 import { loginUser } from '../../actions/LoginActions';
 import FacebookLogin from './LoginFacebook';
 
@@ -13,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchLoginUser: (userInfo) => {
       dispatch(loginUser(userInfo))
+    },
+    updateStorageComponents: (storage, components) => {
+      dispatch(updateStorageAndStateComponents(storage, components))
     }
   }
 }
