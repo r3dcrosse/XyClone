@@ -22,6 +22,13 @@ const port = process.env.PORT || 8000;
 mongoose.connect(database.database);
 app.set('superSecret', database.secret);
 
+// ALLOW CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // middleware to enable hot reloading
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath

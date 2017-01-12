@@ -10,23 +10,24 @@ let grabSequenceNumAndIncrement = function(callback) {
     if (data === null) {
       let newSequence = new Sequence({
         grabKey: 'Grabbed',
-        sequenceValue: 0
+        sequenceValue: 1
       })
       Sequence.create(newSequence)
-      .then((data) => {
-        console.log('SEQUENCE GOT CREATED FOR FIRST TIME')
-        callback(0);
-      })
+        .then((result) => {
+          console.log('SEQUENCE GOT CREATED FOR FIRST TIME')
+          callback(1);
+        })
     } else {
       var newSequenceValue = data.sequenceValue + 1;
+      console.log(newSequenceValue, 'THE UPDATED SEQUENCE VALUE');
       Sequence.findOneAndUpdate({grabKey: 'Grabbed'}, {sequenceValue: newSequenceValue})
-      .then((data) => {
-        console.log('SEQUENCE GOT UPDATED!!!!!!!!!!!!!!!!!!!', data);
-        callback(data.sequenceValue);
-      })
-      .catch((err) => {
-        console.log('ERROR IN FINDING ONE AND UPDATING/INCREMENTING')
-      })
+        .then((result) => {
+          callback(newSequenceValue);
+        })
+        .catch((err) => {
+          console.log('ERROR IN FINDING ONE AND UPDATING/INCREMENTING')
+          console.log(err);
+        })
     }
   })
   .catch((err) => {
@@ -34,26 +35,41 @@ let grabSequenceNumAndIncrement = function(callback) {
   })
 }
 
-let grabProjects = function(callback) {
-
+let grabProjectsAndComponents = function(userId, callback) {
+  Project.find({userId: userId})
+    .then((projects) => {
+      console.log('sending projects back!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1');
+      callback(projects);
+    })
+    .catch((err) => {
+      console.log('ERROR IN GRABBING ALL THE PROJECTS BY THIS DUDE');
+      console.log(err);
+    });
 }
 
 
 module.exports = {
+
   addNewProject: function(req, res) {
     console.log('ADDING A NEW PROJECT ===============================')
-    grabSequenceNumAndIncrement(function(newSequenceNum) {
-
+    grabSequenceNumAndIncrement(function(newSequenceNumber) {
+      console.log('SEDINGIN BACK NEW SEEQUENCE NUMBER!', newSequenceNumber);
+      res.status(200).json({newSequenceNumber: newSequenceNumber});
     })
   },
+
   saveUserIdAndReturnStorage: function(req, res) {
     //REFACTOR TO RETURN STORAGE
-    res.send('YOU GOT ME');
     console.log('THIS IS REQUEST FOR SAVE USER ID ==================================', req.body.userId);
     User.findOne({userId: req.body.userId})
     .then((result) => {
       if (result) {
-        console.log('USER IS ALREADY INSIDE DATABASE');
+        console.log('USER IS ALREADY INSIDE DATABASE')
+        grabProjectsAndComponents(req.body.userId, function(projects) {
+          console.log('SETTING STATUS AND SENDING BACK', projects);
+          // res.status(404).end();
+          res.status(201).json(projects);
+        });
       } else {
         let newUser = new User({
           userId: req.body.userId,
@@ -62,20 +78,26 @@ module.exports = {
         newUser.save()
         .then((result) => {
           console.log('USER HAS BEEN SAVED INTO THE DATABASE!');
-          res.send('YOLLOSWAG IT HAS WORKED USER HAS BEEN UPDATED INTO DATABASE');
+          res.status(204).send({});
+        })
+        .catch((err) => {
+          console.log('ERROR IN SAVING THE NEW USERNAME!');
+          console.log(err);
+          res.status(404).end();
         });
       }
     })
-    .catch(() => {
-      console.log('USER HAS FAILED TO BE UPDATED INTO DATABASE');
+    .catch((err) => {
+      console.log('WE HAVE FAILED TO LOOKUP USERS IN DATABASE');
+      console.log(err);
     })
   },
+
   saveUserSite: function(req, res) {
     // write files to a directory based on req state tree
     console.log('REQUEST', req.body, 'REQUEST');
     // Save the website prop tree to database
-    Project.findOneAndUpdate({projectId: 1}, {title: req.bidy.title, projectId: req.body.projectId, userId: req.body.userId, storage: req.body.storage, components: req.body.components}, {upsert: true})
-
+    Project.findOneAndUpdate({projectId: 1}, {title: req.body.title, projectId: req.body.projectId, userId: req.body.userId, storage: req.body.storage, components: req.body.components}, {upsert: true})
       .then(function(data) {
         if (data === null) {
           console.log('Project Created');

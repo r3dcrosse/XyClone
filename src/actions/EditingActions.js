@@ -49,3 +49,11 @@ export function changeBodyProps (newProps) {
     newProps: newProps
   }
 }
+
+export function updateStorageAndStateComponents (storage, components) {
+  return {
+    type: 'UPDATE_COMPONENTS_STORAGE',
+    storage: storage,
+    components: components
+  }
+}

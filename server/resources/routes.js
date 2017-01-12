@@ -37,11 +37,9 @@ Router.route('/saveUser')
 
 // GRAB USER COMPONENTS ROUTE
 // WHEN WE USE SESSIONS, WE CAN CHANGE THIS TO GET AND USE SESSION.USER
-// Router.route('/updateStorage')
-//   .post(Controller.grabComponentsAndProjects);
 // // ADD NEW PROJECT ROUTE
-// Router.route('/addNewProject')
-//   .get(Controller.addNewProject);
+Router.route('/addNewProject')
+  .get(Controller.addNewProject);
 
 Router.route('/saveSite')
   .post(Controller.saveUserSite);

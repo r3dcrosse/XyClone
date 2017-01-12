@@ -4,7 +4,6 @@ import LogoutButton from './LogoutButton';
 
 
 const mapStateToProps = (state) => {
-  console.log(state.xycloneLogin, 'XYCLONELOGOUT YOLO');
   return {
     loginStatus: state.xycloneLogin.loginStatus
   }
