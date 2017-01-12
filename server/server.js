@@ -10,10 +10,7 @@ const morgan = require('morgan');
 
 const jwt = require('jsonwebtoken');
 const database = require('./config');
-const User = require('./models/user');
 // const passport = require('./resources/facebookPassport.js')
-
-const controller = require('./resources/controller')
 
 const app = express();
 const compiler = webpack(config);

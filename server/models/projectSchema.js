@@ -9,4 +9,5 @@ module.exports = mongoose.model('Project', new Schema({
   title: String,
   components: Array,
   storage: Object,
+  userId: String
 }));

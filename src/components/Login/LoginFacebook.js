@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
+import axios from 'axios';
 
 class FacebookLogin extends Component {
-  componentWillMount() {
-    console.log('running', this.props.loginStatus);
+  componentDidMount() {
     if (Object.keys(this.props.loginStatus).length !== 0) {
       browserHistory.push('/dashboard');
     }
-  }
-  componentDidMount() {
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '233882087066195',
@@ -39,7 +37,16 @@ class FacebookLogin extends Component {
       let assembledMe = Object.assign({}, meInfo, response);
       this.props.dispatchLoginUser(assembledMe);
       browserHistory.push('/dashboard');
+      // REQUEST ENDPOINT FOR SAVING USERS
+      // 'http://localhost:8000/saveUser'
+      // ALSO SET SESSION FROM HERE IN FUTURE
     }.bind(this));
+
+    axios.post('saveUser', {userId: response.authResponse.userID})
+    // .then((userData) => {
+    //     console.log('/////////////////////////////////////////////')
+    //     //MOUNT ALL THE COMPONENTS BELONGING TO THIS USER
+    // });
   }
 
   // This is called with the results from from FB.getLoginStatus().

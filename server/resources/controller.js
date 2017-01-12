@@ -8,7 +8,7 @@ let grabSequenceNumAndIncrement = function(callback) {
   Sequence.findOne({grabKey: 'Grabbed'})
   .then((data) => {
     if (data === null) {
-      var newSequence = new Sequence({
+      let newSequence = new Sequence({
         grabKey: 'Grabbed',
         sequenceValue: 0
       })
@@ -34,6 +34,10 @@ let grabSequenceNumAndIncrement = function(callback) {
   })
 }
 
+let grabProjects = function(callback) {
+
+}
+
 
 module.exports = {
   addNewProject: function(req, res) {
@@ -42,19 +46,46 @@ module.exports = {
 
     })
   },
-
-  grabUserComponents: function(req, res) {
-    console.log('GRABBING USER COMPONENTS ==============================')
-  },
-
-  saveUserId: function(req, res) {
-    console.log('THIS IS REQUEST FOR SAVE USER ID ==================================', req.body);
-    User.findOrCreate({userId: req.body.id})
-    .then({
-      console.log('USER HAS BEEN UPDATED INTO DATABASE');
+  saveUserIdAndReturnStorage: function(req, res) {
+    //REFACTOR TO RETURN STORAGE
+    res.send('YOU GOT ME');
+    console.log('THIS IS REQUEST FOR SAVE USER ID ==================================', req.body.userId);
+    User.findOne({userId: req.body.userId})
+    .then((result) => {
+      if (result) {
+        console.log('USER IS ALREADY INSIDE DATABASE');
+      } else {
+        let newUser = new User({
+          userId: req.body.userId,
+          projects: []
+        });
+        newUser.save()
+        .then((result) => {
+          console.log('USER HAS BEEN SAVED INTO THE DATABASE!');
+          res.send('YOLLOSWAG IT HAS WORKED USER HAS BEEN UPDATED INTO DATABASE');
+        });
+      }
     })
-    .catch({
+    .catch(() => {
       console.log('USER HAS FAILED TO BE UPDATED INTO DATABASE');
     })
+  },
+  saveUserSite: function(req, res) {
+    // write files to a directory based on req state tree
+    console.log('REQUEST', req.body, 'REQUEST');
+    // Save the website prop tree to database
+    Project.findOneAndUpdate({projectId: 1}, {title: req.bidy.title, projectId: req.body.projectId, userId: req.body.userId, storage: req.body.storage, components: req.body.components}, {upsert: true})
+
+      .then(function(data) {
+        if (data === null) {
+          console.log('Project Created');
+        } else {
+          console.log('Updated Project');
+        }
+        res.send('/tempData/myZip.zip');
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
   }
 }
