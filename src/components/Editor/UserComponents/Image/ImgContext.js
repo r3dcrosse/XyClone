@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
-import TextField from 'material-ui/TextField'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
 class ImageContext extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ class ImageContext extends Component {
   }
 
   componentDidMount (){
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
@@ -30,7 +32,7 @@ class ImageContext extends Component {
     })
   }
   componentWillReceiveProps (newProps) {
-    console.log('COMPONENT RECEIVED PROPS.', this.props);
+    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
@@ -39,48 +41,33 @@ class ImageContext extends Component {
       alt: newProps.currComponent.alt
     })
   }
-  
+
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
     this.props.onChangeStyleClick(newProps, this.props.currComponentId);
   }
 
-  changeNameInput (e) {
-    this.setState({name: e.target.value})
+  // When enter key is pressed, update all the properties of the img that changed
+  handleEnterKeyPress (e) {
+    e.key === 'Enter' ? this.prepForDispatch(e) : null;
   }
 
-  changeSrcInput (e) {
-    this.setState({src: e.target.value});
-  }
-
-  changeAlternativeInput(e) {
-    this.setState({alt: e.target.value});
-  }
-
-  changeHeight (e) {
-    let cssObject = this.state.css;
-    cssObject.height = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeWidth (e) {
-    let cssObject = this.state.css;
-    cssObject.width = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeMargin (e) {
-    let cssObject = this.state.css;
-    cssObject.margin = e.target.value;
-    this.setState({css: cssObject});
+  // Use this to update the properties of the component in state
+  changeProp (propertyToSet, cssProp, context, val) {
+    if (cssProp) {
+      let cssObject = this.state.css;
+      cssObject[cssProp] = val;
+      this.setState({ css : cssObject });
+    } else {
+      this.setState({ [propertyToSet] : val });
+    }
   }
 
   deleteCurrComponent(e) {
     e.preventDefault();
     this.props.deleteFocusedComponent(this.props.currComponentId);
   }
-
 
   render() {
     // console.log('ImageContext IS BEING RENDERED');
@@ -91,34 +78,64 @@ class ImageContext extends Component {
       )
     } else {
       return (
-        <div>
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <div> {type} </div>
-            </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Source: </span> <input type='text' value={src} onChange={this.changeSrcInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Alternative: </span> <input type='text' value={alt} onChange={this.changeAlternativeInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-          <form onSubmit={this.deleteCurrComponent.bind(this)}>
-            <input type="submit" value="Delete Component" />
-          </form>
+        <div style={{padding: '5px'}}>
+          <div>
+            <div> {type} </div>
+          </div>
+          <TextField
+            defaultValue={name}
+            floatingLabelText="Image Name"
+            onChange={this.changeProp.bind(this, 'name', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            inputStyle={{fontSize: '6pt'}}
+            defaultValue={src}
+            hintText="http://www.imgur.com/hax1337"
+            floatingLabelText="Image Source"
+            onChange={this.changeProp.bind(this, 'src')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={alt}
+            floatingLabelText="Alternate Text"
+            onChange={this.changeProp.bind(this, 'alt')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.width}
+            floatingLabelText="Width"
+            onChange={this.changeProp.bind(this, 'css', 'width')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.height}
+            floatingLabelText="Height"
+            onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.margin}
+            floatingLabelText="Margin"
+            onChange={this.changeProp.bind(this, 'css', 'margin')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <RaisedButton
+            label="Save"
+            primary={true}
+            onClick={this.prepForDispatch.bind(this)}
+          />
+          <RaisedButton
+            label="Delete"
+            secondary={true}
+            onClick={this.deleteCurrComponent.bind(this)}
+          />
         </div>
       )
     }
