@@ -45,7 +45,7 @@ class ImageContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId);
+    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
   }
 
   // When enter key is pressed, update all the properties of the img that changed

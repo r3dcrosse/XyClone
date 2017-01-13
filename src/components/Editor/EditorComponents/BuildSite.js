@@ -34,9 +34,7 @@ constructor(props) {
     var siteData = {
       components: this.state.components,
       storage: this.state.storage,
-      userId: this.props.currUserId,
-      projectId: this.props.currProjectId,
-      title: 'yoloswag for now'
+      projectId: this.props.currProjectId
     };
     console.log(siteData);
     console.log('BUILDING SITE WITH INSIDE STATE DATA');

@@ -4,27 +4,25 @@ import { storage } from '../../../../cache/ComponentCache'
 import Editor from '../Editor'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING STATE TO PROPS FOR EDITOR', state)
 	return {
 		components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,
-    style: storage['body'].css
+    currProjectId: state.xycloneProjects.currProjectId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		onEditorClick: (id) => {
-			console.log('DISPATCHING ON EDITOR CLICK with ID OF ', id);
 			let component = storage[id];
 			dispatch(editComponent(component, id))
 		},
     deleteFocusedComponent: (id) => {
       dispatch(deleteComponent(id));
     },
-    onEditorBodyClick: (props) => {
-      dispatch(editBodyClick());
+    onEditorBodyClick: (projectId) => {
+      dispatch(editBodyClick(projectId));
     }
 	}
 }

@@ -16,6 +16,7 @@ export default function xycloneLogin (state = initialState, action) {
       return Object.assign({}, state, {
         loginStatus: {}
       });
+
     default:
       console.log('GOT DEFAULT XYCLONE LOGIN', state)
       return state;

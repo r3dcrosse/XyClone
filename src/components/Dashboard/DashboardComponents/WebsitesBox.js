@@ -20,7 +20,7 @@ const WebsitesBox = ({ project, changeCurrProject }) => {
       }}>
         <img src="http://placecorgi.com/280/160" />
       </CardMedia>
-      <CardTitle title={project.name} subtitle={project.description} />
+      <CardTitle title={project.title} subtitle={project.description} />
       <CardActions>
         <RaisedButton label="Edit Site" onClick={enterEditor} primary={true} />
         <SettingsMenu />

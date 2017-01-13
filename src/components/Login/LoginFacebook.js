@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
+import { storage } from '../../cache/ComponentCache'
 
 class FacebookLogin extends Component {
   componentDidMount() {
-    // if (Object.keys(this.props.loginStatus).length !== 0) {
-    //   browserHistory.push('/dashboard');
-    // }
+    if (Object.keys(this.props.loginStatus).length !== 0) {
+      browserHistory.push('/dashboard');
+    }
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '233882087066195',
@@ -40,25 +41,56 @@ class FacebookLogin extends Component {
       // REQUEST ENDPOINT FOR SAVING USERS
       // 'http://localhost:8000/saveUser'
       // ALSO SET SESSION FROM HERE IN FUTURE
+      this.requestForStorage(response);
+
     }.bind(this));
-    this.requestForStorage(response);
   }
 
   requestForStorage (response) {
     console.log('RUNNING REQUEST FOR STORAGE');
      axios.post('/saveUser', {userId: response.authResponse.userID})
     .then((userData) => {
-        console.log(JSON.stringify(userData));
         //MOUNT ALL THE COMPONENTS/PROJECTS BELONGING TO THIS USER
           // result.project = projects. map through projects.
+        // userdata.data is all the projects.
+        // module.exports = mongoose.model('Project', new Schema({
+        //   projectId: Number,
+        //   title: String,
+        //   components: Array,
+        //   storage: Object,
+        //   userId: String
+        // }));
+        console.log('ABOUT TO PUSH TO DASHBOARD');
+        browserHistory.push('/Dashboard');
+        console.log('PUSHED TO DASHBOARD')
+        let allProjects = []
+        let allComponents = [];
+        if (Object.keys(userData.data).length === 0) {
+          return;
+        } else {
+          userData.data.forEach(function(project) {
+            allProjects.push({
+              projectId: project.projectId,
+              title: project.title,
+              description: project.description
+            })
+            for (let i = 0; i < project.components.length; i++) {
+              allComponents.push(project.components[key])
+            }
+            for (let key in project.storage) {
+              storage[key] = project.storage[key];
+            }
+          });
+          console.log(storage);
+          // weed out ALL component references
+          // weed out ALL storage elements
+          // weed out projects.
+          // call this.props.updateStorageComponents(storage, components)
+          this.props.updateStorageComponents(allComponents);
+          this.props.updateProjectsStorage(allProjects);
+          // call this.props.(make youro wn dispatch) for new projects)
+        }
 
-        // weed out ALL component references
-        // weed out ALL storage elements
-        // weed out projects.
-        // call this.props.updateStorageComponents(storage, components)
-        // call this.props.(make youro wn dispatch) for new projects)
-
-        browserHistory.push('/Editor');
     });
   }
 
