@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Paper from 'material-ui/Paper';
 
 class Draggable extends Component {
   constructor(props) {
@@ -42,8 +43,21 @@ class Draggable extends Component {
 
   render() {
     return (
-      <div onMouseDown={this.onMouseDown} style={{ position: 'fixed', left: this.props.x, top: this.props.y }} ref="dragTarget" className='editor-component'>
-        {this.props.children}
+      <div>
+        <Paper
+          onMouseDown={this.onMouseDown}
+          className='editor-component'
+          style={{
+            position: 'fixed',
+            left: this.props.x,
+            top: this.props.y,
+            userSelect: 'none'
+          }}
+          zDepth={1}
+          ref="dragTarget"
+        >
+          {this.props.children}
+        </Paper>
       </div>
     )
   }

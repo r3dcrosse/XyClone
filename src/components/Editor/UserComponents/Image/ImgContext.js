@@ -39,6 +39,7 @@ class ImageContext extends Component {
       alt: newProps.currComponent.alt
     })
   }
+  
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
