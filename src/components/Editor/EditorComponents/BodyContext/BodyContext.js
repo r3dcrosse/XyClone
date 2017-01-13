@@ -10,8 +10,7 @@ class BodyContext extends Component {
     this.state = {
       css: {
         backgroundColor: ''
-      },
-      showColorPicker: false
+      }
     }
   }
 
@@ -32,8 +31,7 @@ class BodyContext extends Component {
     })
   }
 
-  prepForDispatch(e) {
-    e.preventDefault();
+  prepForDispatch() {
     let backgroundColor = this.state.css.backgroundColor;
     let cssObject = Object.assign({}, this.props.style, {
       backgroundColor: backgroundColor
@@ -41,22 +39,11 @@ class BodyContext extends Component {
     this.props.editBodyProps(cssObject);
   }
 
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value;
-    console.log(cssObject);
-    this.setState({css: cssObject});
-  }
-
   handleBackgroundColor (color) {
     let cssObject = this.state.css;
     cssObject.backgroundColor = color.hex;
-    console.log(cssObject);
     this.setState({css: cssObject});
-  }
-
-  showTheColorPicker () {
-    this.setState({showColorPicker: !this.state.showColorPicker});
+    this.prepForDispatch();
   }
 
   render() {
@@ -69,27 +56,11 @@ class BodyContext extends Component {
     } else {
       return (
         <div>
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <span> Background Color: </span>
-              <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-              <div style={{
-                height: '20px',
-                width: '80px',
-                cursor: 'pointer',
-                backgroundColor: css.backgroundColor}}
-                onClick={this.showTheColorPicker.bind(this)}
-              />
-              {
-                this.state.showColorPicker &&
-                <SketchPicker
-                  color={css.backgroundColor}
-                  onChangeComplete={this.handleBackgroundColor.bind(this)}
-                />
-              }
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
+          <div className='bodycontextmenu-text'>Background Color</div>
+          <SketchPicker
+            color={css.backgroundColor}
+            onChange={this.handleBackgroundColor.bind(this)}
+          />
         </div>
       )
     }
