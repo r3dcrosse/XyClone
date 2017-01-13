@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import WebsitesBoxContainer from './DashboardComponents/WebsitesBoxContainer';
 import { Link } from 'react-router';
 import LogoutButtonContainer from './DashboardComponents/LogoutButtonContainer'
+import { storage } from '../../cache/ComponentCache'
 require("../../Basic.less");
 
 
@@ -33,6 +34,21 @@ class Dashboard extends Component {
         console.log(response.data, 'THIS IS THE RESPONSE AFTER ADDING A NEW PROJECT');
         this.props.addNewProject(response.data.title, response.data.description, response.data.projectId);
         // this.props.addNewProject('Default Project ' + response.data.newSequenceNumber, '2 doge for u', 1337);
+        storage['body' + response.data.projectId] = {
+          css: {
+            display: 'inline-flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            position: 'relative',
+            alignItems: 'center',
+            backgroundColor: '#000000',
+            marginLeft: '180px',
+            padding: '0px',
+            width: '70%',
+            height: '100%',
+          }
+        }
       });
   }
 
