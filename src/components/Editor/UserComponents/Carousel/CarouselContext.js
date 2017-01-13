@@ -44,7 +44,7 @@ class CarouselContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
+    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
   }
 
   changeNameInput (e) {
@@ -65,7 +65,7 @@ class CarouselContext extends Component {
   changeChildrenInput (e) {
     // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
     e.preventDefault();
-    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId);
+    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId, this.props.currProject);
   }
 
   changeBackgroundColor (e) {
@@ -96,7 +96,7 @@ class CarouselContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId);
+    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
   }
 
   render() {

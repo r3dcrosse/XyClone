@@ -7,6 +7,8 @@ const initialState = {
 }
 
 // HELPER FUNCTION
+
+// MIGHT NEED TO REFACTOR TO FIND CERTAIN PROJECT ELEMENT
 let recurseDelete = (element) => {
 	// console.log(element, 'RECURSEDELETE WITH ELEMENT');
 	if (element.children.length > 0) {
@@ -49,6 +51,7 @@ export default function xyclone (state = initialState, action) {
 			// project = action.project;
 			// page = action.page || null;
 			// userId = action.userId
+			// REFACTOR THIS TO GET PROJECTID/PAGE AND EVERYTHING FROM ACIOTN.CURRCOMPONENT
 			var newItem = Object.assign({}, storage[action.componentId], {});
 			for (let key in action.newProps) {
 				console.log(action.newProps);
@@ -69,7 +72,7 @@ export default function xyclone (state = initialState, action) {
 			project = action.project;
 			page = action.page || null;
 			userId = action.userId;
-
+			console.log(project);
 			// console.log('THIS IS STORAGE BEFORE', storage);
 			let newObjectId = _components[elem](project, page, userId);
 			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type, projectId: project.projectId};
@@ -82,11 +85,14 @@ export default function xyclone (state = initialState, action) {
 				}
 			});
 		case 'DELETE_COMPONENT':
-			componentFromStorage = storage[action.componentId];
+			componentFromStorage = action.component;
+			console.log(componentFromStorage, 'THIS IS COMPONENT FROM STORAGE');
 			// REFACTOR THIS PART TO BE MORE EFFICENT (OBJECT????)
 			if (componentFromStorage.type === 'UserContainer' || componentFromStorage.type === 'GalleryPost' || componentFromStorage.type === 'Carousel') {
 				recurseDelete(componentFromStorage);
 			}
+
+			//MIGHT NEED TO REFACTOR TO FIND CERTAIN PROEJCT COMPONENT IS FROM
 			if (Object.keys(componentFromStorage.parent).length !== 0) {
 				storage[componentFromStorage.parent.componentId].children = storage[componentFromStorage.parent.componentId].children.filter((ref) => ref.componentId !== action.componentId);
 			}

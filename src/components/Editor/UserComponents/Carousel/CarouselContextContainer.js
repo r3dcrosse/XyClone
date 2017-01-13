@@ -14,15 +14,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChangeStyleClick: (newProps, id, currProject, page, userId) => {
-      dispatch(changeStyle(newProps, id, currProject, page, userId))
+    onChangeStyleClick: (newProps, id, component) => {
+      dispatch(changeStyle(newProps, id, component))
     },
     onEditorComponentSidebarClick: (type, componentId, project) => {
       console.log('DISPATCHING ON COMPONENT CLICK')
       dispatch(addInChildren(type, componentId, project))
     },
-    deleteFocusedComponent: (type, id) => {
-      dispatch(deleteComponent(type, id));
+    deleteFocusedComponent: (id, component) => {
+      dispatch(deleteComponent(id, component));
     }
   }
 }
