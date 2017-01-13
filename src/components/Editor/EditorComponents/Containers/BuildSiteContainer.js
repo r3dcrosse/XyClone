@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
   return {
     components: state.xyclone.components,
     currUserId: state.xycloneLogin.loginStatus.id,
-    currProjectId: state.xycloneProjects.currProjectId
+    currProjectId: state.xycloneProjects.currProjectId,
+    currProject: state.xycloneProjects.currProject
 
   }
 }

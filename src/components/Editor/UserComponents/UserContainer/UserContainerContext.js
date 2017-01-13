@@ -42,7 +42,8 @@ class UserContainerContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId);
+    newProps.
+    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
   }
 
   changeNameInput (e) {
@@ -63,7 +64,7 @@ class UserContainerContext extends Component {
   changeChildrenInput (e) {
     // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
     e.preventDefault();
-    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId);
+    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId, this.props.currProject, this.props.loginStatus.id);
   }
 
   changeBackgroundColor (e) {

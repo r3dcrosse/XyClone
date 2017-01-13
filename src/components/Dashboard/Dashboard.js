@@ -26,20 +26,18 @@ class Dashboard extends Component {
     this.setState({ projects: newProps.projects });
   }
 
-  logout() {
-    browserHistory.push('/login');
-  }
-
   addNewProject() {
     console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
-    axios.get('/addNewProject')
+    axios.post('/addNewProject', {userId: this.props.loginStatus.id})
       .then((response) => {
         console.log(response.data, 'THIS IS THE RESPONSE AFTER ADDING A NEW PROJECT');
-        this.props.addNewProject('Default Project ' + response.data.newSequenceNumber, '2 doge for u', 1337);
+        this.props.addNewProject(response.data.title, response.data.description, response.data.projectId);
+        // this.props.addNewProject('Default Project ' + response.data.newSequenceNumber, '2 doge for u', 1337);
       });
   }
 
   render() {
+    console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
     return (
       <div className="App">
         <AppBar

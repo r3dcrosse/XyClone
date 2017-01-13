@@ -64,7 +64,7 @@ class GalleryPostContext extends Component {
       type: newPropsValues.type,
       children: newPropsValues.children
     }
-    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId);
+    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
   }
 
   changeNameInput (e) {

@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 module.exports = mongoose.model('Project', new Schema({
   projectId: Number,
   title: String,
+  description: String,
   components: Array,
   storage: Object,
   userId: String

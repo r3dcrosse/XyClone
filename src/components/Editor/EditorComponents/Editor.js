@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import UserComponent from './UserComponent'
+import { storage } from '../../../cache/ComponentCache'
 require("../../../Basic.less");
 
-const Editor = ({ style, components, onEditorClick, onEditorBodyClick }) => {
+const Editor = ({ components, onEditorClick, onEditorBodyClick, currProjectId }) => {
+
   let stopBubble = (e) => {
     console.log('STOP BUBBLE IS CALLED');
     e.stopPropagation();
     onEditorClick(this.componentId);
   };
+
+  let preHandleBodyClick = () => {
+    onEditorBodyClick(currProjectId);
+  }
+
+  console.log('WHY IS THIS NOT REMOUNTING FOR SOME REASON');
+  let bodyCss = storage['body' + currProjectId].css;
   return (
     <div className='editor-inPage'>
-      <div style={style} onClick={onEditorBodyClick}>
+      <div style={bodyCss} onClick={preHandleBodyClick}>
         {components.map(component => {
           console.log('RENDERING A COMPONENT', component);
           return (

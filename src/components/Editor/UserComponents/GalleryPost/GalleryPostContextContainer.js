@@ -6,14 +6,16 @@ const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
     currComponent: state.xyclone.currComponent,
-    currComponentId: state.xyclone.currComponentId
+    currComponentId: state.xyclone.currComponentId,
+    currProject: state.xycloneProjects.currProject,
+    loginStatus: state.xycloneLogin.loginStatus
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onChangeStyleClick: (newProps, id) => {
-      dispatch(changeStyle(newProps, id))
+    onChangeStyleClick: (newProps, id, currProject, page, userId) => {
+      dispatch(changeStyle(newProps, id, currProject, page, userId))
     },
     deleteFocusedComponent: (type, id) => {
       dispatch(deleteComponent(type, id));

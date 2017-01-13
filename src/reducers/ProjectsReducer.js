@@ -22,7 +22,7 @@ export default function xycloneProjects (state = initialState, action) {
       // Update project database with new project and description
       return Object.assign({}, state, {
         projects: [...state.projects, {
-          name: action.name,
+          title: action.title,
           description: action.description,
           projectId: action.projectId
         }]
@@ -38,6 +38,10 @@ export default function xycloneProjects (state = initialState, action) {
         currProject: project,
         currProjectId: action.projectId
       });
+    case 'UPDATE_PROJECTS':
+      return Object.assign({}, state, {
+        projects: action.projects
+      })
     default:
       return state;
   }

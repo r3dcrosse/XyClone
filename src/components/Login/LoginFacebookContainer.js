@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { updateStorageAndStateComponents } from '../../actions/EditingActions'
-import { loginUser } from '../../actions/LoginActions';
+import { updateProjectsStorage } from '../../actions/ProjectActions'
+import { loginUser,  } from '../../actions/LoginActions';
 import FacebookLogin from './LoginFacebook';
 
 const mapStateToProps = (state) => {
@@ -17,6 +18,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateStorageComponents: (storage, components) => {
       dispatch(updateStorageAndStateComponents(storage, components))
+    },
+    updateProjectsStorage: (projects) => {
+      dispatch(updateProjectsStorage(projects));
     }
   }
 }

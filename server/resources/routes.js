@@ -39,7 +39,7 @@ Router.route('/saveUser')
 // WHEN WE USE SESSIONS, WE CAN CHANGE THIS TO GET AND USE SESSION.USER
 // // ADD NEW PROJECT ROUTE
 Router.route('/addNewProject')
-  .get(Controller.addNewProject);
+  .post(Controller.addNewProject);
 
 Router.route('/saveSite')
   .post(Controller.saveUserSite);

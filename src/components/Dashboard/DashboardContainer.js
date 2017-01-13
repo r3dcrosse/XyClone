@@ -4,7 +4,8 @@ import Dashboard from './Dashboard';
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.xycloneProjects.projects
+    projects: state.xycloneProjects.projects,
+    loginStatus: state.xycloneLogin.loginStatus
   }
 }
 

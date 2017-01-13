@@ -54,7 +54,58 @@ module.exports = {
     console.log('ADDING A NEW PROJECT ===============================')
     grabSequenceNumAndIncrement(function(newSequenceNumber) {
       console.log('SEDINGIN BACK NEW SEEQUENCE NUMBER!', newSequenceNumber);
-      res.status(200).json({newSequenceNumber: newSequenceNumber});
+      var bodyString = `body${newSequenceNumber}`
+      var newProject = new Project({
+        projectId: newSequenceNumber,
+        title: `DEFAULT PROJECT ${newSequenceNumber}`,
+        description: `DEFAULT PROJECT DESCRIPTION`,
+        components: [],
+        storage: {
+          [bodyString]: {
+            css: {
+              display: 'inline-flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              position: 'relative',
+              alignItems: 'center',
+              backgroundColor: '#000000',
+              marginLeft: '180px',
+              padding: '0px',
+              width: '70%',
+              height: '100%',
+            }
+          }
+        },
+        userId: req.body.userId
+      });
+      newProject.save()
+        .then(()=> {
+          console.log('NEW PROJECT WAS CREATED AND SAVED')
+          res.json(newProject);
+        })
+        .catch((err) => {
+          console.log('ERROR ON NEW PROJECT CREATE');
+          console.log(err)
+          res.end();
+        })
+      // body: {
+      //   css: {
+      //     display: 'inline-flex',
+      //     flexDirection: 'row',
+      //     flexWrap: 'wrap',
+      //     justifyContent: 'center',
+      //     position: 'relative',
+      //     alignItems: 'center',
+      //     backgroundColor: '#000000',
+      //     marginLeft: '180px',
+      //     padding: '0px',
+      //     width: '70%',
+      //     height: '100%',
+      //   }
+      // }
+      // CREATE A NEW PROJECT HERE.
+      // res.status(200).json({newSequenceNumber: newSequenceNumber});
     })
   },
 
