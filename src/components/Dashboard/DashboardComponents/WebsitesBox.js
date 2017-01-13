@@ -30,3 +30,44 @@ const WebsitesBox = ({ project, changeCurrProject }) => {
 };
 
 export default WebsitesBox;
+
+
+// class WebsitesBox extends React.Component { 
+
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       title: this.props.project.name,
+//       subtitle: this.props.project.description,
+//     };
+//   };
+//   //project, changeCurrProject
+//   enterEditor = () => {
+//     // send dispatch action to redux to change the current project
+//     changeCurrProject(project.projectId);
+//     // GRAB ALL THE COMPONENTS THAT CORRESPOND TO THE PROJECT.projectId THROUGH A DISPATCH
+//     browserHistory.push('/editor')
+//   }
+
+//   render () {
+//     return (
+//       <Card>
+//         <CardMedia style={{
+//           paddingTop: '5px',
+//           paddingLeft: '5px',
+//           paddingRight: '5px'
+//         }}>
+//           <img src="http://placecorgi.com/280/160" />
+//         </CardMedia>
+//         <CardTitle title={this.state.title} subtitle={this.state.subtitle} />
+//         <CardActions>
+//           <RaisedButton label="Edit Site" onClick={this.eneterEditor.bind(this)} primary={true} />
+//           <SettingsMenu />
+//         </CardActions>
+//       </Card>
+//     )
+//   }
+// };
+
+// export default WebsitesBox;

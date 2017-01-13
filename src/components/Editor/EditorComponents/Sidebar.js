@@ -3,6 +3,8 @@ import BuildSiteContainer from './Containers/BuildSiteContainer'
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
+import FontIcon from 'material-ui/FontIcon';
+import {blue500, red500, greenA200} from 'material-ui/styles/colors';
 
 
 
@@ -16,6 +18,19 @@ const Sidebar = ({ onSidebarClick, openState, currProject, loginStatus }) => (
       <MenuItem onTouchTap={() => onSidebarClick('GalleryPost', currProject, loginStatus.id)}> Add Gallery Post </MenuItem>
       <Divider />
       <BuildSiteContainer />
+        <div>
+          <FontIcon
+            className="material-icons"
+            style={iconStyles}
+            color={red500}
+            hoverColor={greenA200}
+          >undo</FontIcon> <FontIcon
+            className="material-icons"
+            style={iconStyles}
+            color={red500}
+            hoverColor={greenA200}
+          >redo</FontIcon>
+        </div>
     </Drawer>
 
 )
