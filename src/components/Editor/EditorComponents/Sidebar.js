@@ -4,7 +4,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
-import {blue500, red500, greenA200} from 'material-ui/styles/colors';
+import UndoRedo from './UndoRedo'
+import {blue500, red500, greenA200, black} from 'material-ui/styles/colors';
 
 
 
@@ -16,19 +17,12 @@ const Sidebar = ({ onSidebarClick, openState, currProject, loginStatus }) => (
       <MenuItem onTouchTap={() => onSidebarClick('UserContainer', currProject, loginStatus.id)}> Add Container </MenuItem>
       <MenuItem onTouchTap={() => onSidebarClick('Carousel', currProject, loginStatus.id)}> Add Carousel </MenuItem>
       <MenuItem onTouchTap={() => onSidebarClick('GalleryPost', currProject, loginStatus.id)}> Add Gallery Post </MenuItem>
+      <div>
+        <UndoRedo></UndoRedo>
+      </div>
+      <p></p>
       <Divider />
       <BuildSiteContainer />
-        <div>
-          <FontIcon
-            className="material-icons"
-            color={red500}
-            hoverColor={greenA200}
-          >undo</FontIcon> <FontIcon
-            className="material-icons"
-            color={red500}
-            hoverColor={greenA200}
-          >redo</FontIcon>
-        </div>
     </Drawer>
 
 )
