@@ -21,12 +21,10 @@ const Sidebar = ({ onSidebarClick, openState, currProject, loginStatus }) => (
         <div>
           <FontIcon
             className="material-icons"
-            style={iconStyles}
             color={red500}
             hoverColor={greenA200}
           >undo</FontIcon> <FontIcon
             className="material-icons"
-            style={iconStyles}
             color={red500}
             hoverColor={greenA200}
           >redo</FontIcon>
