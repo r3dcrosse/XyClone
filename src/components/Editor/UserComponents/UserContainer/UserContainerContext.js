@@ -20,7 +20,7 @@ class UserContainerContext extends Component {
     }
   }
 
-  componentDidMount (){
+  componentDidMount () {
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
@@ -29,7 +29,7 @@ class UserContainerContext extends Component {
       children: this.props.currComponent.children
     })
   }
-  componentWillReceiveProps (newProps){
+  componentWillReceiveProps (newProps) {
     console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: newProps.currComponent.name,
