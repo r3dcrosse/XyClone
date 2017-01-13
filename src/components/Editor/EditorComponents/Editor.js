@@ -15,7 +15,7 @@ const Editor = ({ components, onEditorClick, onEditorBodyClick, currProjectId })
   let preHandleBodyClick = () => {
     onEditorBodyClick(currProjectId);
   }
-
+  components = components.filter((component) => {return component.projectId === currProjectId});
   console.log('WHY IS THIS NOT REMOUNTING FOR SOME REASON');
   let bodyCss = storage['body' + currProjectId].css;
   return (

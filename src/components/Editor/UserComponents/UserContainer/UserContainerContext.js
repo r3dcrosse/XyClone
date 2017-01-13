@@ -42,7 +42,6 @@ class UserContainerContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    newProps.
     this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
   }
 

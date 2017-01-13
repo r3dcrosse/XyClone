@@ -26,11 +26,6 @@ class Carousel extends Component {
     this.props.onEditorClick();
   }
 
-  deleteCurrComponent(e) {
-    e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId);
-  }
-
   clickNext (e) {
     this.setState({
       show: (this.state.show + 1) % this.props.children.length
@@ -45,7 +40,7 @@ class Carousel extends Component {
   }
 
   render() {
-    if (this.state.show === null) {
+    if (this.props.children.length === 0) {
       return (
       <div className=''>
         <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
@@ -58,7 +53,15 @@ class Carousel extends Component {
         <button onClick={this.clickNext.bind(this)}>NEXT</button>
           <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
             {
-              <UserComponent show={this.state.show} key={this.props.children[this.state.show].componentId} type={this.props.children[this.state.show].type} componentId={this.props.children[this.state.show].componentId} child={true} onEditorChildClick={() => this.props.onEditorChildClick(this.props.children[this.state.show].componentId)}/>
+              <UserComponent
+              show={this.state.show}
+              key={this.props.children[this.state.show].componentId}
+              type={this.props.children[this.state.show].type}
+              componentId={this.props.children[this.state.show].componentId}
+              child={true}
+              onEditorChildClick={() =>
+                this.props.onEditorChildClick(this.props.children[this.state.show].componentId)
+              }/>
             }
           </div>
           <button onClick={this.clickBack.bind(this)}>BACK</button>

@@ -25,6 +25,7 @@ export default function xyclone (state = initialState, action) {
 	let idInStorage;
 	let componentFromStorage;
 	let project;
+	let projectId;
 	let page;
 	let userId;
 
@@ -41,6 +42,7 @@ export default function xyclone (state = initialState, action) {
 			});
 		case 'EDIT_COMPONENT':
 			// console.log('IN EDIT COMPONENT SWITCH', action.component)
+
 			return Object.assign({}, state, {
 				currComponent: action.component,
 				currComponentId: action.componentId
@@ -105,17 +107,21 @@ export default function xyclone (state = initialState, action) {
 		case 'EDIT_BODY_CLICK':
 		  console.log(' SETTING FOCUS TO THE BODY');
 		  // PLACEHOLDER FOR PROJECT ID
-		  var projectId = 1;
+		  projectId = action.projectId
 			return Object.assign({}, state, {
 				currComponent: storage['body' + projectId],
 				currComponentId: 'body' + projectId
 			});
 		case 'CHANGE_BODY_PROPS':
 			console.log(action.newProps, 'THIS IS THE NEW PROPERTIES OF THE AFSDFASDF');
-			var projectId = 1;
-			storage['body' + projectId].css = action.newProps;
+			projectId = action.projectId
+			var newItem = Object.assign({}, storage['body' + action.projectId], {});
+			for (let key in action.newProps) {
+				newItem[key] = action.newProps[key];
+			}
+			storage['body' + projectId] = newItem
 			return Object.assign({}, state, {
-				currComponent: storage['body' + projectId]
+				currComponent: newItem
 			});
     case 'UPDATE_STORAGE_COMPONENTS':
     	console.log('=======-----------=================================================')
