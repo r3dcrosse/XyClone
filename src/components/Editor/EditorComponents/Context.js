@@ -50,10 +50,10 @@ class Context extends Component {
     if (this.props.currComponent === null) {
       console.log('GOING TO RENDER THIS SHIT');
       return null;
-    } else if (this.props.currComponentId === 'body') {
+    } else if (this.props.currComponentId === 'body' + this.props.currProjectId) {
       return (
         <Draggable x={this.state.x} y={this.state.y} onMove={this.move.bind(this)}>
-          <BodyContextContainer/>
+          <BodyContextContainer />
         </Draggable>
       )
     } else {

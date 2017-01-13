@@ -64,7 +64,7 @@ class GalleryPostContext extends Component {
       type: newPropsValues.type,
       children: newPropsValues.children
     }
-    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
+    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId, this.props.currComponent);
   }
 
   changeNameInput (e) {
@@ -99,7 +99,7 @@ class GalleryPostContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId);
+    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
   }
 
 

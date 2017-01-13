@@ -11,23 +11,25 @@ export function editComponent (component, componentId) {
     type: 'EDIT_COMPONENT',
     component: component,
     componentId: componentId
+//NEED TO ADD A PROJECT ID
   };
 }
-
-export function deleteComponent (componentId) {
+//refactor deleteComponents!
+export function deleteComponent (componentId, component) {
   return {
     type: 'DELETE_COMPONENT',
-    componentId: componentId
+    componentId: componentId,
+    component: component
+// NEED TO ADD A PROJECT ID FOR THIS
   }
 }
-
-export function changeStyle (newProps, componentId, currProject, userId) {
+// REFACTOR CHANGE STYLE
+export function changeStyle (newProps, componentId, component) {
   return {
     type: 'CHANGE_STYLE',
     newProps: newProps,
     componentId: componentId,
-    currProject: currProject,
-    userId: userId
+    component: component
   };
 }
 
@@ -48,7 +50,7 @@ export function editBodyClick (projectId) {
   }
 }
 
-export function changeBodyProps (newProps) {
+export function changeBodyProps (newProps, projectId) {
   return {
     type: 'CHANGE_BODY_PROPS',
     newProps: newProps,

@@ -42,7 +42,7 @@ class TextboxContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currProject, null, this.props.loginStatus.id);
+    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
   }
 
   changeNameInput (e) {
@@ -77,7 +77,7 @@ class TextboxContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId);
+    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
   }
 
   render() {

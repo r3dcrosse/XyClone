@@ -8,14 +8,14 @@ const mapStateToProps = (state) => {
   return {
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,
-    style: storage['body'].css
+    currProjectId: state.xycloneProjects.currProjectId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    editBodyProps: (newProps) => {
-      dispatch(changeBodyProps(newProps));
+    editBodyProps: (newProps, projectId) => {
+      dispatch(changeBodyProps(newProps, projectId));
     }
   }
 }

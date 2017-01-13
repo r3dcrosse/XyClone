@@ -4,7 +4,8 @@ import Context from '../Context'
 const mapStateToProps = (state) => {
   return {
     currComponent: state.xyclone.currComponent,
-    currComponentId: state.xyclone.currComponentId
+    currComponentId: state.xyclone.currComponentId,
+    currProjectId: state.xycloneProjects.currProjectId
   }
 }
 

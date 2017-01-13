@@ -81,7 +81,6 @@ class FacebookLogin extends Component {
               storage[key] = project.storage[key];
             }
           });
-          console.log(storage);
           // weed out ALL component references
           // weed out ALL storage elements
           // weed out projects.

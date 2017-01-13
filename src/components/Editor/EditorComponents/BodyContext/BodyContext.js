@@ -16,7 +16,7 @@ class BodyContext extends Component {
 
   componentDidMount () {
     let cssObject = this.state.css;
-    cssObject.backgroundColor = storage['body'].css.backgroundColor;
+    cssObject.backgroundColor = storage['body' + this.props.currProjectId].css.backgroundColor;
     this.setState({
       css: cssObject
     })
@@ -24,7 +24,7 @@ class BodyContext extends Component {
 
   componentWillReceiveProps (newProps) {
     let cssObject = newProps.currComponent.css;
-    storage['body'].css = cssObject;
+    storage['body'+ this.props.currProjectId].css = cssObject;
     console.log(storage);
     this.setState({
       css: cssObject
@@ -36,7 +36,7 @@ class BodyContext extends Component {
     let cssObject = Object.assign({}, this.props.style, {
       backgroundColor: backgroundColor
     });
-    this.props.editBodyProps(cssObject);
+    this.props.editBodyProps(cssObject, this.props.currProjectId);
   }
 
   handleBackgroundColor (color) {
@@ -49,11 +49,12 @@ class BodyContext extends Component {
   render() {
     // console.log('BodyContext IS BEING RENDERED');
     let { css } = this.state;
-    if (this.props.currComponentId !== 'body') {
+    if (this.props.currComponentId !== 'body' + this.props.currProjectId) {
       return (
         <div> SHIT IM NOT BODY IM JUST NULL </div>
       )
     } else {
+      console.log('IM BEIGN RENDERED BODHYYYYYYYYYY');
       return (
         <div>
           <div className='bodycontextmenu-text'>Background Color</div>

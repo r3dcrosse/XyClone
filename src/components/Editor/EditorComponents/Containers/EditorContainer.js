@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
 			let component = storage[id];
 			dispatch(editComponent(component, id))
 		},
-    deleteFocusedComponent: (id) => {
+    deleteFocusedComponent: (id, projectId) => {
       dispatch(deleteComponent(id));
     },
     onEditorBodyClick: (projectId) => {
