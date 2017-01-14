@@ -4,7 +4,7 @@ import { changeBodyProps } from '../../../../actions/EditingActions'
 import { storage } from '../../../../cache/ComponentCache'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING THE STATE TO BODYCONTEXT', state);
+  // console.log('MAPPING THE STATE TO BODYCONTEXT', state);
   return {
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,

@@ -12,6 +12,7 @@ class Editor extends Component {
   componentWillReceiveProps(newProps) {
     console.log('NEW PROPS FOR EDITOR HAS BEEN RECEIVED!', newProps);
   }
+
   render() {
     let { components, onEditorClick, onEditorBodyClick, currProjectId }  = this.props
     let stopBubble = (e) => {
@@ -54,4 +55,3 @@ Editor.propTypes = {
 
 
 export default Editor;
-

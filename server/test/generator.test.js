@@ -67,16 +67,6 @@ describe('Server: ', function() {
       it('should return a text component with props', function() {
       var testState =
         {
-          pages: [
-            {
-              pageID: 0,
-              pageName: 'index'
-            },
-            {
-              pageID: 1,
-              pageName: 'dogepage'
-            }
-          ]
           components: [
           {
             id: 1,
