@@ -1,4 +1,5 @@
 import { _components, storage } from '../cache/ComponentCache';
+import { _record } from '../cache/StorageCache';
 
 const initialState = {
   components: [],
@@ -28,7 +29,14 @@ export default function xyclone (state = initialState, action) {
 	let projectId;
 	let page;
 	let userId;
+	let initState;
 
+	if (_record.history.length === 0) {
+		initState = Object.assign({}, state);
+		_record.history.push(initState);
+		_record.currState = 0;
+		// console.log(_record.history, '=======================HISTORY');
+	}
 
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -37,10 +45,12 @@ export default function xyclone (state = initialState, action) {
 			page = action.page || null;
 			userId = action.userId || null;
 			idInStorage = _components[elem](project, page, userId);
-			console.log('ADDED A COMPONENT. STORAGE IS NOW %%%%%%%%%%%%%%%%%%%%%%%55', storage);
-			return Object.assign({}, state, {
+
+			newState = Object.assign({}, state, {
 				components: [...state.components, {componentId: idInStorage, type: action.componentType, projectId: project.projectId}]
 			});
+			return newState;
+
 		case 'EDIT_COMPONENT':
 			// console.log('IN EDIT COMPONENT SWITCH', action.component)
 
