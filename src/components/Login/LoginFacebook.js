@@ -79,7 +79,7 @@ class FacebookLogin extends Component {
 
             for (let key in project.storage) {
               storage[key] = project.storage[key];
-              if (!storage[key].parent) {
+              if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
                 storage[key].parent = {};
               }
             }

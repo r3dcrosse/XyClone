@@ -118,7 +118,7 @@ export default function xyclone (state = initialState, action) {
 			projectId = action.projectId
 			var newItem = Object.assign({}, storage['body' + action.projectId], {});
 			for (let key in action.newProps) {
-				newItem[key] = action.newProps[key];
+				newItem.css[key] = action.newProps[key];
 			}
 			storage['body' + projectId] = newItem
 			return Object.assign({}, state, {
