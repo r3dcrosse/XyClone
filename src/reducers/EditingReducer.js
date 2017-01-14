@@ -49,6 +49,10 @@ export default function xyclone (state = initialState, action) {
 			newState = Object.assign({}, state, {
 				components: [...state.components, {componentId: idInStorage, type: action.componentType, projectId: project.projectId}]
 			});
+
+			_record.history.push(newState);
+			_record.currState++;
+
 			return newState;
 
 		case 'EDIT_COMPONENT':
@@ -110,11 +114,19 @@ export default function xyclone (state = initialState, action) {
 				storage[componentFromStorage.parent.componentId].children = storage[componentFromStorage.parent.componentId].children.filter((ref) => ref.componentId !== action.componentId);
 			}
 			delete storage[action.componentId];
-			return Object.assign({}, state, {
+
+			postDelete = Object.assign({}, state, {
 				components: state.components.filter((ref) => ref.componentId !== action.componentId),
 				currComponent: null,
 				currComponentId: null
 			});
+
+			_record.history.push(postDelete);
+			_record.currState++;
+			console.log(_record.history, '===========HISTORY=========');
+
+			return postDelete;
+
 		case 'EDIT_BODY_CLICK':
 		  console.log(' SETTING FOCUS TO THE BODY');
 		  // PLACEHOLDER FOR PROJECT ID
