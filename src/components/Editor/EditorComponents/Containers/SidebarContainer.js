@@ -13,7 +13,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onSidebarClick: (type, project, userId) => {
-            console.log('DISPATCHING ON COMPONENT CLICK')
             dispatch(addComponent(type, project, userId))
         }
     }

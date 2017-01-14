@@ -69,13 +69,14 @@ class FacebookLogin extends Component {
           return;
         } else {
           userData.data.forEach(function(project) {
+
             allProjects.push({
               projectId: project.projectId,
               title: project.title,
               description: project.description
             })
             for (let i = 0; i < project.components.length; i++) {
-              allComponents.push(project.components[key])
+              allComponents.push(project.components[i])
             }
             for (let key in project.storage) {
               storage[key] = project.storage[key];
@@ -119,7 +120,9 @@ class FacebookLogin extends Component {
   // code below.
   checkLoginState () {
     FB.getLoginStatus(function(response) {
+      // response tells us if we are loggred in or not
       this.statusChangeCallback(response);
+
     }.bind(this));
   }
 
