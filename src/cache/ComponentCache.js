@@ -132,8 +132,8 @@ export const _components = {
     };
     incrementIdFunc();
     storage[incrementId] = component;
-    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
-    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
+    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost', projectId: project.projectId};
+    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost', projectId: project.projectId};
     return incrementId++;
   },
 
