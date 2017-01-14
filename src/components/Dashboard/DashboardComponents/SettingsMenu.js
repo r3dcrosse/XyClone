@@ -11,6 +11,7 @@ export default class SettingsMenu extends React.Component {
 
     this.state = {
       open: false,
+      currProjectId: null
     };
   };
 
@@ -30,6 +31,21 @@ export default class SettingsMenu extends React.Component {
     });
   };
 
+  handleDeleteProject = () => {
+    let projectSelected = this.props.project.projectId;
+    let userId = this.props.userId;
+
+    // Close the settings menu
+    this.handleRequestClose();
+
+    // Calls the deletion function in Dashboard.js to delete in DB
+    this.props.handleDeleteProject(userId, projectSelected);
+
+    // Delete the project in Redux storage to rerender the screen
+    this.props.deleteProjectById(projectSelected);
+
+  };
+
   render() {
     return (
       <span>
@@ -45,7 +61,7 @@ export default class SettingsMenu extends React.Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
-            <MenuItem primaryText="Delete website" />
+            <MenuItem primaryText="Delete website" onClick={this.handleDeleteProject}/>
           </Menu>
         </Popover>
       </span>

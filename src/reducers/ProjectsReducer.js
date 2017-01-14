@@ -33,7 +33,6 @@ export default function xycloneProjects (state = initialState, action) {
           return project.projectId === action.projectId;
         }
       )[0];
-      console.log('%%%%%', project);
       return Object.assign({}, state, {
         currProject: project,
         currProjectId: action.projectId
@@ -41,7 +40,18 @@ export default function xycloneProjects (state = initialState, action) {
     case 'UPDATE_PROJECTS':
       return Object.assign({}, state, {
         projects: action.projects
-      })
+      });
+    case 'DELETE_PROJECT':
+      // Delete project from storage and trigger a rerender of the projects
+      var newProjectsArray = state.projects.filter(
+        (project) => {
+          return project.projectId !== action.deletedProjectId;
+        }
+      );
+      return Object.assign({}, state, {
+        projects: newProjectsArray
+      });
+
     default:
       return state;
   }

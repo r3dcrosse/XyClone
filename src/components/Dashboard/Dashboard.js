@@ -11,16 +11,19 @@ require("../../Basic.less");
 
 
 class Dashboard extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      projects: []
+      projects: [],
+      userId: null
     }
   }
 
   componentDidMount() {
-    this.setState({ projects: this.props.projects });
+    this.setState({
+      projects: this.props.projects,
+      userId: this.props.loginStatus.id
+    });
   }
 
   componentWillReceiveProps(newProps) {
@@ -28,11 +31,15 @@ class Dashboard extends Component {
   }
 
   addNewProject() {
-    console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
+    // console.log('THIS IS SUPPOSED TO ADD A NEW PROJECT');
     axios.post('/addNewProject', {userId: this.props.loginStatus.id})
       .then((response) => {
-        console.log(response.data, 'THIS IS THE RESPONSE AFTER ADDING A NEW PROJECT');
-        this.props.addNewProject(response.data.title, response.data.description, response.data.projectId);
+        // console.log(response.data, 'THIS IS THE RESPONSE AFTER ADDING A NEW PROJECT');
+        this.props.addNewProject(
+          response.data.title,
+          response.data.description,
+          response.data.projectId
+        );
         // this.props.addNewProject('Default Project ' + response.data.newSequenceNumber, '2 doge for u', 1337);
         storage['body' + response.data.projectId] = {
           css: {
@@ -52,8 +59,18 @@ class Dashboard extends Component {
       });
   }
 
+  deleteProjectById(userId, projectId) {
+    // Send post request with userId and projectId to delete project in DB
+    axios.post('/deleteProject', {
+      userId: userId,
+      projectId: projectId
+    });
+  }
+
   render() {
-    console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
+    // console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
+    let userId = this.state.userId;
+
     return (
       <div className="App">
         <AppBar
@@ -65,7 +82,14 @@ class Dashboard extends Component {
         <div className="websitesBox-container">
           {
             this.state.projects.map((project, key) => {
-              return ( <WebsitesBoxContainer key={key} project={project} /> )
+              return (
+                <WebsitesBoxContainer
+                  key={ key }
+                  project={ project }
+                  handleDeleteProject={ this.deleteProjectById }
+                  userId={ userId }
+                />
+              )
             })
           }
           <span>

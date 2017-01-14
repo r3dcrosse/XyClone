@@ -28,6 +28,9 @@ Router.route('/saveSite')
 // Router.route('/editProject')
 //   .post(Controller.saveProjectEdit);
 
+Router.route('/deleteProject')
+  .post(Controller.deleteProject);
+
 Router.route('/tempData/myZip.zip')
   .get(function(req, res) {
     console.log('serverside')
