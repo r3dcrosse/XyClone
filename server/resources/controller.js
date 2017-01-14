@@ -89,23 +89,6 @@ module.exports = {
           console.log(err)
           res.end();
         })
-      // body: {
-      //   css: {
-      //     display: 'inline-flex',
-      //     flexDirection: 'row',
-      //     flexWrap: 'wrap',
-      //     justifyContent: 'center',
-      //     position: 'relative',
-      //     alignItems: 'center',
-      //     backgroundColor: '#000000',
-      //     marginLeft: '180px',
-      //     padding: '0px',
-      //     width: '70%',
-      //     height: '100%',
-      //   }
-      // }
-      // CREATE A NEW PROJECT HERE.
-      // res.status(200).json({newSequenceNumber: newSequenceNumber});
     })
   },
 

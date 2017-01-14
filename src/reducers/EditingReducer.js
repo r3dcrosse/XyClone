@@ -37,6 +37,7 @@ export default function xyclone (state = initialState, action) {
 			page = action.page || null;
 			userId = action.userId || null;
 			idInStorage = _components[elem](project, page, userId);
+			console.log('ADDED A COMPONENT. STORAGE IS NOW %%%%%%%%%%%%%%%%%%%%%%%55', storage);
 			return Object.assign({}, state, {
 				components: [...state.components, {componentId: idInStorage, type: action.componentType, projectId: project.projectId}]
 			});

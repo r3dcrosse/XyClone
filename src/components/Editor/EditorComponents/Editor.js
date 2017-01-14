@@ -25,7 +25,7 @@ class Editor extends Component {
       onEditorBodyClick(currProjectId);
     }
     components = components.filter((component) => {return component.projectId === currProjectId});
-    console.log('WHY IS THIS NOT REMOUNTING FOR SOME REASON');
+    // console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
     return (
       <div className='editor-inPage'>
