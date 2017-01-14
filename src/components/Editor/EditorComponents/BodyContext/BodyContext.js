@@ -33,7 +33,7 @@ class BodyContext extends Component {
 
   prepForDispatch() {
     let backgroundColor = this.state.css.backgroundColor;
-    let cssObject = Object.assign({}, this.props.style, {
+    let cssObject = Object.assign({}, this.props.currComponent.css, {
       backgroundColor: backgroundColor
     });
     this.props.editBodyProps(cssObject, this.props.currProjectId);

@@ -29,12 +29,12 @@ constructor(props) {
   }
 
   onBuildSite() {
-    console.log(this.state.components, this.state.storage);
     console.log('===============================================================================')
+    console.log(this.state.storage);
     let projectComponents = this.state.components.filter((component) => {return component.projectId === this.props.currProjectId});
     let projectStorage = {};
     for (let key in this.state.storage) {
-      console.log(this.state.storage, 'THIS IS THE STORAGE');
+      // console.log(this.state.storage, 'THIS IS THE STORAGE');
       if (key === 'body' + this.props.currProjectId) {
         projectStorage[key] = this.state.storage[key]
       } else {
@@ -48,8 +48,8 @@ constructor(props) {
       projectId: this.props.currProjectId
     };
 
-    console.log(siteData);
-    console.log('BUILDING SITE WITH INSIDE STATE DATA');
+    // console.log(siteData);
+    // console.log('BUILDING SITE WITH INSIDE STATE DATA');
     let context = this;
     axios.post('saveSite', siteData)
     .then(function(response) {

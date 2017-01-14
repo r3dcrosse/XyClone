@@ -61,15 +61,13 @@ class FacebookLogin extends Component {
         //   userId: String
         // }));
         console.log('ABOUT TO PUSH TO DASHBOARD');
-        browserHistory.push('/Dashboard');
+        browserHistory.push('/dashboard');
         console.log('PUSHED TO DASHBOARD')
         let allProjects = []
         let allComponents = [];
-        if (Object.keys(userData.data).length === 0) {
-          return;
-        } else {
+        if (Object.keys(userData.data).length !== 0) {
           userData.data.forEach(function(project) {
-
+            console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
             allProjects.push({
               projectId: project.projectId,
               title: project.title,
@@ -78,8 +76,12 @@ class FacebookLogin extends Component {
             for (let i = 0; i < project.components.length; i++) {
               allComponents.push(project.components[i])
             }
+
             for (let key in project.storage) {
               storage[key] = project.storage[key];
+              if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
+                storage[key].parent = {};
+              }
             }
           });
           // weed out ALL component references

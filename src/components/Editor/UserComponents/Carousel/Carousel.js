@@ -6,9 +6,8 @@ class Carousel extends Component {
   constructor(props) {
     super(props)
     // console.log(props, 'THIS IS PROPS');
-
     this.state = {
-      show: null
+      show: 0
     }
   }
 
@@ -16,7 +15,7 @@ class Carousel extends Component {
     console.log(newProps, 'NEWPROPS GOT RECEIVED !!!!!!!!!!!!!!!')
     if (newProps.children.length !== 0 && this.state.show === null) {
       this.setState({
-        show: 0,
+        show: 0
       })
     }
   }

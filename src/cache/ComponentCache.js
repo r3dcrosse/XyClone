@@ -1,5 +1,11 @@
 let incrementId = 0;
 
+let incrementIdFunc = function() {
+  while (storage[incrementId]) {
+    incrementId++;
+  }
+}
+
 export const _components = {
   Navbar: (project = {}, page = null, userId = null) => {
     let defaultCss = {
@@ -18,6 +24,7 @@ export const _components = {
         page: page,
         userId: userId
     }
+    incrementIdFunc();
     storage[incrementId] = component;
     return incrementId++;
   },
@@ -39,6 +46,7 @@ export const _components = {
       page: page,
       userId: userId
     }
+    incrementIdFunc();
     storage[incrementId] = component;
     return incrementId++;
   },
@@ -60,6 +68,7 @@ export const _components = {
       parent: {},
       children: []
     }
+    incrementIdFunc();
     storage[incrementId] = component;
     return incrementId++;
   },
@@ -86,6 +95,7 @@ export const _components = {
       userId: userId,
       parent: {}
     }
+    incrementIdFunc();
     storage[incrementId] = component;
     return incrementId++;
   },
@@ -105,12 +115,14 @@ export const _components = {
     };
     let idOfImage = _components["Image"]();
     let idOfTextbox = _components["Textbox"]();
+    storage[idOfImage].project = project;
+    storage[idOfTextbox].project = project;
     let component = {
       name: 'Default Gallery Post',
       css: defaultCss,
       children: [
-                  {componentId: idOfImage, type: 'Image'},
-                  {componentId: idOfTextbox, type: 'Textbox'}
+                  {componentId: idOfImage, type: 'Image', projectId: project.projectId},
+                  {componentId: idOfTextbox, type: 'Textbox', projectId: project.projectId}
                 ],
       type: 'GalleryPost',
       parent: {},
@@ -118,9 +130,10 @@ export const _components = {
       page: page,
       userId: userId
     };
+    incrementIdFunc();
     storage[incrementId] = component;
-    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
-    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost'};
+    storage[storage[incrementId].children[0].componentId].parent = {componentId: incrementId, type: 'GalleryPost', projectId: project.projectId};
+    storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost', projectId: project.projectId};
     return incrementId++;
   },
 
@@ -149,6 +162,7 @@ export const _components = {
       page: page,
       userId: userId
     }
+    incrementIdFunc();
     storage[incrementId] = component;
     return incrementId++;
   }

@@ -10,13 +10,13 @@ class Editor extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('NEW PROPS FOR EDITOR HAS BEEN RECEIVED!', newProps);
+    // console.log('NEW PROPS FOR EDITOR HAS BEEN RECEIVED!', newProps);
   }
 
   render() {
     let { components, onEditorClick, onEditorBodyClick, currProjectId }  = this.props
     let stopBubble = (e) => {
-      console.log('STOP BUBBLE IS CALLED');
+      // console.log('STOP BUBBLE IS CALLED');
       e.stopPropagation();
       onEditorClick(this.componentId);
     };
@@ -25,13 +25,13 @@ class Editor extends Component {
       onEditorBodyClick(currProjectId);
     }
     components = components.filter((component) => {return component.projectId === currProjectId});
-    console.log('WHY IS THIS NOT REMOUNTING FOR SOME REASON');
+    // console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
     return (
       <div className='editor-inPage'>
         <div style={bodyCss} onClick={preHandleBodyClick}>
           {components.map(component => {
-            console.log('RENDERING A COMPONENT', component);
+            // console.log('RENDERING A COMPONENT', component);
             return (
               <UserComponent
                 key={component.componentId}
