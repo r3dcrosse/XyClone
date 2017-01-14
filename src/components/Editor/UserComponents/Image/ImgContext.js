@@ -78,10 +78,8 @@ class ImageContext extends Component {
       )
     } else {
       return (
-        <div style={{padding: '5px'}}>
-          <div>
-            <div> {type} </div>
-          </div>
+        <div className="imagecontext-container">
+          <div>{type}</div>
           <TextField
             defaultValue={name}
             floatingLabelText="Image Name"
@@ -126,16 +124,19 @@ class ImageContext extends Component {
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
-          <RaisedButton
-            label="Save"
-            primary={true}
-            onClick={this.prepForDispatch.bind(this)}
-          />
-          <RaisedButton
-            label="Delete"
-            secondary={true}
-            onClick={this.deleteCurrComponent.bind(this)}
-          />
+          <span>
+            <RaisedButton
+              label="Save"
+              primary={true}
+              onClick={this.prepForDispatch.bind(this)}
+              style={{paddingRight: '5px'}}
+            />
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              onClick={this.deleteCurrComponent.bind(this)}
+            />
+          </span>
         </div>
       )
     }
