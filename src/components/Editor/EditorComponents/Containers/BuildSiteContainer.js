@@ -2,18 +2,18 @@ import { connect } from 'react-redux'
 import BuildSite from '../BuildSite'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING STATE TO BUILDSITECONTAINER======================================', state);
   return {
     components: state.xyclone.components,
-    currUserId: state.xycloneLogin.loginStatus.id,
+    userId: state.xycloneLogin.loginStatus.id,
+    currComponentId: state.xyclone.currComponentId,
     currProjectId: state.xycloneProjects.currProjectId,
     currProject: state.xycloneProjects.currProject
-
   }
 }
 
 const BuildSiteContainer = connect(
-  mapStateToProps
+  mapStateToProps,
+  null
 )(BuildSite)
 
 export default BuildSiteContainer;

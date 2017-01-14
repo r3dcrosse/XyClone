@@ -15,14 +15,13 @@ constructor(props) {
     this.onBuildSite = this.onBuildSite.bind(this)
   }
   componentDidMount() {
-    console.log(this.props, 'THIS.PROPS FOR BUILDISTE.JS');
     this.setState({
       components: this.props.components,
       storage: storage
     })
   }
+
   componentWillReceiveProps(newProps) {
-    console.log('BUILDSITE RECEIVED NEW PROPS', newProps);
     this.setState({
       components: newProps.components,
       storage: storage
@@ -30,14 +29,28 @@ constructor(props) {
   }
 
   onBuildSite() {
-    var context = this;
-    var siteData = {
-      components: this.state.components,
-      storage: this.state.storage,
+    console.log(this.state.components, this.state.storage);
+    console.log('===============================================================================')
+    let projectComponents = this.state.components.filter((component) => {return component.projectId === this.props.currProjectId});
+    let projectStorage = {};
+    for (let key in this.state.storage) {
+      console.log(this.state.storage, 'THIS IS THE STORAGE');
+      if (key === 'body' + this.props.currProjectId) {
+        projectStorage[key] = this.state.storage[key]
+      } else {
+        this.state.storage[key].project.projectId === this.props.currProjectId ? projectStorage[key] = this.state.storage[key] : null ;
+      }
+    }
+
+    let siteData = {
+      components: projectComponents,
+      storage: projectStorage,
       projectId: this.props.currProjectId
     };
+
     console.log(siteData);
     console.log('BUILDING SITE WITH INSIDE STATE DATA');
+    let context = this;
     axios.post('saveSite', siteData)
     .then(function(response) {
       console.log(response)

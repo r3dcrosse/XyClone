@@ -19,8 +19,6 @@ class Draggable extends Component {
     const ref = ReactDOM.findDOMNode(this.refs.dragTarget);
     const body = document.body;
     const box = ref.getBoundingClientRect();
-    console.log(box.left, 'THIS IS BOX.LEFT');
-    console.log(body.scrollLeft)
     this.setState({
       relX: e.pageX - (box.left),
       relY: e.pageY - (box.top)

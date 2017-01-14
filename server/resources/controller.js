@@ -148,13 +148,9 @@ module.exports = {
     // write files to a directory based on req state tree
     console.log('REQUEST', req.body, 'REQUEST');
     // Save the website prop tree to database
-    Project.findOneAndUpdate({projectId: 1}, {title: req.body.title, projectId: req.body.projectId, userId: req.body.userId, storage: req.body.storage, components: req.body.components}, {upsert: true})
+    Project.findOneAndUpdate({projectId: req.body.projectId}, {projectId: req.body.projectId, storage: req.body.storage, components: req.body.components})
       .then(function(data) {
-        if (data === null) {
-          console.log('Project Created');
-        } else {
-          console.log('Updated Project');
-        }
+        console.log('Updated Project');
         res.send('/tempData/myZip.zip');
       })
       .catch(function(error) {
