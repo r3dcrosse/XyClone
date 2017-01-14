@@ -38,17 +38,18 @@ class ContextMenuSidebar extends Component {
   }
 
   render() {
-    let contextToRender;
+    // let contextToRender;
     // console.log(this.props, 'THESE ARE THE PROPS');
     // console.log(this.props.currComponentId, 'THIS IS CURRCOMPONENT ID');
 
+    // Object hash for rendering a react component based on component added
     let contextContainerToRender = {
       Textbox: () => <TextboxContextContainer />,
       Navbar: () => <NavbarContextContainer />,
       Image: () => <ImageContextContainer />,
       UserContainer: () => <UserContainerContextContainer />,
       GalleryPost: () => <GalleryPostContextContainer />,
-      Carousel: () => <CarouselContextContainer />
+      Carousel: () => <CarouselContextContainer />,
     }
 
     if (this.props.currComponent === null) {
@@ -63,10 +64,14 @@ class ContextMenuSidebar extends Component {
     } else {
       let component = this.props.currComponent;
       let { type } = component;
+
+      // Only render a context menu if there is a current component selected
+      let renderContainer = type === undefined ?
+        null : contextContainerToRender[type]();
       return (
         <Drawer open={true} openSecondary={true} width={240}>
           {
-            contextContainerToRender[type]
+            renderContainer
           }
         </Drawer>
       )
