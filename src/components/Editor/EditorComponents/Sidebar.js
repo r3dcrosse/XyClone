@@ -4,7 +4,10 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import FontIcon from 'material-ui/FontIcon';
-import UndoRedo from './UndoRedo'
+import IconButton from 'material-ui/IconButton';
+import Redo from 'material-ui/svg-icons/content/redo';
+import Undo from 'material-ui/svg-icons/content/undo';
+import FlatButton from 'material-ui/FlatButton';
 import {blue500, red500, greenA200, black} from 'material-ui/styles/colors';
 
 
@@ -18,7 +21,20 @@ const Sidebar = ({ onSidebarClick, openState, currProject, loginStatus }) => (
       <MenuItem onTouchTap={() => onSidebarClick('Carousel', currProject, loginStatus.id)}> Add Carousel </MenuItem>
       <MenuItem onTouchTap={() => onSidebarClick('GalleryPost', currProject, loginStatus.id)}> Add Gallery Post </MenuItem>
       <div>
-        <UndoRedo></UndoRedo>
+        <div>
+          <FlatButton
+            onTouchTap={() => onSidebarClick('', currProject, loginStatus.id)}
+            hoverColor={greenA200}
+            tooltip="UNDO"
+            icon={<Undo />}
+          />
+          <FlatButton
+            onTouchTap={() => onSidebarClick('', currProject, loginStatus.id)}
+            hoverColor={greenA200}
+            tooltip="REDO"
+            icon={<Redo />}
+          />
+        </div>
       </div>
       <p></p>
       <Divider />

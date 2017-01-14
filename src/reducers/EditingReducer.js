@@ -30,12 +30,14 @@ export default function xyclone (state = initialState, action) {
 	let page;
 	let userId;
 	let initState;
+	let newState;
+	let postDelete;
+	let childState;
 
 	if (_record.history.length === 0) {
 		initState = Object.assign({}, state);
 		_record.history.push(initState);
 		_record.currState = 0;
-		// console.log(_record.history, '=======================HISTORY');
 	}
 
 	switch (action.type) {
@@ -95,12 +97,18 @@ export default function xyclone (state = initialState, action) {
 			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type, projectId: project.projectId};
 			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType, projectId: project.projectId });
 			// console.log('STORAGE HAS BEEN UPDATED WITH A NEW CHILD', storage);
-			return Object.assign({}, state, {
+			childState = Object.assign({}, state, {
 				currComponent: {
 					...state.currComponent,
 					children: [...state.currComponent.children]
 				}
 			});
+
+			_record.history.push(childState);
+			_record.currState++;
+
+			return childState;
+
 		case 'DELETE_COMPONENT':
 			componentFromStorage = action.component;
 			console.log(componentFromStorage, 'THIS IS COMPONENT FROM STORAGE');

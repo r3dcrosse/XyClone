@@ -5,27 +5,39 @@ import Redo from 'material-ui/svg-icons/content/redo';
 import Undo from 'material-ui/svg-icons/content/undo';
 import FlatButton from 'material-ui/FlatButton';
 import {blue500, red500, greenA200, fullWhite} from 'material-ui/styles/colors';
+import _record from '../../../cache/StorageCache';
 
 
 
-const UndoRedo = () => (
-  <div>
+export default class UndoRedo extends React.Component {
 
-    <div>
-      <FlatButton
-        tooltip="UNDO"
-        icon={<Undo />}
-      />
-      <FlatButton
-        tooltip="REDO"
-        icon={<Redo />}
-      />
-    </div>
+  constructor(props) {
+    super(props);
 
-  </div>
-);
+    this.state = {
 
-export default UndoRedo;
+    };
+  };
+
+  render() {
+    return (
+      <div>
+
+        <div>
+          <FlatButton
+            tooltip="UNDO"
+            icon={<Undo />}
+          />
+          <FlatButton
+            tooltip="REDO"
+            icon={<Redo />}
+          />
+        </div>
+
+      </div>
+    )
+  }
+};
 
 // const styles = {
 //   mediumIcon: {
