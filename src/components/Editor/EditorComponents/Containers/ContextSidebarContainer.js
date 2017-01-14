@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import Context from '../Context'
+import ContextMenuSidebar from '../ContextMenuSidebar'
 
 const mapStateToProps = (state) => {
   return {
@@ -7,15 +7,15 @@ const mapStateToProps = (state) => {
     currComponentId: state.xyclone.currComponentId,
     currProjectId: state.xycloneProjects.currProjectId
   }
-}
+};
 
 // const mapDispatchToProps = (dispatch) => {
 // }x`
 
-const ContextContainer = connect(
+const ContextMenuContainer = connect(
   mapStateToProps
   // ,
   // mapDispatchToProps
-)(Context)
+)(ContextMenuSidebar);
 
-export default ContextContainer;
+export default ContextMenuContainer;

@@ -5,7 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import EditorContainer from './EditorComponents/Containers/EditorContainer';
 import SidebarContainer from './EditorComponents/Containers/SidebarContainer';
-import ContextContainer from './EditorComponents/Containers/ContextContainer';
+import ContextSidebarContainer from './EditorComponents/Containers/ContextSidebarContainer';
 
 require("../../Basic.less");
 
@@ -46,7 +46,7 @@ class EditorPage extends Component {
           <EditorContainer />
         </div>
         <div>
-          <ContextContainer />
+          <ContextSidebarContainer />
         </div>
       </div>
     </div>

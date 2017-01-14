@@ -19,16 +19,16 @@ class BodyContext extends Component {
     cssObject.backgroundColor = storage['body' + this.props.currProjectId].css.backgroundColor;
     this.setState({
       css: cssObject
-    })
+    });
   }
 
   componentWillReceiveProps (newProps) {
     let cssObject = newProps.currComponent.css;
     storage['body'+ this.props.currProjectId].css = cssObject;
-    console.log(storage);
+    // console.log(storage);
     this.setState({
       css: cssObject
-    })
+    });
   }
 
   prepForDispatch() {
@@ -56,8 +56,8 @@ class BodyContext extends Component {
     } else {
       console.log('IM BEIGN RENDERED BODHYYYYYYYYYY');
       return (
-        <div>
-          <div className='bodycontextmenu-text'>Background Color</div>
+        <div className='bodycontext-container'>
+          <div className='bodycontext-menu'>Body Color</div>
           <SketchPicker
             color={css.backgroundColor}
             onChange={this.handleBackgroundColor.bind(this)}

@@ -53,7 +53,7 @@ constructor(props) {
     let context = this;
     axios.post('saveSite', siteData)
     .then(function(response) {
-      console.log(response)
+      // console.log(response)
       context.setState({
         link: response.data
       })
