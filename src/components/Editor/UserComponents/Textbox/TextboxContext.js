@@ -45,6 +45,17 @@ class TextboxContext extends Component {
     this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
   }
 
+  // Use this to update the properties of the component in state
+  changeProp (propertyToSet, cssProp, context, val) {
+    if (cssProp) {
+      let cssObject = this.state.css;
+      cssObject[cssProp] = val;
+      this.setState({ css : cssObject });
+    } else {
+      this.setState({ [propertyToSet] : val });
+    }
+  }
+
   changeNameInput (e) {
     this.setState({name: e.target.value})
   }
@@ -81,15 +92,15 @@ class TextboxContext extends Component {
   }
 
   render() {
-    // console.log('TEXTBOXCONTEXT IS BEING RENDERED');
     let { type, name, css, text } = this.state;
+
     if (type !== 'Textbox') {
       return (
         <div> SHIT IM NOT A TEXTBOX IM JUST NULL </div>
       )
     } else {
       return (
-        <div>
+        <div className="imagecontext-container">
           <form onSubmit={this.prepForDispatch.bind(this)}>
             <div>
               <div> {type} </div>

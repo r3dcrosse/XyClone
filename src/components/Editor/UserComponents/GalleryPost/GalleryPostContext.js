@@ -112,7 +112,7 @@ class GalleryPostContext extends Component {
       )
     } else {
       return (
-        <div>
+        <div className="imagecontext-container">
           <form onSubmit={this.prepForDispatch.bind(this)}>
             <div>
               <div> {type} </div>
