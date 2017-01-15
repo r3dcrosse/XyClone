@@ -92,6 +92,26 @@ module.exports = {
     })
   },
 
+  deleteProject: function(req, res) {
+    // console.log('DELETE A PROJECT ------------------------------------');
+    // console.log('-----------------project info-----------------');
+    // console.log('userID:::::::', req.body.userId);
+    // console.log('projectId::::::', req.body.projectId);
+    Project.findOneAndRemove({
+      userId: req.body.userId,
+      projectId: req.body.projectId
+    }).then((result) => {
+      console.log('Deleted this project', result);
+      if (result) {
+        res.status(205).json(result);
+      }
+      res.status(204).end();
+    }).catch((err) => {
+      console.log('FAILED TO DELETE PROJECT IN DB');
+      console.log(err);
+    });
+  },
+
   saveUserIdAndReturnStorage: function(req, res) {
     //REFACTOR TO RETURN STORAGE
     console.log('THIS IS REQUEST FOR SAVE USER ID ==================================', req.body.userId);

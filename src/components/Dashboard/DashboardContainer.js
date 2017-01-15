@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addNewProject: (name, description, projectId) => {
       dispatch(addProject(name, description, projectId));
+    },
+    deleteProjectById: (projectId) => {
+      dispatch(deleteProject(projectId));
     }
   }
 }
