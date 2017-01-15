@@ -34,11 +34,16 @@ constructor(props) {
     let projectComponents = this.state.components.filter((component) => {return component.projectId === this.props.currProjectId});
     let projectStorage = {};
     for (let key in this.state.storage) {
-      // console.log(this.state.storage, 'THIS IS THE STORAGE');
+      // First transfer correct body component into storage for specific projectId
       if (key === 'body' + this.props.currProjectId) {
         projectStorage[key] = this.state.storage[key]
       } else {
-        this.state.storage[key].project.projectId === this.props.currProjectId ? projectStorage[key] = this.state.storage[key] : null ;
+        // Check if object in storage has a projectId (a body component doesn't!)
+        if (this.state.storage[key].project) {
+          // Adds components of that projectId from storage into correct project
+          this.state.storage[key].project.projectId === this.props.currProjectId ?
+            projectStorage[key] = this.state.storage[key] : null ;
+        }
       }
     }
 
@@ -68,11 +73,12 @@ constructor(props) {
   render () {
     return (
       <div>
-        <MenuItem rightIcon={<ArrowDropRight />} menuItems=
-                {[
-                  <MenuItem onTouchTap={this.onBuildSite}> Save Site </MenuItem>,
-                  <MenuItem href={this.state.link}> Download Site </MenuItem>
-                ]}>
+        <MenuItem
+          rightIcon={ <ArrowDropRight /> }
+          menuItems={[
+            <MenuItem onTouchTap={this.onBuildSite}> Save Site </MenuItem>,
+            <MenuItem href={this.state.link}> Download Site </MenuItem>
+        ]}>
            Manage Sites
         </MenuItem>
       </div>
