@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch) => {
     dispatchLoginUser: (userInfo) => {
       dispatch(loginUser(userInfo))
     },
-    updateStorageComponents: (storage, components) => {
-      dispatch(updateStorageAndStateComponents(storage, components))
+    updateStorageComponents: (storage) => {
+      dispatch(updateStorageAndStateComponents(storage))
     },
     updateProjectsStorage: (projects) => {
       dispatch(updateProjectsStorage(projects));

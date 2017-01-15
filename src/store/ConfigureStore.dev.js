@@ -20,7 +20,17 @@ function getDebugSessionKey() {
 export default function configureStore(initialState) {
   // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
   // See https://github.com/rackt/redux/releases/tag/v3.1.0
+
   const store = createStore(rootReducer, initialState, enhancer);
+
+  store.subscribe(()=>{
+    // console.log('SUBSCRIBE IS GETTIGN CALLED DOE');
+    console.log(Object.keys(store.getState().xycloneLogin.loginStatus), 'THIS IS LOGIN STATUS FROM STORE.SUBSCRIBE');
+    if (Object.keys(store.getState().xycloneLogin.loginStatus).length !== 0) {
+      // console.log('IM NEVER HERE : C')
+      sessionStorage.setItem('loginStatus', JSON.stringify(store.getState().xycloneLogin.loginStatus));
+    }
+  });
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

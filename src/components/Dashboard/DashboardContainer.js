@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { addProject } from '../../actions/ProjectActions';
+import { updateStorageAndStateComponents } from '../../actions/EditingActions'
+import { addProject, updateProjectsStorage } from '../../actions/ProjectActions';
 import Dashboard from './Dashboard';
-
+updateStorageAndStateComponents
 const mapStateToProps = (state) => {
   return {
     projects: state.xycloneProjects.projects,
@@ -16,6 +17,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteProjectById: (projectId) => {
       dispatch(deleteProject(projectId));
+    },
+    updateStorageComponents(allComponents) {
+      dispatch(updateStorageAndStateComponents(allComponents))
+    },
+    updateProjectsStorage(allProjects) {
+      dispatch(updateProjectsStorage(allProjects));
     }
   }
 }
@@ -26,3 +33,7 @@ const DashboardContainer = connect(
 )(Dashboard);
 
 export default DashboardContainer;
+
+
+          // this.props.updateStorageComponents(allComponents);
+          // this.props.updateProjectsStorage(allProjects);

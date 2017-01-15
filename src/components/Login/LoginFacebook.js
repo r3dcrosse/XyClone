@@ -3,12 +3,9 @@ import { browserHistory } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios';
 import { storage } from '../../cache/ComponentCache'
-
+// import FB from '../../cache/CacheFB'
 class FacebookLogin extends Component {
   componentDidMount() {
-    if (Object.keys(this.props.loginStatus).length !== 0) {
-      browserHistory.push('/dashboard');
-    }
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '233882087066195',
@@ -16,8 +13,8 @@ class FacebookLogin extends Component {
                           // the session
         xfbml      : true,  // parse social plugins on this page
         version    : 'v2.1' // use version 2.1
-      });
-    }.bind(this);
+      })
+    };
 
     // Load the SDK asynchronously
     (function(d, s, id) {
@@ -48,8 +45,8 @@ class FacebookLogin extends Component {
 
   requestForStorage (response) {
     console.log('RUNNING REQUEST FOR STORAGE');
-     axios.post('/saveUser', {userId: response.authResponse.userID})
-    .then((userData) => {
+    axios.post('/saveUser', {userId: response.authResponse.userID})
+      .then((userData) => {
         //MOUNT ALL THE COMPONENTS/PROJECTS BELONGING TO THIS USER
           // result.project = projects. map through projects.
         // userdata.data is all the projects.
@@ -68,21 +65,26 @@ class FacebookLogin extends Component {
         if (Object.keys(userData.data).length !== 0) {
           userData.data.forEach(function(project) {
             console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
+            // ADD ALL THE PROJECTS THE USER HAS
             allProjects.push({
               projectId: project.projectId,
               title: project.title,
               description: project.description
             })
+
+            // GRAB ALL THE COMPONENT REFERENCES THE USER HAS
             for (let i = 0; i < project.components.length; i++) {
               allComponents.push(project.components[i])
             }
 
+            // UPDATE STORAGE CACHE TO CORRESPOND TO THE COMPONENTS FROM THE USER
             for (let key in project.storage) {
               storage[key] = project.storage[key];
               if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
                 storage[key].parent = {};
               }
             }
+
           });
           // weed out ALL component references
           // weed out ALL storage elements
@@ -92,8 +94,20 @@ class FacebookLogin extends Component {
           this.props.updateProjectsStorage(allProjects);
           // call this.props.(make youro wn dispatch) for new projects)
         }
-
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      console.log('WHAT THE **** HAPPENENED')
     });
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  checkLoginState () {
+    FB.getLoginStatus(function(response) {
+      // response tells us if we are loggred in or not
+      this.statusChangeCallback(response);
+    }.bind(this));
   }
 
   // This is called with the results from from FB.getLoginStatus().
@@ -111,21 +125,8 @@ class FacebookLogin extends Component {
       // The person is logged into Facebook, but not your app.
       // FB.login(this.checkLoginState());
     } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      console.log('WHAT THE **** HAPPENENED')
+
     }
-  }
-
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  checkLoginState () {
-    FB.getLoginStatus(function(response) {
-      // response tells us if we are loggred in or not
-      this.statusChangeCallback(response);
-
-    }.bind(this));
   }
 
   handleClick () {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'react';
-import UserComponent from './UserComponent'
-import { storage } from '../../../cache/ComponentCache'
+import UserComponent from './UserComponent';
+import { storage } from '../../../cache/ComponentCache';
 require("../../../Basic.less");
 
 class Editor extends Component {

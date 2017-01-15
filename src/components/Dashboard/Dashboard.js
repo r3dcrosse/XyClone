@@ -20,10 +20,43 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      projects: this.props.projects,
-      userId: this.props.loginStatus.id
-    });
+    axios.post('/saveUser', {userId: this.props.loginStatus.authResponse.userID})
+      .then((userData) => {
+        let allProjects = []
+        let allComponents = [];
+        if (Object.keys(userData.data).length !== 0) {
+          userData.data.forEach(function(project) {
+            console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
+            allProjects.push({
+              projectId: project.projectId,
+              title: project.title,
+              description: project.description
+            })
+            for (let i = 0; i < project.components.length; i++) {
+              allComponents.push(project.components[i])
+            }
+
+            for (let key in project.storage) {
+              storage[key] = project.storage[key];
+              if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
+                storage[key].parent = {};
+              }
+            }
+          });
+          // weed out ALL component references
+          // weed out ALL storage elements
+          // weed out projects.
+          // call this.props.updateStorageComponents(storage, components)
+          this.props.updateStorageComponents(allComponents);
+          this.props.updateProjectsStorage(allProjects);
+          // call this.props.(make youro wn dispatch) for new projects)
+          this.setState({
+            projects: allProjects,
+            userId: this.props.loginStatus.authResponse.userID
+          });
+        }
+    })
+    // this.setState({ projects: this.props.projects });
   }
 
   componentWillReceiveProps(newProps) {
