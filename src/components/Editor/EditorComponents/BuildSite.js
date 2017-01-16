@@ -11,7 +11,8 @@ constructor(props) {
     this.state = {
       components: [],
       storage: {},
-      link: ''
+      link: '',
+      readyToDownload: false
     }
     this.onBuildSite = this.onBuildSite.bind(this)
   }
@@ -25,7 +26,8 @@ constructor(props) {
   componentWillReceiveProps(newProps) {
     this.setState({
       components: newProps.components,
-      storage: storage
+      storage: storage,
+      readyToDownload: false
     })
   }
 
@@ -61,7 +63,8 @@ constructor(props) {
     .then(function(response) {
       console.log('LINK TO DOWNLOAD SITE', response.data);
       context.setState({
-        link: response.data
+        link: response.data,
+        readyToDownload: true
       });
       return response;
     });
@@ -78,7 +81,7 @@ constructor(props) {
           rightIcon={ <ArrowDropRight /> }
           menuItems={[
             <MenuItem onTouchTap={this.onBuildSite}> Save Site </MenuItem>,
-            <MenuItem href={this.state.link}> Download Site </MenuItem>
+            <MenuItem href={this.state.link} disabled={!this.state.readyToDownload}> Download Site </MenuItem>
         ]}>
            Manage Sites
         </MenuItem>
