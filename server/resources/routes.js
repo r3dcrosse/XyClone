@@ -31,67 +31,9 @@ Router.route('/saveSite')
 Router.route('/deleteProject')
   .post(Controller.deleteProject);
 
-Router.route('/tempData/myZip.zip')
-  .get(function(req, res) {
-    console.log('serverside')
-
-    // Pull propTree from database and assemble website
-    Project.findOne({id: 1})
-      .then(function(data) {
-        data === null ? console.log('Could not find website in database') : console.log('found website', data);
-        // Copy template to a new folder that can be modified
-        ncp.limit = 16;
-        ncp('./server/site_templates/gallery', './server/tempData/fileToBeZipped', function(err) {
-          if (err) {
-            return console.error('ERROR COPYING TEMPLATE', err);
-          }
-          console.log('TEMPLATE SUCCESSFULLY COPIED');
-
-          // Write css file to template
-          fs.writeFile(
-            path.resolve(__dirname, '../tempData/fileToBeZipped/styles.css'),
-            generator.mapBodyCSS(data),
-            function() {
-              // Write IndexComponent to template
-              fs.writeFile(
-                path.resolve(__dirname, '../tempData/fileToBeZipped/app/components/IndexComponent.js'),
-                generator.mapStateTreeToReact(data),
-                function() {
-                  // Zip templated directory and send back to user
-                  zipdir(
-                    './server/tempData/fileToBeZipped',
-                    { saveTo: './server/tempData/MyCoolSite.zip' },
-                    function(err, buffer) {
-                      console.log('File was zipped and can now be downloaded');
-                      res.sendFile('tempData/MyCoolSite.zip', {root: '../XyClone/server/'});
-                    }
-                  )
-                }
-              );
-            }
-          );
-
-
-          // Inject new code into copied directory
-          // injectFile.writeToFile(
-          //   path.resolve(__dirname, '../tempData/fileToBeZipped/app/components/IndexComponent.js'),
-          //   generator.mapStateTreeToReact(data),
-          //   function() {
-          //     return zipdir('./server/tempData/fileToBeZipped', {saveTo: './server/tempData/MyCoolSite.zip'}, function(err, buffer) {
-          //       console.log('File was zipped and can now be downloaded');
-          //       res.sendFile('tempData/MyCoolSite.zip', {root: '../XyClone/server/'});
-          //     });
-          //   }
-          // );
-          // Zip up directory and send to user
-
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      })
-  })
-  .delete(function(res) {
+Router.route('/download/:projectId')
+  .get(Controller.downloadProject)
+  .delete(function(res) { // Not sure if we still need this endpoint?
     console.log(res.url)
     fs.unlink('./server/tempData/myZip.zip', function(err) {
       if (err) {

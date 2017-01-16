@@ -3,7 +3,8 @@ const fs = require('fs')
 const path = require('path')
 
 const mapBodyCSS = (stateTree) => {
-  const cssProperites = stateTree.storage.body.css;
+  const projectId = stateTree.projectId;
+  const cssProperites = stateTree.storage[`body${projectId}`].css;
   var bodyCSSasString = `body {`;
 
   // Helper hash to return templated css string

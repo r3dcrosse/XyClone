@@ -2,6 +2,11 @@ const db = require('./configDB');
 const Project = require('../models/projectSchema');
 const User = require('../models/userSchema');
 const Sequence = require('../models/sequenceSchema');
+const zipdir = require('zip-dir');
+const fs = require('fs');
+const path = require('path');
+const ncp = require('ncp').ncp;
+const generator = require('../generator/generator');
 
 
 let grabSequenceNumAndIncrement = function(callback) {
@@ -81,7 +86,7 @@ module.exports = {
       });
       newProject.save()
         .then(()=> {
-          console.log('NEW PROJECT WAS CREATED AND SAVED')
+          console.log('NEW PROJECT WAS CREATED AND SAVED', newProject)
           res.json(newProject);
         })
         .catch((err) => {
@@ -151,17 +156,77 @@ module.exports = {
     // write files to a directory based on req state tree
     console.log('REQUEST', req.body, 'REQUEST');
     // Save the website prop tree to database
-    Project.findOneAndUpdate({projectId: req.body.projectId}, {projectId: req.body.projectId, storage: req.body.storage, components: req.body.components})
+    Project.findOneAndUpdate({
+      projectId: req.body.projectId},
+      {
+        projectId: req.body.projectId,
+        storage: req.body.storage,
+        components: req.body.components
+      })
       .then(function(data) {
         console.log('Updated Project');
-        res.send('/tempData/myZip.zip');
+        // Sendback link to download site
+        // res.send('/tempData/myZip.zip');
+        res.send(`/download/${req.body.projectId}`);
       })
       .catch(function(error) {
         console.log(error)
       });
-  }
+  },
+
+  downloadProject: function(req, res) {
+    const projectId = req.params.projectId;
+    console.log('Trying to download projectId: ', projectId);
+
+    // Pull propTree from database and assemble website
+    Project.findOne({projectId: projectId})
+      .then(function(data) {
+        // Check if website is found in database
+        if (data === null) {
+          console.log('COULD NOT FIND WEBSITE IN DATABASE');
+          res.status(204).end();
+        }
+
+        console.log('found website', data);
+        // Copy template to a new folder that can be modified
+        ncp.limit = 16;
+        ncp('./server/site_templates/gallery', `./server/tempData/${projectId}`, function(err) {
+          if (err) {
+            return console.error('ERROR COPYING TEMPLATE', err);
+          }
+          console.log('TEMPLATE SUCCESSFULLY COPIED');
+
+          // Write css file to template
+          fs.writeFile(
+            path.resolve(__dirname, `../tempData/${projectId}/styles.css`),
+            generator.mapBodyCSS(data),
+            function() {
+              // Write IndexComponent to template
+              fs.writeFile(
+                path.resolve(__dirname, `../tempData/${projectId}/app/components/IndexComponent.js`),
+                generator.mapStateTreeToReact(data),
+                function() {
+                  // Zip templated directory and send back to user
+                  zipdir(
+                    `./server/tempData/${projectId}`,
+                    { saveTo: `./server/tempData/${projectId}.zip` },
+                    function(err, buffer) {
+                      console.log('File was zipped and can now be downloaded');
+                      res.sendFile(`tempData/${projectId}.zip`, {root: '../XyClone/server/'});
+                    }
+                  )
+                }
+              );
+            }
+          );
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
+      })
+    }
+}
 
   // saveProjectEdit: function(req, res) {
   //   Project.findOneAndUpdate({})
   // }
-}

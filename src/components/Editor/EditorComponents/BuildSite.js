@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { storage } from '../../../cache/ComponentCache';
 import MenuItem from 'material-ui/MenuItem';
 import ArrowDropRight from 'material-ui/svg-icons/navigation-arrow-drop-right';
+
 class BuildSite extends Component {
 constructor(props) {
     super(props)
@@ -58,12 +59,12 @@ constructor(props) {
     let context = this;
     axios.post('saveSite', siteData)
     .then(function(response) {
-      // console.log(response)
+      console.log('LINK TO DOWNLOAD SITE', response.data);
       context.setState({
         link: response.data
-      })
-      return response
-    })
+      });
+      return response;
+    });
     // .then(function(res) {
     //   console.log(res.data, 'DATA')
     //   axios.delete(res.data)
