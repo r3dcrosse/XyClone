@@ -176,6 +176,7 @@ module.exports = {
 
   downloadProject: function(req, res) {
     const projectId = req.params.projectId;
+    
     console.log('Trying to download projectId: ', projectId);
 
     // Pull propTree from database and assemble website
