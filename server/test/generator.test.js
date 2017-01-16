@@ -26,9 +26,10 @@ describe('Server: ', function() {
       it('should return body css as a string', function() {
       var testState =
         {
+          projectId: 0,
           components: [],
           storage: {
-            'body': {
+            'body0': {
               css: {
                 backgroundColor: 'blue'
               }
