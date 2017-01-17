@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import saveToSessionStorage from '../../../cache/StorageCache'
-import BuildSiteContainer from './Containers/BuildSiteContainer'
+import saveToSessionStorage from '../../../cache/StorageCache';
+import { storage } from '../../../cache/ComponentCache';
+import BuildSiteContainer from './Containers/BuildSiteContainer';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
@@ -21,62 +22,12 @@ class Sidebar extends Component {
     }
   }
 
-
-
-  undo () {
-  let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
-  let counter = JSON.parse(sessionStorage.getItem('counter')) - 1;
-  let prevProjectState = projectStates[counter];
-
-    allProjects.push({
-      projectId: prevProjectState.projectId,
-      title: prevProjectState.title,
-      description: prevProjectState.description
-    })
-
-    // GRAB ALL THE COMPONENT REFERENCES THE USER HAS
-    for (let i = 0; i < prevProjectState.components.length; i++) {
-      allComponents.push(prevProjectState.components[i])
-    }
-
-    // UPDATE STORAGE CACHE TO CORRESPOND TO THE COMPONENTS FROM THE USER
-    for (let key in prevProjectState.storage) {
-      storage[key] = prevProjectState.storage[key];
-      if ((!storage[key].parent) && key !== ('body' + prevProjectState.projectId)) {
-        storage[key].parent = {};
-      }
-    }
-    this.props.updateStorageComponents(allComponents);
-    this.props.updateProjectsStorage(allProjects);
-  }
-
-  redo () {
-    let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
-    let counter = JSON.parse(sessionStorage.getItem('counter')) - 1;
-    let prevProjectState = projectStates[counter];
-
-    allProjects.push({
-      projectId: prevProjectState.projectId,
-      title: prevProjectState.title,
-      description: prevProjectState.description
-    })
-
-    // GRAB ALL THE COMPONENT REFERENCES THE USER HAS
-    for (let i = 0; i < prevProjectState.components.length; i++) {
-      allComponents.push(prevProjectState.components[i])
-    }
-
-    // UPDATE STORAGE CACHE TO CORRESPOND TO THE COMPONENTS FROM THE USER
-    for (let key in prevProjectState.storage) {
-      storage[key] = prevProjectState.storage[key];
-      if ((!storage[key].parent) && key !== ('body' + prevProjectState.projectId)) {
-        storage[key].parent = {};
-      }
+  componentDidMount() {
+    if (JSON.parse(sessionStorage.getItem('projectStates')).length === 0) {
+      saveToSessionStorage(this.props.components, this.props.currProject, this.props.loginStatus.id);
     }
   }
-  // componentWillReceiveProps (newProps) {
-    // saveToSessionStorage(newProps.components, newProps.currProject, newProps.loginStatus.id);
-  // }
+
   clickHandler (type, currProject, id) {
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
@@ -88,8 +39,82 @@ class Sidebar extends Component {
     })
   }
 
+  undo () {
+    let counter = JSON.parse(sessionStorage.getItem('counter'));
+    if (counter === 0) {
+      return;
+    }
+
+    if (counter > 0) {
+      counter--;
+    }
+    let prevProjectState = JSON.parse(sessionStorage.getItem('projectStates'))[counter];
+    sessionStorage.setItem('counter', JSON.stringify(counter));
+    // CHANGE STORAGE CACHE TO REFLECT THE RPOEJCT STATE;
+    console.log(storage, 'STORAGE BEFORE CHANGE')
+    console.log(prevProjectState, 'PREVIOSU PROJECT STATE');
+    // DELETING ALL PREVIOUS STORAGE COMPONENTS.
+    for (let key in storage) {
+      if (key.includes('body')) {
+        if (key === 'body' + this.props.currProject.projectId) {
+          console.log('DELETING THIS', storage[key]);
+          delete storage[key];
+        }
+      } else {
+        if (storage[key].project.projectId === this.props.currProject.projectId) {
+          console.log('DELETING TIHS NOT BHODY', storage[key])
+          delete storage[key]
+        }
+      }
+    }
+    // ADDING IN ALL COMPONENTS FROM PREVIOUS STATE.
+    for (let key in prevProjectState.storage) {
+      storage[key] = prevProjectState.storage[key];
+    }
+    console.log(storage, 'STORAGE AFTER CHANGE');
+
+    this.props.updateStorageAndStateComponents(prevProjectState.components)
+  }
+
+  redo () {
+    let counter = JSON.parse(sessionStorage.getItem('counter'));
+    let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
+    if (counter === projectStates.length - 1) {
+      return;
+    }
+    if (projectStates.length - 1 > counter) {
+      counter++;
+    }
+    let nextProjectState = JSON.parse(sessionStorage.getItem('projectStates'))[counter];
+    sessionStorage.setItem('counter', JSON.stringify(counter));
+    // CHANGE STORAGE CACHE TO REFLECT THE RPOEJCT STATE;
+    console.log(storage, 'STORAGE BEFORE CHANGE')
+    console.log(nextProjectState, 'PREVIOSU PROJECT STATE');
+    // DELETING ALL PREVIOUS STORAGE COMPONENTS.
+    for (let key in storage) {
+      if (key.includes('body')) {
+        if (key === 'body' + this.props.currProject.projectId) {
+          console.log('DELETING THIS', storage[key]);
+          delete storage[key];
+        }
+      } else {
+        if (storage[key].project.projectId === this.props.currProject.projectId) {
+          console.log('DELETING TIHS NOT BHODY', storage[key])
+          delete storage[key]
+        }
+      }
+    }
+    // ADDING IN ALL COMPONENTS FROM PREVIOUS STATE.
+    for (let key in nextProjectState.storage) {
+      storage[key] = nextProjectState.storage[key];
+    }
+    console.log(storage, 'STORAGE AFTER CHANGE');
+
+    this.props.updateStorageAndStateComponents(nextProjectState.components)
+  }
+
   render() {
-    let { openState, currProject, loginStatus, onSidebarClick } = this.props;
+    let { openState, currProject, loginStatus, onSidebarClick, undo, redo } = this.props;
     return (
       <Drawer open={!openState} containerStyle={{'marginTop': '2%', 'width': '15%'}}>
         <MenuItem onTouchTap={() => this.clickHandler('Navbar', currProject, loginStatus.id)}> Add Navbar</MenuItem>
@@ -101,12 +126,12 @@ class Sidebar extends Component {
         <div>
           <div>
             <FlatButton
-              onTouchTap={() => onSidebarClick('', currProject, loginStatus.id)}
+              onTouchTap={() => this.undo()}
               hoverColor={greenA200}
               icon={<Undo />}
             />
             <FlatButton
-              onTouchTap={() => onSidebarClick('', currProject, loginStatus.id)}
+              onTouchTap={() => this.redo()}
               hoverColor={greenA200}
               icon={<Redo />}
             />

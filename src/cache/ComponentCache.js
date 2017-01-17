@@ -136,9 +136,7 @@ export const _components = {
     storage[storage[incrementId].children[1].componentId].parent = {componentId: incrementId, type: 'GalleryPost', projectId: project.projectId};
     return incrementId++;
   },
-
   Carousel: (project = {}, page = 'IndexPage', userId = null) => {
-
     let defaultCss = {
       display: 'flex',
       flexDirection: 'row',

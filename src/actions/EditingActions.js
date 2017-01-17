@@ -71,6 +71,8 @@ export function updateStorageAndStateComponents (components) {
 // REDUX STATE
 // [{componentId: type: projectId: 2}, {componentId: type: projectId: 4},{componentId: type: projectId:1},{componentId: type: projectId: 1},{componentId: type: projectId:}, {componentId: type: projectId:}]
 
+
+// [{}]
 // IF WE WANNA MAKE IT EASIER, MAKE A REFERENCE STOARGE. THIS IS WHAT WE WANT IT TO BE
 // REDUX STATE
   // [{componentId: type: projectId: 2}, ... ];

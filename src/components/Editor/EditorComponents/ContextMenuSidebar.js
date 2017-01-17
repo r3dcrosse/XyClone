@@ -53,7 +53,6 @@ class ContextMenuSidebar extends Component {
     }
 
     if (this.props.currComponent === null) {
-      // console.log('GOING TO RENDER THIS SHIT');
       return null;
     } else if (this.props.currComponentId === 'body' + this.props.currProjectId) {
       return (

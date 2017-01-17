@@ -39,14 +39,19 @@ let saveToSessionStorage = function(components, project, userId) {
   let currProjectState = composeProject(components, project, userId);
   let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
   let counter = JSON.parse(sessionStorage.getItem('counter'));
-
+  let initialLength = projectStates.length;
+  if (initialLength === 0) {
+    projectStates.push(currProjectState);
+    sessionStorage.setItem('projectStates', JSON.stringify(projectStates));
+    return;
+  }
   //CHECK IF ITS AT END OF PROJECTSTATESLENGTH
-  console.log(projectStates);
   if (counter === projectStates.length - 1) {
     projectStates.push(currProjectState);
     sessionStorage.setItem('projectStates', JSON.stringify(projectStates));
   } else {
-    projectStates.splice(counter, (projectStates.length - 1) - counter, currProjectState);
+    projectStates.length = counter + 1;
+    projectStates.push(currProjectState);
     sessionStorage.setItem('projectStates', JSON.stringify(projectStates));
   }
   sessionStorage.setItem('counter', JSON.stringify(counter + 1));
