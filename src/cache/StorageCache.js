@@ -3,9 +3,19 @@ import { storage } from './ComponentCache';
 
 let composeProject = function(components, project, userId) {
   let projectStorage = {};
+  console.log(project.projectId);
+  console.log(storage, 'STORAGE FROM COMPOSE PROJECT');
   for (let key in storage) {
-    if (storage[key].projectId === project.projectId) {
-      projectStorage[key] = storage[key];
+    console.log(key);
+    if (!key.includes('body')) {
+      if (storage[key].project.projectId === project.projectId) {
+        console.log('adding this corresponding storage component into projectStorage', storage[key]);
+        projectStorage[key] = storage[key];
+      }
+    } else {
+      if (key === 'body' + project.projectId) {
+        projectStorage[key] = storage[key];
+      }
     }
   }
   let projectComponents = components.filter(component => {
@@ -31,6 +41,7 @@ let saveToSessionStorage = function(components, project, userId) {
   let counter = JSON.parse(sessionStorage.getItem('counter'));
 
   //CHECK IF ITS AT END OF PROJECTSTATESLENGTH
+  console.log(projectStates);
   if (counter === projectStates.length - 1) {
     projectStates.push(currProjectState);
     sessionStorage.setItem('projectStates', JSON.stringify(projectStates));

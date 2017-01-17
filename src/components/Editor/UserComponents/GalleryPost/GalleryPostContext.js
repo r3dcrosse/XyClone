@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
 class GalleryPostContext extends Component {
   constructor(props) {
@@ -64,7 +65,15 @@ class GalleryPostContext extends Component {
       type: newPropsValues.type,
       children: newPropsValues.children
     }
-    this.props.onChangeStyleClick(galleryProps, this.props.currComponentId, this.props.currComponent);
+
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(galleryProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   changeNameInput (e) {
@@ -99,7 +108,14 @@ class GalleryPostContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.deleteFocusedComponent(context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
 

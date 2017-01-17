@@ -4,6 +4,7 @@ import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
 class ImageContext extends Component {
   constructor(props) {
@@ -45,7 +46,14 @@ class ImageContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   // When enter key is pressed, update all the properties of the img that changed
@@ -66,7 +74,14 @@ class ImageContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.deleteFocusedComponent(context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   render() {

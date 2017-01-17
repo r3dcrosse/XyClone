@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
 class CarouselContext extends Component {
   constructor(props) {
@@ -44,7 +45,14 @@ class CarouselContext extends Component {
   prepForDispatch(e) {
     e.preventDefault();
     let newProps = this.state;
-    this.props.onChangeStyleClick(newProps, this.props.currComponentId, this.props.currComponent);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   changeNameInput (e) {
@@ -65,7 +73,14 @@ class CarouselContext extends Component {
   changeChildrenInput (e) {
     // THIS IS WHERE THE CHILDREN ARE ADDED/REMOVED
     e.preventDefault();
-    this.props.onEditorComponentSidebarClick(this.state.addChild, this.props.currComponentId, this.props.currProject);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onEditorComponentSidebarClick(context.state.addChild, context.props.currComponentId, context.props.currProject);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   changeBackgroundColor (e) {
@@ -96,7 +111,14 @@ class CarouselContext extends Component {
 
   deleteCurrComponent(e) {
     e.preventDefault();
-    this.props.deleteFocusedComponent(this.props.currComponentId, this.props.currComponent);
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.deleteFocusedComponent(context.props.currComponentId, context.props.currComponent);
+      resolve();
+    })
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    })
   }
 
   render() {
