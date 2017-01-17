@@ -92,6 +92,8 @@ class FacebookLogin extends Component {
           // call this.props.updateStorageComponents(storage, components)
           this.props.updateStorageComponents(allComponents);
           this.props.updateProjectsStorage(allProjects);
+          sessionStorage.setItem('projectStates', JSON.stringify([]));
+          sessionStorage.setItem('counter', JSON.stringify(0));
           // call this.props.(make youro wn dispatch) for new projects)
         }
       // The person is not logged into Facebook, so we're not sure if

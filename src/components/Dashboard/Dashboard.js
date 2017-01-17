@@ -56,6 +56,67 @@ class Dashboard extends Component {
           });
         }
     })
+    // axios.post('/saveUser', {userId: this.props.loginStatus.authResponse.userID})
+    //   .then((userData) => {
+    //     let allProjects = []
+    //     let allComponents = [];
+    //     if (Object.keys(userData.data).length !== 0) {
+    //       const sessionProject = JSON.parse(sessionStorage.getItem('projectStates')).length !== 0 ? JSON.parse(sessionStorage.getItem('projectStates'))[JSON.parse(sessionStorage.getItem('counter'))] : {};
+
+    //       userData.data.forEach(function(project) {
+    //         // IF PROJECT.ID !== PROJECTTOCHANGE.ID
+    //         if (sessionProject.projectId !== project.projectId) {
+    //           console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
+    //           allProjects.push({
+    //             projectId: project.projectId,
+    //             title: project.title,
+    //             description: project.description
+    //           })
+    //           for (let i = 0; i < project.components.length; i++) {
+    //             allComponents.push(project.components[i])
+    //           }
+
+    //           for (let key in project.storage) {
+    //             storage[key] = project.storage[key];
+    //             if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
+    //               storage[key].parent = {};
+    //             }
+    //           }
+    //         } else {
+    //           allProjects.push({
+    //             projectId: sessionProject.projectId,
+    //             title: sessionProject.title,
+    //             description: sessionProject.description
+    //           })
+    //           for (let i = 0; i < sessionProject.components.length; i++) {
+    //             allComponents.push(sessionProject.components[i])
+    //           }
+
+    //           for (let key in sessionProject.storage) {
+    //             storage[key] = sessionProject.storage[key];
+    //             if ((!storage[key].parent) && key !== ('body' + sessionProject.projectId)) {
+    //               storage[key].parent = {};
+    //             }
+    //           }
+    //         }
+    //         // ELSE
+    //           // GET DATA FROM PROJECTTOCHANGE
+    //       });
+    //       // weed out ALL component references
+    //       // weed out ALL storage elements
+    //       // weed out projects.
+    //       // call this.props.updateStorageComponents(storage, components)
+
+    //                         this.props.updateStorageComponents(allComponents);
+            // PUSH INTO COMPONENTREFERENCES
+    //       this.props.updateProjectsStorage(allProjects);
+    //       // call this.props.(make youro wn dispatch) for new projects)
+    //       this.setState({
+    //         projects: allProjects,
+    //         userId: this.props.loginStatus.authResponse.userID
+    //       });
+    //     }
+    // })
     // this.setState({ projects: this.props.projects });
   }
 

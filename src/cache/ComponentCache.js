@@ -170,4 +170,6 @@ export const _components = {
 
 export const storage = {
   // API => id : component
-}
+};
+
+export const componentReferences = [];

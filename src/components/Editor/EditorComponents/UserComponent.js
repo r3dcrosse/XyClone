@@ -44,8 +44,4 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
   }
 }
 
-UserComponent.propTypes = {
-  onClick: PropTypes.func.isRequired
-}
-
 export default UserComponent;
