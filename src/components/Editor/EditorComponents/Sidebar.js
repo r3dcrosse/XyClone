@@ -44,7 +44,6 @@ class Sidebar extends Component {
     if (counter === 0) {
       return;
     }
-
     if (counter > 0) {
       counter--;
     }
@@ -63,7 +62,7 @@ class Sidebar extends Component {
       } else {
         if (storage[key].project.projectId === this.props.currProject.projectId) {
           console.log('DELETING TIHS NOT BHODY', storage[key])
-          delete storage[key]
+          delete storage[key];
         }
       }
     }
