@@ -6,6 +6,7 @@ export function addComponent (componentType, project, userId) {
     userId: userId
   };
 }
+
 export function editComponent (component, componentId) {
   return {
     type: 'EDIT_COMPONENT',
@@ -64,3 +65,23 @@ export function updateStorageAndStateComponents (components) {
     components: components
   }
 }
+
+// THIS IS WHAT IT IS CURRNETLY
+// components of ALL PROJECTS CURRENTLY
+// REDUX STATE
+// [{componentId: type: projectId: 2}, {componentId: type: projectId: 4},{componentId: type: projectId:1},{componentId: type: projectId: 1},{componentId: type: projectId:}, {componentId: type: projectId:}]
+
+// IF WE WANNA MAKE IT EASIER, MAKE A REFERENCE STOARGE. THIS IS WHAT WE WANT IT TO BE
+// REDUX STATE
+  // [{componentId: type: projectId: 2}, ... ];
+
+// currCompoennts FROM ONE PROJECT ONLY
+// [{componentId: type: projectId 1},{componentId: type: projectId 1},{componentId: type: projectId 1}]
+// prevComponents for ONLY ONE PRPOJECT ID
+// [{componentId: type: projectId 1},{componentId: type: projectId 1}]
+
+// 1. LOGIN AND DASHBOARD BOTH NEED TO POPULATE COMPONENTREFERENCES INSIDE COMPONENTCACHE
+// 2. UPDATE STATETREE COMPONENTS INSIDE XYCLONE WHENEVER A CURRPROJECT IS ASSIGNED
+  // THIS WOULD BE INSIDE WEBSITE BOX. YOU WOULD NEED TO MAKE THE CHANGECURRPROJECT A PROMISE. THE RESOLVE WOULD BE UPDATESTORAGEANDSTATECOMPONENTS ACTION.
+// 3.
+

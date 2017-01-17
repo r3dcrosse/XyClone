@@ -1,6 +1,7 @@
-import { createStore, compose } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { persistState } from 'redux-devtools';
 
+import thunk from 'redux-thunk';
 import rootReducer from '../reducers/Index';
 import DevTools from '../components/AppRoot/DevTools';
 
@@ -8,6 +9,7 @@ const enhancer = compose(
   // Middleware you want to use in development:
 //   applyMiddleware(d1, d2, d3),
   // Required! Enable Redux DevTools with the monitors you chose
+  applyMiddleware(thunk),
   DevTools.instrument(),
   persistState(getDebugSessionKey())
 );
@@ -25,7 +27,7 @@ export default function configureStore(initialState) {
 
   store.subscribe(()=>{
     // console.log('SUBSCRIBE IS GETTIGN CALLED DOE');
-    console.log(Object.keys(store.getState().xycloneLogin.loginStatus), 'THIS IS LOGIN STATUS FROM STORE.SUBSCRIBE');
+    // console.log(Object.keys(store.getState().xycloneLogin.loginStatus), 'THIS IS LOGIN STATUS FROM STORE.SUBSCRIBE');
     if (Object.keys(store.getState().xycloneLogin.loginStatus).length !== 0) {
       // console.log('IM NEVER HERE : C')
       sessionStorage.setItem('loginStatus', JSON.stringify(store.getState().xycloneLogin.loginStatus));

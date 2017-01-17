@@ -29,16 +29,7 @@ export default function xyclone (state = initialState, action) {
 	let projectId;
 	let page;
 	let userId;
-	let initState;
-	let newState;
-	let postDelete;
-	let childState;
 
-	if (_record.history.length === 0) {
-		initState = Object.assign({}, state);
-		_record.history.push(initState);
-		_record.currState = 0;
-	}
 
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -48,14 +39,10 @@ export default function xyclone (state = initialState, action) {
 			userId = action.userId || null;
 			idInStorage = _components[elem](project, page, userId);
 
-			newState = Object.assign({}, state, {
+			return Object.assign({}, state, {
 				components: [...state.components, {componentId: idInStorage, type: action.componentType, projectId: project.projectId}]
 			});
 
-			_record.history.push(newState);
-			_record.currState++;
-
-			return newState;
 
 		case 'EDIT_COMPONENT':
 			// console.log('IN EDIT COMPONENT SWITCH', action.component)
@@ -97,17 +84,12 @@ export default function xyclone (state = initialState, action) {
 			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type, projectId: project.projectId};
 			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType, projectId: project.projectId });
 			// console.log('STORAGE HAS BEEN UPDATED WITH A NEW CHILD', storage);
-			childState = Object.assign({}, state, {
+			return Object.assign({}, state, {
 				currComponent: {
 					...state.currComponent,
 					children: [...state.currComponent.children]
 				}
 			});
-
-			_record.history.push(childState);
-			_record.currState++;
-
-			return childState;
 
 		case 'DELETE_COMPONENT':
 			componentFromStorage = action.component;
@@ -123,18 +105,11 @@ export default function xyclone (state = initialState, action) {
 			}
 			delete storage[action.componentId];
 
-			postDelete = Object.assign({}, state, {
+			return Object.assign({}, state, {
 				components: state.components.filter((ref) => ref.componentId !== action.componentId),
 				currComponent: null,
 				currComponentId: null
 			});
-
-			_record.history.push(postDelete);
-			_record.currState++;
-			console.log(_record.history, '===========HISTORY=========');
-
-			return postDelete;
-
 		case 'EDIT_BODY_CLICK':
 		  console.log(' SETTING FOCUS TO THE BODY');
 		  // PLACEHOLDER FOR PROJECT ID
