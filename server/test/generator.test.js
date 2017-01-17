@@ -16,12 +16,239 @@ const writeToFileSync = fileWriter.writeToFileSync
 const escapeSpecialChars = reactGenerator.escapeSpecialChars
 const mapStateTreeToReact = reactGenerator.mapStateTreeToReact
 const mapBodyCSS = reactGenerator.mapBodyCSS
+const generateIndexFile = reactGenerator.generateIndexFile
+const generateComponentFile = reactGenerator.generateComponentFile
 const getComponentString = reactGenerator.getComponentString
 const trimWhitespace = reactGenerator.trimWhitespace
 const keywordParser = reactGenerator.keywordParser
 
 describe('Server: ', function() {
   describe('Generator', function() {
+    describe('Index Page:', function() {
+      it('should return an index page with no other routes', function() {
+        var testState = {
+          "projectId" : 33,
+          "title" : "DEFAULT PROJECT 33",
+          "description" : "DEFAULT PROJECT DESCRIPTION",
+          "storage" : {
+            "2" : {
+              "type" : "Image",
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "100px" },
+              "alt" : "",
+              "page" : "IndexPage",
+              "src" : "https://smalldogbreeds.net/img/dog.jpg",
+              "name" : "Default Image Name"
+            },
+            "body33" : {
+              "css" : {
+                "height" : "100%",
+                "width" : "70%",
+                "padding" : "0px",
+                "marginLeft" : "180px",
+                "backgroundColor" : "#c73838",
+                "alignItems" : "center",
+                "position" : "relative",
+                "justifyContent" : "center",
+                "flexWrap" : "wrap",
+                "flexDirection" : "row",
+                "display" : "inline-flex"
+              }
+            }
+          },
+          "userId" : "10154401632357144",
+          "components" : [
+            {
+              "projectId" : 33,
+              "type" : "Image",
+              "componentId" : 2,
+              "page" : "IndexPage"
+            }
+          ]
+        };
+
+        var testText = generateIndexFile(testState);
+        var rawText =
+`import React from 'react';
+import { render } from 'react-dom';
+import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
+const IndexPage = require('./components/IndexPage.js');
+
+class Index extends React.Component {
+  render() {
+    return (
+      <div className="flex-container">
+        <IndexPage />
+      </div>
+    )
+  }
+}
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={Index} />
+  </Router>
+), document.getElementById('react'));`;
+
+        expect(testText).to.equal(rawText);
+
+
+      });
+      it('should return an index page with two different routes', function() {
+        var testState = {
+          "projectId" : 33,
+          "title" : "DEFAULT PROJECT 33",
+          "description" : "DEFAULT PROJECT DESCRIPTION",
+          "storage" : {
+            "1" : {
+              "parent" : {},
+              "userId" : "10154401632357144",
+              "page" : "IndexPage",
+              "project" : { "description" : "DEFAULT PROJECT DESCRIPTION", "title" : "DEFAULT PROJECT 33", "projectId" : 33 },
+              "type" : "Navbar",
+              "children" : [ "/reddit" ],
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "700px", "backgroundColor" : "yellow" },
+              "name" : "Default Navbar Name"
+            },
+            "2" : {
+              "type" : "Image",
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "100px" },
+              "alt" : "",
+              "page" : "pageTwo",
+              "src" : "https://smalldogbreeds.net/img/dog.jpg",
+              "name" : "Default Image Name"
+            },
+            "body33" : {
+              "css" : {
+                "height" : "100%",
+                "width" : "70%",
+                "padding" : "0px",
+                "marginLeft" : "180px",
+                "backgroundColor" : "#c73838",
+                "alignItems" : "center",
+                "position" : "relative",
+                "justifyContent" : "center",
+                "flexWrap" : "wrap",
+                "flexDirection" : "row",
+                "display" : "inline-flex"
+              }
+            }
+          },
+          "userId" : "10154401632357144",
+          "components" : [
+            {
+              "projectId" : 33,
+              "type" : "Navbar",
+              "componentId" : 1,
+              "page" : "IndexPage"
+            },
+            {
+              "projectId" : 33,
+              "type" : "Image",
+              "componentId" : 2,
+              "page" : "pageTwo"
+            }
+          ]
+        };
+
+        var testText = generateIndexFile(testState);
+        let rawText =
+`import React from 'react';
+import { render } from 'react-dom';
+import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
+const IndexPage = require('./components/IndexPage.js');
+const pageTwo = require('./components/pageTwo.js');
+
+class Index extends React.Component {
+  render() {
+    return (
+      <div className="flex-container">
+        <IndexPage />
+      </div>
+    )
+  }
+}
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={Index} />
+    <Route path="/pageTwo" component={pageTwo} />
+  </Router>
+), document.getElementById('react'));`;
+        expect(testText).to.equal(rawText);
+      });
+    });
+
+    describe('Component file generator:', function() {
+      it('should return files', function() {
+        var testState = {
+          "projectId" : 33,
+          "title" : "DEFAULT PROJECT 33",
+          "description" : "DEFAULT PROJECT DESCRIPTION",
+          "storage" : {
+            "1" : {
+              "parent" : {},
+              "userId" : "10154401632357144",
+              "page" : "IndexPage",
+              "project" : { "description" : "DEFAULT PROJECT DESCRIPTION", "title" : "DEFAULT PROJECT 33", "projectId" : 33 },
+              "type" : "Navbar",
+              "children" : [ "/reddit" ],
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "700px", "backgroundColor" : "yellow" },
+              "name" : "Default Navbar Name"
+            },
+            "2" : {
+              "type" : "Image",
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "100px" },
+              "alt" : "",
+              "page" : "pageTwo",
+              "src" : "https://smalldogbreeds.net/img/dog.jpg",
+              "name" : "Default Image Name"
+            },
+            "body33" : {
+              "css" : {
+                "height" : "100%",
+                "width" : "70%",
+                "padding" : "0px",
+                "marginLeft" : "180px",
+                "backgroundColor" : "#c73838",
+                "alignItems" : "center",
+                "position" : "relative",
+                "justifyContent" : "center",
+                "flexWrap" : "wrap",
+                "flexDirection" : "row",
+                "display" : "inline-flex"
+              }
+            }
+          },
+          "userId" : "10154401632357144",
+          "components" : [
+            {
+              "projectId" : 33,
+              "type" : "Navbar",
+              "componentId" : 1,
+              "page" : "IndexPage"
+            },
+            {
+              "projectId" : 33,
+              "type" : "Image",
+              "componentId" : 2,
+              "page" : "pageTwo"
+            }
+          ]
+        };
+
+        let testText = generateComponentFile('pageTwo', {'IndexPage': 'IndexPage', 'pageTwo':'pageTwo'}, testState);
+        let rawText =
+`import React from 'react';import Carousel from './Carousel.jsx';import { Link } from 'react-router';const IndexPage = require('./IndexPage.js');
+const pageTwo = function() {
+  return (
+    React.createElement('section', {className: 'flex-container'}, [
+React.createElement('img', {src: 'https://smalldogbreeds.net/img/dog.jpg', style: {"margin":"10px","height":"100px","width":"100px"}})    ])
+  )
+};
+
+module.exports = pageTwo;`;
+        expect(testText).to.equal(rawText);
+      });
+    });
+
     describe('Body CSS: ', function() {
       it('should return body css as a string', function() {
       var testState =
@@ -41,28 +268,6 @@ describe('Server: ', function() {
         expect(testText).to.equal(rawText);
       })
     });
-
-    const singleState =
-    {
-      components: [
-        {
-          componentId: 0,
-          type: 'Post'
-        }
-      ],
-      storage: {
-        0: {
-          name: 'ThatPost',
-          css: {
-            color: 'blue',
-            position: 'flex'
-          },
-          type: 'Post',
-          text: 'Hello world',
-          children: []
-        }
-      }
-    }
 
     describe('Text component: ', function() {
       it('should return a text component with props', function() {
@@ -232,7 +437,27 @@ describe('Server: ', function() {
           expect(testText).to.equal(rawText)
       });
 
-
+      const singleState =
+      {
+        components: [
+          {
+            componentId: 0,
+            type: 'Post'
+          }
+        ],
+        storage: {
+          0: {
+            name: 'ThatPost',
+            css: {
+              color: 'blue',
+              position: 'flex'
+            },
+            type: 'Post',
+            text: 'Hello world',
+            children: []
+          }
+        }
+      }
     //   it('should write to a file', function() {
     //     let testText = mapStateTreeToReact(singleState)
     //
@@ -376,7 +601,7 @@ describe('Server: ', function() {
           }
         };
 
-      console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
+      // console.log('&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&');
       let testText = getComponentString(testState.storage[0], testState.storage);
       // let rawText = `React.createElement('Carousel', {}, [React.createElement('div', {style: {"height":"400px","width":"400px"}}, [React.createElement('img', {src: 'http://placecorgi.com/260/180', style: {"width":"260px","height":"180px","padding":"10px"}}),React.createElement('div', {style: {"color":"red","backgroundColor":"blue"}}, 'DOooogGGGEEEeee')])])`;
       // expect(testText).to.equal(rawText);

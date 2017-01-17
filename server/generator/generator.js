@@ -31,6 +31,143 @@ const mapBodyCSS = (stateTree) => {
   return bodyCSSasString;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Generates index.jsx
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+const generateIndexFile = (stateTree) => {
+  let components = stateTree.components;
+  let storage = stateTree.storage;
+  var pages = _sortComponentsByPage(components); // build up obj of components
+  var indexFileAsString = ``;
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate header of file (all the require/import statements)
+////////////////////////////////////////////////////////////////////////////////
+  indexFileAsString += `import React from 'react';\nimport { render } from 'react-dom';\nimport { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';\n`;
+
+  // Generate import statements for each page component
+  for (var page in pages) {
+    let pathToFile = './components/';
+    indexFileAsString += `${_makeRequireStatement(page, pathToFile)}`;
+  }
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate class declaration of index.jsx
+////////////////////////////////////////////////////////////////////////////////
+  indexFileAsString += `
+class Index extends React.Component {
+  render() {
+    return (
+      <div className="flex-container">
+        <IndexPage />
+      </div>
+    )
+  }
+}`;
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate react-route routes based on different pages
+////////////////////////////////////////////////////////////////////////////////
+  indexFileAsString += `
+render((
+  <Router history={hashHistory}>
+    <Route path="/" component={Index} />
+`;
+
+  // Generate custom routes for everything that is not an IndexPage
+  for (var page in pages) {
+    page !== 'IndexPage' ? indexFileAsString += `${_makeRoutes(page)}` : null;
+  }
+
+  indexFileAsString +=
+`  </Router>
+), document.getElementById('react'));`;
+
+  return indexFileAsString;
+};
+
+// Helper function for generateIndexFile
+// @input: an array of component references
+// @output: an object where key is pageName, value is an array of component
+// references for that page
+const _sortComponentsByPage = (components) => {
+  var pageHash = {};
+
+  components.forEach((component) => {
+    pageHash[component.page] === undefined ?
+      pageHash[component.page] = [component] :
+      pageHash[component.page].push(component);
+  });
+
+  return pageHash;
+};
+
+// Helper function to generate require statement for pageName
+// @input: name of page <String>
+// @output: constant declaration with link to name of page <String>
+const _makeRequireStatement = (pageName, pathToFile) => {
+  return `const ${pageName} = require('${pathToFile}${pageName}.js');\n`;
+};
+
+// Helper function to generate react router route for pageName
+// @input: name of page <String>
+// @output: react router component for pageName <String>
+const _makeRoutes = (pageName) => {
+  return `    <Route path="/${pageName}" component={${pageName}} />\n`;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Generates a string to be written to [page].js
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+const generateComponentFile = (currentPage, pageHash, stateTree) => {
+  // Only include components that match the page we are going to generate
+  let components = stateTree.components.filter((component) => {
+    return component.page === currentPage;
+  });
+  let storage = stateTree.storage;
+  var fileAsString = ``;
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate headers for component file
+////////////////////////////////////////////////////////////////////////////////
+  fileAsString += `import React from 'react';import Carousel from './Carousel.jsx';import { Link } from 'react-router';`;
+  for (var page in pageHash) {
+    page !== currentPage ?
+      fileAsString += `${_makeRequireStatement(page, './')}` : null;
+  }
+////////////////////////////////////////////////////////////////////////////////
+// Generate class for component file
+////////////////////////////////////////////////////////////////////////////////
+  fileAsString +=
+`const ${currentPage} = function() {
+  return (
+    React.createElement('section', {className: 'flex-container'}, [
+`;
+  // Build out all components included currentPage DOM
+  for (var i = 0; i < components.length; i++) {
+    let actual = storage[components[i].componentId];
+    fileAsString += getComponentString(actual, storage);
+    // Make it so there is no comma after the last component
+    i <= components.length - 2 ?
+      fileAsString += `,` : null;
+  }
+
+  // Closing part of file
+  fileAsString +=
+`    ])
+  )
+};
+
+module.exports = ${currentPage};`;
+
+  return fileAsString;
+};
+////////////////////////////////////////////////////////////////////////////////
+
 const mapStateTreeToReact = (stateTree) => {
 
   let components = stateTree.components;
@@ -182,6 +319,8 @@ const trimWhitespace = function(text) {
   return text.replace(/ /g,'');
 };
 
+module.exports.generateIndexFile = generateIndexFile;
+module.exports.generateComponentFile = generateComponentFile;
 module.exports.mapBodyCSS = mapBodyCSS;
 module.exports.mapStateTreeToReact = mapStateTreeToReact;
 module.exports.getComponentString = getComponentString;

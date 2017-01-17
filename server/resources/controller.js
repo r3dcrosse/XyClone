@@ -176,7 +176,7 @@ module.exports = {
 
   downloadProject: function(req, res) {
     const projectId = req.params.projectId;
-    
+
     console.log('Trying to download projectId: ', projectId);
 
     // Pull propTree from database and assemble website
@@ -202,20 +202,35 @@ module.exports = {
             path.resolve(__dirname, `../tempData/${projectId}/styles.css`),
             generator.mapBodyCSS(data),
             function() {
-              // Write IndexComponent to template
-              fs.writeFile(
-                path.resolve(__dirname, `../tempData/${projectId}/app/components/IndexComponent.js`),
-                generator.mapStateTreeToReact(data),
-                function() {
-                  // Zip templated directory and send back to user
-                  zipdir(
-                    `./server/tempData/${projectId}`,
-                    { saveTo: `./server/tempData/${projectId}.zip` },
-                    function(err, buffer) {
-                      console.log('File was zipped and can now be downloaded');
-                      res.sendFile(`tempData/${projectId}.zip`, {root: '../XyClone/server/'});
-                    }
-                  )
+              // Generate index.jsx (the root component that includes react-routes)
+              fs.writeFileSync(
+                path.resolve(__dirname, `../tempData/${projectId}/app/index.jsx`),
+                generator.generateIndexFile(data)
+              );
+
+              // Build out obj of different of pages to generate js files for
+              var pageHash = {};
+              data.components.forEach((component) => {
+                pageHash[component.page] === undefined ?
+                  pageHash[component.page] = [component] :
+                  pageHash[component.page].push(component);
+              });
+
+              // generate file for each page
+              for (var page in pageHash) {
+                fs.writeFileSync(
+                  path.resolve(__dirname, `../tempData/${projectId}/app/components/${page}.js`),
+                  generator.generateComponentFile(page, pageHash, data)
+                );
+              }
+
+              // Zip templated directory and send back to user
+              zipdir(
+                `./server/tempData/${projectId}`,
+                { saveTo: `./server/tempData/${projectId}.zip` },
+                function(err, buffer) {
+                  console.log('File was zipped and can now be downloaded');
+                  res.sendFile(`tempData/${projectId}.zip`, {root: '../XyClone/server/'});
                 }
               );
             }
