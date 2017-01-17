@@ -203,7 +203,7 @@ module.exports = {
             generator.mapBodyCSS(data),
             function() {
               // Generate index.jsx (the root component that includes react-routes)
-              fs.writeToFileSync(
+              fs.writeFileSync(
                 path.resolve(__dirname, `../tempData/${projectId}/app/index.jsx`),
                 generator.generateIndexFile(data)
               );
@@ -218,7 +218,7 @@ module.exports = {
 
               // generate file for each page
               for (var page in pageHash) {
-                fs.writeToFileSync(
+                fs.writeFileSync(
                   path.resolve(__dirname, `../tempData/${projectId}/app/components/${page}.js`),
                   generator.generateComponentFile(page, pageHash, data)
                 );

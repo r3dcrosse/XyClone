@@ -73,18 +73,18 @@ import { render } from 'react-dom';
 import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
 const IndexPage = require('./components/IndexPage.js');
 
-class IndexPage extends React.Component {
+class Index extends React.Component {
   render() {
     return (
       <div className="flex-container">
-        <Index />
+        <IndexPage />
       </div>
     )
   }
 }
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={IndexPage} />
+    <Route path="/" component={Index} />
   </Router>
 ), document.getElementById('react'));`;
 
@@ -157,18 +157,18 @@ import { Router, DefaultRoute, Link, Route, hashHistory } from 'react-router';
 const IndexPage = require('./components/IndexPage.js');
 const pageTwo = require('./components/pageTwo.js');
 
-class IndexPage extends React.Component {
+class Index extends React.Component {
   render() {
     return (
       <div className="flex-container">
-        <Index />
+        <IndexPage />
       </div>
     )
   }
 }
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={IndexPage} />
+    <Route path="/" component={Index} />
     <Route path="/pageTwo" component={pageTwo} />
   </Router>
 ), document.getElementById('react'));`;

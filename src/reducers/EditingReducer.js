@@ -35,12 +35,19 @@ export default function xyclone (state = initialState, action) {
 		case 'ADD_COMPONENT':
 			elem = action.componentType;
 			project = action.project;
-			page = action.page || null;
+			page = action.page || 'IndexPage'; // IndexPage is default page
 			userId = action.userId || null;
 			idInStorage = _components[elem](project, page, userId);
 
 			return Object.assign({}, state, {
-				components: [...state.components, {componentId: idInStorage, type: action.componentType, projectId: project.projectId}]
+				components: [...state.components,
+          {
+            componentId: idInStorage,
+            type: action.componentType,
+            projectId: project.projectId,
+            page: page
+          }
+        ]
 			});
 
 
@@ -76,13 +83,13 @@ export default function xyclone (state = initialState, action) {
 			var parentEle = storage[action.componentId];
 			elem = action.componentType;
 			project = action.project;
-			page = action.page || null;
+			page = action.page || 'IndexPage'; // Index page is default
 			userId = action.userId;
 			console.log(project);
 			// console.log('THIS IS STORAGE BEFORE', storage);
 			let newObjectId = _components[elem](project, page, userId);
-			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type, projectId: project.projectId};
-			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType, projectId: project.projectId });
+			storage[newObjectId].parent = {componentId: action.componentId, type: parentEle.type, projectId: project.projectId, page: page};
+			storage[action.componentId].children.push({componentId: newObjectId, type: action.componentType, projectId: project.projectId, page: page });
 			// console.log('STORAGE HAS BEEN UPDATED WITH A NEW CHILD', storage);
 			return Object.assign({}, state, {
 				currComponent: {

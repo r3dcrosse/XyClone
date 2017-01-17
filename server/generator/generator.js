@@ -57,11 +57,11 @@ const generateIndexFile = (stateTree) => {
 // Generate class declaration of index.jsx
 ////////////////////////////////////////////////////////////////////////////////
   indexFileAsString += `
-class IndexPage extends React.Component {
+class Index extends React.Component {
   render() {
     return (
       <div className="flex-container">
-        <Index />
+        <IndexPage />
       </div>
     )
   }
@@ -73,7 +73,7 @@ class IndexPage extends React.Component {
   indexFileAsString += `
 render((
   <Router history={hashHistory}>
-    <Route path="/" component={IndexPage} />
+    <Route path="/" component={Index} />
 `;
 
   // Generate custom routes for everything that is not an IndexPage

@@ -7,7 +7,7 @@ let incrementIdFunc = function() {
 }
 
 export const _components = {
-  Navbar: (project = {}, page = null, userId = null) => {
+  Navbar: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       "backgroundColor": "yellow",
       "width": "700px",
@@ -28,7 +28,7 @@ export const _components = {
     storage[incrementId] = component;
     return incrementId++;
   },
-  Textbox: (project = {}, page = null, userId = null) => {
+  Textbox: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       "backgroundColor": "cornflowerblue",
       "width": "100px",
@@ -50,7 +50,7 @@ export const _components = {
     storage[incrementId] = component;
     return incrementId++;
   },
-  Image: (project = {}, page = null, userId = null) => {
+  Image: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       width: '100px',
       height: '100px',
@@ -72,7 +72,7 @@ export const _components = {
     storage[incrementId] = component;
     return incrementId++;
   },
-  UserContainer: (project = {}, page = null, userId = null) => {
+  UserContainer: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       display: 'flex',
       flexDirection: 'row',
@@ -100,7 +100,7 @@ export const _components = {
     return incrementId++;
   },
 
-  GalleryPost: (project = {}, page = null, userId = null) => {
+  GalleryPost: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       display: 'flex',
       flexDirection: 'column',
@@ -137,7 +137,7 @@ export const _components = {
     return incrementId++;
   },
 
-  Carousel: (project = {}, page = null, userId = null) => {
+  Carousel: (project = {}, page = 'IndexPage', userId = null) => {
 
     let defaultCss = {
       display: 'flex',
