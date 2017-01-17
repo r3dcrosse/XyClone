@@ -176,7 +176,7 @@ module.exports = {
 
   downloadProject: function(req, res) {
     const projectId = req.params.projectId;
-    
+
     console.log('Trying to download projectId: ', projectId);
 
     // Pull propTree from database and assemble website
@@ -202,6 +202,14 @@ module.exports = {
             path.resolve(__dirname, `../tempData/${projectId}/styles.css`),
             generator.mapBodyCSS(data),
             function() {
+              // Generate index.jsx
+              fs.writeToFileSync(
+                path.resolve(__dirname, `../tempData/${projectId}/app/index.jsx`),
+                generator.generateIndexFile(data)
+              );
+
+              // Build out array of different of pages to generate js files for
+
               // Write IndexComponent to template
               fs.writeFile(
                 path.resolve(__dirname, `../tempData/${projectId}/app/components/IndexComponent.js`),
