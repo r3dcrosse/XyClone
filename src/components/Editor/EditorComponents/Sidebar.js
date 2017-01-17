@@ -50,8 +50,6 @@ class Sidebar extends Component {
     let prevProjectState = JSON.parse(sessionStorage.getItem('projectStates'))[counter];
     sessionStorage.setItem('counter', JSON.stringify(counter));
     // CHANGE STORAGE CACHE TO REFLECT THE RPOEJCT STATE;
-    console.log(storage, 'STORAGE BEFORE CHANGE')
-    console.log(prevProjectState, 'PREVIOSU PROJECT STATE');
     // DELETING ALL PREVIOUS STORAGE COMPONENTS.
     for (let key in storage) {
       if (key.includes('body')) {
@@ -62,7 +60,9 @@ class Sidebar extends Component {
       } else {
         if (storage[key].project.projectId === this.props.currProject.projectId) {
           console.log('DELETING TIHS NOT BHODY', storage[key])
+          console.log('STORAGE IS CURRNELTY', storage);
           delete storage[key];
+          console.log('STORAGE IS THIS AFTER', storage);
         }
       }
     }
@@ -70,7 +70,6 @@ class Sidebar extends Component {
     for (let key in prevProjectState.storage) {
       storage[key] = prevProjectState.storage[key];
     }
-    console.log(storage, 'STORAGE AFTER CHANGE');
 
     this.props.updateStorageAndStateComponents(prevProjectState.components)
   }
