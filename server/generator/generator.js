@@ -31,7 +31,11 @@ const mapBodyCSS = (stateTree) => {
   return bodyCSSasString;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Generates index.jsx
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 const generateIndexFile = (stateTree) => {
   let components = stateTree.components;
   let storage = stateTree.storage;
@@ -45,7 +49,8 @@ const generateIndexFile = (stateTree) => {
 
   // Generate import statements for each page component
   for (var page in pages) {
-    indexFileAsString += `${_makeRequireStatement(page)}`;
+    let pathToFile = './components/';
+    indexFileAsString += `${_makeRequireStatement(page, pathToFile)}`;
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,8 +107,8 @@ const _sortComponentsByPage = (components) => {
 // Helper function to generate require statement for pageName
 // @input: name of page <String>
 // @output: constant declaration with link to name of page <String>
-const _makeRequireStatement = (pageName) => {
-  return `const ${pageName} = require('./components/${pageName}.js');\n`;
+const _makeRequireStatement = (pageName, pathToFile) => {
+  return `const ${pageName} = require('${pathToFile}${pageName}.js');\n`;
 };
 
 // Helper function to generate react router route for pageName
@@ -111,7 +116,57 @@ const _makeRequireStatement = (pageName) => {
 // @output: react router component for pageName <String>
 const _makeRoutes = (pageName) => {
   return `    <Route path="/${pageName}" component={${pageName}} />\n`;
-}
+};
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Generates a string to be written to [page].js
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+const generateComponentFile = (currentPage, pageHash, stateTree) => {
+  // Only include components that match the page we are going to generate
+  let components = stateTree.components.filter((component) => {
+    return component.page === currentPage;
+  });
+  let storage = stateTree.storage;
+  var fileAsString = ``;
+
+////////////////////////////////////////////////////////////////////////////////
+// Generate headers for component file
+////////////////////////////////////////////////////////////////////////////////
+  fileAsString += `import React from 'react';import Carousel from './Carousel.jsx';import { Link } from 'react-router';`;
+  for (var page in pageHash) {
+    page !== currentPage ?
+      fileAsString += `${_makeRequireStatement(page, './')}` : null;
+  }
+////////////////////////////////////////////////////////////////////////////////
+// Generate class for component file
+////////////////////////////////////////////////////////////////////////////////
+  fileAsString +=
+`const ${currentPage} = function() {
+  return (
+    React.createElement('section', {className: 'flex-container'}, [
+`;
+  // Build out all components included currentPage DOM
+  for (var i = 0; i < components.length; i++) {
+    let actual = storage[components[i].componentId];
+    fileAsString += getComponentString(actual, storage);
+    // Make it so there is no comma after the last component
+    i <= components.length - 2 ?
+      fileAsString += `,` : null;
+  }
+
+  // Closing part of file
+  fileAsString +=
+`    ])
+  )
+};
+
+module.exports = ${currentPage};`;
+
+  return fileAsString;
+};
+////////////////////////////////////////////////////////////////////////////////
 
 const mapStateTreeToReact = (stateTree) => {
 
@@ -265,6 +320,7 @@ const trimWhitespace = function(text) {
 };
 
 module.exports.generateIndexFile = generateIndexFile;
+module.exports.generateComponentFile = generateComponentFile;
 module.exports.mapBodyCSS = mapBodyCSS;
 module.exports.mapStateTreeToReact = mapStateTreeToReact;
 module.exports.getComponentString = getComponentString;

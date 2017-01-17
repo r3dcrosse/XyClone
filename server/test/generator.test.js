@@ -17,6 +17,7 @@ const escapeSpecialChars = reactGenerator.escapeSpecialChars
 const mapStateTreeToReact = reactGenerator.mapStateTreeToReact
 const mapBodyCSS = reactGenerator.mapBodyCSS
 const generateIndexFile = reactGenerator.generateIndexFile
+const generateComponentFile = reactGenerator.generateComponentFile
 const getComponentString = reactGenerator.getComponentString
 const trimWhitespace = reactGenerator.trimWhitespace
 const keywordParser = reactGenerator.keywordParser
@@ -174,6 +175,80 @@ render((
         expect(testText).to.equal(rawText);
       });
     });
+
+    describe('Component file generator:', function() {
+      it('should return files', function() {
+        var testState = {
+          "projectId" : 33,
+          "title" : "DEFAULT PROJECT 33",
+          "description" : "DEFAULT PROJECT DESCRIPTION",
+          "storage" : {
+            "1" : {
+              "parent" : {},
+              "userId" : "10154401632357144",
+              "page" : "IndexPage",
+              "project" : { "description" : "DEFAULT PROJECT DESCRIPTION", "title" : "DEFAULT PROJECT 33", "projectId" : 33 },
+              "type" : "Navbar",
+              "children" : [ "/reddit" ],
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "700px", "backgroundColor" : "yellow" },
+              "name" : "Default Navbar Name"
+            },
+            "2" : {
+              "type" : "Image",
+              "css" : { "margin" : "10px", "height" : "100px", "width" : "100px" },
+              "alt" : "",
+              "page" : "pageTwo",
+              "src" : "https://smalldogbreeds.net/img/dog.jpg",
+              "name" : "Default Image Name"
+            },
+            "body33" : {
+              "css" : {
+                "height" : "100%",
+                "width" : "70%",
+                "padding" : "0px",
+                "marginLeft" : "180px",
+                "backgroundColor" : "#c73838",
+                "alignItems" : "center",
+                "position" : "relative",
+                "justifyContent" : "center",
+                "flexWrap" : "wrap",
+                "flexDirection" : "row",
+                "display" : "inline-flex"
+              }
+            }
+          },
+          "userId" : "10154401632357144",
+          "components" : [
+            {
+              "projectId" : 33,
+              "type" : "Navbar",
+              "componentId" : 1,
+              "page" : "IndexPage"
+            },
+            {
+              "projectId" : 33,
+              "type" : "Image",
+              "componentId" : 2,
+              "page" : "pageTwo"
+            }
+          ]
+        };
+
+        let testText = generateComponentFile('pageTwo', {'IndexPage': 'IndexPage', 'pageTwo':'pageTwo'}, testState);
+        let rawText =
+`import React from 'react';import Carousel from './Carousel.jsx';import { Link } from 'react-router';const IndexPage = require('./IndexPage.js');
+const pageTwo = function() {
+  return (
+    React.createElement('section', {className: 'flex-container'}, [
+React.createElement('img', {src: 'https://smalldogbreeds.net/img/dog.jpg', style: {"margin":"10px","height":"100px","width":"100px"}})    ])
+  )
+};
+
+module.exports = pageTwo;`;
+        expect(testText).to.equal(rawText);
+      });
+    });
+
     describe('Body CSS: ', function() {
       it('should return body css as a string', function() {
       var testState =
