@@ -1,8 +1,9 @@
-export function addProject (title, description, projectId) {
+export function addProject (title, description, imgUrl, projectId) {
   return {
     type: 'ADD_PROJECT',
     title: title,
     description: description,
+    imgUrl: imgUrl,
     projectId: projectId
   }
 };

@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addNewProject: (name, description, projectId) => {
-      dispatch(addProject(name, description, projectId));
+    addNewProject: (title, description, imgUrl, projectId) => {
+      dispatch(addProject(title, description, imgUrl, projectId));
     },
     deleteProjectById: (projectId) => {
       dispatch(deleteProject(projectId));
