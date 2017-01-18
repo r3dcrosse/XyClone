@@ -13,14 +13,20 @@ const initialState = {
     // }
   ],
   currProject: {},
-  currProjectId: null
+  currProjectId: null,
+  pages: []
 }
 
 export default function xycloneProjects (state = initialState, action) {
   switch (action.type) {
     case 'ADD_PROJECT':
       // Update project database with new project and description
+      console.log('GOT HERE!!!!!!!!');
       return Object.assign({}, state, {
+        pages: [...state.pages, {
+          projectId: action.projectId,
+          page: 'IndexPage'
+        }],
         projects: [...state.projects, {
           title: action.title,
           description: action.description,
@@ -51,7 +57,14 @@ export default function xycloneProjects (state = initialState, action) {
       return Object.assign({}, state, {
         projects: newProjectsArray
       });
-
+    case 'ADD_PAGE':
+      let newPageArray = [...state.pages, {
+        page: action.pageToAdd,
+        projectId: action.projectId
+      }];
+      return Object.assign({}, state, {
+        pages: newPageArray
+      });
     default:
       return state;
   }

@@ -18,7 +18,7 @@ class Editor extends Component {
   }
 
   render() {
-    let { components, onEditorClick, onEditorBodyClick, currProjectId }  = this.props
+    let { components, onEditorClick, onEditorBodyClick, currProjectId, currPage }  = this.props
     let stopBubble = (e) => {
       // console.log('STOP BUBBLE IS CALLED');
       e.stopPropagation();
@@ -29,24 +29,22 @@ class Editor extends Component {
       onEditorBodyClick(currProjectId);
     }
     components = components.filter((component) => {return component.projectId === currProjectId});
-    // console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
+    console.log('COMPONENTS::::', components);
+    console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
     return (
-      <div className='editor-inPage'>
-        <div style={bodyCss} onClick={preHandleBodyClick}>
-          {components.map(component => {
-            // console.log('RENDERING A COMPONENT', component);
-            return (
-              <UserComponent
-                key={component.componentId}
-                componentId={component.componentId}
-                type={component.type}
-                onEditorClick={() => onEditorClick(component.componentId)}
-              />
-            )
-            }
+      <div style={bodyCss} onClick={preHandleBodyClick}>
+        {components.map(component => {
+          console.log('RENDERING A COMPONENT', component);
+          return (
+            <UserComponent
+              key={component.componentId}
+              componentId={component.componentId}
+              type={component.type}
+              onEditorClick={() => onEditorClick(component.componentId)}
+            />
           )}
-        </div>
+        )}
       </div>
     )
   }

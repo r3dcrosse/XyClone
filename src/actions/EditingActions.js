@@ -66,6 +66,13 @@ export function updateStorageAndStateComponents (components) {
   }
 }
 
+export function changePage (newPage) {
+  return {
+    type: 'CHANGE_PAGE',
+    page: newPage
+  }
+};
+
 // THIS IS WHAT IT IS CURRNETLY
 // components of ALL PROJECTS CURRENTLY
 // REDUX STATE
@@ -86,4 +93,3 @@ export function updateStorageAndStateComponents (components) {
 // 2. UPDATE STATETREE COMPONENTS INSIDE XYCLONE WHENEVER A CURRPROJECT IS ASSIGNED
   // THIS WOULD BE INSIDE WEBSITE BOX. YOU WOULD NEED TO MAKE THE CHANGECURRPROJECT A PROMISE. THE RESOLVE WOULD BE UPDATESTORAGEANDSTATECOMPONENTS ACTION.
 // 3.
-
