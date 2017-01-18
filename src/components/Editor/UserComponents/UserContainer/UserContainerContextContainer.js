@@ -6,6 +6,7 @@ import UserContainerContext from './UserContainerContext'
 const mapStateToProps = (state) => {
   console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
+    components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,
     currProject: state.xycloneProjects.currProject,

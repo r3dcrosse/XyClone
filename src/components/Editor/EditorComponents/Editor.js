@@ -9,6 +9,10 @@ class Editor extends Component {
     super(props);
   }
 
+  componentDidMount() {
+
+  }
+
   componentWillReceiveProps(newProps) {
     // console.log('NEW PROPS FOR EDITOR HAS BEEN RECEIVED!', newProps);
   }

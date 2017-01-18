@@ -7,20 +7,18 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import axios from 'axios';
 import DashboardContainer from '../Dashboard/DashboardContainer';
 import Login from '../Login/Login';
-import EditorPage from '../Editor/EditorPage'
+import EditorPage from '../Editor/EditorPage';
 
 export default class Root extends Component {
 
-  requireAuth() {
+  requireAuth () {
     if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length === 0) {
       browserHistory.push('/login');
     }
-      console.log('REQUIREING AUTH');
   }
 
-  checkLogin() {
+  checkLogin () {
     if (Object.keys(this.props.store.getState().xycloneLogin.loginStatus).length !== 0) {
-      console.log('CHECKING LOGIN COMPLETE YOU ARE LOGGED IN');
       browserHistory.push('/dashboard');
     }
   }

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent, updateIndividualStorageComponents } from '../../../../actions/EditingActions'
+import { removeComponent, addComponent, updateStorageAndStateComponents } from '../../../../actions/EditingActions'
 import Sidebar from '../Sidebar'
 
 const mapStateToProps = (state) => {
@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch) => {
         onSidebarClick: (type, project, userId) => {
             dispatch(addComponent(type, project, userId));
         },
-        updateIndividualStorageComponents: (components) => {
-          dispatch(updateIndividualStorageComponents(components));
+        updateStorageAndStateComponents: (components) => {
+          dispatch(updateStorageAndStateComponents(components));
         }
     }
 }
