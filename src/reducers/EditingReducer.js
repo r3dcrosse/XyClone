@@ -4,7 +4,9 @@ import { _record } from '../cache/StorageCache';
 const initialState = {
   components: [],
   currComponent: null,
-  currComponentId: null
+  currComponentId: null,
+  currPage: 'IndexPage',
+  pages: []
 }
 
 // HELPER FUNCTION
@@ -29,7 +31,6 @@ export default function xyclone (state = initialState, action) {
 	let projectId;
 	let page;
 	let userId;
-
 
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -141,7 +142,11 @@ export default function xyclone (state = initialState, action) {
       console.log(action.components);
       return Object.assign({}, state, {
       	components: action.components
-      })
+      });
+    case 'CHANGE_PAGE':
+      return Object.assign({}, state, {
+        currPage: action.page
+      });
 		default:
 			return state
 	}

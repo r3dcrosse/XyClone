@@ -7,14 +7,16 @@ const mapStateToProps = (state) => {
     return {
         components: state.xyclone.components,
         currProject: state.xycloneProjects.currProject,
-        loginStatus: state.xycloneLogin.loginStatus
+        loginStatus: state.xycloneLogin.loginStatus,
+        currPage: state.xyclone.currPage,
+        pages: state.xycloneProjects.pages
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSidebarClick: (type, project, userId) => {
-            dispatch(addComponent(type, project, userId));
+        onSidebarClick: (type, project, userId, page) => {
+            dispatch(addComponent(type, project, userId, page));
         },
         updateStorageAndStateComponents: (components) => {
           dispatch(updateStorageAndStateComponents(components));

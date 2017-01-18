@@ -3,6 +3,7 @@ import { PropTypes } from 'react';
 import { Link, browserHistory } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import EditorContainer from './EditorComponents/Containers/EditorContainer';
 import SidebarContainer from './EditorComponents/Containers/SidebarContainer';
 import ContextSidebarContainer from './EditorComponents/Containers/ContextSidebarContainer';
@@ -10,8 +11,8 @@ import ContextSidebarContainer from './EditorComponents/Containers/ContextSideba
 require("../../Basic.less");
 
 class EditorPage extends Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
       open: false
     };
@@ -28,7 +29,22 @@ class EditorPage extends Component {
     browserHistory.push('/dashboard')
   }
 
+  handleAddNewPage () {
+    let projectId = this.props.currProjectId;
+    this.props.onAddPage('Test', projectId);
+    this.props.onChangePage('Test');
+  }
+
+  handleChangePage (page) {
+    this.props.onChangePage(page);
+  }
+
   render () {
+    // Filter out tabs pertaining to projectID
+    let pages = this.props.pages.filter((page) => {
+      return page.projectId === this.props.currProjectId;
+    });
+
     return (
     <div>
       <AppBar
@@ -42,9 +58,20 @@ class EditorPage extends Component {
         <div>
           <SidebarContainer openState={ this.state.open }/>
         </div>
-        <div className='editor-inPage'>
-          <EditorContainer />
-        </div>
+          <div className='editor-inPage'>
+            <Tabs style={{marginLeft: '180px'}}>
+              {
+                pages.map((element) => {
+                  return (
+                    <Tab label={element.page} onActive={this.handleChangePage.bind(this, element.page)} key={element.page}>
+                      <EditorContainer />
+                    </Tab>
+                  )
+                })
+              }
+              <Tab label='+' onActive={ this.handleAddNewPage.bind(this) } />
+            </Tabs>
+          </div>
         <div>
           <ContextSidebarContainer />
         </div>
