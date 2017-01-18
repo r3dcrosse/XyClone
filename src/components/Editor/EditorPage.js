@@ -32,10 +32,15 @@ class EditorPage extends Component {
   handleAddNewPage () {
     let projectId = this.props.currProjectId;
     this.props.onAddPage('Test', projectId);
+    this.props.onChangePage('Test');
+  }
+
+  handleChangePage (page) {
+    this.props.onChangePage(page);
   }
 
   render () {
-    console.log('@@@@@@@@@@@@@@@@@@@@ pages:', this.props.pages);
+    // Filter out tabs pertaining to projectID
     let pages = this.props.pages.filter((page) => {
       return page.projectId === this.props.currProjectId;
     });
@@ -58,7 +63,7 @@ class EditorPage extends Component {
               {
                 pages.map((element) => {
                   return (
-                    <Tab label={element.page}>
+                    <Tab label={element.page} onActive={this.handleChangePage.bind(this, element.page)} key={element.page}>
                       <EditorContainer />
                     </Tab>
                   )

@@ -1,9 +1,10 @@
-export function addComponent (componentType, project, userId) {
+export function addComponent (componentType, project, userId, page) {
   return {
     type: 'ADD_COMPONENT',
     componentType: componentType,
     project: project,
-    userId: userId
+    userId: userId,
+    page: page
   };
 }
 

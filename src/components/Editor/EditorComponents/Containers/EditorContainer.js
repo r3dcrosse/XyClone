@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,
     currProjectId: state.xycloneProjects.currProjectId,
-		page: state.xyclone.currPage
+		currPage: state.xyclone.currPage
   }
 }
 

@@ -28,10 +28,15 @@ class Editor extends Component {
     let preHandleBodyClick = () => {
       onEditorBodyClick(currProjectId);
     }
-    components = components.filter((component) => {return component.projectId === currProjectId});
+    console.log('COMPONENTS PRE FILTER:::', components);
+    components = components.filter((component) => {
+      return (component.projectId === currProjectId &&
+              component.page === currPage);
+    });
     console.log('COMPONENTS::::', components);
     console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
+
     return (
       <div style={bodyCss} onClick={preHandleBodyClick}>
         {components.map(component => {

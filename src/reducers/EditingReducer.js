@@ -145,7 +145,7 @@ export default function xyclone (state = initialState, action) {
       });
     case 'CHANGE_PAGE':
       return Object.assign({}, state, {
-        currPage: action.newPage
+        currPage: action.page
       });
 		default:
 			return state

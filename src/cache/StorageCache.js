@@ -1,7 +1,7 @@
 
 import { storage } from './ComponentCache';
 
-let composeProject = function(components, project, userId) {
+let composeProject = function(components, project, userId, pages) {
   let projectStorage = {};
   console.log(project.projectId);
   console.log(storage, 'STORAGE FROM COMPOSE PROJECT');
@@ -28,15 +28,16 @@ let composeProject = function(components, project, userId) {
     title: project.title,
     components: projectComponents,
     storage: projectStorage,
-    description: project.description
+    description: project.description,
+    pages: pages
   }
 }
 
-let saveToSessionStorage = function(components, project, userId) {
+let saveToSessionStorage = function(components, project, userId, pages) {
   // console.log('COMPONENTS', components);
   // console.log('PROJECT', project);
   // console.log('USERID', userId);
-  let currProjectState = composeProject(components, project, userId);
+  let currProjectState = composeProject(components, project, userId, pages);
   let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
   let counter = JSON.parse(sessionStorage.getItem('counter'));
   let initialLength = projectStates.length;
