@@ -69,7 +69,8 @@ class FacebookLogin extends Component {
             allProjects.push({
               projectId: project.projectId,
               title: project.title,
-              description: project.description
+              description: project.description,
+              imgUrl: project.imgUrl
             })
 
             // GRAB ALL THE COMPONENT REFERENCES THE USER HAS

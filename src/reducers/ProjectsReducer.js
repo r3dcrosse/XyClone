@@ -30,6 +30,7 @@ export default function xycloneProjects (state = initialState, action) {
         projects: [...state.projects, {
           title: action.title,
           description: action.description,
+          imgUrl: action.imgUrl,
           projectId: action.projectId
         }]
       });

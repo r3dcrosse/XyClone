@@ -62,8 +62,9 @@ module.exports = {
       var bodyString = `body${newSequenceNumber}`
       var newProject = new Project({
         projectId: newSequenceNumber,
-        title: `DEFAULT PROJECT ${newSequenceNumber}`,
-        description: `DEFAULT PROJECT DESCRIPTION`,
+        title: req.body.title,
+        imgUrl: req.body.imgUrl,
+        description: req.body.description,
         components: [],
         storage: {
           [bodyString]: {

@@ -5,6 +5,8 @@ import {Card, CardActions, CardTitle, CardMedia} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
 const WebsitesBox = ({ project, changeCurrProject, handleDeleteProject, userId }) => {
+  console.log(project.imgUrl)
+    console.log(project)
   let enterEditor = () => {
     // send dispatch action to redux to change the current project
     changeCurrProject(project.projectId);
@@ -13,6 +15,7 @@ const WebsitesBox = ({ project, changeCurrProject, handleDeleteProject, userId }
       sessionStorage.setItem('projectStates', JSON.stringify([]));
       sessionStorage.setItem('counter', JSON.stringify(0));
     }
+
     // GRAB ALL THE COMPONENTS THAT CORRESPOND TO THE PROJECT.projectId THROUGH A DISPATCH
     browserHistory.push('/editor');
   }
@@ -25,7 +28,7 @@ const WebsitesBox = ({ project, changeCurrProject, handleDeleteProject, userId }
         paddingRight: '5px'
       }}
       >
-        <img src="http://placecorgi.com/280/160" />
+        <img src={ project.imgUrl } />
       </CardMedia>
       <CardTitle
         title={ project.title }
