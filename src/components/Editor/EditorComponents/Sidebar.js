@@ -11,9 +11,7 @@ import Redo from 'material-ui/svg-icons/content/redo';
 import Undo from 'material-ui/svg-icons/content/undo';
 import FlatButton from 'material-ui/FlatButton';
 import {blue500, red500, greenA200, black} from 'material-ui/styles/colors';
-
-
-
+import SwapComponentsContainer from './Containers/SwapComponentsContainer';
 class Sidebar extends Component {
   constructor (props) {
     super(props);
@@ -59,13 +57,12 @@ class Sidebar extends Component {
         }
       } else {
         if (storage[key].project.projectId === this.props.currProject.projectId) {
-          console.log('DELETING TIHS NOT BHODY', storage[key])
-          console.log('STORAGE IS CURRNELTY', storage);
           delete storage[key];
-          console.log('STORAGE IS THIS AFTER', storage);
         }
       }
     }
+
+     //[{},{},{},{},{},{},{},{},{},{}]
     // ADDING IN ALL COMPONENTS FROM PREVIOUS STATE.
     for (let key in prevProjectState.storage) {
       storage[key] = prevProjectState.storage[key];
@@ -86,18 +83,14 @@ class Sidebar extends Component {
     let nextProjectState = JSON.parse(sessionStorage.getItem('projectStates'))[counter];
     sessionStorage.setItem('counter', JSON.stringify(counter));
     // CHANGE STORAGE CACHE TO REFLECT THE RPOEJCT STATE;
-    console.log(storage, 'STORAGE BEFORE CHANGE')
-    console.log(nextProjectState, 'PREVIOSU PROJECT STATE');
     // DELETING ALL PREVIOUS STORAGE COMPONENTS.
     for (let key in storage) {
       if (key.includes('body')) {
         if (key === 'body' + this.props.currProject.projectId) {
-          console.log('DELETING THIS', storage[key]);
           delete storage[key];
         }
       } else {
         if (storage[key].project.projectId === this.props.currProject.projectId) {
-          console.log('DELETING TIHS NOT BHODY', storage[key])
           delete storage[key]
         }
       }
@@ -121,7 +114,8 @@ class Sidebar extends Component {
         <MenuItem onTouchTap={() => this.clickHandler('UserContainer', currProject, loginStatus.id)}> Add Container </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('Carousel', currProject, loginStatus.id)}> Add Carousel </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('GalleryPost', currProject, loginStatus.id)}> Add Gallery Post </MenuItem>
-        <div>
+        <Divider />
+        <div style={{'marginTop': '2%'}}>
           <div>
             <FlatButton
               onTouchTap={() => this.undo()}
@@ -135,7 +129,9 @@ class Sidebar extends Component {
             />
           </div>
         </div>
-        <p></p>
+        <div>
+          <SwapComponentsContainer />
+        </div>
         <Divider />
         <BuildSiteContainer />
       </Drawer>

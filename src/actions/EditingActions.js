@@ -74,6 +74,19 @@ export function changePage (newPage) {
   }
 };
 
+export function swapFlagToggle () {
+  return {
+    type: 'TOGGLE_SWAP_FLAG'
+  }
+}
+
+export function swapComponents (idToSwap, projectId) {
+  return {
+    type: 'SWAP_COMPONENTS',
+    idToSwap: idToSwap,
+    projectId: projectId
+  }
+}
 // THIS IS WHAT IT IS CURRNETLY
 // components of ALL PROJECTS CURRENTLY
 // REDUX STATE

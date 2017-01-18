@@ -2,14 +2,21 @@ import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
 
-const UserContainer = ({name, style, id, onEditorClick, children, onEditorChildClick}) => {
+const UserContainer = ({name, style, currComponentId, id, onEditorClick, children, onEditorChildClick}) => {
+  let currComponentStyle;
+  if (currComponentId === id) {
+    currComponentStyle = 'currComponent-style'
+  } else {
+    currComponentStyle = '';
+  }
   let stopSideProp = (e) => {
-      e.stopPropagation();
-      onEditorClick();
-    }
+    e.stopPropagation();
+    onEditorClick();
+  }
+  console.log(currComponentStyle);
   return (
     <div className=''>
-      <div className='userContainer-flexcontainer' style={style} onClick={stopSideProp} >
+      <div className={'userContainer-flexcontainer ' + currComponentStyle} style={style} onClick={stopSideProp} >
         {
           children.map((referenceObject) => {
             console.log("THIS IS THE REFERENCE OBJECT ==========================", referenceObject);

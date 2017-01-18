@@ -6,9 +6,12 @@ import { storage } from '../../../../cache/ComponentCache'
 const mapStateToProps = (state) => {
   // console.log('MAPPING THE STATE TO BODYCONTEXT', state);
   return {
+    components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
     currComponentId: state.xyclone.currComponentId,
-    currProjectId: state.xycloneProjects.currProjectId
+    currProjectId: state.xycloneProjects.currProjectId,
+    currProject: state.xycloneProjects.currProject,
+    loginStatus: state.xycloneLogin.loginStatus
   }
 }
 

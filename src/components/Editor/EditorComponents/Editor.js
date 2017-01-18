@@ -24,30 +24,30 @@ class Editor extends Component {
       e.stopPropagation();
       onEditorClick(this.componentId);
     };
-
     let preHandleBodyClick = () => {
       onEditorBodyClick(currProjectId);
     }
-    console.log('COMPONENTS PRE FILTER:::', components);
+
     components = components.filter((component) => {
       return (component.projectId === currProjectId &&
               component.page === currPage);
     });
-    console.log('COMPONENTS::::', components);
-    console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
-
+    bodyCss['boxShadow'] = '10px 10px 10px #A9A9A9';
+    bodyCss['borderRadius'] = '20px';
     return (
-      <div style={bodyCss} onClick={preHandleBodyClick}>
-        {components.map(component => {
-          console.log('RENDERING A COMPONENT', component);
-          return (
-            <UserComponent
-              key={component.componentId}
-              componentId={component.componentId}
-              type={component.type}
-              onEditorClick={() => onEditorClick(component.componentId)}
-            />
+      <div className='editor-inPage'>
+        <div style={bodyCss} onClick={preHandleBodyClick}>
+          {components.map(component => {
+            return (
+              <UserComponent
+                key={component.componentId}
+                componentId={component.componentId}
+                type={component.type}
+                onEditorClick={() => onEditorClick(component.componentId)}
+              />
+              )
+            }
           )}
         )}
       </div>

@@ -12,7 +12,9 @@ export const _components = {
       "backgroundColor": "yellow",
       "width": "700px",
       "height": "100px",
-      "margin": "10px"
+      "margin": "10px",
+      "borderRadius": "2px",
+      "boxShadow": "2px 2px 2px 2px #353535"
     }
     let component = {
         name: 'Default Navbar Name',

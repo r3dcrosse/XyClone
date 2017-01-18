@@ -80,6 +80,7 @@ module.exports = {
               padding: '0px',
               width: '70%',
               height: '100%',
+              border: 'none'
             }
           }
         },

@@ -1,6 +1,8 @@
 body, html {
   margin: 0px;
   padding: 0px;
+  background-color: #D3D3D3;
+
 }
 
 .loginpage-field-container,
@@ -12,13 +14,22 @@ body, html {
 }
 
 .websitesBox-container {
-  padding-top: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
+.individual-website-block {
+  margin: 10px 10px 10px 10px !important;
+}
+
+.individual-website-block-buttons {
+  text-align: center !important;
+}
 .flex-container {
   display: inline-flex;
   margin-left: 0px;
@@ -121,4 +132,17 @@ body, html {
   margin-left: 44px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.dashboard-AddProjectButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  z-index: 100000;
+}
+.toggle-swap-class {
+  border: 1px solid red;
+}
+.currComponent-style {
+  border: 1px solid yellow;
 }

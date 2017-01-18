@@ -23,7 +23,6 @@ class ImageContext extends Component {
   }
 
   componentDidMount (){
-    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
@@ -33,7 +32,6 @@ class ImageContext extends Component {
     })
   }
   componentWillReceiveProps (newProps) {
-    // console.log('COMPONENT RECEIVED PROPS.', this.props);
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,

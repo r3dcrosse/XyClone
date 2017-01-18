@@ -10,9 +10,5 @@ const reducers = {
   xycloneProjects: xycloneProjects
 };
 
-// const rootReducer = combineReducers({
-//   xyclone,
-//   formReducer
-// })
 const rootReducer = combineReducers(reducers);
 export default rootReducer;

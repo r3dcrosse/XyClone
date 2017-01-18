@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 
-const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClick = undefined}) => {
+const Textbox = ({name, style, text, id, currProjectId, currComponentId, onEditorClick, child, onEditorChildClick = undefined, swapFlag, swapComponents}) => {
+  let currComponentStyle;
+  if (currComponentId === id) {
+    currComponentStyle = 'currComponent-style'
+  } else if (swapFlag){
+    currComponentStyle = 'toggle-swap-class';
+  } else {
+    currComponentStyle = '';
+  }
+
   if (!child) {
     let stopSideProp = (e) => {
       e.stopPropagation();
-      onEditorClick();
+      if (swapFlag) {
+        swapComponents(id, currProjectId);
+      } else {
+        onEditorClick();
+      }
     }
     return (
-      <div className='flex-item-textbox' style={style} onClick={stopSideProp}>
+      <div className={'flex-item-textbox ' + currComponentStyle} style={style} onClick={stopSideProp}>
         <div>
           {text}
         </div>
@@ -15,13 +28,17 @@ const Textbox = ({name, style, text, id, onEditorClick, child, onEditorChildClic
     )
   } else {
     let stopBubble = (e) => {
-      if (onEditorChildClick) {
-        onEditorChildClick();
+      if (swapFlag) {
+        swapComponents(id, currProjectId);
+      } else {
+        if (onEditorChildClick) {
+          onEditorChildClick();
+        }
       }
       e.stopPropagation();
     }
     return (
-      <div className='flex-item-textbox' style={style} onClick={stopBubble}>
+      <div className={'flex-item-textbox ' + currComponentStyle} style={style} onClick={stopBubble}>
         <div>
           {text}
         </div>

@@ -3,10 +3,7 @@ import { storage } from './ComponentCache';
 
 let composeProject = function(components, project, userId, pages) {
   let projectStorage = {};
-  console.log(project.projectId);
-  console.log(storage, 'STORAGE FROM COMPOSE PROJECT');
   for (let key in storage) {
-    console.log(key);
     if (!key.includes('body')) {
       if (storage[key].project.projectId === project.projectId) {
         console.log('adding this corresponding storage component into projectStorage', storage[key]);

@@ -1,25 +1,42 @@
 import React, { Component } from 'react';
 
-const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEditorChildClick = undefined}) => {
-  let stopSideProp = (e) => {
-    e.stopPropagation();
-    onEditorClick();
+const ImageComponent = ({name, style, src, swapFlag,  alt, id, child, onEditorClick, onEditorChildClick = undefined, currComponentId, swapComponents, currProjectId}) => {
+  let currComponentStyle;
+  if (currComponentId === id) {
+    currComponentStyle = 'currComponent-style'
+  } else if (swapFlag){
+    currComponentStyle = 'toggle-swap-class';
+  } else {
+    currComponentStyle = '';
   }
+
   if (!child) {
+    let stopSideProp = (e) => {
+      e.stopPropagation();
+      if (swapFlag) {
+        swapComponents(id, currProjectId);
+      } else {
+        onEditorClick();
+      }
+    }
     return (
-      <div className='flex-item-textbox' style={style} onClick={stopSideProp}>
+      <div className={"flex-item-textbox " + currComponentStyle} style={style} onClick={stopSideProp}>
         <img src={src} alt={alt} style={{"width": "100%", "height": "100%"}}/>
       </div>
     )
   } else {
     let stopBubble = (e) => {
-      if (onEditorChildClick) {
-        onEditorChildClick();
+      if (swapFlag) {
+        swapComponents(id, currProjectId);
+      } else {
+        if (onEditorChildClick) {
+          onEditorChildClick();
+        }
       }
       e.stopPropagation();
     }
     return (
-      <div className='flex-item-textbox' style={style} onClick={stopBubble}>
+      <div className={"flex-item-textbox " + currComponentStyle} style={style} onClick={stopBubble}>
         <img src={src} alt={alt} style={{"width": "100%", "height": "100%"}}/>
       </div>
     )
@@ -28,9 +45,4 @@ const ImageComponent = ({name, style, src, alt, id, child, onEditorClick, onEdit
 
 export default ImageComponent;
 
-// Textbox.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   links: PropTypes.arrayOf(PropTypes.shape({componentId: PropTypes.string.isRequired}).isRequired),
-//   css: PropTypes.shape
-// }
 
