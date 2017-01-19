@@ -58,14 +58,6 @@ export default function xycloneProjects (state = initialState, action) {
       return Object.assign({}, state, {
         projects: newProjectsArray
       });
-    case 'ADD_PAGE':
-      let newPageArray = [...state.pages, {
-        page: action.pageToAdd,
-        projectId: action.projectId
-      }];
-      return Object.assign({}, state, {
-        pages: newPageArray
-      });
     default:
       return state;
   }

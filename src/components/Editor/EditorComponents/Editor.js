@@ -18,24 +18,23 @@ class Editor extends Component {
   }
 
   render() {
-    let { components, onEditorClick, onEditorBodyClick, currProjectId, currPage }  = this.props
+    let { components, onEditorClick, onEditorBodyClick, currProjectId }  = this.props
     let stopBubble = (e) => {
       // console.log('STOP BUBBLE IS CALLED');
       e.stopPropagation();
       onEditorClick(this.componentId);
     };
-
     let preHandleBodyClick = () => {
       onEditorBodyClick(currProjectId);
     }
-    console.log('COMPONENTS PRE FILTER:::', components);
     components = components.filter((component) => {
-      return (component.projectId === currProjectId &&
-              component.page === currPage);
+      return component.projectId === currProjectId
     });
     console.log('COMPONENTS::::', components);
     console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
+    bodyCss['boxShadow'] = '10px 10px 10px #A9A9A9';
+    bodyCss['borderRadius'] = '20px';
 
     return (
       <div style={bodyCss} onClick={preHandleBodyClick}>

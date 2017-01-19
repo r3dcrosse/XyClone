@@ -28,12 +28,3 @@ export function deleteProject (projectId) {
     deletedProjectId: projectId
   }
 };
-
-export function addPage (newPage, projectId) {
-  console.log('GOT HERE!!!! ADDING A NEW PAGE!!!!!');
-  return {
-    type: 'ADD_PAGE',
-    pageToAdd: newPage,
-    projectId: projectId
-  }
-};

@@ -7,7 +7,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import axios from 'axios';
 import DashboardContainer from '../Dashboard/DashboardContainer';
 import Login from '../Login/Login';
-import EditorPageContainer from '../Editor/EditorPageContainer';
+import EditorPage from '../Editor/EditorPage';
 
 export default class Root extends Component {
 
@@ -39,7 +39,7 @@ export default class Root extends Component {
               <IndexRoute component={Login} />
               <Route path='/login' component={Login} onEnter={this.checkLogin.bind(this)}/>
               <Route path='/dashboard' component={DashboardContainer} onEnter={this.requireAuth.bind(this)} />
-              <Route path='/editor' component={EditorPageContainer} onEnter={this.checkCurrProjectId.bind(this)}/>
+              <Route path='/editor' component={EditorPage} onEnter={this.checkCurrProjectId.bind(this)}/>
             </Route>
           </Router>
           <DevTools />

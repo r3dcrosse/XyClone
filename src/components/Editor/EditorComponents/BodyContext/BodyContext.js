@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
+import saveToSessionStorage from '../../../../cache/StorageCache';
 import { SketchPicker } from 'react-color';
 
 class BodyContext extends Component {
@@ -37,6 +38,7 @@ class BodyContext extends Component {
       backgroundColor: backgroundColor
     });
     this.props.editBodyProps(cssObject, this.props.currProjectId);
+
   }
 
   handleBackgroundColor (color) {
@@ -44,6 +46,11 @@ class BodyContext extends Component {
     cssObject.backgroundColor = color.hex;
     this.setState({css: cssObject});
     this.prepForDispatch();
+  }
+
+  handleBackgroundColorComplete () {
+    console.log('THIS IS BEING RUN DOE');
+    saveToSessionStorage(this.props.components, this.props.currProject, this.props.loginStatus.id);
   }
 
   render() {
@@ -56,7 +63,7 @@ class BodyContext extends Component {
     } else {
       console.log('IM BEIGN RENDERED BODHYYYYYYYYYY');
       return (
-        <div className='bodycontext-container'>
+        <div className='bodycontext-container' onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
           <div className='bodycontext-menu'>Body Color</div>
           <SketchPicker
             color={css.backgroundColor}

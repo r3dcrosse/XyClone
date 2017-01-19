@@ -41,9 +41,6 @@ class Dashboard extends Component {
         if (Object.keys(userData.data).length !== 0) {
           const sessionProject = JSON.parse(sessionStorage.getItem('projectStates')).length !== 0 ? JSON.parse(sessionStorage.getItem('projectStates')) [JSON.parse(sessionStorage.getItem('counter'))] : {};
 
-          console.log(JSON.parse(sessionStorage.getItem('projectStates')).length);
-          console.log(JSON.parse(sessionStorage.getItem('counter')));
-          console.log(sessionProject);
           userData.data.forEach(function(project) {
             // IF PROJECT.ID !== PROJECTTOCHANGE.ID
             if (sessionProject.projectId !== project.projectId) {
@@ -94,7 +91,7 @@ class Dashboard extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ 
+    this.setState({
       projects: newProps.projects,
       open: false,
     });
@@ -163,8 +160,10 @@ class Dashboard extends Component {
         onTouchTap={ this.addNewProject.bind(this) }
       />,
     ];
+
     // console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
     let userId = this.state.userId;
+    console.log(this.state.projects);
     return (
       <div>
         <div className="App">
@@ -174,51 +173,51 @@ class Dashboard extends Component {
             iconElementRight={ <LogoutButtonContainer /> }
           />
         </div>
-
-          <div className="websitesBox-container">
-            {
-              this.state.projects.map((project, key) => {
-                return (
-                  <WebsitesBoxContainer
-                    key={ key }
-                    project={ project }
-                    handleDeleteProject={ this.deleteProjectById }
-                    userId={ userId }
-                  />
-                )
-              })
-            }
-          </div>
-
-        <span>
-          <RaisedButton
-            label="+"
-            onTouchTap={this.handleOpen.bind(this)}
-          />
-          <Dialog
-            title="Create New Project"
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose.bind(this)}
-          >
-            <TextField
-              id='title'
-              hintText="Project Title"
-              floatingLabelText="Project Title"
-            /><br />
-            <TextField
-              id='description'
-              hintText="Project Description"
-              floatingLabelText="Project Description"
-            /><br />
-            <TextField
-              id='imgUrl'
-              hintText="Project Image URL"
-              floatingLabelText="Project Image URL"
-            /><br />
-          </Dialog>
-        </span>
+        <div className="websitesBox-container">
+          {
+            this.state.projects.map((project, key) => {
+              return (
+                <WebsitesBoxContainer
+                  key={ key }
+                  project={ project }
+                  handleDeleteProject={ this.deleteProjectById }
+                  userId={ userId }
+                />
+              )
+            })
+          }
+        </div>
+        <div style={{'marginTop':'500px'}}>
+          <span>
+            <RaisedButton
+              label="+"
+              onTouchTap={this.handleOpen.bind(this)}
+            />
+            <Dialog
+              title="Create New Project"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose.bind(this)}
+            >
+              <TextField
+                id='title'
+                hintText="Project Title"
+                floatingLabelText="Project Title"
+              /><br />
+              <TextField
+                id='description'
+                hintText="Project Description"
+                floatingLabelText="Project Description"
+              /><br />
+              <TextField
+                id='imgUrl'
+                hintText="Project Image URL"
+                floatingLabelText="Project Image URL"
+              /><br />
+            </Dialog>
+          </span>
+        </div>
 
       </div>
     );

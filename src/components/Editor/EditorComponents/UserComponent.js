@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { PropTypes } from 'react';
 import { storage } from '../../../cache/ComponentCache';
 
-import ImageComponent from '../UserComponents/Image/Img';
-import Navbar from '../UserComponents/Navbar/Navbar';
-import Textbox from '../UserComponents/Textbox/Textbox';
+import ImageComponentContainer from '../UserComponents/Image/ImgContainer';
+import NavbarContainer from '../UserComponents/Navbar/NavbarContainer';
+import TextboxContainer from '../UserComponents/Textbox/TextboxContainer';
 import UserContainerContainer from '../UserComponents/UserContainer/UserContainerContainer'
-import GalleryPost from '../UserComponents/GalleryPost/GalleryPost'
+import GalleryPostContainer from '../UserComponents/GalleryPost/GalleryPostContainer'
 import CarouselContainer from '../UserComponents/Carousel/CarouselContainer'
 
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
@@ -16,27 +16,20 @@ const UserComponent = ({ componentId, type, onEditorClick, child = false, onEdit
   let name = storage[componentId].name;
   let children = storage[componentId].children;
   switch (type) {
-
     case 'Navbar':
-      return <Navbar name={name} children={children} style={style} id={componentId} onEditorClick={onEditorClick}/>;
-
+      return <NavbarContainer name={name} children={children} style={style} id={componentId} onEditorClick={onEditorClick}/>;
     case 'Textbox':
       let { text } = storage[componentId];
-      return <Textbox name={name} style={style} text={text} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
-
+      return <TextboxContainer name={name} style={style} text={text} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
     case 'Image':
       let { src, alt } = storage[componentId];
-      return <ImageComponent name={name} style={style} src={src} alt={alt} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
-
+      return <ImageComponentContainer name={name} style={style} src={src} alt={alt} id={componentId} onEditorClick={onEditorClick} child={child} onEditorChildClick={onEditorChildClick}/>
     case 'UserContainer':
-      return <UserContainerContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
-
+      return <UserContainerContainer name={name} style={style} id={componentId} children={children} onEditorClick={onEditorClick}/>
     case 'GalleryPost':
-      return <GalleryPost name={name} style={style} child={child} children={children} onEditorClick={onEditorClick} onEditorChildClick={onEditorChildClick}/>
-
+      return <GalleryPostContainer name={name} style={style} child={child} children={children} onEditorClick={onEditorClick} onEditorChildClick={onEditorChildClick} id={componentId}/>
     case 'Carousel':
-      return <CarouselContainer name={name} style={style} children={children} onEditorClick={onEditorClick}/>
-
+      return <CarouselContainer name={name} style={style} children={children} onEditorClick={onEditorClick} id={componentId}/>
     default:
       return <li>
               ID: {storage[componentId].name}

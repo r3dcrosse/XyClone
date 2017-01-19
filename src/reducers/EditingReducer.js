@@ -6,7 +6,8 @@ const initialState = {
   currComponent: null,
   currComponentId: null,
   currPage: 'IndexPage',
-  pages: []
+  pages: [],
+  swapFlag: false
 }
 
 // HELPER FUNCTION
@@ -31,6 +32,7 @@ export default function xyclone (state = initialState, action) {
 	let projectId;
 	let page;
 	let userId;
+	let swapFlagTemp;
 
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -54,7 +56,6 @@ export default function xyclone (state = initialState, action) {
 
 		case 'EDIT_COMPONENT':
 			// console.log('IN EDIT COMPONENT SWITCH', action.component)
-
 			return Object.assign({}, state, {
 				currComponent: action.component,
 				currComponentId: action.componentId
@@ -122,9 +123,11 @@ export default function xyclone (state = initialState, action) {
 		  console.log(' SETTING FOCUS TO THE BODY');
 		  // PLACEHOLDER FOR PROJECT ID
 		  projectId = action.projectId
+		  swapFlagTemp = state.swapFlag ? false : false;
 			return Object.assign({}, state, {
 				currComponent: storage['body' + projectId],
-				currComponentId: 'body' + projectId
+				currComponentId: 'body' + projectId,
+				swapFlag: false
 			});
 		case 'CHANGE_BODY_PROPS':
 			console.log(action.newProps, 'THIS IS THE NEW PROPERTIES OF THE AFSDFASDF');
@@ -143,11 +146,51 @@ export default function xyclone (state = initialState, action) {
       return Object.assign({}, state, {
       	components: action.components
       });
-    case 'CHANGE_PAGE':
-      return Object.assign({}, state, {
-        currPage: action.page
-      });
-		default:
+    case 'TOGGLE_SWAP_FLAG':
+    	console.log('TOGGLING SWAP FLAG');
+    	return Object.assign({}, state, {
+    		swapFlag: !state.swapFlag
+    	});
+    case 'SWAP_COMPONENTS':
+    	console.log('ABOUT TO SWAP COMPONENTS.');
+    	let objToSwap1;
+    	let objToSwap2;
+    	if (JSON.stringify(action.idToSwap).includes('body')) {
+    		console.log('IT INCLUDES BODY');
+    		return Object.assign({}, state, {
+    			swapFlag: !state.swapFlag
+    		});
+    	}
+    	for (let key in storage) {
+    		console.log(action.idToSwap, key);
+    		if (JSON.stringify(state.currComponentId) === key) {
+    			objToSwap1 = [storage[key], key];
+    		} else if (JSON.stringify(action.idToSwap) === key) {
+	    		if (storage[key].project.projectId === action.projectId) {
+	    			console.log('here');
+	    			objToSwap2 = [storage[key], key];
+	    		}
+    		}
+    	}
+    	storage[objToSwap1[1]] = objToSwap2[0];
+    	storage[objToSwap2[1]] = objToSwap1[0];
+    	console.log(state.components);
+    	let newStateComponents = state.components.map(function(component) {
+				if (component.componentId === JSON.parse(objToSwap1[1])) {
+    				component.type = objToSwap2[0].type;
+  			} else {
+	  			if (component.componentId === JSON.parse(objToSwap2[1])) {
+	  				component.type = objToSwap1[0].type;
+	  			}
+	  		}
+	  		return component;
+    	});
+    	return Object.assign({}, state, {
+    		components: newStateComponents,
+    		currComponentId: action.idToSwap,
+    		swapFlag: !state.swapFlag
+    	});
+ 		default:
 			return state
 	}
 }

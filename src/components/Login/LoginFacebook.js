@@ -57,7 +57,9 @@ class FacebookLogin extends Component {
         //   storage: Object,
         //   userId: String
         // }));
-        console.log('ABOUT TO PUSH TO DASHBOARD');
+        console.log('ABOUT TO PUSH TO DASHBOARD, SETTING PROJECT STATES AND COUNTER');
+        sessionStorage.setItem('projectStates', JSON.stringify([]));
+        sessionStorage.setItem('counter', JSON.stringify(0));
         browserHistory.push('/dashboard');
         console.log('PUSHED TO DASHBOARD')
         let allProjects = []
@@ -93,8 +95,6 @@ class FacebookLogin extends Component {
           // call this.props.updateStorageComponents(storage, components)
           this.props.updateStorageComponents(allComponents);
           this.props.updateProjectsStorage(allProjects);
-          sessionStorage.setItem('projectStates', JSON.stringify([]));
-          sessionStorage.setItem('counter', JSON.stringify(0));
           // call this.props.(make youro wn dispatch) for new projects)
         }
       // The person is not logged into Facebook, so we're not sure if

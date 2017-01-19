@@ -50,7 +50,7 @@ class TextboxContext extends Component {
     })
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
-    })  }
+    }) }
 
   // Use this to update the properties of the component in state
   changeProp (propertyToSet, cssProp, context, val) {

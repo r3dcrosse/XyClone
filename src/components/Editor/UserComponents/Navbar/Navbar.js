@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
 
-const Navbar = ({name, children, style, id, onEditorClick}) => {
+const Navbar = ({name, swapFlag, swapComponents, currProjectId, children, style, id, currComponentId, onEditorClick}) => {
+  let currComponentStyle;
+  if (currComponentId === id) {
+    currComponentStyle = 'currComponent-style'
+  } else if (swapFlag){
+    currComponentStyle = 'toggle-swap-class';
+  } else {
+    currComponentStyle = '';
+  }
   let stopSideProp = (e) => {
     e.stopPropagation();
-    onEditorClick();
+    if (swapFlag) {
+      swapComponents(id, currProjectId)
+    } else {
+      onEditorClick();
+    }
   }
   return (
-    <nav className='flex-item-navbar' style={style} onClick={stopSideProp}>
+    <nav className={'flex-item-navbar ' + currComponentStyle} style={style} onClick={stopSideProp}>
       <div>
         NAVBAR LOADED with id {id}, {name}
       </div>
