@@ -7,6 +7,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import { SketchPicker } from 'react-color';
 
 class UserContainerContext extends Component {
   constructor(props) {
@@ -21,7 +22,9 @@ class UserContainerContext extends Component {
       },
       children: [],
       type: '',
-      childSelector: 'Textbox'
+      childSelector: 'Textbox',
+      colorPickerButtonText: 'Background Color',
+      openColorPicker: false
     }
   }
 
@@ -33,6 +36,7 @@ class UserContainerContext extends Component {
       children: this.props.currComponent.children
     })
   }
+
   componentWillReceiveProps (newProps) {
     this.setState({
       name: newProps.currComponent.name,
@@ -58,6 +62,34 @@ class UserContainerContext extends Component {
   // When enter key is pressed, update all the properties of the img that changed
   handleEnterKeyPress (e) {
     e.key === 'Enter' ? this.prepForDispatch(e) : null;
+  }
+
+  handleOpenColorPicker (e) {
+    this.state.openColorPicker ?
+      this.setState({colorPickerButtonText: 'Background Color'}) :
+      this.setState({colorPickerButtonText: 'Close Color Picker'});
+    this.setState({openColorPicker: !this.state.openColorPicker});
+  }
+
+  handleBackgroundColor (color) {
+    let cssObject = this.state.css;
+    cssObject.backgroundColor = color.hex;
+    this.setState({css: cssObject});
+    // this.prepForDispatch();
+  }
+
+  handleBackgroundColorComplete () {
+    console.log('THIS IS BEING RUN DOE');
+
+    let newProps = this.state;
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    });
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    });
   }
 
   // Use this to update the properties of the component in state
@@ -92,12 +124,6 @@ class UserContainerContext extends Component {
     })
   }
 
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
-  }
-
   deleteCurrComponent(e) {
     e.preventDefault();
     let context = this;
@@ -111,7 +137,8 @@ class UserContainerContext extends Component {
   }
 
   render() {
-    let { type, name, css, children } = this.state;
+    // console.log('UserContainerContext IS BEING RENDERED WITH', this.state);
+    let { type, name, css, children, openColorPicker, colorPickerButtonText } = this.state;
     if (type !== 'UserContainer') {
       return (
         <div> SHIT IM NOT A USERCONTAINER IM JUST NULL </div>
@@ -127,10 +154,22 @@ class UserContainerContext extends Component {
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
-              <div>
-                <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-              </div>
-
+          <div>Background Color: {css.backgroundColor}</div>
+          <RaisedButton
+            label={colorPickerButtonText}
+            fullWidth={true}
+            onClick={this.handleOpenColorPicker.bind(this)}
+            style={{marginBottom: '10px', marginTop: '10px'}}
+          />
+          {
+            openColorPicker &&
+            <div onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
+              <SketchPicker
+                color={css.backgroundColor}
+                onChange={this.handleBackgroundColor.bind(this)}
+              />
+            </div>
+          }
           <TextField
             defaultValue={css.width}
             floatingLabelText="Width"
@@ -172,7 +211,7 @@ class UserContainerContext extends Component {
               label="Save"
               primary={true}
               onClick={this.prepForDispatch.bind(this)}
-              style={{marginRight: '5px'}}
+              style={{marginRight: '5px', marginBottom: '5px'}}
             />
             <RaisedButton
               label="Delete"

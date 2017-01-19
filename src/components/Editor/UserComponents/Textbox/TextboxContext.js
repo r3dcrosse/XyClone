@@ -5,6 +5,7 @@ import { storage } from '../../../../cache/ComponentCache';
 import saveToSessionStorage from '../../../../cache/StorageCache';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import { SketchPicker } from 'react-color';
 
 class TextboxContext extends Component {
   constructor(props) {
@@ -13,12 +14,17 @@ class TextboxContext extends Component {
       name: '',
       css: {
         backgroundColor: '',
+        color: 'black',
         width: '',
         height: '',
         margin: ''
       },
       text: '',
-      type: ''
+      type: '',
+      colorPickerButtonText: 'Background Color',
+      openColorPicker: false,
+      textColorPicker: 'Text Color',
+      openTextColorPicker: false
     }
   }
 
@@ -70,10 +76,46 @@ class TextboxContext extends Component {
     }
   }
 
-  changeBackgroundColor (e) {
+  handleOpenColorPicker (e) {
+    this.state.openColorPicker ?
+      this.setState({colorPickerButtonText: 'Background Color'}) :
+      this.setState({colorPickerButtonText: 'Close Color Picker'});
+    this.setState({openColorPicker: !this.state.openColorPicker});
+  }
+
+  handleOpenTextColorPicker () {
+    this.state.openTextColorPicker ?
+      this.setState({textColorPicker: 'Text Color'}) :
+      this.setState({textColorPicker: 'Close Color Picker'});
+    this.setState({openTextColorPicker: !this.state.openTextColorPicker});
+  }
+
+  handleTextColor (color) {
     let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
+    cssObject.color = color.hex;
     this.setState({css: cssObject});
+    // this.prepForDispatch();
+  }
+
+  handleBackgroundColor (color) {
+    let cssObject = this.state.css;
+    cssObject.backgroundColor = color.hex;
+    this.setState({css: cssObject});
+    // this.prepForDispatch();
+  }
+
+  handleBackgroundColorComplete () {
+    console.log('THIS IS BEING RUN DOE');
+
+    let newProps = this.state;
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    });
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    });
   }
 
   deleteCurrComponent(e) {
@@ -88,7 +130,7 @@ class TextboxContext extends Component {
     })  }
 
   render() {
-    let { type, name, css, text } = this.state;
+    let { type, name, css, text, colorPickerButtonText, openColorPicker, textColorPicker, openTextColorPicker } = this.state;
 
     if (type !== 'Textbox') {
       return (
@@ -112,11 +154,38 @@ class TextboxContext extends Component {
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
-
-            <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+          <div>Text Color: {css.color}</div>
+          <RaisedButton
+            label={textColorPicker}
+            fullWidth={true}
+            onClick={this.handleOpenTextColorPicker.bind(this)}
+            style={{marginBottom: '10px', marginTop: '10px'}}
+          />
+          {
+            openTextColorPicker &&
+            <div onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
+              <SketchPicker
+                color={css.color}
+                onChange={this.handleTextColor.bind(this)}
+              />
             </div>
-
+          }
+          <div>Background Color: {css.backgroundColor}</div>
+          <RaisedButton
+            label={colorPickerButtonText}
+            fullWidth={true}
+            onClick={this.handleOpenColorPicker.bind(this)}
+            style={{marginBottom: '10px', marginTop: '10px'}}
+          />
+          {
+            openColorPicker &&
+            <div onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
+              <SketchPicker
+                color={css.backgroundColor}
+                onChange={this.handleBackgroundColor.bind(this)}
+              />
+            </div>
+          }
           <TextField
             defaultValue={css.width}
             floatingLabelText="Width"
@@ -143,7 +212,7 @@ class TextboxContext extends Component {
               label="Save"
               primary={true}
               onClick={this.prepForDispatch.bind(this)}
-              style={{marginRight: '5px'}}
+              style={{marginRight: '5px', marginBottom: '5px'}}
             />
             <RaisedButton
               label="Delete"

@@ -51,7 +51,7 @@ export default class SettingsMenu extends React.Component {
   }
 
   onChange () {
-    
+
   }
 
   handleSubmit () {
@@ -124,21 +124,18 @@ export default class SettingsMenu extends React.Component {
           >
             <TextField
               id='title'
-              onChange={}
               value={this.state.title}
               hintText="Update Project Title"
               floatingLabelText="Project Title"
             /><br />
             <TextField
               id='description'
-              onChange={}
               value={this.state.description}
               hintText="Update Project Description"
               floatingLabelText="Project Description"
             /><br />
             <TextField
               id='imgUrl'
-              onChange={}
               value={this.state.imgUrl}
               hintText="Update Project Image"
               floatingLabelText="Project Image URL"
