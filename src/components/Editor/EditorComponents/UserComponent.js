@@ -9,7 +9,7 @@ import UserContainerContainer from '../UserComponents/UserContainer/UserContaine
 import GalleryPostContainer from '../UserComponents/GalleryPost/GalleryPostContainer'
 import CarouselContainer from '../UserComponents/Carousel/CarouselContainer'
 
-const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined}) => {
+const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined }) => {
   // console.log('COMPONENTID', componentId);
   // console.log('TYPE OF COMPONENT', type);
   let style = storage[componentId].css;

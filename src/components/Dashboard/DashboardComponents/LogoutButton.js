@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
+import { storage } from '../../../cache/ComponentCache'
 // import FB from '../../../cache/CacheFB'
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -35,7 +36,9 @@ class LogoutButton extends Component {
       console.log('response of logout', response);
       this.props.dispatchLogoutUser();
       sessionStorage.clear();
-
+      for (let key in storage) {
+        delete storage[key];
+      }
       browserHistory.push('/login');
     }.bind(this));
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-const ImageComponent = ({name, style, src, swapFlag,  alt, id, child, onEditorClick, onEditorChildClick = undefined, currComponentId, swapComponents, currProjectId}) => {
+import saveToSessionStorage from '../../../../cache/StorageCache';
+const ImageComponent = ({name, style, src, swapFlag, components, currProject, loginStatus, alt, id, child, onEditorClick, onEditorChildClick = undefined, currComponentId, swapComponents, currProjectId}) => {
   let currComponentStyle;
   if (currComponentId === id) {
     currComponentStyle = 'currComponent-style'
@@ -14,7 +14,13 @@ const ImageComponent = ({name, style, src, swapFlag,  alt, id, child, onEditorCl
     let stopSideProp = (e) => {
       e.stopPropagation();
       if (swapFlag) {
-        swapComponents(id, currProjectId);
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve();
+        });
+        swapHandler.then(() => {
+          saveToSessionStorage(components, currProject, loginStatus.id)
+        });
       } else {
         onEditorClick();
       }
@@ -27,7 +33,13 @@ const ImageComponent = ({name, style, src, swapFlag,  alt, id, child, onEditorCl
   } else {
     let stopBubble = (e) => {
       if (swapFlag) {
-        swapComponents(id, currProjectId);
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve();
+        });
+        swapHandler.then(() => {
+          saveToSessionStorage(components, currProject, loginStatus.id)
+        });
       } else {
         if (onEditorChildClick) {
           onEditorChildClick();

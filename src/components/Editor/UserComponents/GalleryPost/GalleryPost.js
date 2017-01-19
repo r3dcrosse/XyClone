@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
-const GalleryPost = ({name, style, currProjectId, swapFlag, id, currComponentId, child, children, onEditorClick, onEditorChildClick = undefined}) => {
+const GalleryPost = ({name, style, currProjectId, swapFlag, swapComponents, id, currComponentId, child, children, onEditorClick, onEditorChildClick = undefined, loginStatus, components }) => {
   let currComponentStyle;
   if (currComponentId === id) {
     currComponentStyle = 'currComponent-style'
@@ -16,7 +17,13 @@ const GalleryPost = ({name, style, currProjectId, swapFlag, id, currComponentId,
     let stopSideProp = (e) => {
       e.stopPropagation();
       if (swapFlag) {
-        swapComponents(id, currProjectId);
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve();
+        });
+        swapHandler.then(()=> {
+          saveToSessionStorage(components, currProjectId, loginStatus.id)
+        })
       } else {
         onEditorClick();
       }
@@ -27,7 +34,7 @@ const GalleryPost = ({name, style, currProjectId, swapFlag, id, currComponentId,
           children.map((referenceObject) => {
             console.log("THIS IS AN IMAGE/TEXTBOX IN GALLERYPOST", referenceObject);
             return (
-              <UserComponent key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true}/>
+              <UserComponent key={referenceObject.componentId} type={referenceObject.type} componentId={referenceObject.componentId} child={true} />
             )
           }
         )}
@@ -35,13 +42,23 @@ const GalleryPost = ({name, style, currProjectId, swapFlag, id, currComponentId,
     )
   } else {
     let stopBubble = (e) => {
-      if (onEditorChildClick) {
-        onEditorChildClick();
+      if (swapFlag) {
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve();
+        });
+        swapHandler.then(() => {
+          saveToSessionStorage(components, currProject, loginStatus.id)
+        });
+      } else {
+        if (onEditorChildClick) {
+          onEditorChildClick();
+        }
       }
       e.stopPropagation();
     }
     return (
-      <div className='GalleryPost-flexcontainer currComponent-style' style={style} onClick={stopBubble}>
+      <div className={'GalleryPost-flexcontainer ' + currComponentStyle} style={style} onClick={stopBubble}>
         {
           children.map((referenceObject) => {
             console.log("THIS IS AN IMAGE/TEXTBOX IN GALLERYPOST", referenceObject);

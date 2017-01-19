@@ -33,7 +33,6 @@ class TextboxContext extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    // console.log('COMPONENTSWILLRECIEVEPROPS');
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,

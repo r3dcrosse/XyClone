@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
-const Navbar = ({name, swapFlag, swapComponents, currProjectId, children, style, id, currComponentId, onEditorClick}) => {
+const Navbar = ({name, swapFlag, swapComponents, components, currProject, currProjectId, children, style, id, currComponentId, onEditorClick, loginStatus }) => {
   let currComponentStyle;
   if (currComponentId === id) {
     currComponentStyle = 'currComponent-style'
@@ -12,7 +13,13 @@ const Navbar = ({name, swapFlag, swapComponents, currProjectId, children, style,
   let stopSideProp = (e) => {
     e.stopPropagation();
     if (swapFlag) {
-      swapComponents(id, currProjectId)
+      let swapHandler = new Promise(function(resolve, reject) {
+        swapComponents(id, currProjectId);
+        resolve();
+      });
+      swapHandler.then(() => {
+        saveToSessionStorage(components, currProject, loginStatus.id)
+      });
     } else {
       onEditorClick();
     }

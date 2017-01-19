@@ -4,7 +4,6 @@ import UserContainerContext from './UserContainerContext'
 
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
     components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
@@ -19,9 +18,8 @@ const mapDispatchToProps = (dispatch) => {
     onChangeStyleClick: (newProps, id, component) => {
       dispatch(changeStyle(newProps, id, component))
     },
-    onEditorComponentSidebarClick: (type, componentId, project) => {
-      console.log('DISPATCHING ON COMPONENT CLICK')
-      dispatch(addInChildren(type, componentId, project))
+    onEditorComponentSidebarClick: (type, componentId, project, userId) => {
+      dispatch(addInChildren(type, componentId, project, userId))
     },
     deleteFocusedComponent: (id, component) => {
       dispatch(deleteComponent(id, component));

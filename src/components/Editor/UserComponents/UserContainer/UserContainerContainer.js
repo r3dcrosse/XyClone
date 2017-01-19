@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { editComponent } from '../../../../actions/EditingActions'
+import { editComponent, swapComponents } from '../../../../actions/EditingActions'
 import { storage } from '../../../../cache/ComponentCache'
 import UserContainer from './UserContainer'
 
@@ -8,16 +8,22 @@ const mapStateToProps = (state) => {
   return {
     components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
-    currComponentId: state.xyclone.currComponentId
+    currComponentId: state.xyclone.currComponentId,
+    currProjectId: state.xycloneProjects.currProjectId,
+    currProject: state.xycloneProjects.currProject,
+    loginStatus: state.xycloneLogin.loginStatus,
+    swapFlag: state.xyclone.swapFlag
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onEditorChildClick: (id) => {
-      console.log('ON EDITOR CHILD CLICK ', id);
       let component = storage[id];
       dispatch(editComponent(component, id))
+    },
+    swapComponents: (idToSwap, projectId) => {
+      dispatch(swapComponents(idToSwap, projectId));
     }
   }
 }
