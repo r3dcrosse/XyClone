@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import saveToSessionStorage from '../../../../cache/StorageCache';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class UserContainerContext extends Component {
   constructor(props) {
@@ -50,6 +52,22 @@ class UserContainerContext extends Component {
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
     });
+  }
+
+  // When enter key is pressed, update all the properties of the img that changed
+  handleEnterKeyPress (e) {
+    e.key === 'Enter' ? this.prepForDispatch(e) : null;
+  }
+
+  // Use this to update the properties of the component in state
+  changeProp (propertyToSet, cssProp, context, val) {
+    if (cssProp) {
+      let cssObject = this.state.css;
+      cssObject[cssProp] = val;
+      this.setState({ css : cssObject });
+    } else {
+      this.setState({ [propertyToSet] : val });
+    }
   }
 
   changeNameInput (e) {
@@ -125,28 +143,41 @@ class UserContainerContext extends Component {
       )
     } else {
       return (
-        <div>
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <div> {type} </div>
-            </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
+        <div className="imagecontext-container">
+        <div>User Container</div>
+        <TextField
+          defaultValue={name}
+          floatingLabelText="Container Name"
+          onChange={this.changeProp.bind(this, 'name', null)}
+          onKeyPress={this.handleEnterKeyPress.bind(this)}
+          fullWidth={true}
+        />
             <div>
               <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
             </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
+
+        <TextField
+          defaultValue={css.width}
+          floatingLabelText="Width"
+          onChange={this.changeProp.bind(this, 'css', 'width')}
+          onKeyPress={this.handleEnterKeyPress.bind(this)}
+          fullWidth={true}
+        />
+        <TextField
+          defaultValue={css.height}
+          floatingLabelText="Height"
+          onChange={this.changeProp.bind(this, 'css', 'height')}
+          onKeyPress={this.handleEnterKeyPress.bind(this)}
+          fullWidth={true}
+        />
+        <TextField
+          defaultValue={css.margin}
+          floatingLabelText="Margin"
+          onChange={this.changeProp.bind(this, 'css', 'margin')}
+          onKeyPress={this.handleEnterKeyPress.bind(this)}
+          fullWidth={true}
+        />
+
           <div>
             <span> Add a child! </span>
             <form onSubmit={this.changeChildrenInput.bind(this)}>
@@ -157,9 +188,19 @@ class UserContainerContext extends Component {
               <input type="submit" value="Add Children"/>
             </form>
           </div>
-          <form onSubmit={this.deleteCurrComponent.bind(this)}>
-            <input type="submit" value="Delete Component" />
-          </form>
+          <span>
+            <RaisedButton
+              label="Save"
+              primary={true}
+              onClick={this.prepForDispatch.bind(this)}
+              style={{marginRight: '5px'}}
+            />
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              onClick={this.deleteCurrComponent.bind(this)}
+            />
+          </span>
         </div>
       )
     }

@@ -57,7 +57,6 @@ class TextboxContext extends Component {
 
   // When enter key is pressed, update all the properties of the img that changed
   handleEnterKeyPress (e) {
-    console.log('GOT HERE');
     e.key === 'Enter' ? this.prepForDispatch(e) : null;
   }
 
