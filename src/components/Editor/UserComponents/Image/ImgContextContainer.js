@@ -3,7 +3,6 @@ import { changeStyle, deleteComponent } from '../../../../actions/EditingActions
 import ImageContext from './ImgContext'
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
     components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,

@@ -52,7 +52,6 @@ class Sidebar extends Component {
     for (let key in storage) {
       if (key.includes('body')) {
         if (key === 'body' + this.props.currProject.projectId) {
-          console.log('DELETING THIS', storage[key]);
           delete storage[key];
         }
       } else {
@@ -69,6 +68,8 @@ class Sidebar extends Component {
     }
 
     this.props.updateStorageAndStateComponents(prevProjectState.components)
+    this.props.editBodyClick(this.props.currProject.projectId);
+
   }
 
   redo () {
@@ -99,9 +100,9 @@ class Sidebar extends Component {
     for (let key in nextProjectState.storage) {
       storage[key] = nextProjectState.storage[key];
     }
-    console.log(storage, 'STORAGE AFTER CHANGE');
 
     this.props.updateStorageAndStateComponents(nextProjectState.components)
+    this.props.editBodyClick(this.props.currProject.projectId);
   }
 
   render() {

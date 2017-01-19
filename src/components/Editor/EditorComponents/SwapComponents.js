@@ -10,10 +10,7 @@ class SwapComponents extends Component {
   }
 
   handleSwapComponents () {
-    console.log(this.props.currComponentId);
-    console.log(JSON.stringify(this.props.currComponentId).includes('body'))
     if (!JSON.stringify(this.props.currComponentId).includes('body')) {
-    console.log('TOGGLING SHIT');
       this.props.toggleFlag();
     }
   }

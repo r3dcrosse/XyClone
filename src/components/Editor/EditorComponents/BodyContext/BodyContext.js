@@ -49,12 +49,10 @@ class BodyContext extends Component {
   }
 
   handleBackgroundColorComplete () {
-    console.log('THIS IS BEING RUN DOE');
     saveToSessionStorage(this.props.components, this.props.currProject, this.props.loginStatus.id);
   }
 
   render() {
-    // console.log('BodyContext IS BEING RENDERED');
     let { css } = this.state;
     if (this.props.currComponentId !== 'body' + this.props.currProjectId) {
       return (

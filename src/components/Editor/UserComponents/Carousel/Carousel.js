@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
 class Carousel extends Component {
 
   constructor(props) {
     super(props)
-    // console.log(props, 'THIS IS PROPS');
     this.state = {
       show: 0
     }
@@ -23,10 +23,17 @@ class Carousel extends Component {
 
   stopSideProp (e) {
     e.stopPropagation();
-    if (swapFlag) {
-      swapComponents(this.props.id, this.props.currProjectId);
+    if (this.props.swapFlag) {
+      let context = this;
+      let swapHandler = new Promise(function(resolve, reject) {
+        context.props.swapComponents(context.props.id, context.props.currProjectId);
+        resolve();
+      });
+      swapHandler.then(() => {
+        saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id)
+      });
     } else {
-      onEditorClick();
+      this.props.onEditorClick();
     }
   }
 
@@ -44,9 +51,8 @@ class Carousel extends Component {
   }
 
   render() {
-
     let currComponentStyle;
-    if (this.props.currComponentId === id) {
+    if (this.props.currComponentId === this.props.id) {
       currComponentStyle = 'currComponent-style'
     } else if (this.props.swapFlag){
       currComponentStyle = 'toggle-swap-class';

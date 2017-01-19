@@ -30,8 +30,6 @@ class Editor extends Component {
     components = components.filter((component) => {
       return component.projectId === currProjectId
     });
-    console.log('COMPONENTS::::', components);
-    console.log(storage, 'THIS IS THE STORAGE THAT WE ARE NOW MOUNTING');
     let bodyCss = storage['body' + currProjectId].css;
     bodyCss['boxShadow'] = '10px 10px 10px #A9A9A9';
     bodyCss['borderRadius'] = '20px';
@@ -39,7 +37,6 @@ class Editor extends Component {
     return (
       <div style={bodyCss} onClick={preHandleBodyClick}>
         {components.map(component => {
-          console.log('RENDERING A COMPONENT', component);
           return (
             <UserComponent
               key={component.componentId}

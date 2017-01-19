@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import saveToSessionStorage from '../../../../cache/StorageCache'
 
-const Textbox = ({name, style, text, id, currProjectId, currComponentId, onEditorClick, child, onEditorChildClick = undefined, swapFlag, swapComponents}) => {
+const Textbox = ({name, style, text, id, currProjectId, currProject, currComponentId, onEditorClick, child, onEditorChildClick = undefined, swapFlag, swapComponents, components, loginStatus}) => {
   let currComponentStyle;
   if (currComponentId === id) {
     currComponentStyle = 'currComponent-style'
@@ -9,12 +10,17 @@ const Textbox = ({name, style, text, id, currProjectId, currComponentId, onEdito
   } else {
     currComponentStyle = '';
   }
-
   if (!child) {
     let stopSideProp = (e) => {
       e.stopPropagation();
       if (swapFlag) {
-        swapComponents(id, currProjectId);
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve();
+        });
+        swapHandler.then(() => {
+          saveToSessionStorage(components, currProject, loginStatus.id)
+        })
       } else {
         onEditorClick();
       }
@@ -29,7 +35,10 @@ const Textbox = ({name, style, text, id, currProjectId, currComponentId, onEdito
   } else {
     let stopBubble = (e) => {
       if (swapFlag) {
-        swapComponents(id, currProjectId);
+        let swapHandler = new Promise(function(resolve, reject) {
+          swapComponents(id, currProjectId);
+          resolve(saveToSessionStorage(components, currProject, loginStatus.id));
+        });
       } else {
         if (onEditorChildClick) {
           onEditorChildClick();

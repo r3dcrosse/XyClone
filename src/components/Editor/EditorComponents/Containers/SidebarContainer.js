@@ -1,9 +1,8 @@
 import { connect } from 'react-redux'
-import { removeComponent, addComponent, updateStorageAndStateComponents } from '../../../../actions/EditingActions'
+import { addComponent, updateStorageAndStateComponents, editBodyClick } from '../../../../actions/EditingActions'
 import Sidebar from '../Sidebar'
 
 const mapStateToProps = (state) => {
-    console.log('SIDEBAR CONTAINER MAPPING STATE TO PROPS');
     return {
         components: state.xyclone.components,
         currProject: state.xycloneProjects.currProject,
@@ -18,11 +17,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateStorageAndStateComponents: (components) => {
           dispatch(updateStorageAndStateComponents(components));
+        },
+        editBodyClick: (id) => {
+            dispatch(editBodyClick(id));
         }
     }
 }
 
-[]
 const SidebarContainer = connect(
     mapStateToProps,
     mapDispatchToProps

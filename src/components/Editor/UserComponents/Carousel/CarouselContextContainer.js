@@ -18,9 +18,9 @@ const mapDispatchToProps = (dispatch) => {
     onChangeStyleClick: (newProps, id, component) => {
       dispatch(changeStyle(newProps, id, component))
     },
-    onEditorComponentSidebarClick: (type, componentId, project) => {
+    onEditorComponentSidebarClick: (type, componentId, project, userId) => {
       console.log('DISPATCHING ON COMPONENT CLICK')
-      dispatch(addInChildren(type, componentId, project))
+      dispatch(addInChildren(type, componentId, project, userId))
     },
     deleteFocusedComponent: (id, component) => {
       dispatch(deleteComponent(id, component));

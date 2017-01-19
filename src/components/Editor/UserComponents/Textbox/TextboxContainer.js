@@ -1,11 +1,15 @@
 import Textbox from './Textbox';
 import { connect } from 'react-redux'
 import { swapComponents } from '../../../../actions/EditingActions'
+
 const mapStateToProps = (state) => {
   return {
+    components: state.xyclone.components,
     currComponentId: state.xyclone.currComponentId,
     swapFlag: state.xyclone.swapFlag,
-    currPprojectId: state.xycloneProjects.currProjectId
+    currProjectId: state.xycloneProjects.currProjectId,
+    currProject: state.xycloneProjects.currProject,
+    loginStatus: state.xycloneLogin.loginStatus
   }
 }
 

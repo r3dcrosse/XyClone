@@ -4,7 +4,6 @@ import TextboxContext from './TextboxContext'
 
 
 const mapStateToProps = (state) => {
-  console.log('MAPPING TO EDITORCOMPONENTCONTAINERASDFASDFASDF', state)
   return {
     components: state.xyclone.components,
     currComponent: state.xyclone.currComponent,
