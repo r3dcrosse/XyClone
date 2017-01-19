@@ -105,14 +105,14 @@ class ImageContext extends Component {
             defaultValue={src}
             hintText="http://www.imgur.com/hax1337"
             floatingLabelText="Image Source"
-            onChange={this.changeProp.bind(this, 'src')}
+            onChange={this.changeProp.bind(this, 'src', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
             defaultValue={alt}
             floatingLabelText="Alternate Text"
-            onChange={this.changeProp.bind(this, 'alt')}
+            onChange={this.changeProp.bind(this, 'alt', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />

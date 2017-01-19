@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import saveToSessionStorage from '../../../../cache/StorageCache';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class TextboxContext extends Component {
   constructor(props) {
@@ -31,7 +33,7 @@ class TextboxContext extends Component {
   }
 
   componentWillReceiveProps (newProps) {
-    console.log('COMPONENTSWILLRECIEVEPROPS');
+    // console.log('COMPONENTSWILLRECIEVEPROPS');
     this.setState({
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
@@ -50,7 +52,13 @@ class TextboxContext extends Component {
     })
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
-    }) }
+    })
+  }
+
+  // When enter key is pressed, update all the properties of the img that changed
+  handleEnterKeyPress (e) {
+    e.key === 'Enter' ? this.prepForDispatch(e) : null;
+  }
 
   // Use this to update the properties of the component in state
   changeProp (propertyToSet, cssProp, context, val) {
@@ -63,33 +71,9 @@ class TextboxContext extends Component {
     }
   }
 
-  changeNameInput (e) {
-    this.setState({name: e.target.value})
-  }
-
-  changeTextInput (e) {
-    this.setState({text: e.target.value});
-  }
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
     cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
-  }
-  changeHeight (e) {
-    let cssObject = this.state.css;
-    cssObject.height = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeWidth (e) {
-    let cssObject = this.state.css;
-    cssObject.width = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeMargin (e) {
-    let cssObject = this.state.css;
-    cssObject.margin = e.target.value;
     this.setState({css: cssObject});
   }
 
@@ -114,33 +98,60 @@ class TextboxContext extends Component {
     } else {
       return (
         <div className="imagecontext-container">
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <div> {type} </div>
-            </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Text: </span> <input type='text' value={text} onChange={this.changeTextInput.bind(this)}/>
-            </div>
+          <div>{type}</div>
+          <TextField
+            defaultValue={name}
+            floatingLabelText="Textbox Name"
+            onChange={this.changeProp.bind(this, 'name', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={text}
+            floatingLabelText="Text"
+            onChange={this.changeProp.bind(this, 'text', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+
             <div>
               <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
             </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-          <form onSubmit={this.deleteCurrComponent.bind(this)}>
-            <input type="submit" value="Delete Component" />
-          </form>
+
+          <TextField
+            defaultValue={css.width}
+            floatingLabelText="Width"
+            onChange={this.changeProp.bind(this, 'css', 'width')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.height}
+            floatingLabelText="Height"
+            onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.margin}
+            floatingLabelText="Margin"
+            onChange={this.changeProp.bind(this, 'css', 'margin')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <span>
+            <RaisedButton
+              label="Save"
+              primary={true}
+              onClick={this.prepForDispatch.bind(this)}
+              style={{marginRight: '5px'}}
+            />
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              onClick={this.deleteCurrComponent.bind(this)}
+            />
+          </span>
         </div>
       )
     }

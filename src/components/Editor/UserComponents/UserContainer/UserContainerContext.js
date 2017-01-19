@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import saveToSessionStorage from '../../../../cache/StorageCache';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class UserContainerContext extends Component {
   constructor(props) {
@@ -17,7 +21,7 @@ class UserContainerContext extends Component {
       },
       children: [],
       type: '',
-      addChild: 'Textbox'
+      childSelector: 'Textbox'
     }
   }
 
@@ -52,19 +56,28 @@ class UserContainerContext extends Component {
     });
   }
 
+  // When enter key is pressed, update all the properties of the img that changed
+  handleEnterKeyPress (e) {
+    e.key === 'Enter' ? this.prepForDispatch(e) : null;
+  }
+
+  // Use this to update the properties of the component in state
+  changeProp (propertyToSet, cssProp, context, val) {
+    if (cssProp) {
+      let cssObject = this.state.css;
+      cssObject[cssProp] = val;
+      this.setState({ css : cssObject });
+    } else {
+      this.setState({ [propertyToSet] : val });
+    }
+  }
+
   changeNameInput (e) {
     this.setState({name: e.target.value})
   }
 
-  changeChildType (e) {
-    let options = e.target.options;
-    let addChildType = '';
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        addChildType = options[i].value
-      }
-    }
-    this.setState({addChild: addChildType});
+  changeChildType (e, index, value) {
+    this.setState({childSelector: value});
   }
 
   changeChildrenInput (e) {
@@ -72,7 +85,7 @@ class UserContainerContext extends Component {
     e.preventDefault();
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
-      context.props.onEditorComponentSidebarClick(context.state.addChild, context.props.currComponentId, context.props.currProject);
+      context.props.onEditorComponentSidebarClick(context.state.childSelector, context.props.currComponentId, context.props.currProject);
       resolve();
     })
     dispatchHandler.then(() => {
@@ -83,24 +96,6 @@ class UserContainerContext extends Component {
   changeBackgroundColor (e) {
     let cssObject = this.state.css;
     cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
-  }
-
-  changeHeight (e) {
-    let cssObject = this.state.css;
-    cssObject.height = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeWidth (e) {
-    let cssObject = this.state.css;
-    cssObject.width = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-  changeMargin (e) {
-    let cssObject = this.state.css;
-    cssObject.margin = e.target.value;
     this.setState({css: cssObject});
   }
 
@@ -125,41 +120,68 @@ class UserContainerContext extends Component {
       )
     } else {
       return (
-        <div>
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <div> {type} </div>
-            </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-            </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-          <div>
-            <span> Add a child! </span>
-            <form onSubmit={this.changeChildrenInput.bind(this)}>
-              <select onChange={this.changeChildType.bind(this)}>
-                <option value="Textbox"> Textbox </option>
-                <option value="Image"> Image </option>
-              </select>
-              <input type="submit" value="Add Children"/>
-            </form>
-          </div>
-          <form onSubmit={this.deleteCurrComponent.bind(this)}>
-            <input type="submit" value="Delete Component" />
-          </form>
+        <div className="imagecontext-container">
+          <div>User Container</div>
+          <TextField
+            defaultValue={name}
+            floatingLabelText="Container Name"
+            onChange={this.changeProp.bind(this, 'name', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+              <div>
+                <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
+              </div>
+
+          <TextField
+            defaultValue={css.width}
+            floatingLabelText="Width"
+            onChange={this.changeProp.bind(this, 'css', 'width')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.height}
+            floatingLabelText="Height"
+            onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.margin}
+            floatingLabelText="Margin"
+            onChange={this.changeProp.bind(this, 'css', 'margin')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <SelectField
+            floatingLabelText="Child Type"
+            fullWidth={true}
+            value={this.state.childSelector}
+            onChange={this.changeChildType.bind(this)}
+          >
+            <MenuItem value={"Textbox"} primaryText="Textbox" />
+            <MenuItem value={"Image"} primaryText="Image" />
+          </SelectField>
+          <RaisedButton
+            label="Add Child"
+            fullWidth={true}
+            onClick={this.changeChildrenInput.bind(this)}
+            style={{marginBottom: '10px'}}
+          />
+          <span>
+            <RaisedButton
+              label="Save"
+              primary={true}
+              onClick={this.prepForDispatch.bind(this)}
+              style={{marginRight: '5px'}}
+            />
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              onClick={this.deleteCurrComponent.bind(this)}
+            />
+          </span>
         </div>
       )
     }

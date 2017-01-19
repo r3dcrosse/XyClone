@@ -107,8 +107,8 @@ class Sidebar extends Component {
   render() {
     let { openState, currProject, loginStatus, onSidebarClick, undo, redo } = this.props;
     return (
-      <Drawer open={!openState} containerStyle={{'marginTop': '2%', 'width': '15%'}}>
-        <MenuItem onTouchTap={() => this.clickHandler('Navbar', currProject, loginStatus.id)}> Add Navbar</MenuItem>
+      <Drawer open={!openState} containerStyle={{'marginTop': '70px', 'width': '15%'}}>
+        {/* <MenuItem onTouchTap={() => this.clickHandler('Navbar', currProject, loginStatus.id)}> Add Navbar</MenuItem> */}
         <MenuItem onTouchTap={() => this.clickHandler('Textbox', currProject, loginStatus.id)}> Add Textbox </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('Image', currProject, loginStatus.id)}> Add Image </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('UserContainer', currProject, loginStatus.id)}> Add Container </MenuItem>
