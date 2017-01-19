@@ -31,6 +31,12 @@ export default class SettingsMenu extends React.Component {
     });
   };
 
+  handleEditProject () {
+    let projectSelected = this.props.project.projectId;
+
+    axios.post('/updateProject')
+  }
+
   handleDeleteProject = () => {
     let projectSelected = this.props.project.projectId;
     let userId = this.props.userId;
@@ -61,6 +67,7 @@ export default class SettingsMenu extends React.Component {
           onRequestClose={this.handleRequestClose}
         >
           <Menu>
+            <MenuItem primaryText="Edit Project" onClick={this.handleEditProject}/>
             <MenuItem primaryText="Delete website" onClick={this.handleDeleteProject}/>
           </Menu>
         </Popover>

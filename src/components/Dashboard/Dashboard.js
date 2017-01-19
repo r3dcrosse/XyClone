@@ -66,6 +66,7 @@ class Dashboard extends Component {
               allProjects.push({
                 projectId: sessionProject.projectId,
                 title: sessionProject.title,
+                imgUrl: sessionProject.imgUrl,
                 description: sessionProject.description
               })
               for (let i = 0; i < sessionProject.components.length; i++) {
@@ -173,51 +174,51 @@ class Dashboard extends Component {
             iconElementRight={ <LogoutButtonContainer /> }
           />
         </div>
-        <div className="websitesBox-container">
-          {
-            this.state.projects.map((project, key) => {
-              return (
-                <WebsitesBoxContainer
-                  key={ key }
-                  project={ project }
-                  handleDeleteProject={ this.deleteProjectById }
-                  userId={ userId }
-                />
-              )
-            })
-          }
-        </div>
-        <div style={{'marginTop':'500px'}}>
-          <span>
-            <RaisedButton
-              label="+"
-              onTouchTap={this.handleOpen.bind(this)}
-            />
-            <Dialog
-              title="Create New Project"
-              actions={actions}
-              modal={false}
-              open={this.state.open}
-              onRequestClose={this.handleClose.bind(this)}
-            >
-              <TextField
-                id='title'
-                hintText="Project Title"
-                floatingLabelText="Project Title"
-              /><br />
-              <TextField
-                id='description'
-                hintText="Project Description"
-                floatingLabelText="Project Description"
-              /><br />
-              <TextField
-                id='imgUrl'
-                hintText="Project Image URL"
-                floatingLabelText="Project Image URL"
-              /><br />
-            </Dialog>
-          </span>
-        </div>
+
+          <div className="websitesBox-container">
+            {
+              this.state.projects.map((project, key) => {
+                return (
+                  <WebsitesBoxContainer
+                    key={ key }
+                    project={ project }
+                    handleDeleteProject={ this.deleteProjectById }
+                    userId={ userId }
+                  />
+                )
+              })
+            }
+          </div>
+
+        <span>
+          <RaisedButton
+            label="+ Add New Project"
+            onTouchTap={this.handleOpen.bind(this)}
+          />
+          <Dialog
+            title="Create New Project"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose.bind(this)}
+          >
+            <TextField
+              id='title'
+              hintText="Project Title"
+              floatingLabelText="Project Title"
+            /><br />
+            <TextField
+              id='description'
+              hintText="Project Description"
+              floatingLabelText="Project Description"
+            /><br />
+            <TextField
+              id='imgUrl'
+              hintText="Project Image URL"
+              floatingLabelText="Project Image URL"
+            /><br />
+          </Dialog>
+        </span>
 
       </div>
     );

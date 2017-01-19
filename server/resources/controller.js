@@ -99,6 +99,23 @@ module.exports = {
     })
   },
 
+  updateProjectDashboard: function(req, res) {
+    Project.findOneAndUpdate({projectId: req.body.projectId},
+      {
+        title: req.body.title,
+        imgUrl: req.body.imgUrl,
+        description: req.body.description,
+      })
+      .then(function(data) {
+        console.log('Updated Project');
+        res.status(204).end();
+      })
+      .catch(function(error) {
+        console.log('FAILED TO UPDATE PROJECT')
+        console.log(error)
+      });
+  },
+
   deleteProject: function(req, res) {
     // console.log('DELETE A PROJECT ------------------------------------');
     // console.log('-----------------project info-----------------');

@@ -22,6 +22,9 @@ Router.route('/saveUser')
 Router.route('/addNewProject')
   .post(Controller.addNewProject);
 
+Router.route('/updateProjectDashboard')
+  .post(Controller.updateProjectDashboard);
+
 Router.route('/saveSite')
   .post(Controller.saveUserSite);
 
