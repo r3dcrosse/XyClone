@@ -163,6 +163,7 @@ class Dashboard extends Component {
 
     // console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
     let userId = this.state.userId;
+    console.log(this.state.projects);
     return (
       <div>
         <div className="App">
@@ -186,35 +187,37 @@ class Dashboard extends Component {
             })
           }
         </div>
-        <span>
-          <RaisedButton
-            label="+"
-            onTouchTap={this.handleOpen.bind(this)}
-          />
-          <Dialog
-            title="Create New Project"
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose.bind(this)}
-          >
-            <TextField
-              id='title'
-              hintText="Project Title"
-              floatingLabelText="Project Title"
-            /><br />
-            <TextField
-              id='description'
-              hintText="Project Description"
-              floatingLabelText="Project Description"
-            /><br />
-            <TextField
-              id='imgUrl'
-              hintText="Project Image URL"
-              floatingLabelText="Project Image URL"
-            /><br />
-          </Dialog>
-        </span>
+        <div style={{'marginTop':'500px'}}>
+          <span>
+            <RaisedButton
+              label="+"
+              onTouchTap={this.handleOpen.bind(this)}
+            />
+            <Dialog
+              title="Create New Project"
+              actions={actions}
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleClose.bind(this)}
+            >
+              <TextField
+                id='title'
+                hintText="Project Title"
+                floatingLabelText="Project Title"
+              /><br />
+              <TextField
+                id='description'
+                hintText="Project Description"
+                floatingLabelText="Project Description"
+              /><br />
+              <TextField
+                id='imgUrl'
+                hintText="Project Image URL"
+                floatingLabelText="Project Image URL"
+              /><br />
+            </Dialog>
+          </span>
+        </div>
 
       </div>
     );

@@ -5,12 +5,9 @@ const initialState = {
   components: [],
   currComponent: null,
   currComponentId: null,
-<<<<<<< HEAD
   currPage: 'IndexPage',
-  pages: []
-=======
+  pages: [],
   swapFlag: false
->>>>>>> WIP with component swapping
 }
 
 // HELPER FUNCTION
@@ -35,10 +32,7 @@ export default function xyclone (state = initialState, action) {
 	let projectId;
 	let page;
 	let userId;
-<<<<<<< HEAD
-=======
 	let swapFlagTemp;
->>>>>>> WIP with component swapping
 
 	switch (action.type) {
 		case 'ADD_COMPONENT':
@@ -151,10 +145,6 @@ export default function xyclone (state = initialState, action) {
       console.log(action.components);
       return Object.assign({}, state, {
       	components: action.components
-      });
-    case 'CHANGE_PAGE':
-      return Object.assign({}, state, {
-        currPage: action.page
       });
     case 'TOGGLE_SWAP_FLAG':
     	console.log('TOGGLING SWAP FLAG');

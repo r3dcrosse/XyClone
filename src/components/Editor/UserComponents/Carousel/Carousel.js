@@ -3,6 +3,7 @@ import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
 
 class Carousel extends Component {
+
   constructor(props) {
     super(props)
     // console.log(props, 'THIS IS PROPS');
@@ -22,7 +23,11 @@ class Carousel extends Component {
 
   stopSideProp (e) {
     e.stopPropagation();
-    this.props.onEditorClick();
+    if (swapFlag) {
+      swapComponents(this.props.id, this.props.currProjectId);
+    } else {
+      onEditorClick();
+    }
   }
 
   clickNext (e) {
@@ -39,12 +44,16 @@ class Carousel extends Component {
   }
 
   render() {
-    let currComponentStyle
-    if (this.props.currComponentId === this.props.id) {
+
+    let currComponentStyle;
+    if (this.props.currComponentId === id) {
       currComponentStyle = 'currComponent-style'
+    } else if (this.props.swapFlag){
+      currComponentStyle = 'toggle-swap-class';
     } else {
       currComponentStyle = '';
     }
+
     if (this.props.children.length === 0) {
       return (
       <div className=''>

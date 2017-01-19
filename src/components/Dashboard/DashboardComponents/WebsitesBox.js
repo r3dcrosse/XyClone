@@ -32,25 +32,19 @@ const WebsitesBox = ({ project, changeCurrProject, editBodyClick, handleDeletePr
         title={ project.title }
         subtitle={ project.description }
       />
-      <CardActions>
+      <CardActions className='individual-website-block-buttons'>
         <RaisedButton
           label="Edit Site"
           onClick={ enterEditor }
           primary={ true }
         />
-        <CardActions className='individual-website-block-buttons'>
-          <RaisedButton
-            label="Edit Site"
-            onClick={ enterEditor }
-            primary={ true }
-          />
-          <SettingsMenuContainer
-            project={ project }
-            handleDeleteProject={ handleDeleteProject }
-            userId={ userId }
-          />
-        </CardActions>
-      </Card>
+        <SettingsMenuContainer
+          project={ project }
+          handleDeleteProject={ handleDeleteProject }
+          userId={ userId }
+        />
+      </CardActions>
+    </Card>
   )
 };
 
@@ -96,5 +90,3 @@ export default WebsitesBox;
 // };
 
 // export default WebsitesBox;
-=======
->>>>>>> WIP with component swapping

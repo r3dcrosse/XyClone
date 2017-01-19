@@ -26,14 +26,14 @@ class Sidebar extends Component {
     }
   }
 
-  clickHandler (type, currProject, id, currPage) {
+  clickHandler (type, currProject, id) {
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
-      context.props.onSidebarClick(type, currProject, id, currPage);
+      context.props.onSidebarClick(type, currProject, id);
       resolve();
     })
     dispatchHandler.then(() => {
-      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id, context.props.pages);
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
     })
   }
 
@@ -105,12 +105,12 @@ class Sidebar extends Component {
   }
 
   render() {
-    let { openState, currProject, loginStatus, onSidebarClick, undo, redo, currPage } = this.props;
+    let { openState, currProject, loginStatus, onSidebarClick, undo, redo } = this.props;
     return (
       <Drawer open={!openState} containerStyle={{'marginTop': '2%', 'width': '15%'}}>
         <MenuItem onTouchTap={() => this.clickHandler('Navbar', currProject, loginStatus.id)}> Add Navbar</MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('Textbox', currProject, loginStatus.id)}> Add Textbox </MenuItem>
-        <MenuItem onTouchTap={() => this.clickHandler('Image', currProject, loginStatus.id, currPage)}> Add Image </MenuItem>
+        <MenuItem onTouchTap={() => this.clickHandler('Image', currProject, loginStatus.id)}> Add Image </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('UserContainer', currProject, loginStatus.id)}> Add Container </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('Carousel', currProject, loginStatus.id)}> Add Carousel </MenuItem>
         <MenuItem onTouchTap={() => this.clickHandler('GalleryPost', currProject, loginStatus.id)}> Add Gallery Post </MenuItem>

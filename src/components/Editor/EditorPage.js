@@ -29,21 +29,9 @@ class EditorPage extends Component {
     browserHistory.push('/dashboard')
   }
 
-  handleAddNewPage () {
-    let projectId = this.props.currProjectId;
-    this.props.onAddPage('Test', projectId);
-    this.props.onChangePage('Test');
-  }
-
-  handleChangePage (page) {
-    this.props.onChangePage(page);
-  }
-
   render () {
     // Filter out tabs pertaining to projectID
-    let pages = this.props.pages.filter((page) => {
-      return page.projectId === this.props.currProjectId;
-    });
+
 
     return (
     <div>
@@ -59,18 +47,7 @@ class EditorPage extends Component {
           <SidebarContainer openState={ this.state.open }/>
         </div>
           <div className='editor-inPage'>
-            <Tabs style={{marginLeft: '180px'}}>
-              {
-                pages.map((element) => {
-                  return (
-                    <Tab label={element.page} onActive={this.handleChangePage.bind(this, element.page)} key={element.page}>
-                      <EditorContainer />
-                    </Tab>
-                  )
-                })
-              }
-              <Tab label='+' onActive={ this.handleAddNewPage.bind(this) } />
-            </Tabs>
+            <EditorContainer />
           </div>
         <div>
           <ContextSidebarContainer />

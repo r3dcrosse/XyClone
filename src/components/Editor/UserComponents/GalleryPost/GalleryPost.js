@@ -2,20 +2,25 @@ import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
 import { storage } from '../../../../cache/ComponentCache'
 
-const GalleryPost = ({name, style, id, currComponentId, child, children, onEditorClick, onEditorChildClick = undefined}) => {
-  let stopSideProp = (e) => {
-    console.log('yoloswag');
-    e.stopPropagation();
-    onEditorClick();
-  }
+const GalleryPost = ({name, style, currProjectId, swapFlag, id, currComponentId, child, children, onEditorClick, onEditorChildClick = undefined}) => {
   let currComponentStyle;
   if (currComponentId === id) {
     currComponentStyle = 'currComponent-style'
+  } else if (swapFlag){
+    currComponentStyle = 'toggle-swap-class';
   } else {
     currComponentStyle = '';
   }
 
   if (!child) {
+    let stopSideProp = (e) => {
+      e.stopPropagation();
+      if (swapFlag) {
+        swapComponents(id, currProjectId);
+      } else {
+        onEditorClick();
+      }
+    }
     return (
       <div className={"GalleryPost-flexcontainer " + currComponentStyle} style={style} onClick={stopSideProp}>
         {
@@ -30,9 +35,7 @@ const GalleryPost = ({name, style, id, currComponentId, child, children, onEdito
     )
   } else {
     let stopBubble = (e) => {
-      console.log('FUCK ME')
       if (onEditorChildClick) {
-        console.log('NEVER HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         onEditorChildClick();
       }
       e.stopPropagation();

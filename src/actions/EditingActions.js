@@ -67,13 +67,6 @@ export function updateStorageAndStateComponents (components) {
   }
 }
 
-export function changePage (newPage) {
-  return {
-    type: 'CHANGE_PAGE',
-    page: newPage
-  }
-};
-
 export function swapFlagToggle () {
   return {
     type: 'TOGGLE_SWAP_FLAG'

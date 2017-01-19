@@ -1,12 +1,11 @@
 
 import { storage } from './ComponentCache';
 
-let composeProject = function(components, project, userId, pages) {
+let composeProject = function(components, project, userId) {
   let projectStorage = {};
   for (let key in storage) {
     if (!key.includes('body')) {
       if (storage[key].project.projectId === project.projectId) {
-        console.log('adding this corresponding storage component into projectStorage', storage[key]);
         projectStorage[key] = storage[key];
       }
     } else {
@@ -25,16 +24,15 @@ let composeProject = function(components, project, userId, pages) {
     title: project.title,
     components: projectComponents,
     storage: projectStorage,
-    description: project.description,
-    pages: pages
+    description: project.description
   }
 }
 
-let saveToSessionStorage = function(components, project, userId, pages) {
+let saveToSessionStorage = function(components, project, userId) {
   // console.log('COMPONENTS', components);
   // console.log('PROJECT', project);
-  // console.log('USERID', userId);
-  let currProjectState = composeProject(components, project, userId, pages);
+  console.log('USERID ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', userId);
+  let currProjectState = composeProject(components, project, userId);
   let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
   let counter = JSON.parse(sessionStorage.getItem('counter'));
   let initialLength = projectStates.length;

@@ -6,13 +6,21 @@ import GalleryPost from './GalleryPost'
 
 const mapStateToProps = (state) => {
   return {
-    currComponentId: state.xyclone.currComponentId
+    currComponentId: state.xyclone.currComponentId,
+    currProjectId: state.xycloneProjects.currProjectId,
+    swapFlag: state.xyclone.swapFlag
   }
 }
-
+const mapDispatchToProps = (dispatch) => {
+  return {
+    swapComponents: (idToSwap, projectId) => {
+      dispatch(swapComponents(idToSwap, projectId));
+    }
+  }
+}
 const GalleryPostContainer = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(GalleryPost)
 
 export default GalleryPostContainer;
