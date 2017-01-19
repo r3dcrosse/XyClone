@@ -22,6 +22,13 @@ export function updateProjectsStorage (projects) {
   }
 };
 
+export function updatePagesStorage (pages) {
+  return {
+    type: 'UPDATE_PAGES',
+    pages: pages
+  }
+}
+
 export function deleteProject (projectId) {
   return {
     type: 'DELETE_PROJECT',

@@ -22,6 +22,11 @@ let composeProject = function(components, project, userId, pages) {
     return component.projectId === project.projectId;
   });
 
+  console.log('#######', pages);
+  let projectPages = pages.filter((page) => {
+    return page.projectId === project.projectId;
+  })
+
   return {
     projectId: project.projectId,
     userId: userId,
@@ -29,14 +34,14 @@ let composeProject = function(components, project, userId, pages) {
     components: projectComponents,
     storage: projectStorage,
     description: project.description,
-    pages: pages
+    pages: projectPages
   }
 }
 
 let saveToSessionStorage = function(components, project, userId, pages) {
   // console.log('COMPONENTS', components);
-  // console.log('PROJECT', project);
-  // console.log('USERID', userId);
+  console.log('PROJECT', project);
+  console.log('pages', pages);
   let currProjectState = composeProject(components, project, userId, pages);
   let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
   let counter = JSON.parse(sessionStorage.getItem('counter'));

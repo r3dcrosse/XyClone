@@ -48,6 +48,10 @@ export default function xycloneProjects (state = initialState, action) {
       return Object.assign({}, state, {
         projects: action.projects
       });
+    case 'UPDATE_PAGES':
+      return Object.assign({}, state, {
+        pages: action.pages
+      })
     case 'DELETE_PROJECT':
       // Delete project from storage and trigger a rerender of the projects
       var newProjectsArray = state.projects.filter(

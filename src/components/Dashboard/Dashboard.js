@@ -9,6 +9,7 @@ import LogoutButtonContainer from './DashboardComponents/LogoutButtonContainer'
 import { storage } from '../../cache/ComponentCache';
 import Dialog from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+const _ = require('underscore');
 require("../../Basic.less");
 
 
@@ -36,8 +37,9 @@ class Dashboard extends Component {
   componentDidMount() {
     axios.post('/saveUser', {userId: this.props.loginStatus.authResponse.userID})
       .then((userData) => {
-        let allProjects = []
+        let allProjects = [];
         let allComponents = [];
+        let allPages = [];
         if (Object.keys(userData.data).length !== 0) {
           const sessionProject = JSON.parse(sessionStorage.getItem('projectStates')).length !== 0 ? JSON.parse(sessionStorage.getItem('projectStates')) [JSON.parse(sessionStorage.getItem('counter'))] : {};
 
@@ -46,34 +48,59 @@ class Dashboard extends Component {
           console.log(sessionProject);
           userData.data.forEach(function(project) {
             // IF PROJECT.ID !== PROJECTTOCHANGE.ID
-            if (sessionProject.projectId !== project.projectId) {
+            //DATA FROM THE DATABASE
+
+            if (sessionProject.projectId !== project.projectId) { // WHAT DOES THIS MEAN!!!!!?!?!
+              // SESSIONPROJECT INSIDE SESSIONSTORAGE ISNT project
               console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
               allProjects.push({
                 projectId: project.projectId,
                 title: project.title,
                 imgUrl: project.imgUrl,
                 description: project.description
-              })
+              });
+
+              var pageHash = {};
               for (let i = 0; i < project.components.length; i++) {
-                allComponents.push(project.components[i])
+                allComponents.push(project.components[i]);
+                var page = project.components[i].page;
+                var projectId = project.components[i].projectId;
+                pageHash[projectId] = {
+                  [page]: projectId
+                }
+                allPages.push({
+                  projectId: project.components[i].projectId,
+                  page: project.components[i].page
+                });
               }
 
+              // Make pages a uniq array
+              allPages = _.uniq(allPages);
 
+              // editing cache update storage
               for (let key in project.storage) {
                 storage[key] = project.storage[key];
                 if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
                   storage[key].parent = {};
                 }
               }
+
+              // stprage is filled with compoennts from proejctStprage
             } else {
               allProjects.push({
                 projectId: sessionProject.projectId,
                 title: sessionProject.title,
                 description: sessionProject.description
-              })
+              });
+
               for (let i = 0; i < sessionProject.components.length; i++) {
-                allComponents.push(sessionProject.components[i])
+                allComponents.push(sessionProject.components[i]);
+                allPages.push({
+                  projectId: sessionProject.components[i].projectId,
+                  page: sessionProject.components[i].page
+                });
               }
+
               for (let key in sessionProject.storage) {
                 storage[key] = sessionProject.storage[key];
                 if ((!storage[key].parent) && key !== ('body' + sessionProject.projectId)) {
@@ -84,17 +111,21 @@ class Dashboard extends Component {
           });
           this.props.updateStorageComponents(allComponents);
           this.props.updateProjectsStorage(allProjects);
+          console.log('##########', _.uniq(allPages));
+          this.props.updatePagesStorage(_.uniq(allPages));
+
           this.setState({
             projects: allProjects,
-            userId: this.props.loginStatus.authResponse.userID
+            userId: this.props.loginStatus.authResponse.userID,
           });
         }
-    })
+    });
+
     this.setState({ projects: this.props.projects });
   }
 
   componentWillReceiveProps(newProps) {
-    this.setState({ 
+    this.setState({
       projects: newProps.projects,
       open: false,
     });

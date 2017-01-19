@@ -17,7 +17,12 @@ export const _components = {
     let component = {
         name: 'Default Navbar Name',
         css: defaultCss,
-        children: ['/reddit'],
+        links: [
+          {
+            linkName: 'Home',
+            route: '/'
+          }
+        ],
         type: 'Navbar',
         parent: {},
         project: project,
@@ -171,4 +176,3 @@ export const storage = {
 };
 
 export const componentReferences = [];
-

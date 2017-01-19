@@ -10,7 +10,7 @@ const WebsitesBox = ({ project, changeCurrProject, handleDeleteProject, userId }
   let enterEditor = () => {
     // send dispatch action to redux to change the current project
     changeCurrProject(project.projectId);
-    let sessionProjectId = JSON.parse(sessionStorage.getItem('projectStates'))[0].projectId
+    let sessionProjectId = JSON.parse(sessionStorage.getItem('projectStates')).length !== 0 ? JSON.parse(sessionStorage.getItem('projectStates'))[0].projectId : -1234;
     if (project.projectId !== sessionProjectId) {
       sessionStorage.setItem('projectStates', JSON.stringify([]));
       sessionStorage.setItem('counter', JSON.stringify(0));

@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 
-const Navbar = ({name, children, style, id, onEditorClick}) => {
+const Navbar = ({name, links, style, id, onEditorClick}) => {
   let stopSideProp = (e) => {
     e.stopPropagation();
     onEditorClick();
   }
+  let linkNames = links.map((link) => {
+    return link.linkName;
+  })
   return (
     <nav className='flex-item-navbar' style={style} onClick={stopSideProp}>
       <div>
-        NAVBAR LOADED with id {id}, {name}
+        NAVBAR LOADED with id {id}, {name}, and links: {links}
       </div>
+      {
+        linkNames.map((link) => {
+          return ( <span>link</span> )
+        })
+      }
     </nav>
   )
 }

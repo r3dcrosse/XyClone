@@ -65,6 +65,10 @@ module.exports = {
         title: req.body.title,
         imgUrl: req.body.imgUrl,
         description: req.body.description,
+        pages: [{
+          projectId: newSequenceNumber,
+          page: 'IndexPage'
+        }],
         components: [],
         storage: {
           [bodyString]: {

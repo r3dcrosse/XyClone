@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { updateStorageAndStateComponents } from '../../actions/EditingActions'
-import { addProject, updateProjectsStorage } from '../../actions/ProjectActions';
+import { addProject, updateProjectsStorage, updatePagesStorage } from '../../actions/ProjectActions';
 import Dashboard from './Dashboard';
 updateStorageAndStateComponents
 const mapStateToProps = (state) => {
@@ -23,6 +23,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     updateProjectsStorage(allProjects) {
       dispatch(updateProjectsStorage(allProjects));
+    },
+    updatePagesStorage(allPages) {
+      dispatch(updatePagesStorage(allPages));
     }
   }
 }
