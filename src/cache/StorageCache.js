@@ -17,14 +17,14 @@ let composeProject = function(components, project, userId) {
   let projectComponents = components.filter(component => {
     return component.projectId === project.projectId;
   });
-
   return {
     projectId: project.projectId,
     userId: userId,
     title: project.title,
     components: projectComponents,
     storage: projectStorage,
-    description: project.description
+    description: project.description,
+    imgUrl: project.imgUrl
   }
 }
 
