@@ -212,7 +212,7 @@ class TextboxContext extends Component {
               label="Save"
               primary={true}
               onClick={this.prepForDispatch.bind(this)}
-              style={{marginRight: '5px'}}
+              style={{marginRight: '5px', marginBottom: '5px'}}
             />
             <RaisedButton
               label="Delete"

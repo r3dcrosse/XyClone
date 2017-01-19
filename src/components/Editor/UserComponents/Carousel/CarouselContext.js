@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { PropTypes } from 'react';
 import { storage } from '../../../../cache/ComponentCache';
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import saveToSessionStorage from '../../../../cache/StorageCache';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import { SketchPicker } from 'react-color';
 
 class CarouselContext extends Component {
   constructor(props) {
@@ -18,7 +23,9 @@ class CarouselContext extends Component {
       },
       children: [],
       type: '',
-      addChild: 'GalleryPost'
+      childSelector: 'GalleryPost',
+      colorPickerButtonText: 'Background Color',
+      openColorPicker: false
     }
   }
 
@@ -49,25 +56,30 @@ class CarouselContext extends Component {
     let dispatchHandler = new Promise(function(resolve, reject) {
       context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
       resolve();
-    })
+    });
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
-    })
+    });
   }
 
-  changeNameInput (e) {
-    this.setState({name: e.target.value})
+  // When enter key is pressed, update all the properties of the img that changed
+  handleEnterKeyPress (e) {
+    e.key === 'Enter' ? this.prepForDispatch(e) : null;
   }
 
-  changeChildType (e) {
-    let options = e.target.options;
-    let addChildType = '';
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].selected) {
-        addChildType = options[i].value
-      }
+  // Use this to update the properties of the component in state
+  changeProp (propertyToSet, cssProp, context, val) {
+    if (cssProp) {
+      let cssObject = this.state.css;
+      cssObject[cssProp] = val;
+      this.setState({ css : cssObject });
+    } else {
+      this.setState({ [propertyToSet] : val });
     }
-    this.setState({addChild: addChildType});
+  }
+
+  changeChildType (e, index, value) {
+    this.setState({childSelector: value});
   }
 
   changeChildrenInput (e) {
@@ -75,7 +87,7 @@ class CarouselContext extends Component {
     e.preventDefault();
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
-      context.props.onEditorComponentSidebarClick(context.state.addChild, context.props.currComponentId, context.props.currProject, context.props.loginStatus.id);
+      context.props.onEditorComponentSidebarClick(context.state.childSelector, context.props.currComponentId, context.props.currProject, context.props.loginStatus.id);
       resolve();
     })
     dispatchHandler.then(() => {
@@ -83,31 +95,33 @@ class CarouselContext extends Component {
     })
   }
 
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
+  handleOpenColorPicker (e) {
+    this.state.openColorPicker ?
+      this.setState({colorPickerButtonText: 'Background Color'}) :
+      this.setState({colorPickerButtonText: 'Close Color Picker'});
+    this.setState({openColorPicker: !this.state.openColorPicker});
   }
 
-  changeHeight (e) {
+  handleBackgroundColor (color) {
     let cssObject = this.state.css;
-    cssObject.height = e.target.value;
+    cssObject.backgroundColor = color.hex;
     this.setState({css: cssObject});
+    // this.prepForDispatch();
   }
 
-  changeWidth (e) {
-    let cssObject = this.state.css;
-    cssObject.width = e.target.value;
-    this.setState({css: cssObject});
+  handleBackgroundColorComplete () {
+    console.log('THIS IS BEING RUN DOE');
+
+    let newProps = this.state;
+    let context = this;
+    let dispatchHandler = new Promise(function(resolve, reject) {
+      context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
+      resolve();
+    });
+    dispatchHandler.then(() => {
+      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+    });
   }
-
-  changeMargin (e) {
-    let cssObject = this.state.css;
-    cssObject.margin = e.target.value;
-    this.setState({css: cssObject});
-  }
-
-
 
   deleteCurrComponent(e) {
     e.preventDefault();
@@ -123,7 +137,7 @@ class CarouselContext extends Component {
 
   render() {
     console.log('CAROUSELContainerContext IS BEING RENDERED WITH', this.state);
-    let { type, name, css, children } = this.state;
+    let { type, name, css, children, openColorPicker, colorPickerButtonText } = this.state;
     if (type !== 'Carousel') {
       return (
         <div> SHIT IM NOT A CAROUSEL IM JUST NULL </div>
@@ -131,39 +145,79 @@ class CarouselContext extends Component {
     } else {
       return (
         <div className="imagecontext-container">
-          <form onSubmit={this.prepForDispatch.bind(this)}>
-            <div>
-              <div> {type} </div>
+          <div>{type}</div>
+          <TextField
+            defaultValue={name}
+            floatingLabelText="Carousel Name"
+            onChange={this.changeProp.bind(this, 'name', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.width}
+            floatingLabelText="Width"
+            onChange={this.changeProp.bind(this, 'css', 'width')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.height}
+            floatingLabelText="Height"
+            onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.margin}
+            floatingLabelText="Margin"
+            onChange={this.changeProp.bind(this, 'css', 'margin')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <div>Background Color: {css.backgroundColor}</div>
+          <RaisedButton
+            label={colorPickerButtonText}
+            fullWidth={true}
+            onClick={this.handleOpenColorPicker.bind(this)}
+            style={{marginBottom: '10px', marginTop: '10px'}}
+          />
+          {
+            openColorPicker &&
+            <div onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
+              <SketchPicker
+                color={css.backgroundColor}
+                onChange={this.handleBackgroundColor.bind(this)}
+              />
             </div>
-            <div>
-              <span> Name: </span> <input type='text' value={name} onChange={this.changeNameInput.bind(this)}/>
-            </div>
-            <div>
-              <span> Background Color: </span> <input type='text' value={css.backgroundColor} onChange={this.changeBackgroundColor.bind(this)}/>
-            </div>
-            <div>
-              <span> Width: </span> <input type='text' value={css.width} onChange={this.changeWidth.bind(this)}/>
-            </div>
-            <div>
-              <span> Height: </span> <input type='text' value={css.height} onChange={this.changeHeight.bind(this)}/>
-            </div>
-            <div>
-              <span> Margin: </span> <input type='text' value={css.margin} onChange={this.changeMargin.bind(this)}/>
-            </div>
-            <input type="submit" value="Submit" />
-          </form>
-          <div>
-            <span> Add a child! </span>
-            <form onSubmit={this.changeChildrenInput.bind(this)}>
-              <select onChange={this.changeChildType.bind(this)}>
-                <option value="GalleryPost"> Gallery Post </option>
-              </select>
-              <input type="submit" value="Add Children"/>
-            </form>
-          </div>
-          <form onSubmit={this.deleteCurrComponent.bind(this)}>
-            <input type="submit" value="Delete Component" />
-          </form>
+          }
+          <SelectField
+            floatingLabelText="Child Type"
+            fullWidth={true}
+            value={this.state.childSelector}
+            onChange={this.changeChildType.bind(this)}
+          >
+            <MenuItem value={"GalleryPost"} primaryText="GalleryPost" />
+          </SelectField>
+          <RaisedButton
+            label="Add Child"
+            fullWidth={true}
+            onClick={this.changeChildrenInput.bind(this)}
+            style={{marginBottom: '10px'}}
+          />
+
+          <span>
+            <RaisedButton
+              label="Save"
+              primary={true}
+              onClick={this.prepForDispatch.bind(this)}
+              style={{marginRight: '5px', marginBottom: '5px'}}
+            />
+            <RaisedButton
+              label="Delete"
+              secondary={true}
+              onClick={this.deleteCurrComponent.bind(this)}
+            />
+          </span>
         </div>
       )
     }
