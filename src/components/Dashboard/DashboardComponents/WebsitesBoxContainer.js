@@ -10,7 +10,10 @@ const mapDispatchToProps = (dispatch) => {
     },
     editBodyClick: (id) => {
       dispatch(editBodyClick(id));
-    }
+    },
+    // updateProjectSummary: (title, description, imgUrl, projectId) => {
+    //   dispatch(updateProjectSummary(title, description, imgUrl, projectId));
+    // }
   }
 }
 

@@ -99,7 +99,9 @@ module.exports = {
     })
   },
 
-  updateProjectDashboard: function(req, res) {
+  updateProjectSummary: function(req, res) {
+    console.log(req.body)
+
     Project.findOneAndUpdate({projectId: req.body.projectId},
       {
         title: req.body.title,
@@ -108,7 +110,7 @@ module.exports = {
       })
       .then(function(data) {
         console.log('Updated Project');
-        res.status(204).end();
+        res.send(data);
       })
       .catch(function(error) {
         console.log('FAILED TO UPDATE PROJECT')

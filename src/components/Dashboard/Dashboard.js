@@ -175,6 +175,17 @@ class Dashboard extends Component {
           />
         </div>
 
+        <div style={{margin:'100px'}}>
+
+        </div>
+
+        <div>
+        <RaisedButton
+            label="+ Add New Project"
+            onTouchTap={this.handleOpen.bind(this)}
+          />
+        </div>
+
           <div className="websitesBox-container">
             {
               this.state.projects.map((project, key) => {
@@ -191,10 +202,6 @@ class Dashboard extends Component {
           </div>
 
         <span>
-          <RaisedButton
-            label="+ Add New Project"
-            onTouchTap={this.handleOpen.bind(this)}
-          />
           <Dialog
             title="Create New Project"
             actions={actions}

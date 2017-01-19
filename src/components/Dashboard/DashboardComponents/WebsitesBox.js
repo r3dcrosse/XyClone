@@ -36,11 +36,9 @@ const WebsitesBox = ({ project, changeCurrProject, editBodyClick, handleDeletePr
       }}
       >
         <img style={{borderRadius: '25px'}} src={ project.imgUrl } />
+
       </CardMedia>
       <CardTitle
-        style={{
-
-        }}
         title={ project.title }
         subtitle={ project.description }
       />

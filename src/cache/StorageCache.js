@@ -24,8 +24,7 @@ let composeProject = function(components, project, userId) {
     components: projectComponents,
     storage: projectStorage,
     description: project.description,
-    imgUrl: project.imgUrl,
-    pages: pages
+    imgUrl: project.imgUrl
   }
 }
 
