@@ -45,4 +45,34 @@ const saveUser = function (userId, password, cb) {
     })
 }
 
+const validateUser = function(userId, password, cb) {
+    let retrievedHash;
+
+    User.findOne({userId: userId}, (err, result) => {
+        console.log('db result', result)
+        if (result) {
+            retrievedHash = result.password;
+            bcrypt.compare(password, retrievedHash, function(err, res) {
+                if (res) {
+                    // secret should really be a private key
+                    jwt.sign({
+                        data: userId
+                    }, 'secret', { expiresIn: '1h' }, function (err, token) {
+                        console.log('token :', token)
+                        cb(res, token);
+                    });
+                } else { 
+                    console.log('bcrypt wrong password')
+                    cb(false)
+                }
+            })
+        } else { 
+            cb(400)
+        }
+
+
+    })
+}   
+ 
 module.exports.saveUser = saveUser;
+module.exports.validateUser = validateUser;

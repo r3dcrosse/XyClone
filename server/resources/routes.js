@@ -63,4 +63,27 @@ Router.route('/signup')
     })
   })
 
+Router.route('/login')
+  .post(function (req, res) {
+    var username = req.body.usn,
+        password = req.body.pass; 
+    console.log('usrname', username)
+
+    authController.validateUser(username, password, (authResponse, token) => {
+      if (authResponse === true) { 
+        console.log('on the server valid login')
+        res.status(200).json({token: token, response: 'valid login'})
+      } else if (authResponse === 400) {
+        console.log('on the server 400 err')
+        res.status(200).send('user not found')
+      } else if (authResponse === 500) {
+        console.log('on the server in 500')
+        res.status(200).send('server error')
+      } else if (authResponse === false) {
+        console.log('on the server in 401')
+        res.status(200).send('password incorrect')
+      }
+    })
+  })
+
 module.exports = Router

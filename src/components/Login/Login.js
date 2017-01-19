@@ -16,14 +16,17 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      open: false, 
-      signUpStatus: ''
+      signupDialog: false, 
+      loginDialog: false,
+      signupStatus: '',
+      loginStatus: ''
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSignupSubmit = this.handleSignupSubmit.bind(this);
-    this.handleSigninSubmit = this.handleSigninSubmit.bind(this);
+    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleLoginRedirect = this.handleLoginRedirect.bind(this);
+    this.handleLoginBackout = this.handleLoginBackout.bind(this);
   }
 
   handleUsernameChange(event) {
@@ -38,11 +41,17 @@ class Login extends Component {
     browserHistory.push('/dashboard')
   }
 
+  handleLoginBackout(event) {
+    this.setState({
+      loginDialog: false
+    })
+  }
+
   handleSignupSubmit(event) {
     var usn = this.state.username,
         pass = this.state.password,
         that = this;
-
+    
     console.log('props', this.props)
 
     axios.post('http://localhost:8000/signup', {
@@ -69,8 +78,56 @@ class Login extends Component {
         }
 
         that.setState({
-          open: true,
-          signUpStatus: status
+          signupDialog: true,
+          signupStatus: status
+        })
+
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+
+  handleLoginSubmit(event) {
+    var usn = this.state.username,
+        pass = this.state.password,
+        that = this;
+
+    console.log('props', this.props)
+
+    axios.post('http://localhost:8000/login', {
+        usn: usn,
+        pass: pass
+    })
+      .then(function (response) {
+        
+        let status
+
+        console.log(response)
+
+        if (response.data.response === 'valid login') {
+          status = 'Great! You\'re now up for XyClone'
+          let login = {
+            id: response.data.token,
+            authResponse: {
+              userID: response.data.token
+            }
+          }
+          that.props.dispatchLoginUser(login);
+          browserHistory.push('/dashboard');
+        } else if (response.data === 'user not found') {
+          console.log('in the 400 block')
+          status = 'Username not found'
+        } else if (response.data === 'password incorrect') {
+          console.log('in the 500 block')
+          status = 'password incorrect'
+        } else {
+          status = 'Sorry, we had an error. Please try again later'
+        }
+
+        that.setState({
+          loginDialog: true,
+          loginStatus: status
         })
         
       })
@@ -79,16 +136,20 @@ class Login extends Component {
       })
   }
 
-  handleSigninSubmit(event) {
-  }
-
   render() {
-    const actions = [
+    const signupActions = [
       <RaisedButton 
         label="Go to the dashboard" 
         onClick={this.handleLoginRedirect} 
       />
     ]
+    const loginActions = [
+      <RaisedButton
+        label="Back"
+        onClick={this.handleLoginBackout}
+      />
+    ]
+
     return (
       <div className="App">
         <div className="loginpage-field-container">
@@ -106,8 +167,13 @@ class Login extends Component {
           />
           <Dialog
             title={this.state.signUpStatus}
-            open={this.state.open}
-            actions={actions}
+            open={this.state.signupDialog}
+            actions={signupActions}
+          />
+          <Dialog
+            title={this.state.loginStatus}
+            open={this.state.loginDialog}
+            actions={loginActions}
           />
           {/* <ReactPasswordStrength
             minLength={5}
@@ -125,7 +191,7 @@ class Login extends Component {
             <RaisedButton
               label="Login"
               primary={true}
-              href="/dashboard"
+              onClick={this.handleLoginSubmit}
             />
           </span>
         </div>
