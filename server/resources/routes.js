@@ -2,6 +2,7 @@ const path = require('path');
 const Router = require('express').Router();
 
 const Controller = require('./controller');
+const authController = require('./authController')
 const zipdir = require('zip-dir');
 const fs = require('fs');
 const Project = require('../models/projectSchema');
@@ -46,5 +47,20 @@ Router.route('/download/:projectId')
     });
   });
 
+Router.route('/signup')
+  .post(function (req, res) {
+    var credentials = req.body; 
+    console.log(credentials)
+    authController.saveUser(req.body.usn, req.body.pass, (status, token) => {
+      if (status === 200) {
+          console.log('going to send', status)
+          res.status(200).send(token);
+        } else if (status === 400) {
+          res.status(200).send('Sorry. That username is already taken');
+        } else {
+          res.status(500).send('Sorry, there was an error, please try again later')
+        }
+    })
+  })
 
 module.exports = Router

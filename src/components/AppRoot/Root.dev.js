@@ -8,6 +8,8 @@ import axios from 'axios';
 import DashboardContainer from '../Dashboard/DashboardContainer';
 import Login from '../Login/Login';
 import EditorPage from '../Editor/EditorPage';
+import LoginLocalContainer from '../Login/LoginLocalContainer'
+import EditorPageContainer from '../Editor/EditorPageContainer';
 
 export default class Root extends Component {
 
@@ -36,8 +38,8 @@ export default class Root extends Component {
         <div>
           <Router history={browserHistory} >
             <Route path='/' component={App}>
-              <IndexRoute component={Login} />
-              <Route path='/login' component={Login} onEnter={this.checkLogin.bind(this)}/>
+              <IndexRoute component={LoginLocalContainer} />
+              <Route path='/login' component={LoginLocalContainer} onEnter={this.checkLogin.bind(this)}/>
               <Route path='/dashboard' component={DashboardContainer} onEnter={this.requireAuth.bind(this)} />
               <Route path='/editor' component={EditorPage} onEnter={this.checkCurrProjectId.bind(this)}/>
             </Route>
