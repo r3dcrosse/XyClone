@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { updateStorageAndStateComponents } from '../../actions/EditingActions'
 import { updateProjectsStorage } from '../../actions/ProjectActions'
 import { loginUser } from '../../actions/LoginActions';
-import FacebookLogin from './LoginFacebook';
+import Login from './Login';
 
 const mapStateToProps = (state) => {
   console.log(state.xycloneLogin, 'XYCLONELOGIN YOLO');
@@ -25,11 +25,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-
-
-const FacebookLoginContainer = connect(
+const LoginLocalContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(FacebookLogin)
+)(Login)
 
-export default FacebookLoginContainer;
+export default LoginLocalContainer;

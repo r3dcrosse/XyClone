@@ -2,6 +2,7 @@ const path = require('path');
 const Router = require('express').Router();
 
 const Controller = require('./controller');
+const authController = require('./authController')
 const zipdir = require('zip-dir');
 const fs = require('fs');
 const Project = require('../models/projectSchema');
@@ -46,5 +47,43 @@ Router.route('/download/:projectId')
     });
   });
 
+Router.route('/signup')
+  .post(function (req, res) {
+    var credentials = req.body; 
+    console.log(credentials)
+    authController.saveUser(req.body.usn, req.body.pass, (status, token) => {
+      if (status === 200) {
+          console.log('going to send', status)
+          res.status(200).send(token);
+        } else if (status === 400) {
+          res.status(200).send('Sorry. That username is already taken');
+        } else {
+          res.status(500).send('Sorry, there was an error, please try again later')
+        }
+    })
+  })
+
+Router.route('/login')
+  .post(function (req, res) {
+    var username = req.body.usn,
+        password = req.body.pass; 
+    console.log('usrname', username)
+
+    authController.validateUser(username, password, (authResponse, token) => {
+      if (authResponse === true) { 
+        console.log('on the server valid login')
+        res.status(200).json({token: token, response: 'valid login'})
+      } else if (authResponse === 400) {
+        console.log('on the server 400 err')
+        res.status(200).send('user not found')
+      } else if (authResponse === 500) {
+        console.log('on the server in 500')
+        res.status(200).send('server error')
+      } else if (authResponse === false) {
+        console.log('on the server in 401')
+        res.status(200).send('password incorrect')
+      }
+    })
+  })
 
 module.exports = Router

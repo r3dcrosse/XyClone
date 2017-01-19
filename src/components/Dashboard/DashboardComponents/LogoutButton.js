@@ -32,15 +32,24 @@ class LogoutButton extends Component {
 
   handleLogout() {
     console.log('FOR SOME REASON LOGOUT BUTTON IS CLICKED ??')
-    FB.logout(function(response) {
-      console.log('response of logout', response);
+    console.log('the login status is', this.props.loginStatus);
+    
+    // if length is two, this is a local login
+    if (Object.keys(this.props.loginStatus).length === 2) {
       this.props.dispatchLogoutUser();
       sessionStorage.clear();
       for (let key in storage) {
         delete storage[key];
       }
       browserHistory.push('/login');
-    }.bind(this));
+    } else {
+      FB.logout(function(response) {
+        console.log('response of logout', response);
+        this.props.dispatchLogoutUser();
+        sessionStorage.clear();
+        browserHistory.push('/login');
+      }.bind(this));
+    }
   }
 
 
