@@ -23,7 +23,7 @@ class UserContainerContext extends Component {
       children: [],
       type: '',
       childSelector: 'Textbox',
-      colorPickerButtonText: 'Custom Color',
+      colorPickerButtonText: 'Background Color',
       openColorPicker: false
     }
   }
@@ -66,7 +66,7 @@ class UserContainerContext extends Component {
 
   handleOpenColorPicker (e) {
     this.state.openColorPicker ?
-      this.setState({colorPickerButtonText: 'Custom Background Color'}) :
+      this.setState({colorPickerButtonText: 'Background Color'}) :
       this.setState({colorPickerButtonText: 'Close Color Picker'});
     this.setState({openColorPicker: !this.state.openColorPicker});
   }
@@ -90,12 +90,6 @@ class UserContainerContext extends Component {
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
     });
-  }
-
-  changeBackgroundColor (e) {
-    let cssObject = this.state.css;
-    cssObject.backgroundColor = e.target.value
-    this.setState({css: cssObject});
   }
 
   // Use this to update the properties of the component in state
