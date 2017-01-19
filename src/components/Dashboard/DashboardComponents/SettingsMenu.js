@@ -17,11 +17,30 @@ export default class SettingsMenu extends React.Component {
       open: false,
       openDiag: false,
       currProjectId: null,
+      title: '',
+      imgUrl: '',
+      description: ''
+    };
+  };
+
+  componentDidMount () {
+    this.setState({
       title: this.props.project.title,
       imgUrl: this.props.project.imgUrl,
       description: this.props.project.description
-    };
-  };
+    })
+  }
+
+  // componentWillReceiveProps (newProps) {
+  //   console.log('I RECEIVED NEW PROPS DOE');
+  //   let context = this;
+  //   let project = newProps.projects.filter((item) => {return item.projectId === context.props.project.projectId});
+  //   this.setState({
+  //     title: project[0].title,
+  //     imgUrl: project[0].imgUrl,
+  //     description: project[0].description
+  //   })
+  // }
 
   handleTouchTap = (event) => {
     // This prevents ghost click.
@@ -50,8 +69,13 @@ export default class SettingsMenu extends React.Component {
     });
   }
 
-  onChange () {
-
+  handleChangeProperties (propertyToSet, propToChange, val) {
+    // console.log(propertyToSet, 'PROPERTYTOSET');
+    // console.log(propToChange, 'PROPERTYTOCHANGE');
+    // console.log(val, 'VAL');
+    this.setState({
+      [propertyToSet]: val
+    })
   }
 
   handleSubmit () {
@@ -61,9 +85,11 @@ export default class SettingsMenu extends React.Component {
     let context = this;
     let projectSelected = this.props.project.projectId;
 
-    let title = document.getElementById('title').value;
-    let description = document.getElementById('description').value;
-    let imgUrl = document.getElementById('imgUrl').value;
+    let title = this.state.title;
+    let description = this.state.description;
+    let imgUrl = this.state.imgUrl;
+
+    this.props.updateOneProject(this.props.project.projectId, title, description, imgUrl);
 
     axios.post('/updateProjectSummary', {projectId: projectSelected, title: title , description: description, imgUrl: imgUrl})
       .then((response) => {
@@ -107,7 +133,8 @@ export default class SettingsMenu extends React.Component {
         onTouchTap={this.handleSubmit.bind(this)}
       />,
     ];
-    console.log(this.state.title);
+    let { title, description, imgUrl } = this.state
+    console.log(title, description, imgUrl);
     return (
       <span>
         <RaisedButton
@@ -116,7 +143,7 @@ export default class SettingsMenu extends React.Component {
         />
         <span>
           <Dialog
-            title="Create New Project"
+            title="Edit Project"
             actions={actions}
             modal={false}
             open={this.state.openDiag}
@@ -124,19 +151,22 @@ export default class SettingsMenu extends React.Component {
           >
             <TextField
               id='title'
-              value={this.state.title}
+              onChange={this.handleChangeProperties.bind(this, 'title')}
+              value={title}
               hintText="Update Project Title"
               floatingLabelText="Project Title"
             /><br />
             <TextField
               id='description'
-              value={this.state.description}
+              onChange={this.handleChangeProperties.bind(this, 'description')}
+              value={description}
               hintText="Update Project Description"
               floatingLabelText="Project Description"
             /><br />
             <TextField
               id='imgUrl'
-              value={this.state.imgUrl}
+              onChange={this.handleChangeProperties.bind(this, 'imgUrl')}
+              value={imgUrl}
               hintText="Update Project Image"
               floatingLabelText="Project Image URL"
             /><br />

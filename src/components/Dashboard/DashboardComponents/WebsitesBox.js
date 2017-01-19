@@ -24,15 +24,12 @@ const WebsitesBox = ({ project, changeCurrProject, editBodyClick, handleDeletePr
   return (
     <Card className='individual-website-block'>
       <CardMedia style={{
-        paddingTop: '5px',
-        paddingLeft: '5px',
-        paddingRight: '5px',
-        paddingBottom: '5px',
-        maxHeight: '500px',
-        maxWidth: '500px',
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#D3D3D3'
+        // paddingTop: '5px',
+        // paddingLeft: '5px',
+        // paddingRight: '5px',
+        // paddingBottom: '5px',
+        backgroundColor: '#D3D3D3',
+        textAlign: 'center'
       }}
       >
         <img style={{borderRadius: '25px'}} src={ project.imgUrl } />
@@ -61,42 +58,4 @@ const WebsitesBox = ({ project, changeCurrProject, editBodyClick, handleDeletePr
 export default WebsitesBox;
 
 
-// class WebsitesBox extends React.Component {
 
-//   constructor(props) {
-//     super(props);
-
-//     this.state = {
-//       title: this.props.project.name,
-//       subtitle: this.props.project.description,
-//     };
-//   };
-//   //project, changeCurrProject
-//   enterEditor = () => {
-//     // send dispatch action to redux to change the current project
-//     changeCurrProject(project.projectId);
-//     // GRAB ALL THE COMPONENTS THAT CORRESPOND TO THE PROJECT.projectId THROUGH A DISPATCH
-//     browserHistory.push('/editor')
-//   }
-
-//   render () {
-//     return (
-//       <Card>
-//         <CardMedia style={{
-//           paddingTop: '5px',
-//           paddingLeft: '5px',
-//           paddingRight: '5px'
-//         }}>
-//           <img src="http://placecorgi.com/280/160" />
-//         </CardMedia>
-//         <CardTitle title={this.state.title} subtitle={this.state.subtitle} />
-//         <CardActions>
-//           <RaisedButton label="Edit Site" onClick={this.eneterEditor.bind(this)} primary={true} />
-//           <SettingsMenu />
-//         </CardActions>
-//       </Card>
-//     )
-//   }
-// };
-
-// export default WebsitesBox;

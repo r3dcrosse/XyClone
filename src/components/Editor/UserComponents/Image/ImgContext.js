@@ -61,6 +61,8 @@ class ImageContext extends Component {
 
   // Use this to update the properties of the component in state
   changeProp (propertyToSet, cssProp, context, val) {
+    console.log(cssProp);
+    console.log(val);
     if (cssProp) {
       let cssObject = this.state.css;
       cssObject[cssProp] = val;

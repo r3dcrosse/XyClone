@@ -28,3 +28,13 @@ export function deleteProject (projectId) {
     deletedProjectId: projectId
   }
 };
+
+export function updateOneProject (projectId, title, description, imgUrl) {
+  return {
+    type: 'UPDATE_ONE_PROJECT',
+    projectId: projectId,
+    title: title,
+    description: description,
+    imgUrl: imgUrl
+  }
+}
