@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import saveToSessionStorage from '../../../../cache/StorageCache';
+
 const ImageComponent = ({name, style, src, swapFlag, components, currProject, loginStatus, alt, id, child, onEditorClick, onEditorChildClick = undefined, currComponentId, swapComponents, currProjectId}) => {
   let currComponentStyle;
   if (currComponentId === id) {

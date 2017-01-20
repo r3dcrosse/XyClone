@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import saveToSessionStorage from '../../../../cache/StorageCache';
 
 const Textbox = ({name, style, text, id, currProjectId, currProject, currComponentId, onEditorClick, child, onEditorChildClick = undefined, swapFlag, swapComponents, components, loginStatus}) => {
   let currComponentStyle;
