@@ -62,7 +62,9 @@ export const _components = {
     let defaultCss = {
       width: '260px',
       height: '180px',
-      margin: '5px'
+      margin: '5px',
+      border: "0px solid black",
+      borderRadius: "0px",
     }
     let component = {
       name: 'Default Image Name',

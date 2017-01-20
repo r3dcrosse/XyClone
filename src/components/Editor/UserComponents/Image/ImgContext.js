@@ -14,7 +14,9 @@ class ImageContext extends Component {
       css: {
         width: '',
         height: '',
-        margin: ''
+        margin: '',
+        border: '',
+        borderRadius: ''
       },
       src: '',
       alt: '',
@@ -129,6 +131,20 @@ class ImageContext extends Component {
             value={css.height}
             floatingLabelText="Height"
             onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            value={css.border}
+            floatingLabelText="Border"
+            onChange={this.changeProp.bind(this, 'css', 'border')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            value={css.borderRadius}
+            floatingLabelText="Border Radius"
+            onChange={this.changeProp.bind(this, 'css', 'borderRadius')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
