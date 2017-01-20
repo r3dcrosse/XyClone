@@ -50,7 +50,7 @@ class TextboxContext extends Component {
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
       text: newProps.currComponent.text,
-      fontFamilySelector: this.newProps.currComponent.css.fontFamily
+      fontFamilySelector: newProps.currComponent.css.fontFamily
     })
   }
 
