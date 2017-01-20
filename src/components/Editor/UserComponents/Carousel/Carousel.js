@@ -70,7 +70,7 @@ class Carousel extends Component {
     } else {
       return (
         <div className={currComponentStyle}>
-        <button onClick={this.clickNext.bind(this)}>NEXT</button>
+          <button onClick={this.clickNext.bind(this)}>NEXT</button>
           <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
             {
               <UserComponent

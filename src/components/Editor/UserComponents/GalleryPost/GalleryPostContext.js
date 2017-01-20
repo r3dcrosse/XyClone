@@ -103,8 +103,9 @@ class GalleryPostContext extends Component {
       resolve();
     })
     dispatchHandler.then(() => {
-      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
-    })
+      let newComponents = context.props.components.filter((component) => { return component.componentId !== context.props.currComponentId});
+      console.log(newComponents)
+      saveToSessionStorage(newComponents, context.props.currProject, context.props.loginStatus.id);    })
   }
 
 
