@@ -32,9 +32,9 @@ export const _components = {
   },
   Textbox: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
-      "display": "flex",
-      "justifyContent": "center",
-      "alignItems": "center",
+      "textAlign": "center",
+      "border": "1px solid black",
+      "borderRadius": "0px",
       "backgroundColor": "cornflowerblue",
       "width": "300px",
       "height": "20px",

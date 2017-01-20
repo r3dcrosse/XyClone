@@ -48,9 +48,7 @@ const Textbox = ({name, style, text, id, currProjectId, currProject, currCompone
     }
     return (
       <div className={'flex-item-textbox ' + currComponentStyle} style={style} onClick={stopBubble}>
-        <div>
-          {text}
-        </div>
+        {text}
       </div>
     )
   }

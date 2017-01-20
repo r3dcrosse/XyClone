@@ -21,7 +21,9 @@ class TextboxContext extends Component {
         height: '',
         margin: '',
         fontSize: '',
-        fontFamily: ''
+        fontFamily: '',
+        border: '',
+        borderRadius: ''
       },
       text: '',
       type: '',
@@ -227,6 +229,20 @@ class TextboxContext extends Component {
             defaultValue={css.height}
             floatingLabelText="Height"
             onChange={this.changeProp.bind(this, 'css', 'height')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.border}
+            floatingLabelText="Border"
+            onChange={this.changeProp.bind(this, 'css', 'border')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            defaultValue={css.borderRadius}
+            floatingLabelText="Border Radius"
+            onChange={this.changeProp.bind(this, 'css', 'borderRadius')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
