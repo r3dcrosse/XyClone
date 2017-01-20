@@ -11,3 +11,9 @@ export function logoutUser () {
   }
 }
 
+export function clearCache () {
+  return {
+    type: 'CLEAR_CACHE'
+  }
+}
+
