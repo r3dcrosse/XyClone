@@ -78,12 +78,6 @@ class Carousel extends Component {
       return (
       <div className=''>
         <div className={currComponentStyle} style={this.props.style} onClick={this.stopSideProp.bind(this)} >
-        <Snackbar
-          open={this.state.openSnack}
-          message="Added Carousel to Editor"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose.bind(this)}
-        />
         </div>
       </div>
     )
