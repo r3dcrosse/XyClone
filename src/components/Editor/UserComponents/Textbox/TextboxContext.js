@@ -5,6 +5,8 @@ import { storage } from '../../../../cache/ComponentCache';
 import saveToSessionStorage from '../../../../cache/StorageCache';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import { SketchPicker } from 'react-color';
 
 class TextboxContext extends Component {
@@ -14,17 +16,20 @@ class TextboxContext extends Component {
       name: '',
       css: {
         backgroundColor: '',
-        color: 'black',
+        color: '',
         width: '',
         height: '',
-        margin: ''
+        margin: '',
+        fontSize: '',
+        fontFamily: ''
       },
       text: '',
       type: '',
       colorPickerButtonText: 'Background Color',
       openColorPicker: false,
       textColorPicker: 'Text Color',
-      openTextColorPicker: false
+      openTextColorPicker: false,
+      fontFamilySelector: 'serif'
     }
   }
 
@@ -34,7 +39,8 @@ class TextboxContext extends Component {
       name: this.props.currComponent.name,
       css: this.props.currComponent.css,
       type: this.props.currComponent.type,
-      text: this.props.currComponent.text
+      text: this.props.currComponent.text,
+      fontFamilySelector: this.props.currComponent.css.fontFamily
     })
   }
 
@@ -43,7 +49,8 @@ class TextboxContext extends Component {
       name: newProps.currComponent.name,
       css: newProps.currComponent.css,
       type: newProps.currComponent.type,
-      text: newProps.currComponent.text
+      text: newProps.currComponent.text,
+      fontFamilySelector: this.newProps.currComponent.css.fontFamily
     })
   }
 
@@ -67,6 +74,10 @@ class TextboxContext extends Component {
 
   // Use this to update the properties of the component in state
   changeProp (propertyToSet, cssProp, context, val) {
+    console.log('propertyToSet', propertyToSet);
+    console.log('cssProp', cssProp);
+    console.log('context', context);
+    console.log('val', val);
     if (cssProp) {
       let cssObject = this.state.css;
       cssObject[cssProp] = val;
@@ -118,6 +129,11 @@ class TextboxContext extends Component {
     });
   }
 
+  changeFontFamily (e, index, value) {
+    this.setState({fontFamilySelector: value});
+    this.changeProp('css', 'fontFamily', this, value);
+  }
+
   deleteCurrComponent(e) {
     e.preventDefault();
     let context = this;
@@ -140,17 +156,31 @@ class TextboxContext extends Component {
       return (
         <div className="imagecontext-container">
           <div>{type}</div>
-          <TextField
-            defaultValue={name}
-            floatingLabelText="Textbox Name"
-            onChange={this.changeProp.bind(this, 'name', null)}
-            onKeyPress={this.handleEnterKeyPress.bind(this)}
-            fullWidth={true}
-          />
+          {/* <TextField defaultValue={name} floatingLabelText="Textbox Name" onChange={this.changeProp.bind(this, 'name', null)} onKeyPress={this.handleEnterKeyPress.bind(this)} fullWidth={true} /> */}
           <TextField
             defaultValue={text}
             floatingLabelText="Text"
             onChange={this.changeProp.bind(this, 'text', null)}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <SelectField
+            floatingLabelText="Font Family"
+            fullWidth={true}
+            value={this.state.fontFamilySelector}
+            onChange={this.changeFontFamily.bind(this)}
+          >
+            <MenuItem value={"serif"} primaryText="serif" />
+            <MenuItem value={"sans-serif"} primaryText="sans-serif" />
+            <MenuItem value={"monospace"} primaryText="monospace" />
+            <MenuItem value={"cursive"} primaryText="cursive" />
+            <MenuItem value={"fantasy"} primaryText="fantasy" />
+          </SelectField>
+          <TextField
+            hintText="14px"
+            defaultValue={css.fontSize}
+            floatingLabelText="Font Size"
+            onChange={this.changeProp.bind(this, 'css', 'fontSize')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
