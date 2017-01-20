@@ -35,7 +35,10 @@ export const _components = {
       "backgroundColor": "cornflowerblue",
       "width": "300px",
       "height": "20px",
-      "margin": "10px"
+      "margin": "10px",
+      "color": "black",
+      "fontSize": "14px",
+      "fontFamily": "serif"
     };
     let component = {
       name: 'Default Textbox Name',
