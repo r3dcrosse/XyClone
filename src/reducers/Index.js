@@ -10,5 +10,18 @@ const reducers = {
   xycloneProjects: xycloneProjects
 };
 
-const rootReducer = combineReducers(reducers);
+// const rootReducer = combineReducers(reducers);
+// export default rootReducer;
+
+const appReducer = combineReducers(reducers);
+
+const rootReducer = (state, action) => {
+  if (action.type === 'CLEAR_CACHE') {
+    state = undefined
+  }
+  return appReducer(state, action)
+}
+
 export default rootReducer;
+
+

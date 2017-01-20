@@ -16,10 +16,11 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      signupDialog: false, 
+      signupDialog: false,
       loginDialog: false,
       signupStatus: '',
-      loginStatus: ''
+      loginStatus: '',
+      redirectOption: '',
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -38,7 +39,13 @@ class Login extends Component {
   }
 
   handleLoginRedirect(event) {
-    browserHistory.push('/dashboard')
+    if (this.state.redirectOption === 'Back') {
+      this.setState({
+        signupDialog: false
+      })
+    } else {
+      browserHistory.push('/dashboard')
+    }
   }
 
   handleLoginBackout(event) {
@@ -51,7 +58,7 @@ class Login extends Component {
     var usn = this.state.username,
         pass = this.state.password,
         that = this;
-    
+
     console.log('props', this.props)
 
     axios.post('http://localhost:8000/signup', {
@@ -59,29 +66,39 @@ class Login extends Component {
         pass: pass
     })
       .then(function (response) {
-        
-        let status
+        console.log(response.data);
+        let status;
 
         if (response.status === 200) {
           status = 'Great! You\'re now signed up for XyClone'
           let login = {
-            id: response.data,
+            id: usn,
             authResponse: {
-              userID: response.data
+              userID: usn
             }
           }
+          that.setState({
+            redirectOption: 'Dashboard',
+          })
+
           that.props.dispatchLoginUser(login);
-        } else if (response.status === 400) {
+        } else if (response.status === 201) {
+          console.log('SORRY THAT USERNAMEI S ALREADY TAKEN')
           status = 'Sorry. That username is already taken'
+
+          that.setState({
+            redirectOption: 'Back',
+          })
+
         } else {
           status = 'Signup failed. Please try again'
         }
 
-        that.setState({
-          signupDialog: true,
-          signupStatus: status
-        })
 
+        that.setState({
+          signupStatus: status,
+          signupDialog: true
+        })
       })
       .catch(function (error) {
         console.log(error)
@@ -100,21 +117,53 @@ class Login extends Component {
         pass: pass
     })
       .then(function (response) {
-        
+
         let status
 
         console.log(response)
 
         if (response.data.response === 'valid login') {
           status = 'Great! You\'re now up for XyClone'
+
           let login = {
-            id: response.data.token,
+            id: usn,
             authResponse: {
-              userID: response.data.token
+              userID: usn
             }
           }
+
           that.props.dispatchLoginUser(login);
+          sessionStorage.setItem('projectStates', JSON.stringify([]));
+          sessionStorage.setItem('counter', JSON.stringify(0));
           browserHistory.push('/dashboard');
+          let allProjects = []
+          let allComponents = [];
+          if (Object.keys(response.data.projectsData).length !== 0) {
+            response.data.projectsData.forEach(function(project) {
+              console.log(project, 'THIS IS PROJECT FROM LOGIN SCREEN');
+              allProjects.push({
+                projectId: project.projectId,
+                title: project.title,
+                description: project.description,
+                imgUrl: project.imgUrl
+              })
+              // GRAB ALL THE COMPONENT REFERENCES THE USER HAS
+              for (let i = 0; i < project.components.length; i++) {
+                allComponents.push(project.components[i])
+              }
+
+            // UPDATE STORAGE CACHE TO CORRESPOND TO THE COMPONENTS FROM THE USER
+              for (let key in project.storage) {
+                storage[key] = project.storage[key];
+                if ((!storage[key].parent) && key !== ('body' + project.projectId)) {
+                  storage[key].parent = {};
+                }
+              }
+
+            });
+            this.props.updateStorageComponents(allComponents);
+            this.props.updateProjectsStorage(allProjects);
+          }
         } else if (response.data === 'user not found') {
           console.log('in the 400 block')
           status = 'Username not found'
@@ -124,12 +173,11 @@ class Login extends Component {
         } else {
           status = 'Sorry, we had an error. Please try again later'
         }
-
         that.setState({
           loginDialog: true,
           loginStatus: status
         })
-        
+
       })
       .catch(function (error) {
         console.log(error)
@@ -138,9 +186,9 @@ class Login extends Component {
 
   render() {
     const signupActions = [
-      <RaisedButton 
-        label="Go to the dashboard" 
-        onClick={this.handleLoginRedirect} 
+      <RaisedButton
+        label={this.state.redirectOption}
+        onClick={this.handleLoginRedirect}
       />
     ]
     const loginActions = [
@@ -149,7 +197,7 @@ class Login extends Component {
         onClick={this.handleLoginBackout}
       />
     ]
-
+    console.log(this.state.signupStatus);
     return (
       <div className="App">
         <div className="loginpage-field-container">
@@ -166,7 +214,7 @@ class Login extends Component {
             onChange={this.handlePasswordChange}
           />
           <Dialog
-            title={this.state.signUpStatus}
+            title={this.state.signupStatus}
             open={this.state.signupDialog}
             actions={signupActions}
           />
@@ -202,4 +250,14 @@ class Login extends Component {
 
 export default Login;
 
+        //MOUNT ALL THE COMPONENTS/PROJECTS BELONGING TO THIS USER
+          // result.project = projects. map through projects.
+        // userdata.data is all the projects.
+        // module.exports = mongoose.model('Project', new Schema({
+        //   projectId: Number,
+        //   title: String,
+        //   components: Array,
+        //   storage: Object,
+        //   userId: String
+        // }));
 

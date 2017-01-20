@@ -58,6 +58,18 @@ export default function xycloneProjects (state = initialState, action) {
       return Object.assign({}, state, {
         projects: newProjectsArray
       });
+    case 'UPDATE_ONE_PROJECT':
+      let projectsArray = state.projects.map((project) => {
+        if (project.projectId === action.projectId) {
+          project.title = action.title;
+          project.description = action.description;
+          project.imgUrl = action.imgUrl
+        }
+        return project;
+      });
+      return Object.assign({}, state, {
+        projects: projectsArray
+      });
     default:
       return state;
   }

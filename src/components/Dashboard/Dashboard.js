@@ -148,6 +148,7 @@ class Dashboard extends Component {
   }
 
   render() {
+
     const actions = [
       <FlatButton
         label="Cancel"
@@ -161,7 +162,6 @@ class Dashboard extends Component {
         onTouchTap={ this.addNewProject.bind(this) }
       />,
     ];
-
     // console.log('THIS IS THE PROJECTS THAT ARE CURRENTLY INSIDE REDUX INSIDE DASHBOARD', this.state.projects)
     let userId = this.state.userId;
     console.log(this.state.projects);
@@ -179,11 +179,11 @@ class Dashboard extends Component {
 
         </div>
 
-        <div>
-        <RaisedButton
-            label="+ Add New Project"
-            onTouchTap={this.handleOpen.bind(this)}
-          />
+        <div className='dashboard-AddProjectButton'>
+          <RaisedButton
+              label="+ Add New Project"
+              onTouchTap={this.handleOpen.bind(this)}
+            />
         </div>
 
           <div className="websitesBox-container">

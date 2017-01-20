@@ -49,14 +49,15 @@ Router.route('/download/:projectId')
 
 Router.route('/signup')
   .post(function (req, res) {
-    var credentials = req.body; 
+    var credentials = req.body;
     console.log(credentials)
-    authController.saveUser(req.body.usn, req.body.pass, (status, token) => {
+    authController.saveUser(req.body.usn, req.body.pass, (status, token, projects) => {
       if (status === 200) {
           console.log('going to send', status)
-          res.status(200).send(token);
+          res.status(200).json({token: token, response: 'signed up', projectsData: projects});
         } else if (status === 400) {
-          res.status(200).send('Sorry. That username is already taken');
+          console.log('sending this status');
+          res.status(201).json('UH OH');
         } else {
           res.status(500).send('Sorry, there was an error, please try again later')
         }
@@ -66,13 +67,13 @@ Router.route('/signup')
 Router.route('/login')
   .post(function (req, res) {
     var username = req.body.usn,
-        password = req.body.pass; 
+        password = req.body.pass;
     console.log('usrname', username)
 
-    authController.validateUser(username, password, (authResponse, token) => {
-      if (authResponse === true) { 
+    authController.validateUser(username, password, (authResponse, token, projects) => {
+      if (authResponse) {
         console.log('on the server valid login')
-        res.status(200).json({token: token, response: 'valid login'})
+        res.status(200).json({token: token, response: 'valid login', projectsData: projects})
       } else if (authResponse === 400) {
         console.log('on the server 400 err')
         res.status(200).send('user not found')

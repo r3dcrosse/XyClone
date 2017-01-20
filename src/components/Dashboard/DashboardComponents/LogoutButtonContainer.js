@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { loginUser, logoutUser } from '../../../actions/LoginActions';
+import { loginUser, logoutUser, clearCache } from '../../../actions/LoginActions';
 import LogoutButton from './LogoutButton';
 
 
@@ -13,6 +13,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     dispatchLogoutUser: () => {
       dispatch(logoutUser())
+    },
+    clearCache: () => {
+      dispatch(clearCache());
     }
   }
 }

@@ -3,6 +3,12 @@ import { editBodyClick } from '../../../actions/EditingActions';
 import { changeCurrProject } from '../../../actions/ProjectActions';
 import WebsitesBox from './WebsitesBox';
 
+const mapStateToProps = (state) => {
+  return {
+    projects: state.xycloneProjects.projects
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrProject: (id) => {
@@ -10,7 +16,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     editBodyClick: (id) => {
       dispatch(editBodyClick(id));
-    },
+    }
     // updateProjectSummary: (title, description, imgUrl, projectId) => {
     //   dispatch(updateProjectSummary(title, description, imgUrl, projectId));
     // }
@@ -18,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const WebsitesBoxContainer = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(WebsitesBox);
 
