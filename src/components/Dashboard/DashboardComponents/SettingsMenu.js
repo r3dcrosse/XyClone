@@ -96,7 +96,7 @@ export default class SettingsMenu extends React.Component {
         let parsed = JSON.parse(response.config.data);
         console.log(parsed);
         context.setState({
-          projetId: parsed.projectId,
+          projectId: parsed.projectId,
           title: parsed.title,
           description: parsed.description,
           imgUrl: parsed.imgUrl
