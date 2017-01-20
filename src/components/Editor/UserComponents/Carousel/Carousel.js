@@ -91,12 +91,6 @@ class Carousel extends Component {
       return (
         <div className={currComponentStyle}>
         <RaisedButton style={{marginRight: '250px'}} label="Back" onClick={this.clickBack.bind(this)}/> <RaisedButton label="Next" onClick={this.clickNext.bind(this)} />
-        <Snackbar
-          open={this.state.openSnack}
-          message="Added Gallery Post to Carousel"
-          autoHideDuration={4000}
-          onRequestClose={this.handleRequestClose.bind(this)}
-        />
           <div className='Carousel-flexcontainer' style={this.props.style} onClick={this.stopSideProp.bind(this)} >
             {
               <UserComponent
