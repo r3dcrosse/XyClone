@@ -103,7 +103,9 @@ class Dashboard extends Component {
     let title = document.getElementById('title').value;
     let description = document.getElementById('description').value;
     let imgUrl = document.getElementById('imgUrl').value;
-
+    if (imgUrl === '') {
+      imgUrl = 'http://entertainment.inquirer.net/files/2016/07/13717225_1265259390150735_8093269019210020606_o.jpg';
+    }
     axios.post('/addNewProject', {userId: this.props.loginStatus.id, title: title, description: description, imgUrl: imgUrl})
       .then((response) => {
 
