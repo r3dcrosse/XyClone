@@ -54,6 +54,7 @@ class UserContainerContext extends Component {
       context.props.onChangeStyleClick(newProps, context.props.currComponentId, context.props.currComponent);
       resolve();
     });
+
     dispatchHandler.then(() => {
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
     });
@@ -120,6 +121,7 @@ class UserContainerContext extends Component {
       resolve();
     })
     dispatchHandler.then(() => {
+
       saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
     })
   }
@@ -128,11 +130,14 @@ class UserContainerContext extends Component {
     e.preventDefault();
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
+      console.log('DELETING CONTAINER');
       context.props.deleteFocusedComponent(context.props.currComponentId, context.props.currComponent);
       resolve();
     })
     dispatchHandler.then(() => {
-      saveToSessionStorage(context.props.components, context.props.currProject, context.props.loginStatus.id);
+      let newComponents = context.props.components.filter((component) => { return component.componentId !== context.props.currComponentId});
+      console.log(newComponents)
+      saveToSessionStorage(newComponents, context.props.currProject, context.props.loginStatus.id);
     })
   }
 

@@ -43,17 +43,20 @@ class LogoutButton extends Component {
       console.log('LOGGING OUT HERE')
       this.props.dispatchLogoutUser();
       this.props.clearCache();
-      browserHistory.push('/login');
-
+      setTimeout(function() {
+        browserHistory.push('/login');
+      }, 1000)
     } else {
       FB.logout(function(response) {
-        console.log('response of logout', response);
         this.props.dispatchLogoutUser();
         this.props.clearCache();
-       browserHistory.push('/login');
-
+        setTimeout(function() {
+          browserHistory.push('/login');
+        }, 1000)
       }.bind(this));
     }
+
+    browserHistory.push('/login');
 
   }
 

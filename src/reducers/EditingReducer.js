@@ -13,11 +13,12 @@ const initialState = {
 // HELPER FUNCTION
 
 // MIGHT NEED TO REFACTOR TO FIND CERTAIN PROJECT ELEMENT
-let recurseDelete = (element) => {
+let recurseDelete = (element, arrayOfChildren) => {
 	// console.log(element, 'RECURSEDELETE WITH ELEMENT');
 	if (element.children.length > 0) {
-		for (let i = 0; i < element.children.length; i++) {
-			recurseDelete(storage[element.children[i].componentId]);
+    for (let i = 0; i < element.children.length; i++) {
+      arrayOfChildren.push(element.children[i].componentId);
+			recurseDelete(storage[element.children[i].componentId], arrayOfChildren);
 		}
 	}
 	element.children.length = 0;
@@ -91,7 +92,7 @@ export default function xyclone (state = initialState, action) {
 				currComponentId: action.componentId
 			});
 		case 'ADD_CHILDREN':
-			// console.log('ADDING A CHILD INTO', action.componentId);
+			console.log('ADDING A CHILD INTO', action.componentId);
 			var parentEle = storage[action.componentId];
 			elem = action.componentType;
 			project = action.project;
@@ -115,18 +116,33 @@ export default function xyclone (state = initialState, action) {
 			componentFromStorage = action.component;
 			// console.log(componentFromStorage, 'THIS IS COMPONENT FROM STORAGE');
 			// REFACTOR THIS PART TO BE MORE EFFICENT (OBJECT????)
+      let arrayOfChildren = [];
 			if (componentFromStorage.type === 'UserContainer' || componentFromStorage.type === 'GalleryPost' || componentFromStorage.type === 'Carousel') {
-				recurseDelete(componentFromStorage);
+				recurseDelete(componentFromStorage, arrayOfChildren);
 			}
+
+      console.log(arrayOfChildren);
+
+      for (let key in storage) {
+        if (!key.includes('body')) {
+          for (let i = 0; i < arrayOfChildren.length; i++) {
+            console.log(JSON.parse(key), arrayOfChildren[i]);
+            if (JSON.parse(key) === arrayOfChildren[i]) {
+              delete storage[key];
+            }
+          }
+        }
+      }
 
 			//MIGHT NEED TO REFACTOR TO FIND CERTAIN PROEJCT COMPONENT IS FROM
 			if (Object.keys(componentFromStorage.parent).length !== 0) {
 				storage[componentFromStorage.parent.componentId].children = storage[componentFromStorage.parent.componentId].children.filter((ref) => ref.componentId !== action.componentId);
 			}
 			delete storage[action.componentId];
-
+      let filteredForObject = state.components.filter((ref) => ref.componentId !== action.componentId)
+      console.log(filteredForObject);
 			return Object.assign({}, state, {
-				components: state.components.filter((ref) => ref.componentId !== action.componentId),
+				components: filteredForObject,
 				currComponent: null,
 				currComponentId: null
 			});

@@ -81,7 +81,8 @@ class Login extends Component {
           that.setState({
             redirectOption: 'Dashboard',
           })
-
+          sessionStorage.setItem('projectStates', JSON.stringify([]));
+          sessionStorage.setItem('counter', JSON.stringify(0));
           that.props.dispatchLoginUser(login);
         } else if (response.status === 201) {
           console.log('SORRY THAT USERNAMEI S ALREADY TAKEN')
@@ -136,6 +137,7 @@ class Login extends Component {
           that.props.dispatchLoginUser(login);
           sessionStorage.setItem('projectStates', JSON.stringify([]));
           sessionStorage.setItem('counter', JSON.stringify(0));
+          console.log('SETTING SESSION STORAGE. WHY ISNT IT SETTING?');
           browserHistory.push('/dashboard');
           let allProjects = []
           let allComponents = [];
