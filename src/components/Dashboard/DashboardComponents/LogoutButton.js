@@ -36,22 +36,25 @@ class LogoutButton extends Component {
     for (let key in storage) {
       delete storage[key];
     }
+    sessionStorage.clear();
+
     // if length is two, this is a local login
     if (Object.keys(this.props.loginStatus).length === 2) {
+      console.log('LOGGING OUT HERE')
       this.props.dispatchLogoutUser();
       this.props.clearCache();
-      sessionStorage.clear();
-
       browserHistory.push('/login');
+
     } else {
       FB.logout(function(response) {
         console.log('response of logout', response);
         this.props.dispatchLogoutUser();
         this.props.clearCache();
-        sessionStorage.clear();
-        browserHistory.push('/login');
+       browserHistory.push('/login');
+
       }.bind(this));
     }
+
   }
 
 
