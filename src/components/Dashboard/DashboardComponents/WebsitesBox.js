@@ -32,7 +32,7 @@ const WebsitesBox = ({ project, changeCurrProject, editBodyClick, handleDeletePr
         textAlign: 'center'
       }}
       >
-        <img style={{borderRadius: '25px'}} src={ project.imgUrl } />
+        <img style={{}} src={ project.imgUrl } />
 
       </CardMedia>
       <CardTitle
