@@ -172,6 +172,8 @@ class Dashboard extends Component {
             title="XyClone | Dashboard"
             className='AppBar-EditorPage'
             iconElementRight={ <LogoutButtonContainer /> }
+            showMenuIconButton={false}
+
           />
         </div>
 

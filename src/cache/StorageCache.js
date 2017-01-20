@@ -29,11 +29,11 @@ let composeProject = function(components, project, userId) {
 }
 
 let saveToSessionStorage = function(components, project, userId) {
-  console.log('COMPONENTS', components);
-  console.log('PROJECT', project);
-  console.log('USERID ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', userId);
+  // console.log('COMPONENTS', components);
+  // console.log('PROJECT', project);
+  // console.log('USERID ASDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', userId);
   let currProjectState = composeProject(components, project, userId);
-  console.log(currProjectState, 'THIS IS THE PUSHED STATE');
+  // console.log(currProjectState, 'THIS IS THE PUSHED STATE');
   let projectStates = JSON.parse(sessionStorage.getItem('projectStates'));
   let counter = JSON.parse(sessionStorage.getItem('counter'));
   let initialLength = projectStates.length;

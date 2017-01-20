@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Dialog from 'material-ui/Dialog';
+import AppBar from 'material-ui/AppBar'
 import FacebookLoginContainer from './LoginFacebookContainer.js'
 import SignedUpDialog from './SignedUpDialog'
 import ReactPasswordStrength from 'react-password-strength'
@@ -197,51 +198,57 @@ class Login extends Component {
         onClick={this.handleLoginBackout}
       />
     ]
-    console.log(this.state.signupStatus);
     return (
       <div className="App">
-        <div className="loginpage-field-container">
-          <FacebookLoginContainer />
-          <TextField
-            floatingLabelText="Username"
-            value={this.state.value}
-            onChange={this.handleUsernameChange}
-          />
-          <TextField
-            floatingLabelText="Password"
-            type="password"
-            value={this.state.value}
-            onChange={this.handlePasswordChange}
-          />
-          <Dialog
-            title={this.state.signupStatus}
-            open={this.state.signupDialog}
-            actions={signupActions}
-          />
-          <Dialog
-            title={this.state.loginStatus}
-            open={this.state.loginDialog}
-            actions={loginActions}
-          />
-          {/* <ReactPasswordStrength
-            minLength={5}
-            minScore={2}
-            scoreWords={['weak', 'okay', 'good', 'strong', 'stronger']}
-            changeCallback={this.handlePasswordChange}
-            inputProps={{ name: "password", autocomplete: "off" }}
-          /> */}
-          <span>
-            <RaisedButton
-              label="Sign Up"
-              secondary={true}
-              onClick={this.handleSignupSubmit}
+        <AppBar
+          title="XyClone "
+          className='AppBar-EditorPage'
+          showMenuIconButton={false}
+        />
+        <div className='loginpage-container'>
+          <div className="loginpage-field-container">
+            <FacebookLoginContainer />
+            <TextField
+              floatingLabelText="Username"
+              value={this.state.value}
+              onChange={this.handleUsernameChange}
             />
-            <RaisedButton
-              label="Login"
-              primary={true}
-              onClick={this.handleLoginSubmit}
+            <TextField
+              floatingLabelText="Password"
+              type="password"
+              value={this.state.value}
+              onChange={this.handlePasswordChange}
             />
-          </span>
+            <Dialog
+              title={this.state.signupStatus}
+              open={this.state.signupDialog}
+              actions={signupActions}
+            />
+            <Dialog
+              title={this.state.loginStatus}
+              open={this.state.loginDialog}
+              actions={loginActions}
+            />
+            {/* <ReactPasswordStrength
+              minLength={5}
+              minScore={2}
+              scoreWords={['weak', 'okay', 'good', 'strong', 'stronger']}
+              changeCallback={this.handlePasswordChange}
+              inputProps={{ name: "password", autocomplete: "off" }}
+            /> */}
+            <span>
+              <RaisedButton
+                label="Sign Up"
+                secondary={true}
+                onClick={this.handleSignupSubmit}
+              />
+              <RaisedButton
+                label="Login"
+                primary={true}
+                onClick={this.handleLoginSubmit}
+              />
+            </span>
+          </div>
         </div>
       </div>
     );

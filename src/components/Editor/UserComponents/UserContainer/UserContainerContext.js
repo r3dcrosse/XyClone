@@ -116,7 +116,7 @@ class UserContainerContext extends Component {
     e.preventDefault();
     let context = this;
     let dispatchHandler = new Promise(function(resolve, reject) {
-      context.props.onEditorComponentSidebarClick(context.state.addChild, context.props.currComponentId, context.props.currProject, context.props.loginStatus.id);
+      context.props.onEditorComponentSidebarClick(context.state.childSelector, context.props.currComponentId, context.props.currProject, context.props.loginStatus.id);
       resolve();
     })
     dispatchHandler.then(() => {
