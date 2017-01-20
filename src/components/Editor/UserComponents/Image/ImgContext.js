@@ -96,7 +96,7 @@ class ImageContext extends Component {
         <div className="imagecontext-container">
           <div>{type}</div>
           <TextField
-            defaultValue={name}
+            value={name}
             floatingLabelText="Image Name"
             onChange={this.changeProp.bind(this, 'name', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
@@ -104,7 +104,7 @@ class ImageContext extends Component {
           />
           <TextField
             inputStyle={{fontSize: '6pt'}}
-            defaultValue={src}
+            value={src}
             hintText="http://www.imgur.com/hax1337"
             floatingLabelText="Image Source"
             onChange={this.changeProp.bind(this, 'src', null)}
@@ -112,28 +112,28 @@ class ImageContext extends Component {
             fullWidth={true}
           />
           <TextField
-            defaultValue={alt}
+            value={alt}
             floatingLabelText="Alternate Text"
             onChange={this.changeProp.bind(this, 'alt', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.width}
+            value={css.width}
             floatingLabelText="Width"
             onChange={this.changeProp.bind(this, 'css', 'width')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.height}
+            value={css.height}
             floatingLabelText="Height"
             onChange={this.changeProp.bind(this, 'css', 'height')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.margin}
+            value={css.margin}
             floatingLabelText="Margin"
             onChange={this.changeProp.bind(this, 'css', 'margin')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}

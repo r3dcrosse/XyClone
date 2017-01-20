@@ -158,9 +158,9 @@ class TextboxContext extends Component {
       return (
         <div className="imagecontext-container">
           <div>{type}</div>
-          {/* <TextField defaultValue={name} floatingLabelText="Textbox Name" onChange={this.changeProp.bind(this, 'name', null)} onKeyPress={this.handleEnterKeyPress.bind(this)} fullWidth={true} /> */}
+          {/* <TextField value={name} floatingLabelText="Textbox Name" onChange={this.changeProp.bind(this, 'name', null)} onKeyPress={this.handleEnterKeyPress.bind(this)} fullWidth={true} /> */}
           <TextField
-            defaultValue={text}
+            value={text}
             floatingLabelText="Text"
             onChange={this.changeProp.bind(this, 'text', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
@@ -180,7 +180,7 @@ class TextboxContext extends Component {
           </SelectField>
           <TextField
             hintText="14px"
-            defaultValue={css.fontSize}
+            value={css.fontSize}
             floatingLabelText="Font Size"
             onChange={this.changeProp.bind(this, 'css', 'fontSize')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
@@ -219,35 +219,35 @@ class TextboxContext extends Component {
             </div>
           }
           <TextField
-            defaultValue={css.width}
+            value={css.width}
             floatingLabelText="Width"
             onChange={this.changeProp.bind(this, 'css', 'width')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.height}
+            value={css.height}
             floatingLabelText="Height"
             onChange={this.changeProp.bind(this, 'css', 'height')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.border}
+            value={css.border}
             floatingLabelText="Border"
             onChange={this.changeProp.bind(this, 'css', 'border')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.borderRadius}
+            value={css.borderRadius}
             floatingLabelText="Border Radius"
             onChange={this.changeProp.bind(this, 'css', 'borderRadius')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.margin}
+            value={css.margin}
             floatingLabelText="Margin"
             onChange={this.changeProp.bind(this, 'css', 'margin')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}

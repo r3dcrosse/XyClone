@@ -148,7 +148,7 @@ class UserContainerContext extends Component {
         <div className="imagecontext-container">
           <div>User Container</div>
           <TextField
-            defaultValue={name}
+            value={name}
             floatingLabelText="Container Name"
             onChange={this.changeProp.bind(this, 'name', null)}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
@@ -171,21 +171,21 @@ class UserContainerContext extends Component {
             </div>
           }
           <TextField
-            defaultValue={css.width}
+            value={css.width}
             floatingLabelText="Width"
             onChange={this.changeProp.bind(this, 'css', 'width')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.height}
+            value={css.height}
             floatingLabelText="Height"
             onChange={this.changeProp.bind(this, 'css', 'height')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
           <TextField
-            defaultValue={css.margin}
+            value={css.margin}
             floatingLabelText="Margin"
             onChange={this.changeProp.bind(this, 'css', 'margin')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
