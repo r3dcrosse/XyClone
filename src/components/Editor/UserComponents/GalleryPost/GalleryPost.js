@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
-import { storage } from '../../../../cache/ComponentCache'
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import { storage } from '../../../../cache/ComponentCache';
+import saveToSessionStorage from '../../../../cache/StorageCache';
 
 const GalleryPost = ({name, style, currProjectId, swapFlag, swapComponents, id, currComponentId, child, children, onEditorClick, onEditorChildClick = undefined, loginStatus, components }) => {
   let currComponentStyle;

@@ -10,8 +10,11 @@ import GalleryPostContainer from '../UserComponents/GalleryPost/GalleryPostConta
 import CarouselContainer from '../UserComponents/Carousel/CarouselContainer'
 
 const UserComponent = ({ componentId, type, onEditorClick, child = false, onEditorChildClick = undefined }) => {
-  // console.log('COMPONENTID', componentId);
-  // console.log('TYPE OF COMPONENT', type);
+  console.log('COMPONENTID', componentId);
+  console.log('TYPE OF COMPONENT', type);
+  console.log(storage[componentId])
+  console.log(storage);
+  
   let style = storage[componentId].css;
   let name = storage[componentId].name;
   let children = storage[componentId].children;

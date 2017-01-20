@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserComponent from '../../EditorComponents/UserComponent';
-import { storage } from '../../../../cache/ComponentCache'
-import saveToSessionStorage from '../../../../cache/StorageCache'
+import { storage } from '../../../../cache/ComponentCache';
+import saveToSessionStorage from '../../../../cache/StorageCache';
 
 const UserContainer = ({name, style, components, currProjectId, currProject, currComponentId, id, onEditorClick, children, onEditorChildClick, swapFlag, loginStatus, swapComponents}) => {
   let currComponentStyle;

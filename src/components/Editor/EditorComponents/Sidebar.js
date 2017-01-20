@@ -12,13 +12,22 @@ import Undo from 'material-ui/svg-icons/content/undo';
 import FlatButton from 'material-ui/FlatButton';
 import {blue500, red500, greenA200, black} from 'material-ui/styles/colors';
 import SwapComponentsContainer from './Containers/SwapComponentsContainer';
+import Snackbar from 'material-ui/Snackbar';
+
 class Sidebar extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      components: null
+      components: null,
+      openSnack: false
     }
   }
+
+  handleRequestClose = () => {
+    this.setState({
+      openSnack: false,
+    });
+  };
 
   componentDidMount() {
     if (JSON.parse(sessionStorage.getItem('projectStates')).length === 0) {
@@ -28,6 +37,11 @@ class Sidebar extends Component {
 
   clickHandler (type, currProject, id) {
     let context = this;
+
+    context.setState({
+      openSnack: true,
+    });
+
     let dispatchHandler = new Promise(function(resolve, reject) {
       context.props.onSidebarClick(type, currProject, id);
       resolve();
@@ -135,6 +149,14 @@ class Sidebar extends Component {
         </div>
         <Divider />
         <BuildSiteContainer />
+
+        <Snackbar
+          style={{margin: '500px', backgroundColor: 'red'}}
+          open={true}
+          message='Added Component to Editor'
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose.bind(this)}
+        />
       </Drawer>
     )
   }

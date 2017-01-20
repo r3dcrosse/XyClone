@@ -19,7 +19,8 @@ class CarouselContext extends Component {
         backgroundColor: '',
         width: '',
         height: '',
-        margin: ''
+        margin: '',
+        borderRadius: ''
       },
       children: [],
       type: '',
@@ -172,6 +173,13 @@ class CarouselContext extends Component {
             value={css.margin}
             floatingLabelText="Margin"
             onChange={this.changeProp.bind(this, 'css', 'margin')}
+            onKeyPress={this.handleEnterKeyPress.bind(this)}
+            fullWidth={true}
+          />
+          <TextField
+            value={css.borderRadius}
+            floatingLabelText="Border Radius"
+            onChange={this.changeProp.bind(this, 'css', 'borderRadius')}
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />

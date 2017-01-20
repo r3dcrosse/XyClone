@@ -34,7 +34,7 @@ export const _components = {
     let defaultCss = {
       "textAlign": "center",
       "border": "1px solid black",
-      "borderRadius": "0px",
+      "borderRadius": "25px",
       "backgroundColor": "cornflowerblue",
       "width": "300px",
       "height": "20px",
@@ -90,10 +90,11 @@ export const _components = {
       justifyContent: 'center',
       position: 'relative',
       alignItems: 'center',
-      backgroundColor: 'red',
+      backgroundColor: '#5E2E2E',
       width: '400px',
       height: '400px',
-      margin: '10px'
+      margin: '10px',
+      borderRadius: "25px",
     }
     let component = {
       name: 'Default User Container',
@@ -121,7 +122,8 @@ export const _components = {
       backgroundColor: 'white',
       width: '400px',
       height: '400px',
-      margin: '10px'
+      margin: '10px',
+      borderRadius: "25px",
     };
     let idOfImage = _components["Image"]();
     let idOfTextbox = _components["Textbox"]();
@@ -157,7 +159,8 @@ export const _components = {
       backgroundColor: 'grey',
       width: '400px',
       height: '400px',
-      margin: '10px'
+      margin: '10px',
+      borderRadius: "25px",
     };
     let component = {
       name: 'Default Carousel',
