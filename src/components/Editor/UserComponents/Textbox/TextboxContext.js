@@ -254,13 +254,6 @@ class TextboxContext extends Component {
             onKeyPress={this.handleEnterKeyPress.bind(this)}
             fullWidth={true}
           />
-          <TextField
-            value={css.borderRadius}
-            floatingLabelText="Border Radius"
-            onChange={this.changeProp.bind(this, 'css', 'borderRadius')}
-            onKeyPress={this.handleEnterKeyPress.bind(this)}
-            fullWidth={true}
-          />
           <span>
             <RaisedButton
               label="Save"
