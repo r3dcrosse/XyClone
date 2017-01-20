@@ -59,7 +59,6 @@ class BodyContext extends Component {
         <div> SHIT IM NOT BODY IM JUST NULL </div>
       )
     } else {
-      console.log('IM BEIGN RENDERED BODHYYYYYYYYYY');
       return (
         <div className='bodycontext-container' onMouseUp={this.handleBackgroundColorComplete.bind(this)}>
           <div className='bodycontext-menu'>Body Color</div>

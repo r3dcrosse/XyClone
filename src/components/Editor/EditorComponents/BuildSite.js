@@ -32,8 +32,6 @@ constructor(props) {
   }
 
   onBuildSite() {
-    console.log('===============================================================================')
-    console.log(this.state.storage);
     let projectComponents = this.state.components.filter((component) => {return component.projectId === this.props.currProjectId});
     let projectStorage = {};
     for (let key in this.state.storage) {
@@ -61,7 +59,6 @@ constructor(props) {
     let context = this;
     axios.post('saveSite', siteData)
     .then(function(response) {
-      console.log('LINK TO DOWNLOAD SITE', response.data);
       context.setState({
         link: response.data,
         readyToDownload: true
