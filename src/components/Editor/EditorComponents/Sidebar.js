@@ -151,7 +151,6 @@ class Sidebar extends Component {
         <BuildSiteContainer />
 
         <Snackbar
-          style={{margin: '500px', backgroundColor: 'red'}}
           open={true}
           message='Added Component to Editor'
           autoHideDuration={4000}
