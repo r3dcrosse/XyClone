@@ -33,13 +33,13 @@ export const _components = {
   Textbox: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
       "backgroundColor": "cornflowerblue",
-      "width": "100px",
-      "height": "100px",
+      "width": "300px",
+      "height": "20px",
       "margin": "10px"
     };
     let component = {
       name: 'Default Textbox Name',
-      text: 'I AM A TEXTBOX I GOT LOADED HAHA',
+      text: 'Write some text here...',
       css: defaultCss,
       children: [],
       type: 'Textbox',
@@ -54,9 +54,9 @@ export const _components = {
   },
   Image: (project = {}, page = 'IndexPage', userId = null) => {
     let defaultCss = {
-      width: '100px',
-      height: '100px',
-      margin: '10px'
+      width: '260px',
+      height: '180px',
+      margin: '5px'
     }
     let component = {
       name: 'Default Image Name',
@@ -111,8 +111,8 @@ export const _components = {
       position: 'relative',
       alignItems: 'center',
       backgroundColor: 'white',
-      width: '300px',
-      height: '300px',
+      width: '400px',
+      height: '400px',
       margin: '10px'
     };
     let idOfImage = _components["Image"]();
@@ -173,4 +173,3 @@ export const storage = {
 };
 
 export const componentReferences = [];
-
