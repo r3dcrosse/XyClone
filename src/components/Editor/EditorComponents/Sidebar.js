@@ -149,7 +149,7 @@ class Sidebar extends Component {
         </div>
         <Divider />
         <BuildSiteContainer />
-        <div>hello</div>
+
         <Snackbar
           style={{margin: '500px', backgroundColor: 'red'}}
           open={true}
