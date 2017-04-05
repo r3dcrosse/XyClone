@@ -20,23 +20,24 @@
 
 ## Usage
 
-> Some usage instructions
+> Login through Facebook and create a new project in XyClone. 
+> Build out how you want your website to look in the project editor.
+> Save the project, then hit download.
+> Unzip the file, cd into the directory, run npm install then npm start to get your site up and running locally.
 
 ### Development:
-1) Set NODE_ENV to 'dev'
-2) npm install
-3) npm test to ensure changes are safe
-4) npm start to bundle
-5) go to http://localhost:8000
-
+```
+git clone https://github.com/r3dcrosse/XyClone && cd XyClone
+npm install
+npm start
+```
+Navigate to [http://localhost:8000](http://localhost:8000) to run XyClone locally.
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 6.9.1
+- npm (~v3)
+- MongoDB
 
 ### HOW THE ACTIONS WORK
 
@@ -79,17 +80,6 @@ DO THESE STEPS IN ORDER:
   - Inside src/components/Editor/Context.js file
     - Import the container created from the CONTEXT CONTAINER FILE step
     - Add a switch case for the context component created
-
-
-### Installing Dependencies
-
-From within the root directory:
-
-```sh
-sudo npm install -g bower
-npm install
-bower install
-```
 
 ### Roadmap
 
