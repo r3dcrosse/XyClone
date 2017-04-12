@@ -1,7 +1,6 @@
 # Project Name
-
 > XyClone
-> Link to demo the app: [https://xyclone.herokuapp.com](https://xyclone.herokuapp.com) (takes a couple seconds to load)
+- Link to demo the app: [https://xyclone.herokuapp.com](https://xyclone.herokuapp.com) (takes a couple seconds to load)
 
 ## Team
 
